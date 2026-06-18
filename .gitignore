@@ -1,0 +1,12 @@
+# Generated data — rebuild with build_maps.py then build_tiles.py
+maps/
+tiles/
+maps.json
+
+# Python
+__pycache__/
+*.pyc
+
+# Local editor / tool state
+.claude/settings.local.json
+.DS_Store
