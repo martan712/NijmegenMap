@@ -50,6 +50,8 @@ export class MapEngine {
     this.growth.reveal(scene.growthUpto ?? null);
     this.fort.reveal(scene.fortUpto ?? null);
     this.wall.setVisible(!!scene.wall);
+    if (scene.wall && scene.wallPoint != null) this.wall.focusPoint(scene.wallPoint);
+    else this.wall.clearHighlight();
     this.wo2.reveal(scene.ww2Order ?? null);
   }
 

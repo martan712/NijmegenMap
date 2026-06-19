@@ -90,23 +90,64 @@ export const CHAPTERS: Chapter[] = [
         ],
       },
       {
-        // Data-driven: one scene per CHW_VESTINGWERKEN ring (captioned from the
-        // gemeente's own TOELICHTING), with the later stadsmuur appended after
-        // the generated rings (see useChapters).
+        // Data-driven: one scene per CHW_VESTINGWERKEN ring, captioned from the
+        // gemeente's own TOELICHTING (see useChapters).
         title: "Vestingwerken",
-        sub: "Alle vestingringen + stadsmuur, 1230 → 1880",
+        sub: "Alle vestingringen, 1230 → 1732",
         source: "vestingwerken",
+        scenes: [],
+      },
+      {
+        // Captions/images per point come from the gemeente Korfmacher popups
+        // (Museum Het Valkhof / RAN) — see fetch_korfmacher.py. Each scene
+        // focuses the point whose photo you can click.
+        title: "Stadsmuur & poorten",
+        sub: "De wal van binnenuit, vlak voor de sloop",
         scenes: [
           {
-            // Source: https://www.noviomagus.nl/OudNijmegen/Stadswallen.htm
-            title: "De stadsmuur (1870–1880)",
+            title: "De ontmanteling (1874–1876)",
             year: 1879,
-            focus: FOCUS.oldtown,
+            focus: FOCUS.fortress,
             wall: true,
-            badge: "1870–1880",
+            era: "ontmanteling",
+            tag: "muur",
+            text: "Op 11 maart 1874 verloor Nijmegen zijn vestingstatus; vanaf 1876 werden de wallen, torens en poorten gesloopt om de overvolle benedenstad lucht en betere hygiëne te geven. Stadstekenaar Rudolphus Lauwerier en fotograaf Gerard Korfmacher legden de verdwijnende vestingwerken vast. Klik op de punten voor hun afbeeldingen (collectie Museum Het Valkhof / Regionaal Archief Nijmegen).",
+          },
+          {
+            title: "Kronenburgertoren",
+            year: 1879,
+            wall: true,
+            wallPoint: 17,
             era: "stadsmuur",
             tag: "muur",
-            text: "Op 11 maart 1874 verloor Nijmegen zijn vestingstatus. Vanaf 1876 werden de wallen, torens en poorten gesloopt om de overvolle benedenstad — ruim 23.000 inwoners — lucht en betere hygiëne te geven. Klik op de punten voor historische afbeeldingen van de stadswal en haar poorten (collectie Museum Het Valkhof). Fort Krayenhoff en de forten bij Lent bleven behouden.",
+            text: "De Kronenburgertoren, een zware ronde toren uit de 15e eeuw, vormde de zuidwesthoek van de middeleeuwse stadsmuur. Anders dan de meeste vestingwerken bleef hij na 1876 gespaard — vandaag staat hij nog steeds, als blikvanger van het Kronenburgerpark dat op de oude wal werd aangelegd.",
+          },
+          {
+            title: "Hezelpoort",
+            year: 1879,
+            wall: true,
+            wallPoint: 21,
+            era: "stadsmuur",
+            tag: "muur",
+            text: "De Hezelpoort was de westelijke stadspoort, aan de weg naar Hees. Op de tekeningen uit 1876 zijn de slopers er al druk in de weer; de poort en de aangrenzende bolwerken verdwenen volledig.",
+          },
+          {
+            title: "Molenpoort",
+            year: 1879,
+            wall: true,
+            wallPoint: 11,
+            era: "stadsmuur",
+            tag: "muur",
+            text: "De Molenpoort gaf vanaf de Molenstraat toegang tot de stad. Tijdens de afbraak in 1876–1877 verdween eerst de toegangsbrug en daarna de poort zelf. De naam leeft voort in het winkelcentrum Molenpoort.",
+          },
+          {
+            title: "Belvédère",
+            year: 1879,
+            wall: true,
+            wallPoint: 27,
+            era: "stadsmuur",
+            tag: "muur",
+            text: "Hoog op de Hunerberg, met uitzicht over de Waal, staat de Belvédère — oorspronkelijk een middeleeuwse muurtoren, in de 17e eeuw verbouwd tot uitkijktoren. Ook de Belvédère overleefde de slechting en is er vandaag nog, nu als restaurant.",
           },
         ],
       },

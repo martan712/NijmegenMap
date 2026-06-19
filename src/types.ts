@@ -37,6 +37,8 @@ export interface Scene {
   fortUpto?: number;
   /** Show the city-wall points. */
   wall?: boolean;
+  /** Fly to, highlight, and open the popup of this wall point (NUMMER). */
+  wallPoint?: number;
   /** Reveal WW2 damage cumulatively up to this event order. */
   ww2Order?: number;
   // Optional year-readout overrides.

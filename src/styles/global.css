@@ -33,6 +33,16 @@ body,
   line-height: 1.45;
   max-height: 260px;
   overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+}
+.leaflet-popup-content::-webkit-scrollbar {
+  display: none; /* Chrome / Safari */
+}
+
+/* Wall (Korfmacher) image popups: size to the image, no clip / scrollbar. */
+.wallpop .leaflet-popup-content {
+  max-height: none;
+  overflow: visible;
 }
 .leaflet-popup-content .pp {
   font-weight: 700;

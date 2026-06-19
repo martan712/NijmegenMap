@@ -122,9 +122,15 @@
   margin: 0 0 14px;
   font-size: 13.5px;
   line-height: 1.55;
-  /* Gemeente TOELICHTING can be long — keep the panel a sane height. */
+  /* Gemeente TOELICHTING can be long — keep the panel a sane height, but hide
+     the scrollbar (still scrollable by wheel/drag). */
   max-height: 17vh;
   overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+}
+
+.sceneText::-webkit-scrollbar {
+  display: none; /* Chrome / Safari */
 }
 
 .nav {
