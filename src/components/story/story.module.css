@@ -14,6 +14,35 @@
   backdrop-filter: var(--blur);
 }
 
+.close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--muted);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.close:hover {
+  background: var(--surface);
+  color: var(--text);
+}
+
+/* Keep headings clear of the close button. */
+.heading,
+.sceneTitle {
+  padding-right: 24px;
+}
+
 .crumb {
   font-size: 11px;
   color: var(--accent);

@@ -20,6 +20,7 @@ export default function App() {
   const { containerRef, lensRingRef, lensYearRef, engine } = useMapEngine(manifest);
 
   const [mode, setMode] = useState<Mode>("story");
+  const [storyOpen, setStoryOpen] = useState(true);
   const story = useStoryNavigation(engine, mode === "story");
   const free = useFreeExplore(engine, manifest, mode === "free");
 
@@ -94,7 +95,7 @@ export default function App() {
       {badge && <YearBadge {...badge} />}
       <GrowthLegend visible={legend.visible} activeYear={legend.year} />
 
-      {mode === "story" && (
+      {mode === "story" && storyOpen && (
         <StoryPanel
           chapter={CHAPTERS[chapterIndex]}
           chapterIndex={chapterIndex}
@@ -103,6 +104,7 @@ export default function App() {
           onOpenThread={story.openThread}
           onGotoScene={story.gotoScene}
           onBackToChapter={story.backToChapter}
+          onClose={() => setStoryOpen(false)}
         />
       )}
 
@@ -132,7 +134,14 @@ export default function App() {
         mode={mode}
         activeChapter={chapterIndex}
         onOpenChapter={(i) => {
+          // Clicking the active chapter toggles its panel (keeps the position);
+          // clicking another chapter opens it fresh.
+          if (mode === "story" && i === chapterIndex) {
+            setStoryOpen((open) => !open);
+            return;
+          }
           setMode("story");
+          setStoryOpen(true);
           story.openChapter(i);
         }}
         onEnterFree={() => setMode("free")}

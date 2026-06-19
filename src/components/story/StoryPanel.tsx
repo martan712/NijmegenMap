@@ -11,6 +11,7 @@ interface Props {
   onOpenThread: (threadIndex: number) => void;
   onGotoScene: (sceneIndex: number) => void;
   onBackToChapter: () => void;
+  onClose: () => void;
 }
 
 /**
@@ -25,9 +26,13 @@ export function StoryPanel({
   onOpenThread,
   onGotoScene,
   onBackToChapter,
+  onClose,
 }: Props) {
   return (
     <div className={styles.panel}>
+      <button className={styles.close} onClick={onClose} aria-label="Sluiten" title="Sluiten">
+        ×
+      </button>
       {threadIndex == null ? (
         <ChapterView
           chapter={chapter}
