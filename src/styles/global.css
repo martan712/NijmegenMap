@@ -1,0 +1,45 @@
+/*
+ * Global resets, app shell, and styling for DOM that Leaflet generates
+ * itself (popups, the spyglass lens) which CSS Modules can't scope.
+ */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+  font-family: var(--font);
+}
+
+/* The Leaflet map fills the whole viewport; UI floats on top. */
+#map {
+  position: absolute;
+  inset: 0;
+  background: #aab;
+}
+
+/* Base/aerial layers crossfade via opacity transitions. */
+.wms-img {
+  transition: opacity 0.3s ease;
+  image-rendering: auto;
+}
+
+/* Popups are rendered by Leaflet, so they live in the global layer. */
+.leaflet-popup-content {
+  font-size: 13px;
+  line-height: 1.45;
+  max-height: 260px;
+  overflow-y: auto;
+}
+.leaflet-popup-content .pp {
+  font-weight: 700;
+  color: #b5341f;
+}
+.leaflet-popup-content .pw {
+  color: #555;
+  font-size: 12px;
+  margin: 2px 0 6px;
+}

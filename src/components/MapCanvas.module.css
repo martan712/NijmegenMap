@@ -1,0 +1,30 @@
+/* Spyglass lens ring — follows the cursor (positioned by SpyManager). */
+.lens {
+  position: absolute;
+  z-index: 800;
+  pointer-events: none;
+  display: none;
+  width: 260px;
+  height: 260px;
+  margin: -130px 0 0 -130px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.5),
+    0 4px 18px rgba(0, 0, 0, 0.4),
+    inset 0 0 14px rgba(0, 0, 0, 0.35);
+}
+
+.lensYear {
+  position: absolute;
+  top: -26px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 12px;
+  padding: 1px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+}

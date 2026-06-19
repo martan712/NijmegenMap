@@ -1,0 +1,39 @@
+/*
+ * Global colour scheme & design tokens.
+ * Every component reads from these variables — change the look here, once.
+ */
+:root {
+  /* Surfaces */
+  --panel-bg: rgba(20, 24, 31, 0.92);
+  --surface: #2a313c;
+  --surface-hover: #38414f;
+  --border: #3a4350;
+  --ink: #1a1d23;
+
+  /* Text */
+  --text: #e8edf2;
+  --muted: #93a1b0;
+
+  /* Brand */
+  --accent: #ff8a3d;
+
+  /* Overlay accents */
+  --growth-built-stroke: #1a1d23;
+  --wo2-current: #e8281e;
+  --wo2-past: #7a1d16;
+  --wall-fill: #ffd27d;
+
+  /* Elevation */
+  --shadow-sm: 0 4px 18px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 6px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.42);
+
+  /* Shape */
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --blur: blur(8px);
+
+  /* Type */
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
