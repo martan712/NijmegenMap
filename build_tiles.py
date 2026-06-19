@@ -25,15 +25,25 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 
+import os
+
 ROOT = Path(__file__).parent
 MANIFEST = ROOT / "maps.json"
 TILE_DIR = ROOT / "tiles"
 MINZOOM = 12
-MAXZOOM = {"map": 15, "aerial": 17}   # old maps have little detail; aerials a lot
+MAXZOOM = {"map": 17, "aerial": 17}
+# Maps whose scans hold no real detail beyond z16 (from the resolution probe);
+# everything else resolves cleanly to z17.
+NATIVE_MAXZOOM = {1820: 16, 1850: 16, 1885: 16, 1894: 16}
+OLD_MAXZOOM = {"map": 15, "aerial": 17}   # previous scheme, for migrating markers
 META = 12            # metatile = META×META tiles → 3072px request (< 4000 cap)
-WORKERS = 6
+WORKERS = int(os.environ.get("NIJ_WORKERS", "6"))
 QUALITY = 80
 TILE = 256
+
+
+def maxzoom_for(entry):
+    return NATIVE_MAXZOOM.get(entry["year"], MAXZOOM[entry["type"]])
 
 
 # --- slippy-map <-> lon/lat ------------------------------------------------
@@ -137,51 +147,67 @@ def _render(entry, z, tx0, tx1, ty0, ty1):
 
 
 def build_layer(entry):
+    """Render the pyramid one zoom level at a time, skipping levels already
+    marked done (so raising a layer's maxzoom only renders the new levels)."""
     key = entry["_key"]
-    maxz = MAXZOOM[entry["type"]]
+    kd = TILE_DIR / key
+    kd.mkdir(parents=True, exist_ok=True)
+    maxz = maxzoom_for(entry)
+
+    # Migrate the old whole-layer marker to per-zoom markers.
+    if (kd / ".done").exists():
+        for z in range(MINZOOM, OLD_MAXZOOM[entry["type"]] + 1):
+            (kd / f".z{z}.done").touch()
+        (kd / ".done").unlink()
+
     (s, w), (n, e) = entry["bounds"]
-    jobs = []
     for z in range(MINZOOM, maxz + 1):
+        if (kd / f".z{z}.done").exists():
+            continue
+        jobs = []
         tx_lo, tx_hi = xtile(w, z), xtile(e, z)
         ty_lo, ty_hi = ytile(n, z), ytile(s, z)
         for tx in range(tx_lo, tx_hi + 1, META):
             for ty in range(ty_lo, ty_hi + 1, META):
                 jobs.append((z, tx, min(tx + META - 1, tx_hi),
                              ty, min(ty + META - 1, ty_hi)))
-
-    total = 0
-    t0 = time.time()
-    with ThreadPoolExecutor(max_workers=WORKERS) as ex:
-        futs = [ex.submit(render_block, entry, *j) for j in jobs]
-        for f in as_completed(futs):
-            try:
-                total += f.result()
-            except Exception as ex2:  # noqa: BLE001
-                print(f"    metatile failed: {ex2}")
-    (TILE_DIR / key / ".done").write_text("ok")
-    print(f"  {entry['year']:>4}  z{MINZOOM}-{maxz}  {len(jobs):>4} metatiles  "
-          f"{total:>7,} tiles  {time.time()-t0:5.0f}s  {key}")
+        t0 = time.time()
+        zt = 0
+        with ThreadPoolExecutor(max_workers=WORKERS) as ex:
+            futs = [ex.submit(render_block, entry, *j) for j in jobs]
+            for f in as_completed(futs):
+                try:
+                    zt += f.result()
+                except Exception as ex2:  # noqa: BLE001
+                    print(f"    metatile failed: {ex2}")
+        (kd / f".z{z}.done").touch()
+        print(f"  {entry['year']:>4}  z{z:<2} {len(jobs):>4} mt  {zt:>7,} tiles  "
+              f"{time.time()-t0:5.0f}s  {key}")
     return maxz
 
 
 def main():
+    only = sys.argv[1] if len(sys.argv) > 1 else None   # "maps" | "aerial" | None
+    want = {"maps": "map", "aerial": "aerial"}.get(only)
     manifest = json.loads(MANIFEST.read_text())
     TILE_DIR.mkdir(exist_ok=True)
     for entry in manifest:
-        entry["_key"] = Path(entry["file"]).stem          # e.g. 2025_Luchtfoto2025_mosaic
-        maxz = MAXZOOM[entry["type"]]
-        if (TILE_DIR / entry["_key"] / ".done").exists():
-            print(f"  {entry['year']:>4}  (done) {entry['_key']}")
-        else:
-            maxz = build_layer(entry)
+        entry["_key"] = Path(entry["file"]).stem
+        if want and entry["type"] != want:
+            continue
+        maxz = build_layer(entry)
         entry["tiles"] = f"tiles/{entry['_key']}/{{z}}/{{x}}/{{y}}.webp"
         entry["minzoom"] = MINZOOM
         entry["maxzoom"] = maxz
-        del entry["_key"]
 
-    MANIFEST.write_text(json.dumps(manifest, indent=2, ensure_ascii=False))
+    # Only rewrite the manifest on a full run; a filtered run just renders tiles.
+    if not only:
+        for entry in manifest:
+            entry.pop("_key", None)
+        MANIFEST.write_text(json.dumps(manifest, indent=2, ensure_ascii=False))
+        print("maps.json updated.")
     size = sum(f.stat().st_size for f in TILE_DIR.rglob("*.webp"))
-    print(f"\nDone. Tile pyramid = {size/1024/1024:.0f} MB; maps.json updated.")
+    print(f"Done. Tile pyramid = {size/1024/1024:.0f} MB.")
 
 
 if __name__ == "__main__":

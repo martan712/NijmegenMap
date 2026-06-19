@@ -46,7 +46,7 @@
 
     /* Bottom control panel */
     #panel {
-      position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%);
+      position: absolute; left: 50%; bottom: 78px; transform: translateX(-50%);
       z-index: 1000; width: min(880px, calc(100% - 24px));
       background: var(--panel-bg); color: var(--text);
       padding: 14px 18px 12px; border-radius: 14px;
@@ -95,6 +95,21 @@
     button.chip:hover { background: #38414f; }
     button.chip.active { background: var(--accent); border-color: var(--accent); color: #1a1d23; font-weight: 700; }
 
+    /* City-growth legend */
+    #growthLegend {
+      position: absolute; top: 78px; left: 12px; z-index: 900; display: none;
+      background: var(--panel-bg); color: var(--text); padding: 10px 12px;
+      border-radius: 10px; box-shadow: 0 4px 18px rgba(0,0,0,.35); backdrop-filter: blur(6px);
+      max-width: 200px; font-size: 12px;
+    }
+    #growthLegend .lg-title { font-weight: 650; margin-bottom: 6px; font-size: 12px; }
+    #growthLegend .lg-row { display: flex; align-items: center; gap: 7px; line-height: 1.5; }
+    #growthLegend .sw { width: 12px; height: 12px; border-radius: 3px; flex: 0 0 auto; border: 1px solid rgba(0,0,0,.3); }
+    #growthLegend .lg-row.future { opacity: .4; }
+    .leaflet-popup-content { font-size: 13px; line-height: 1.45; max-height: 260px; overflow-y: auto; }
+    .leaflet-popup-content .pp { font-weight: 700; color: #b5341f; }
+    .leaflet-popup-content .pw { color: #555; font-size: 12px; margin: 2px 0 6px; }
+
     /* Spyglass lens ring (follows the cursor) */
     #lens {
       position: absolute; z-index: 800; pointer-events: none; display: none;
@@ -109,11 +124,65 @@
     }
     a.cred { color: var(--muted); font-size: 11px; text-decoration: none; }
     a.cred:hover { color: var(--text); }
+
+    /* --- Story navigation (the "fractal book") --- */
+    /* Spine: a thin ribbon of chapters, always on screen. */
+    #spine {
+      position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%);
+      z-index: 1000; display: flex; gap: 6px; flex-wrap: wrap; justify-content: center;
+      width: min(940px, calc(100% - 24px));
+      background: var(--panel-bg); padding: 8px 10px; border-radius: 12px;
+      box-shadow: 0 6px 24px rgba(0,0,0,.4); backdrop-filter: blur(8px);
+    }
+    .spine-chip {
+      background: transparent; color: var(--muted); border: 1px solid transparent;
+      border-radius: 8px; padding: 5px 11px; font-size: 12px; cursor: pointer; white-space: nowrap;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .spine-chip:hover { background: #2a313c; color: var(--text); }
+    .spine-chip.active { background: var(--accent); border-color: var(--accent); color: #1a1d23; font-weight: 700; }
+    .spine-chip .sn { font-size: 10px; opacity: .7; }
+    .spine-chip.free { margin-left: auto; border-color: #3a4350; color: var(--text); }
+    .spine-sep { width: 1px; background: #3a4350; margin: 2px 2px; align-self: stretch; }
+
+    /* Story card: chapter intro / thread cards / scene caption, above the spine. */
+    #story {
+      position: absolute; left: 50%; bottom: 78px; transform: translateX(-50%);
+      z-index: 1000; width: min(620px, calc(100% - 24px));
+      background: var(--panel-bg); color: var(--text);
+      padding: 16px 20px; border-radius: 14px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.42); backdrop-filter: blur(8px);
+    }
+    #story h2 { margin: 0 0 4px; font-size: 18px; font-weight: 700; }
+    #story .intro { margin: 0 0 12px; font-size: 13px; color: var(--muted); line-height: 1.5; }
+    #story .crumb { font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
+    #story .scene-title { margin: 0 0 6px; font-size: 17px; font-weight: 700; }
+    #story .scene-text { margin: 0 0 14px; font-size: 13.5px; color: var(--text); line-height: 1.55; }
+
+    .thread-cards { display: flex; flex-direction: column; gap: 8px; }
+    .thread-card {
+      text-align: left; background: #2a313c; color: var(--text); border: 1px solid #3a4350;
+      border-radius: 10px; padding: 10px 13px; cursor: pointer;
+    }
+    .thread-card:hover { background: #38414f; border-color: var(--accent); }
+    .thread-card .tc-title { font-size: 13.5px; font-weight: 650; }
+    .thread-card .tc-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    .scene-nav { display: flex; align-items: center; gap: 12px; }
+    .scene-nav .dots { display: flex; gap: 6px; flex: 1 1 auto; justify-content: center; }
+    .scene-nav .dot { width: 8px; height: 8px; border-radius: 50%; background: #3a4350; cursor: pointer; border: none; padding: 0; }
+    .scene-nav .dot.on { background: var(--accent); }
+    .story-back {
+      background: transparent; color: var(--muted); border: none; cursor: pointer;
+      font-size: 12px; padding: 0; margin-bottom: 10px;
+    }
+    .story-back:hover { color: var(--text); }
   </style>
 </head>
 <body>
   <div id="map"></div>
   <div id="lens"><span class="lensYr" id="lensYr"></span></div>
+  <div id="growthLegend"><div class="lg-title">Stadsontwikkeling</div></div>
 
   <div id="title">
     <h1>Nijmegen Tijdmachine</h1>
@@ -126,7 +195,10 @@
     <div class="tag" id="yrTag">kaart</div>
   </div>
 
-  <div id="panel">
+  <div id="story"></div>
+  <div id="spine"></div>
+
+  <div id="panel" style="display:none">
     <div class="row">
       <button class="nav" id="prevBtn" title="Vorige (←)">‹</button>
       <button class="play" id="playBtn" title="Afspelen">▶</button>
@@ -152,6 +224,9 @@
       <div class="ctrl">
         <button class="chip" id="spyBtn" title="Vergelijk-loep (V)">🔍 Vergelijk</button>
         <select id="spyYear" style="display:none"></select>
+      </div>
+      <div class="ctrl">
+        <button class="chip" id="growthBtn" title="Stadsontwikkeling (G)">🏗 Groei</button>
       </div>
       <div class="spacer"></div>
       <a class="cred" href="https://services.nijmegen.nl/geoservices/wms/extern_Historie_raster?request=GetCapabilities&service=WMS" target="_blank" rel="noopener">Bron: Gemeente Nijmegen (WMS)</a>
@@ -183,6 +258,12 @@
     let opacity = 1;
     let playing = false;
     let playTimer = null;
+
+    // Story mode drives the map from a scene config instead of the slider; the
+    // sharp live overlay and overlays read the "active" entry from whichever is live.
+    let storyMode = true;
+    let storyEntry = null;
+    function activeEntry() { return storyMode ? storyEntry : timeline[current]; }
 
     // Per-layer base: a local XYZ tile pyramid (fast, fully local) when built,
     // else a single anchored image (fallback before build_tiles.py has run).
@@ -218,7 +299,7 @@
     }
 
     function updateLive() {
-      const entry = timeline[current];
+      const entry = activeEntry();
       if (!entry || map.getZoom() <= liveMax(entry)) { clearLive(); return; }
       const b = map.getBounds().pad(0.08);
       const sw = b.getSouthWest(), ne = b.getNorthEast();
@@ -282,15 +363,11 @@
       }
     }
 
-    function show(i) {
-      if (!timeline.length) return;
-      current = Math.max(0, Math.min(i, timeline.length - 1));
-      slider.value = current;
-      const entry = timeline[current];
-
+    // Crossfade the base map/aerial layer for an entry. Reused by the slider and
+    // the story engine.
+    function setBase(entry) {
       const ov = baseFor(entry);
       if (!map.hasLayer(ov)) { ov.setOpacity(0); ov.addTo(map); }
-      // Crossfade: fade the new one in, fade the old one out.
       requestAnimationFrame(() => requestAnimationFrame(() => ov.setOpacity(opacity)));
       const old = activeOverlay;
       activeOverlay = ov;
@@ -298,14 +375,38 @@
         old.setOpacity(0);
         setTimeout(() => { if (activeOverlay !== old) map.removeLayer(old); }, 320);
       }
+      return ov;
+    }
+    // Pick a manifest entry for a year (prefer maps; never a wo2 clone).
+    function entryByYear(year) {
+      const c = manifest.filter(e => e.year === year && e.type !== "wo2");
+      return c.find(e => e.type === "map") || c[0] || manifest.find(e => e.year === year);
+    }
 
-      yrText.textContent = entry.label || entry.year;
-      yrLabel.textContent = entry.era || "";
-      yrTag.textContent = entry.type === "aerial" ? "luchtfoto" : "kaart";
+    // Update the top-right year readout. Optional overrides let story scenes
+    // show a different headline (e.g. "1944" over a 1938 base map).
+    function setBadge(entry, opts) {
+      opts = opts || {};
+      yrText.textContent = opts.label || entry.label || entry.year;
+      yrLabel.textContent = opts.era != null ? opts.era : (entry.era || "");
+      yrTag.textContent = opts.tag || (entry.type === "aerial" ? "luchtfoto"
+        : entry.type === "wo2" ? "oorlog" : "kaart");
+    }
+
+    function show(i) {
+      if (!timeline.length) return;
+      current = Math.max(0, Math.min(i, timeline.length - 1));
+      slider.value = current;
+      const entry = timeline[current];
+
+      setBase(entry);
+      setBadge(entry);
 
       // Refresh the sharp live layer for the newly selected year (if zoomed in).
       clearLive();
       updateLive();
+      if (growthOn) growthUpdate();
+      setWO2(entry);
     }
 
     // --- Controls ---
@@ -418,19 +519,522 @@
     spyBtn.addEventListener("click", toggleSpy);
     spyYearSel.addEventListener("change", setSpyLayer);
 
+    // --- City growth (Stadsontwikkeling): CHW polygons from the city's WFS,
+    // colored by development period and revealed cumulatively as the slider moves. ---
+    const growthPane = map.createPane("growth");
+    growthPane.style.zIndex = 450;        // above hist(350) & live(400), below spy(500)
+    const PERIODS = ["Voor 1230", "1250-1400", "1400-1525", "1525-1874", "1900", "1915",
+      "1925", "1935", "1955", "1965", "1975", "1985", "2000", "Lent", "Veur Lent"];
+    // representative "established by" year for the cumulative reveal
+    const PERIOD_YEAR = { "Voor 1230": 1230, "1250-1400": 1400, "1400-1525": 1525,
+      "1525-1874": 1874, "1900": 1900, "1915": 1915, "1925": 1925, "1935": 1935,
+      "1955": 1955, "1965": 1965, "1975": 1975, "1985": 1985, "2000": 2000,
+      // Lent / Veur Lent are the recent Waalsprong expansion north of the river,
+      // not the medieval village — the source lists them after 2000.
+      "Lent": 2003, "Veur Lent": 2015 };
+    function periodColor(p) {
+      const i = PERIODS.indexOf(p), n = PERIODS.length - 1;
+      return `hsl(${8 + (i < 0 ? 0 : i) / n * 250} 70% 50%)`;   // red(old) → blue(new)
+    }
+    const growthBtn = document.getElementById("growthBtn");
+    const legendEl = document.getElementById("growthLegend");
+    let growthOn = false, growthLayer = null, growthLoaded = false;
+    // In story mode the reveal year comes from the scene, not the slider.
+    let growthYearOverride = null;
+
+    function curYear() {
+      const e = activeEntry();
+      return e ? (typeof e.year === "number" ? e.year : parseInt(e.year, 10)) : 0;
+    }
+    function growthYear() { return growthYearOverride != null ? growthYearOverride : curYear(); }
+    function growthStyle(f) {
+      const p = f.properties.PERIODE, built = PERIOD_YEAR[p] <= growthYear();
+      return { pane: "growth", color: built ? "#1a1d23" : periodColor(p), weight: 1,
+        opacity: built ? 0.7 : 0.35, dashArray: built ? null : "3 4",
+        fillColor: periodColor(p), fillOpacity: built ? 0.5 : 0.0 };
+    }
+    function buildLegend() {
+      legendEl.querySelectorAll(".lg-row").forEach(n => n.remove());
+      PERIODS.forEach(p => {
+        const row = document.createElement("div");
+        row.className = "lg-row"; row.dataset.p = p;
+        row.innerHTML = `<span class="sw" style="background:${periodColor(p)}"></span><span>${p}</span>`;
+        legendEl.appendChild(row);
+      });
+    }
+    function growthUpdate() {
+      if (!growthLayer) return;
+      growthLayer.setStyle(growthStyle);
+      const y = growthYear();
+      growthLayer.eachLayer(layer => {
+        const built = PERIOD_YEAR[layer.feature.properties.PERIODE] <= y;
+        layer.options.interactive = built;        // only built areas are clickable
+        const el = layer._path;
+        if (el) {
+          el.style.pointerEvents = built ? "auto" : "none";
+          el.classList.toggle("leaflet-interactive", built);
+        }
+        if (!built && layer.isPopupOpen()) layer.closePopup();
+      });
+      legendEl.querySelectorAll(".lg-row").forEach(r =>
+        r.classList.toggle("future", !(PERIOD_YEAR[r.dataset.p] <= y)));
+    }
+    function loadGrowth(cb) {
+      if (growthLoaded) { cb && cb(); return; }
+      fetch("data/stadsontwikkeling.geojson").then(r => r.json()).then(gj => {
+        growthLayer = L.geoJSON(gj, {
+          pane: "growth", style: growthStyle,
+          onEachFeature: (f, layer) => {
+            const pr = f.properties;
+            layer.bindPopup(`<div class="pp">${pr.PERIODE}</div>` +
+              (pr.WIJKEN && pr.WIJKEN !== "None" ? `<div class="pw">${pr.WIJKEN}</div>` : "") +
+              `<div>${pr.OMSCHRIJVING || ""}</div>`, { maxWidth: 330 });
+          }
+        });
+        growthLoaded = true; buildLegend(); cb && cb();
+      }).catch(e => console.error("growth load failed", e));
+    }
+    function toggleGrowth() {
+      growthOn = !growthOn;
+      growthBtn.classList.toggle("active", growthOn);
+      if (growthOn) {
+        loadGrowth(() => { growthLayer.addTo(map); growthUpdate(); });
+        legendEl.style.display = "block";
+      } else {
+        if (growthLayer) map.removeLayer(growthLayer);
+        legendEl.style.display = "none";
+      }
+    }
+    growthBtn.addEventListener("click", toggleGrowth);
+
+    // Story-mode growth control: reveal polygons up to `upto`, or hide entirely.
+    function storyGrowth(upto) {
+      growthYearOverride = upto;
+      if (upto == null) {
+        if (!growthOn && growthLayer) map.removeLayer(growthLayer);
+        if (!growthOn) legendEl.style.display = "none";
+        return;
+      }
+      loadGrowth(() => { if (!map.hasLayer(growthLayer)) growthLayer.addTo(map); growthUpdate(); });
+      legendEl.style.display = "block";
+    }
+
+    // --- WW2 damage events (extern_wo2): dedicated 1944 timeline stops. Each
+    // shows all 1944 building footprints (gray, canvas) with that event's damage
+    // polygons in red on top; earlier events stay faintly visible (cumulative). ---
+    map.createPane("wo2bg").style.zIndex = 455;   // 1944 buildings (context)
+    map.createPane("wo2").style.zIndex = 460;     // damage polygons, above buildings
+    const WO2_EVENTS = [
+      { cat: "Bombardement 22 feb", label: "Bombardement", era: "22 februari 1944",
+        desc: "22 februari 1944 — Amerikaans vergissingsbombardement; grote delen van het centrum verwoest." },
+      { cat: "Bevrijding 17-21 sep", label: "Bevrijding", era: "17–21 september 1944",
+        desc: "17–21 september 1944 — strijd om de Waalbrug tijdens Operatie Market Garden." },
+      { cat: "Granatentijd 22 sep", label: "Granatentijd", era: "vanaf 22 september 1944",
+        desc: "Vanaf 22 september 1944 — Nijmegen als frontstad onder Duitse granaatbeschietingen." },
+    ];
+    const WO2_ORDER = {}, WO2_DESC = {};
+    WO2_EVENTS.forEach((e, i) => { WO2_ORDER[e.cat] = i + 1; WO2_DESC[e.cat] = e.desc; });
+    let wo2Dmg = null, wo2Bldg = null, wo2Loaded = false;
+
+    function wo2Style(f, curOrder) {
+      const o = WO2_ORDER[f.properties.CATEGORIE] || 99;
+      // Always set stroke/fill in BOTH branches — setStyle only overrides keys
+      // you pass, so omitting them leaves a previously-hidden feature stuck off.
+      if (o > curOrder) return { pane: "wo2", stroke: false, fill: false, fillOpacity: 0, opacity: 0 };
+      const cur = o === curOrder;
+      return { pane: "wo2", stroke: true, fill: true,
+        color: cur ? "#e8281e" : "#7a1d16", weight: 1,
+        opacity: cur ? 0.9 : 0.45, fillColor: cur ? "#e8281e" : "#5c1712",
+        fillOpacity: cur ? 0.55 : 0.25 };
+    }
+    function wo2Update(curOrder) {
+      if (!wo2Dmg) return;
+      wo2Dmg.setStyle(f => wo2Style(f, curOrder));
+      wo2Dmg.eachLayer(layer => {
+        const vis = (WO2_ORDER[layer.feature.properties.CATEGORIE] || 99) <= curOrder;
+        layer.options.interactive = vis;
+        const el = layer._path;
+        if (el) { el.style.pointerEvents = vis ? "auto" : "none"; el.classList.toggle("leaflet-interactive", vis); }
+        if (!vis && layer.isPopupOpen()) layer.closePopup();
+      });
+    }
+    function loadWO2(cb) {
+      if (wo2Loaded) { cb && cb(); return; }
+      Promise.all([
+        fetch("data/his_1944_bebouwing.geojson").then(r => r.json()),
+        fetch("data/wo2_oorlogsschade.geojson").then(r => r.json())
+      ]).then(([bldg, dmg]) => {
+        wo2Bldg = L.geoJSON(bldg, { pane: "wo2bg", interactive: false,
+          renderer: L.canvas({ pane: "wo2bg" }),
+          style: { color: "#5b5048", weight: 0.4, fillColor: "#cabfb2", fillOpacity: 0.85 } });
+        wo2Dmg = L.geoJSON(dmg, { pane: "wo2",
+          onEachFeature: (f, layer) => {
+            const cat = f.properties.CATEGORIE;
+            layer.bindPopup(`<div class="pp">${cat}</div><div>${WO2_DESC[cat] || ""}</div>`, { maxWidth: 300 });
+          } });
+        wo2Loaded = true; cb && cb();
+      }).catch(e => console.error("WO2 load failed", e));
+    }
+    function showWO2(order) {
+      loadWO2(() => {
+        if (!map.hasLayer(wo2Bldg)) wo2Bldg.addTo(map);
+        if (!map.hasLayer(wo2Dmg)) wo2Dmg.addTo(map);
+        wo2Update(order);
+      });
+    }
+    function hideWO2() {
+      if (wo2Bldg && map.hasLayer(wo2Bldg)) map.removeLayer(wo2Bldg);
+      if (wo2Dmg && map.hasLayer(wo2Dmg)) map.removeLayer(wo2Dmg);
+    }
+    function setWO2(entry) {
+      if (entry && entry.type === "wo2") showWO2(entry.wo2order);
+      else hideWO2();
+    }
+
+    // --- Fortifications (CHW_VESTINGWERKEN): 7 dated ring lines, revealed
+    // cumulatively up to a scene's `fortUpto` year. Story-mode only. ---
+    map.createPane("fort").style.zIndex = 458;
+    const fortYearOf = p => Math.max(...(p.match(/\d{4}/g) || ["0"]).map(Number));
+    function fortColor(p) {
+      // chronological position → red(old) → blue(new), like the growth ramp
+      const y = fortYearOf(p);
+      const t = Math.max(0, Math.min(1, (y - 1300) / (1732 - 1300)));
+      return `hsl(${10 + t * 230} 75% 52%)`;
+    }
+    let fortLayer = null, fortLoaded = false, fortYearOverride = null;
+    function fortStyle(f) {
+      const on = fortYearOverride == null || fortYearOf(f.properties.PERIODE) <= fortYearOverride;
+      return { pane: "fort", color: fortColor(f.properties.PERIODE),
+        weight: on ? 3 : 0, opacity: on ? 0.92 : 0 };
+    }
+    function loadFort(cb) {
+      if (fortLoaded) { cb && cb(); return; }
+      fetch("data/vestingwerken.geojson").then(r => r.json()).then(gj => {
+        fortLayer = L.geoJSON(gj, { pane: "fort", style: fortStyle,
+          onEachFeature: (f, layer) => layer.bindPopup(
+            `<div class="pp">${f.properties.PERIODE}</div><div>${f.properties.TOELICHTING || ""}</div>`,
+            { maxWidth: 320 }) });
+        fortLoaded = true; cb && cb();
+      }).catch(e => console.error("fort load failed", e));
+    }
+    function storyFort(upto) {
+      fortYearOverride = upto;
+      if (upto == null) { if (fortLayer && map.hasLayer(fortLayer)) map.removeLayer(fortLayer); return; }
+      loadFort(() => { if (!map.hasLayer(fortLayer)) fortLayer.addTo(map); fortLayer.setStyle(fortStyle); });
+    }
+
+    // --- City wall (HIS_STADSMUUR): 36 tower/gate points. Story-mode only. ---
+    map.createPane("wall").style.zIndex = 459;
+    let wallLayer = null, wallLoaded = false;
+    function loadWall(cb) {
+      if (wallLoaded) { cb && cb(); return; }
+      fetch("data/stadsmuur.geojson").then(r => r.json()).then(gj => {
+        wallLayer = L.geoJSON(gj, {
+          pane: "wall",
+          pointToLayer: (f, ll) => L.circleMarker(ll, { pane: "wall", radius: 5,
+            color: "#1a1d23", weight: 1.5, fillColor: "#ffd27d", fillOpacity: 0.95 }),
+          onEachFeature: (f, layer) => layer.bindPopup(
+            `<div class="pp">Stadsmuur</div><div>Punt ${f.properties.NUMMER ?? f.properties.ID}</div>`,
+            { maxWidth: 220 })
+        });
+        wallLoaded = true; cb && cb();
+      }).catch(e => console.error("wall load failed", e));
+    }
+    function storyWall(on) {
+      if (!on) { if (wallLayer && map.hasLayer(wallLayer)) map.removeLayer(wallLayer); return; }
+      loadWall(() => { if (!map.hasLayer(wallLayer)) wallLayer.addTo(map); });
+    }
+
+    // ====================================================================
+    // STORY ENGINE — the "fractal book": spine → chapter → thread → scene.
+    // ====================================================================
+    // Focus extents to fly to (south-west / north-east corners).
+    const FOCUS = {
+      oldtown:    [[51.8435, 5.8585], [51.8525, 5.8720]],
+      fortress:   [[51.8395, 5.8520], [51.8560, 5.8800]],
+      center:     [[51.8430, 5.8575], [51.8530, 5.8745]],
+      city:       [[51.8050, 5.7900], [51.8820, 5.9180]],
+      dukenburg:  [[51.8150, 5.7780], [51.8420, 5.8280]],
+      waalsprong: [[51.8540, 5.8520], [51.8860, 5.9120]],
+    };
+
+    const CHAPTERS = [
+      {
+        title: "Vroeg Nijmegen", short: "Middeleeuwen", focus: FOCUS.oldtown, year: 1557,
+        intro: "De oudste stad van Nederland groeit rond het Valkhof. Volg de eerste " +
+          "stadsuitleg en de muren die haar moesten beschermen.",
+        threads: [
+          { title: "De eerste stad", sub: "Stadsgroei tot ~1525",
+            scenes: [
+              { title: "Rond het Valkhof", year: 1557, focus: FOCUS.oldtown, growthUpto: 1230,
+                text: "Voor 1230 ligt de bebouwing dicht tegen het Valkhof en de Waal — de kiem van de middeleeuwse stad." },
+              { title: "De stad breidt uit", year: 1557, growthUpto: 1400,
+                text: "Tussen 1250 en 1400 groeit Nijmegen binnen de stadsmuren tot een welvarende Hanzestad." },
+              { title: "Volgroeide middeleeuwse stad", year: 1557, growthUpto: 1525,
+                text: "Rond 1525 is de ommuurde stad zo goed als vol; verdere groei moet wachten tot de muren vallen." },
+            ] },
+          { title: "Muren & verdediging", sub: "Vestingringen + stadsmuur",
+            scenes: [
+              { title: "De eerste ommuring", year: 1557, focus: FOCUS.oldtown, fortUpto: 1300, wall: true,
+                text: "De oudste stenen muur (1230–1300) sluit de stad in. De gele punten markeren torens en poorten." },
+              { title: "Uitbreiding van de muur", year: 1557, fortUpto: 1425, wall: true,
+                text: "In de 15e eeuw wordt de ommuring uitgelegd om de gegroeide stad te omvatten." },
+              { title: "Laatmiddeleeuwse vesting", year: 1557, fortUpto: 1536, wall: true,
+                text: "Begin 16e eeuw is de muur op haar grootst — de basis voor de latere vestingstad." },
+            ] },
+        ],
+      },
+      {
+        title: "Vestingstad", short: "tot 1900", focus: FOCUS.fortress, year: 1850,
+        intro: "Van de Gouden Eeuw tot 1900 is Nijmegen een ingesnoerde vestingstad. " +
+          "Bastions volgens de nieuwste school, tot de wal in 1874 valt.",
+        threads: [
+          { title: "De vesting groeit", sub: "Kaarten 1639 → 1900",
+            scenes: [
+              { title: "De stad in 1639", year: 1639, focus: FOCUS.fortress,
+                text: "Op de oudste stadsplattegrond ligt Nijmegen strak binnen haar wallen aan de Waal." },
+              { title: "Bastions en bolwerken", year: 1672,
+                text: "Tijdens het Rampjaar is de vesting volop in bedrijf; de bastions steken scherp naar buiten." },
+              { title: "De 18e-eeuwse vesting", year: 1783,
+                text: "De vorm verandert nauwelijks: een eeuw lang blijft de stad gevangen in haar wallen." },
+              { title: "Tegen de grenzen", year: 1850,
+                text: "Halverwege de 19e eeuw barst de dichtbevolkte stad uit haar voegen — de wal wordt een keurslijf." },
+              { title: "Na de slechting", year: 1900,
+                text: "Met de wal weg in 1874 kan Nijmegen eindelijk de ruimte in; de eerste singels en wijken verschijnen." },
+            ] },
+          { title: "Vestingwerken", sub: "Ringen 1525 → 1732",
+            scenes: [
+              { title: "Middeleeuwse basis", year: 1639, focus: FOCUS.fortress, fortUpto: 1536,
+                text: "De late middeleeuwse muur vormt het vertrekpunt voor de moderne vesting." },
+              { title: "Italiaanse vestingbouw", year: 1639, fortUpto: 1605,
+                text: "Rond 1600 komen bastions volgens het Italiaanse stelsel — hoekige punten die elkaar dekken." },
+              { title: "Versterking Coehoorn", year: 1672, fortUpto: 1702,
+                text: "De beroemde vestingbouwer Menno van Coehoorn moderniseert de werken rond 1700." },
+              { title: "De vesting compleet", year: 1783, fortUpto: 1732,
+                text: "Met de uitbreidingen van 1726–1732 bereikt de vesting haar definitieve omvang." },
+            ] },
+          { title: "Slechting & uitbreiding", sub: "1874 → eerste wijken",
+            scenes: [
+              { title: "De ingesnoerde stad", year: 1871, focus: FOCUS.fortress, growthUpto: 1525,
+                text: "Vlak voor de slechting is de stad nog volledig omsloten door de oude vestingrand." },
+              { title: "De wal valt (1874)", year: 1900, growthUpto: 1900,
+                text: "Na 1874 wordt de wal geslecht; rond de oude kern verrijzen de eerste 19e-eeuwse uitbreidingen." },
+              { title: "Eerste nieuwe wijken", year: 1925, growthUpto: 1925,
+                text: "In het begin van de 20e eeuw groeit Nijmegen voor het eerst echt voorbij haar historische grens." },
+            ] },
+        ],
+      },
+      {
+        title: "Oorlog", short: "1944", focus: FOCUS.center, year: 1938,
+        intro: "1944 is een eigen mini-geschiedenis. Volg hoe het centrum in golven " +
+          "wordt verwoest — over de vooroorlogse plattegrond van de stad.",
+        threads: [
+          { title: "Verwoesting", sub: "22 feb → 17 sep → granatentijd",
+            scenes: [
+              { title: "Het bombardement", year: 1938, focus: FOCUS.center, ww2Order: 1,
+                badge: "1944", era: "22 februari 1944", tag: "oorlog",
+                text: "Op 22 februari 1944 treft een Amerikaans vergissingsbombardement het centrum — in rood de verwoeste percelen op de vooroorlogse stad." },
+              { title: "De slag om de brug", year: 1938, ww2Order: 2,
+                badge: "1944", era: "17–21 september 1944", tag: "oorlog",
+                text: "Tijdens Market Garden (17–21 september) woedt de strijd om de Waalbrug; de schade breidt zich verder uit." },
+              { title: "Granatentijd", year: 1938, ww2Order: 3,
+                badge: "1944", era: "vanaf 22 september 1944", tag: "oorlog",
+                text: "Als frontstad ligt Nijmegen maandenlang onder Duitse granaatbeschietingen — de schade stapelt zich op." },
+            ] },
+        ],
+      },
+      {
+        title: "Wederopbouw", short: "na 1945", focus: FOCUS.city, year: 2025,
+        intro: "Na de oorlog herrijst het centrum en spreidt de stad zich uit: " +
+          "naoorlogse wijken in het zuiden en, later, de Waalsprong in het noorden.",
+        threads: [
+          { title: "Wederopbouw", sub: "1949 → 1967",
+            scenes: [
+              { title: "Het verwoeste hart", year: 1949, focus: FOCUS.center,
+                text: "Op de luchtfoto van 1949 zijn de littekens van de oorlog in het centrum nog goed te zien." },
+              { title: "Een nieuw centrum", year: 1957,
+                text: "In de jaren '50 verrijst een modern, ruimer opgezet stadshart op de oude fundamenten." },
+              { title: "De stad hersteld", year: 1967,
+                text: "Tegen het eind van de jaren '60 is de wederopbouw grotendeels voltooid." },
+            ] },
+          { title: "Naoorlogse wijken", sub: "Dukenburg & Lindenholt",
+            scenes: [
+              { title: "Voor de uitbreiding", year: 1964, focus: FOCUS.dukenburg, growthUpto: 1955,
+                text: "Het zuidwesten is rond 1960 nog grotendeels open land tussen de dorpen." },
+              { title: "Dukenburg verrijst", year: 1977, growthUpto: 1975,
+                text: "Vanaf de jaren '60–'70 verrijst Dukenburg als grote naoorlogse uitbreiding." },
+              { title: "Lindenholt erbij", year: 1986, growthUpto: 1985,
+                text: "In de jaren '80 komt Lindenholt erbij; het zuidwesten is dan volgebouwd." },
+            ] },
+          { title: "Waalsprong", sub: "Lent & Veur Lent, 2000+",
+            scenes: [
+              { title: "Over de Waal", year: 2008, focus: FOCUS.waalsprong, growthUpto: 2003,
+                text: "Vanaf 2000 springt Nijmegen de Waal over: bij Lent verrijst een geheel nieuwe stadsdeel." },
+              { title: "Ruimte voor de rivier", year: 2015, growthUpto: 2015,
+                text: "Met 'Ruimte voor de Waal' krijgt de rivier een nevengeul; Veur Lent wordt een eiland." },
+              { title: "Nijmegen nu", year: 2025, focus: FOCUS.city,
+                text: "De actuele luchtfoto toont de hele gemeente — van de middeleeuwse kern tot de Waalsprong." },
+            ] },
+        ],
+      },
+    ];
+
+    // --- Story state + DOM ---
+    const storyEl = document.getElementById("story");
+    const spineEl = document.getElementById("spine");
+    const panelEl = document.getElementById("panel");
+    let chapIdx = null, threadIdx = null, sceneIdx = 0;
+
+    // Reset every story-driven overlay (used when leaving a scene / entering free mode).
+    function clearStoryOverlays() {
+      storyGrowth(null); storyFort(null); storyWall(false); hideWO2();
+    }
+
+    // Render a single scene's full map state.
+    function applyScene(scene) {
+      const entry = entryByYear(scene.year) || manifest.find(e => e.type !== "wo2");
+      if (entry) {
+        storyEntry = entry;
+        setBase(entry);
+        setBadge(entry, { label: scene.badge, era: scene.era, tag: scene.tag });
+      }
+      if (scene.focus) map.flyToBounds(scene.focus, { duration: 0.85, padding: [20, 20] });
+      storyGrowth(scene.growthUpto != null ? scene.growthUpto : null);
+      storyFort(scene.fortUpto != null ? scene.fortUpto : null);
+      storyWall(!!scene.wall);
+      if (scene.ww2Order != null) showWO2(scene.ww2Order); else hideWO2();
+      clearLive(); updateLive();
+    }
+
+    function renderSpine() {
+      spineEl.innerHTML = "";
+      CHAPTERS.forEach((ch, i) => {
+        const b = document.createElement("button");
+        b.className = "spine-chip" + (storyMode && i === chapIdx ? " active" : "");
+        b.innerHTML = `<span class="sn">${i + 1}</span>${ch.title}`;
+        b.title = ch.short;
+        b.addEventListener("click", () => openChapter(i));
+        spineEl.appendChild(b);
+      });
+      const sep = document.createElement("div"); sep.className = "spine-sep"; spineEl.appendChild(sep);
+      const free = document.createElement("button");
+      free.className = "spine-chip free" + (!storyMode ? " active" : "");
+      free.textContent = "Vrij verkennen";
+      free.addEventListener("click", enterFree);
+      spineEl.appendChild(free);
+    }
+
+    function openChapter(i) {
+      storyMode = true; chapIdx = i; threadIdx = null;
+      panelEl.style.display = "none"; storyEl.style.display = "";
+      clearStoryOverlays();
+      const ch = CHAPTERS[i];
+      if (ch.year != null) {
+        const entry = entryByYear(ch.year);
+        if (entry) { storyEntry = entry; setBase(entry); setBadge(entry); clearLive(); updateLive(); }
+      }
+      if (ch.focus) map.flyToBounds(ch.focus, { duration: 0.85, padding: [20, 20] });
+      storyEl.innerHTML =
+        `<div class="crumb">Hoofdstuk ${i + 1}</div>` +
+        `<h2>${ch.title}</h2>` +
+        `<p class="intro">${ch.intro}</p>` +
+        `<div class="thread-cards"></div>`;
+      const wrap = storyEl.querySelector(".thread-cards");
+      ch.threads.forEach((t, ti) => {
+        const c = document.createElement("button");
+        c.className = "thread-card";
+        c.innerHTML = `<div class="tc-title">${t.title}</div>` +
+          `<div class="tc-sub">${t.sub || (t.scenes.length + " scènes")}</div>`;
+        c.addEventListener("click", () => openThread(ti));
+        wrap.appendChild(c);
+      });
+      renderSpine();
+    }
+
+    function openThread(ti) {
+      threadIdx = ti; sceneIdx = 0;
+      renderScene();
+    }
+
+    function gotoScene(si) {
+      const scenes = CHAPTERS[chapIdx].threads[threadIdx].scenes;
+      sceneIdx = Math.max(0, Math.min(si, scenes.length - 1));
+      renderScene();
+    }
+
+    function renderScene() {
+      const ch = CHAPTERS[chapIdx], thread = ch.threads[threadIdx];
+      const scenes = thread.scenes, scene = scenes[sceneIdx];
+      applyScene(scene);
+      storyEl.innerHTML =
+        `<button class="story-back">‹ ${ch.title}</button>` +
+        `<div class="crumb">${thread.title} · ${sceneIdx + 1}/${scenes.length}</div>` +
+        `<h3 class="scene-title">${scene.title}</h3>` +
+        `<p class="scene-text">${scene.text}</p>` +
+        `<div class="scene-nav">` +
+          `<button class="nav" id="scPrev" ${sceneIdx === 0 ? "disabled" : ""}>‹</button>` +
+          `<div class="dots"></div>` +
+          `<button class="nav" id="scNext">${sceneIdx === scenes.length - 1 ? "✓" : "›"}</button>` +
+        `</div>`;
+      const dots = storyEl.querySelector(".dots");
+      scenes.forEach((_, si) => {
+        const d = document.createElement("button");
+        d.className = "dot" + (si === sceneIdx ? " on" : "");
+        d.addEventListener("click", () => gotoScene(si));
+        dots.appendChild(d);
+      });
+      storyEl.querySelector(".story-back").addEventListener("click", () => openChapter(chapIdx));
+      storyEl.querySelector("#scPrev").addEventListener("click", () => gotoScene(sceneIdx - 1));
+      storyEl.querySelector("#scNext").addEventListener("click", () => {
+        if (sceneIdx === scenes.length - 1) openChapter(chapIdx); else gotoScene(sceneIdx + 1);
+      });
+    }
+
+    function enterFree() {
+      storyMode = false; chapIdx = null; threadIdx = null;
+      clearStoryOverlays();
+      storyEl.style.display = "none";
+      panelEl.style.display = "";
+      renderSpine();
+      show(current);
+    }
+
     document.addEventListener("keydown", e => {
       if (e.target.tagName === "SELECT") return;
+      if (storyMode) {
+        if (threadIdx == null) return;       // chapter overview: nothing to scrub
+        if (e.key === "ArrowLeft") gotoScene(sceneIdx - 1);
+        else if (e.key === "ArrowRight") gotoScene(sceneIdx + 1);
+        else if (e.key === "v" || e.key === "V") toggleSpy();
+        return;
+      }
       if (e.key === "ArrowLeft") show(current - 1);
       else if (e.key === "ArrowRight") show(current + 1);
       else if (e.key === " ") { e.preventDefault(); togglePlay(); }
       else if (e.key === "v" || e.key === "V") toggleSpy();
+      else if (e.key === "g" || e.key === "G") toggleGrowth();
     });
 
     // --- Boot: load the manifest. Base layers are local tile pyramids, so they
     // load on demand and year-switches are instant; no preloading needed. ---
     fetch("maps.json")
       .then(r => r.json())
-      .then(data => { manifest = data; applyFilter("all"); })
+      .then(data => {
+        manifest = data;
+        // Insert the three WW2 damage stops right after the 1938 map. They reuse
+        // the 1938 base (clone), so the city's pre-war footprint shows beneath.
+        const base = manifest.find(e => e.year === 1938 && e.type === "map");
+        if (base) {
+          const stops = WO2_EVENTS.map(ev => Object.assign({}, base, {
+            type: "wo2", year: 1944, label: ev.label, era: ev.era,
+            wo2cat: ev.cat, wo2order: WO2_ORDER[ev.cat]
+          }));
+          manifest.splice(manifest.indexOf(base) + 1, 0, ...stops);
+        }
+        applyFilter("all");     // populate timeline (used by free mode + spyglass)
+        renderSpine();
+        openChapter(0);         // start the guided tour at the first chapter
+      })
       .catch(err => {
         yrText.textContent = "—";
         yrLabel.textContent = "maps.json niet gevonden — draai build_maps.py";

@@ -46,11 +46,44 @@ python3 -m http.server 8765  # serve
 
 `build_maps.py` is idempotent — re-running only fetches missing layers.
 
+## City growth (Stadsontwikkeling)
+
+`fetch_chw.py` pulls the city's *Cultuurhistorische Waardenkaart* polygons from
+the open GeoServer WFS:
+
+```
+https://services.nijmegen.nl/geoservices/extern_Cultuurhistorie/ows  (WFS, GeoJSON, EPSG:4326)
+layer: CHW_STADSONTWIKKELING  → data/stadsontwikkeling.geojson
+```
+
+Each polygon has a `PERIODE` (Voor 1230 … 2000, Lent, Veur Lent), a rich
+`OMSCHRIJVING`, and `WIJKEN`. The "🏗 Groei" overlay colors them by period and
+reveals them cumulatively as the slider moves; click an area for its
+description. Sibling CHW layers (vestingwerken, gebouwde omgeving, parken, …)
+live on the same service for future annotation layers.
+
+## WW2 damage stops
+
+`fetch_chw.py` also pulls two layers used for three dedicated **1944 timeline
+stops** (spliced in after the 1938 map):
+
+- `extern_wo2:WO2_OORLOGSSCHADE` — 1565 damage polygons, attribute `CATEGORIE`
+  with the three events: *Bombardement 22 feb*, *Bevrijding 17–21 sep*,
+  *Granatentijd 22 sep*.
+- `extern_Historie:HIS_1944_BEBOUWING` — 26 999 1944 building footprints.
+
+Each stop draws all 1944 footprints in gray (Leaflet canvas) with that event's
+damage polygons in red on top; earlier events stay faintly visible (cumulative
+destruction). Click a damaged area for the event description. `extern_wo2` also
+hosts diaries, deaths-by-event, war monuments and German-occupied buildings.
+
 ## Controls
 
 - Timeline slider · ‹ › step · ▶ play · ← → / space keys
 - Transparency slider (blend against the modern map)
 - Filter: all / maps only / aerial photos only
+- 🔍 Vergelijk (V): compare-spyglass lens following the cursor, with a year selector
+- 🏗 Groei (G): city-development overlay synced to the timeline
 
 ## Ideas / next steps
 

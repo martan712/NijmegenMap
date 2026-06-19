@@ -1,0 +1,44 @@
+- Archeologie exploration optie
+- Perceel exploration optie?
+	+ 1. The Human Element: Genealogy & Inhabitants
+		The municipal portal tells you where the plots were, but it doesn't easily tell you the drama of who lived there. You can layer in genealogical data to 
+		create a "Who Lived Here?" feature.
+
+		The Source: OpenArch.nl or WieWasWie.nl APIs.
+
+		The Data: OpenArch exposes millions of Dutch historical records (birth, marriage, death, and tax registries) via a free API. Many of these records from the
+		18th and 19th centuries include exact address fields or old neighborhood codes (like Wijk A, nummer 45).
+
+		The Feature: A user clicks on a building polygon, and your app queries OpenArch for that specific historical address, displaying a timeline of every
+		family, merchant, or blacksmith who lived and worked in that building over a 200-year span.
+
+	+ 2. The Architectural Deep Dive: Cultural Heritage API
+	The portal has a basic "Historical buildings" layer, but it lacks rich architectural descriptions, interior photos, and restoration histories.
+
+	The Source: Rijksdienst voor het Cultureel Erfgoed (RCE) Open Data & SPARQL Endpoint.
+
+	The Data: The Dutch Cultural Heritage Agency provides full open-access data for every Rijksmonument (national monument) in Nijmegen. This includes the exact
+	architectural styles, the names of the original architects, structural modifications over time, and high-resolution cultural asset photos.
+
+	The Feature: Instead of just a popup saying "Built in 1450," your app pulls the official architectural dossier, explaining why the building is culturally
+	significant, its Gothic or Renaissance features, and what parts are original versus restored.
+
+	+ 3. Local Lore: The Street Name Origins
+	Nijmegen is full of fascinating street names (Kannenmarkt, Ganzenheuvel, Bessemstraat) that directly reflect medieval trades, geography, or historical figures.
+
+	The Source: Regionaal Archief Nijmegen (RAN) Open Data Collections.
+
+	The Data: The regional archive digitizes books and official municipal decrees explaining the exact origin of every street name in the city.
+
+	The Feature: A subtle hover effect or header display. When a user zooms into a street, a small tooltip reveals: "Kannenmarkt: Named in 1432 after the potters and
+	pewterers who set up market stalls here to sell jugs (kannen)." It adds instant, bite-sized historical context to the simple act of navigating the map.
+	
+	+ 4. Media Layer: The Sound of History
+	Old maps are silent, but history wasn't. Adding audio or oral histories transforms an app into an emotional experience.
+
+	The Source: Beeld & Geluid (Netherlands Institute for Sound and Vision) open archives, or local walking-tour podcast RSS feeds.
+
+	The Data: Geo-tagged audio clips, radio broadcasts from WWII, and oral history interviews with older Nijmegen citizens recounting life in the mid-20th century.
+
+	The Feature: An "Audio Hotspot" layer. If a user walks near the Waal Bridge with their headphones on, they can trigger an authentic 1944 radio broadcast clipping 	
+	detailing the Allied capture of the bridge during Operation Market Garden.
