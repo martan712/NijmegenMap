@@ -3,6 +3,14 @@ maps/
 tiles/
 maps.json
 
+# Node / Vite
+node_modules/
+dist/
+public/maps
+public/tiles
+public/maps.json
+public/data
+
 # Python
 __pycache__/
 *.pyc
@@ -10,3 +18,5 @@ __pycache__/
 # Local editor / tool state
 .claude/settings.local.json
 .DS_Store
+
+Notes
