@@ -98,14 +98,15 @@ export const CHAPTERS: Chapter[] = [
         source: "vestingwerken",
         scenes: [
           {
-            title: "De stadsmuur",
+            // Source: https://www.noviomagus.nl/OudNijmegen/Stadswallen.htm
+            title: "De stadsmuur (1870–1880)",
             year: 1879,
             focus: FOCUS.oldtown,
             wall: true,
             badge: "1870–1880",
             era: "stadsmuur",
             tag: "muur",
-            text: "[Wall text placeholder]",
+            text: "Op 11 maart 1874 verloor Nijmegen zijn vestingstatus. Vanaf 1876 werden de wallen, torens en poorten gesloopt om de overvolle benedenstad — ruim 23.000 inwoners — lucht en betere hygiëne te geven. Klik op de punten voor historische afbeeldingen van de stadswal en haar poorten (collectie Museum Het Valkhof). Fort Krayenhoff en de forten bij Lent bleven behouden.",
           },
         ],
       },
