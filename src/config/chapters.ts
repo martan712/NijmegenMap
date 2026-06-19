@@ -46,34 +46,6 @@ export const CHAPTERS: Chapter[] = [
           },
         ],
       },
-      {
-        title: "Muren & verdediging",
-        sub: "Vestingringen + stadsmuur",
-        scenes: [
-          {
-            title: "De eerste ommuring",
-            year: 1557,
-            focus: FOCUS.oldtown,
-            fortUpto: 1300,
-            wall: true,
-            text: "De oudste stenen muur (1230–1300) sluit de stad in. De gele punten markeren torens en poorten.",
-          },
-          {
-            title: "Uitbreiding van de muur",
-            year: 1557,
-            fortUpto: 1425,
-            wall: true,
-            text: "In de 15e eeuw wordt de ommuring uitgelegd om de gegroeide stad te omvatten.",
-          },
-          {
-            title: "Laatmiddeleeuwse vesting",
-            year: 1557,
-            fortUpto: 1536,
-            wall: true,
-            text: "Begin 16e eeuw is de muur op haar grootst — de basis voor de latere vestingstad.",
-          },
-        ],
-      },
     ],
   },
   {
@@ -118,33 +90,22 @@ export const CHAPTERS: Chapter[] = [
         ],
       },
       {
+        // Data-driven: one scene per CHW_VESTINGWERKEN ring (captioned from the
+        // gemeente's own TOELICHTING), with the later stadsmuur appended after
+        // the generated rings (see useChapters).
         title: "Vestingwerken",
-        sub: "Ringen 1525 → 1732",
+        sub: "Alle vestingringen + stadsmuur, 1230 → 1880",
+        source: "vestingwerken",
         scenes: [
           {
-            title: "Middeleeuwse basis",
-            year: 1639,
-            focus: FOCUS.fortress,
-            fortUpto: 1536,
-            text: "De late middeleeuwse muur vormt het vertrekpunt voor de moderne vesting.",
-          },
-          {
-            title: "Italiaanse vestingbouw",
-            year: 1639,
-            fortUpto: 1605,
-            text: "Rond 1600 komen bastions volgens het Italiaanse stelsel — hoekige punten die elkaar dekken.",
-          },
-          {
-            title: "Versterking Coehoorn",
-            year: 1672,
-            fortUpto: 1702,
-            text: "De beroemde vestingbouwer Menno van Coehoorn moderniseert de werken rond 1700.",
-          },
-          {
-            title: "De vesting compleet",
-            year: 1783,
-            fortUpto: 1732,
-            text: "Met de uitbreidingen van 1726–1732 bereikt de vesting haar definitieve omvang.",
+            title: "De stadsmuur",
+            year: 1879,
+            focus: FOCUS.oldtown,
+            wall: true,
+            badge: "1870–1880",
+            era: "stadsmuur",
+            tag: "muur",
+            text: "[Wall text placeholder]",
           },
         ],
       },

@@ -45,11 +45,17 @@ export interface Scene {
   tag?: string;
 }
 
+/** A datasource that a thread's scenes are generated from at runtime. */
+export type ThreadSource = "vestingwerken";
+
 /** A short, ordered run of scenes you page through. */
 export interface Thread {
   title: string;
   sub?: string;
+  /** Static scenes. Empty when `source` generates them from a dataset. */
   scenes: Scene[];
+  /** If set, scenes are built from this gemeente datasource (see useChapters). */
+  source?: ThreadSource;
 }
 
 /** A themed era that opens into one or more threads. */

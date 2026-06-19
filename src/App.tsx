@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import { CHAPTERS } from "./config/chapters";
 import { entryByYear, entryTag, yearOf } from "./lib/manifest";
 import { useManifest } from "./hooks/useManifest";
+import { useChapters } from "./hooks/useChapters";
 import { useMapEngine } from "./hooks/useMapEngine";
 import { useStoryNavigation } from "./hooks/useStoryNavigation";
 import { useFreeExplore } from "./hooks/useFreeExplore";
@@ -17,24 +17,25 @@ import styles from "./App.module.css";
 
 export default function App() {
   const { manifest, error } = useManifest();
+  const chapters = useChapters();
   const { containerRef, lensRingRef, lensYearRef, engine } = useMapEngine(manifest);
 
   const [mode, setMode] = useState<Mode>("story");
   const [storyOpen, setStoryOpen] = useState(true);
-  const story = useStoryNavigation(engine, mode === "story");
+  const story = useStoryNavigation(engine, chapters, mode === "story");
   const free = useFreeExplore(engine, manifest, mode === "free");
 
   const { chapterIndex, threadIndex, sceneIndex } = story;
   const activeScene =
     threadIndex != null
-      ? CHAPTERS[chapterIndex].threads[threadIndex].scenes[sceneIndex]
-      : null;
+      ? chapters[chapterIndex].threads[threadIndex].scenes[sceneIndex]
+      : undefined;
 
   // Year readout, derived from whichever mode is active.
   const badge: Badge | null = useMemo(() => {
     if (!manifest) return null;
     if (mode === "story") {
-      const chapter = CHAPTERS[chapterIndex];
+      const chapter = chapters[chapterIndex];
       if (activeScene) {
         const entry = entryByYear(manifest, activeScene.year);
         return {
@@ -48,7 +49,7 @@ export default function App() {
     }
     const entry = free.timeline[free.current];
     return entry ? { label: entry.label || entry.year, era: entry.era, tag: entryTag(entry) } : null;
-  }, [manifest, mode, chapterIndex, activeScene, free.timeline, free.current]);
+  }, [manifest, mode, chapters, chapterIndex, activeScene, free.timeline, free.current]);
 
   // Growth legend visibility + dimming year.
   const legend = useMemo(() => {
@@ -97,7 +98,7 @@ export default function App() {
 
       {mode === "story" && storyOpen && (
         <StoryPanel
-          chapter={CHAPTERS[chapterIndex]}
+          chapter={chapters[chapterIndex]}
           chapterIndex={chapterIndex}
           threadIndex={threadIndex}
           sceneIndex={sceneIndex}
@@ -130,7 +131,7 @@ export default function App() {
       )}
 
       <Spine
-        chapters={CHAPTERS}
+        chapters={chapters}
         mode={mode}
         activeChapter={chapterIndex}
         onOpenChapter={(i) => {

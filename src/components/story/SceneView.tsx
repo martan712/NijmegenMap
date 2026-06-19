@@ -15,6 +15,19 @@ export function SceneView({ chapterTitle, thread, sceneIndex, onGotoScene, onBac
   const scene = scenes[sceneIndex];
   const isLast = sceneIndex === scenes.length - 1;
 
+  // Data-driven threads have no scenes until their dataset has loaded.
+  if (!scene) {
+    return (
+      <>
+        <button className={styles.back} onClick={onBack}>
+          ‹ {chapterTitle}
+        </button>
+        <div className={styles.crumb}>{thread.title}</div>
+        <p className={styles.sceneText}>Laden…</p>
+      </>
+    );
+  }
+
   return (
     <>
       <button className={styles.back} onClick={onBack}>

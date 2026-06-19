@@ -122,6 +122,9 @@
   margin: 0 0 14px;
   font-size: 13.5px;
   line-height: 1.55;
+  /* Gemeente TOELICHTING can be long — keep the panel a sane height. */
+  max-height: 17vh;
+  overflow-y: auto;
 }
 
 .nav {
