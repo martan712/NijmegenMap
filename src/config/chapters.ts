@@ -21,11 +21,49 @@ export const CHAPTERS: Chapter[] = [
     year: 1557,
     focus: FOCUS.limes,
     intro:
-      "Nederland begint hier. Lang voor de stad bestond, lag aan de Waal de " +
-      "noordgrens van het Romeinse rijk: legerkampen op de heuvels, de " +
-      "Bataafse hoofdplaats en — onder keizer Trajanus — Ulpia Noviomagus, " +
-      "de oudste stad van Nederland.",
+      "Nederland begint hier. Lang voor de stad woonden er al mensen bij de " +
+      "rivierovergang — en aan de Waal lag eeuwenlang de noordgrens van het " +
+      "Romeinse rijk: legerkampen op de heuvels, de Bataafse hoofdplaats en, " +
+      "onder keizer Trajanus, Ulpia Noviomagus, de oudste stad van Nederland.",
     threads: [
+      {
+        // Prehistory: the deepest layer, before the Romans. Located pins on the
+        // modern reference map (no overlay). Beeld in data/prehistorie/.
+        title: "Prehistorie",
+        sub: "Voor de Romeinen, neolithicum → 50 v.Chr.",
+        scenes: [
+          {
+            title: "Grafheuvels en urnenvelden",
+            year: 1557,
+            pin: {
+              label: "Nijmegen-Oost",
+              at: [51.8385, 5.887],
+              zoom: 14,
+              image: "data/prehistorie/grafheuvel.jpg",
+              credit: "Een grote grafheuvel uit de bronstijd (Hoogeloon) — foto Bert van As, CC BY-SA 4.0 (Wikimedia Commons)",
+            },
+            badge: "Prehistorie",
+            era: "Neolithicum – bronstijd",
+            tag: "prehistorie",
+            text: "Al lang voor de Romeinen woonden hier mensen. In Nijmegen-Oost liggen sporen uit het neolithicum tot de late bronstijd: grafheuvels en urnenvelden. De rivierovergang en de hoge stuwwal maakten deze plek al vroeg aantrekkelijk om te wonen.",
+          },
+          {
+            title: "De eerste Bataven",
+            year: 1557,
+            pin: {
+              label: "Waterstraat",
+              at: [51.85, 5.8632],
+              zoom: 15,
+              image: "data/prehistorie/bataven.jpg",
+              credit: "Reconstructie van een ijzertijdboerderij te Wekerom — foto Syborgh, CC BY-SA 3.0 (Wikimedia Commons)",
+            },
+            badge: "± 50 v.Chr.",
+            era: "De eerste Bataven",
+            tag: "prehistorie",
+            text: "Rond 50 v.Chr. vestigden zich de eerste Bataven in het gebied; de Waterstraat in de benedenstad gaat terug op een van de oudste wegen van Nederland. Wanneer kort daarna de Romeinen arriveren, treffen ze hier dus al bewoning aan — het begin van Romeins Nijmegen.",
+          },
+        ],
+      },
       {
         // Limes-overlay (data/romeinse_limes.geojson = gemeente ARC_ROMEINSE_LIMES,
         // kern-/bufferzones). Locatiepins op vaste coördinaten; captions geaard op
