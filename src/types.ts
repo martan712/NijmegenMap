@@ -23,6 +23,15 @@ export interface ManifestEntry {
   wo2order?: number;
 }
 
+/** A labelled marker the camera centres on (pre-cartographic era scenes). */
+export interface ScenePin {
+  label: string;
+  /** [lat, lon] of the marker tip. */
+  at: [number, number];
+  /** Zoom to fly to (default ~15.5). */
+  zoom?: number;
+}
+
 /** A single configured map state — one "page" of the book. */
 export interface Scene {
   title: string;
@@ -35,10 +44,14 @@ export interface Scene {
   growthUpto?: number;
   /** Reveal fortification rings up to this period-year. */
   fortUpto?: number;
-  /** Show the Romeinse Limes (gemeente Archeologie) zones overlay. */
+  /** Show the Romeinse Limes (gemeente Archeologie) zones overlay + legend. */
   roman?: boolean;
-  /** Drop a labelled pin on the limes component site whose SITENAAM contains this. */
-  romanPin?: string;
+  /** Show the limes zones dimmed as a quiet geographic anchor (no legend). */
+  limesAnchor?: boolean;
+  /** Render no historical base map — modern reference map only (pre-1557 eras). */
+  noBase?: boolean;
+  /** A labelled location pin the camera centres on. */
+  pin?: ScenePin;
   /** Show the city-wall points. */
   wall?: boolean;
   /** Fly to, highlight, and open the popup of this wall point (NUMMER). */

@@ -54,11 +54,11 @@ body,
   margin: 2px 0 6px;
 }
 
-/* Romeinse Limes scene pin + its permanent label (Leaflet-generated DOM). */
-.limes-pin {
+/* Scene location pin + its permanent label (Leaflet-generated DOM). */
+.map-pin {
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
 }
-.leaflet-tooltip.limes-tip {
+.leaflet-tooltip.map-tip {
   background: var(--panel-bg);
   color: var(--text);
   border: none;
@@ -69,7 +69,7 @@ body,
   padding: 3px 8px;
   border-radius: var(--radius-md);
 }
-.leaflet-tooltip.limes-tip::before {
+.leaflet-tooltip.map-tip::before {
   display: none; /* hide the default tooltip arrow */
 }
 
