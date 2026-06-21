@@ -413,6 +413,80 @@ export const CHAPTERS: Chapter[] = [
       "Bastions volgens de nieuwste school, tot de wal in 1874 valt.",
     threads: [
       {
+        // Early-modern bridge (1543 → 1794): the period between the full
+        // medieval city and the cartographic fortress maps. Pin scenes on the
+        // closest historical base map (basemap forced on, since a lone pin would
+        // otherwise show the modern reference map). Beeld in data/earlymodern/.
+        title: "Gewest, geloof & vrede",
+        sub: "Van Habsburg tot de Fransen, 1543 → 1794",
+        scenes: [
+          {
+            title: "Gelre wordt Habsburgs",
+            year: 1557,
+            basemap: true,
+            pin: {
+              label: "Grote Markt",
+              at: [51.84775, 5.86505],
+              zoom: 16,
+              image: "data/earlymodern/venlo1543.jpg",
+              credit: "Keizer Karel V — anoniem portret, ca. 1550 (Rijksmuseum), publiek domein (Wikimedia Commons)",
+            },
+            badge: "1543",
+            era: "Verdrag van Venlo",
+            tag: "vesting",
+            text: "In 1543 dwong keizer Karel V met het Verdrag van Venlo het hertogdom Gelre in de Habsburgse Nederlanden. Nijmegen verloor haar eeuwenoude zelfstandige positie; voortaan was Arnhem de favoriete gewestelijke hoofdstad.",
+          },
+          {
+            title: "Maurits verovert de stad",
+            year: 1639,
+            basemap: true,
+            pin: {
+              label: "Valkhof",
+              at: [51.84782, 5.87026],
+              zoom: 16,
+              image: "data/earlymodern/maurits1591.jpg",
+              credit: "Prins Maurits van Oranje — Michiel van Mierevelt, publiek domein (Wikimedia Commons)",
+            },
+            badge: "1591",
+            era: "Maurits verovert Nijmegen",
+            tag: "vesting",
+            text: "In 1591 veroverde prins Maurits van Oranje Nijmegen op de Spaanse koning. Onder de Republiek werd de stad gereformeerd: de katholieke meerderheid werd minderheid en katholieke instellingen verdwenen of doken onder.",
+          },
+          {
+            title: "De Vrede van Nijmegen",
+            year: 1672,
+            basemap: true,
+            pin: {
+              label: "Stadhuis",
+              at: [51.84715, 5.86555],
+              zoom: 16,
+              image: "data/earlymodern/vrede1678.jpg",
+              credit: "De Vrede van Nijmegen, 1678 — prent, Rijksmuseum (CC0, Wikimedia Commons)",
+            },
+            badge: "1678",
+            era: "Vrede van Nijmegen",
+            tag: "vesting",
+            text: "Van 1678 tot 1679 werd in Nijmegen de vrede getekend die de Hollandse Oorlog beëindigde. Diplomaten uit heel Europa onderhandelden in de stad; heel even was Nijmegen het diplomatieke centrum van het continent.",
+          },
+          {
+            title: "De Fransen nemen de vesting",
+            year: 1783,
+            basemap: true,
+            pin: {
+              label: "Schipbrug naar Lent",
+              at: [51.8507, 5.866],
+              zoom: 15,
+              image: "data/earlymodern/franse1794.jpg",
+              credit: "Het beleg van Nijmegen in 1794, met de schipbrug naar Lent — prent, Ambroise Tardieu, publiek domein (Wikimedia Commons)",
+            },
+            badge: "1794",
+            era: "Franse inname",
+            tag: "vesting",
+            text: "Eind 1794 viel de vesting Nijmegen na hevige beschietingen in handen van de Franse Revolutionaire legers. Bij de overhaaste vlucht over de schipbrug naar Lent verdronken velen. Het begin van de Franse tijd — en van Nijmegen als zwaarbewapende grensvesting in de 19e eeuw.",
+          },
+        ],
+      },
+      {
         // Data-driven: one scene per CHW_VESTINGWERKEN ring, captioned from the
         // gemeente's own TOELICHTING (see useChapters).
         title: "De vesting groeit",
