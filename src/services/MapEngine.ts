@@ -55,7 +55,7 @@ export class MapEngine {
     // no map-anchored overlay) shows the modern reference map; everything else
     // shows the historical map for `year`. `basemap` overrides the default.
     const preCartographic =
-      !!(scene.pin || scene.arrows || scene.limes) &&
+      !!(scene.pin || scene.arrows || scene.limes || scene.anchor) &&
       scene.growth == null && scene.fort == null && !scene.wall && scene.ww2 == null;
     if (!(scene.basemap ?? !preCartographic)) {
       this.base.clear();
@@ -75,9 +75,9 @@ export class MapEngine {
     // between consecutive scenes animate smoothly rather than blink.
     this.growth.reveal(scene.growth ?? null);
     this.fort.reveal(scene.fort ?? null);
-    // Full limes shows the zones (+ legend); "anchor" keeps just the Valkhof
-    // zone as a dimmed location cue under post-Roman scenes.
-    this.roman.setVisible(scene.limes != null, scene.limes === "anchor");
+    // The limes frontier shows the zones (+ legend); `anchor` keeps just the
+    // Valkhof zone as a dimmed location cue under post-Roman scenes.
+    this.roman.setVisible(!!(scene.limes || scene.anchor), !!scene.anchor);
     this.pins.show(scene.pin ?? null);
     this.flow.show(scene.arrows ?? null);
     this.wall.setVisible(!!scene.wall || scene.wallPoint != null);

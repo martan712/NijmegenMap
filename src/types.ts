@@ -85,8 +85,14 @@ export interface Scene {
   growth?: number;
   /** Reveal fortification rings up to this period-year (cumulative). */
   fort?: number;
-  /** Romeinse Limes overlay: full zones (+ legend) or a dimmed Valkhof anchor. */
-  limes?: "full" | "anchor";
+  /** Romeinse Limes frontier overlay: the kern-/bufferzones (+ legend). */
+  limes?: boolean;
+  /**
+   * Dimmed Valkhof location cue — a faint spotlight on the Valkhof (reuses the
+   * limes kernzone geometry). A separate, simpler concern than the `limes`
+   * frontier overlay; used to anchor the post-Roman Valkhof scenes.
+   */
+  anchor?: boolean;
   /** Show the city-wall points. */
   wall?: boolean;
   /** Fly to + open one wall point by NUMMER (implies `wall`). */

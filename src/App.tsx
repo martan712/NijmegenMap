@@ -97,7 +97,7 @@ export default function App() {
       {badge && <YearBadge {...badge} />}
       <GrowthLegend visible={legend.visible} activeYear={legend.year} />
       <RomanLegend
-        visible={mode === "story" && activeScene?.limes === "full"}
+        visible={mode === "story" && !!activeScene?.limes}
       />
 
       {mode === "story" && storyOpen && (

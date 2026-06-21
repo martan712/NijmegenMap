@@ -34,7 +34,7 @@ export const CHAPTERS: Chapter[] = [
         sub: "Noviomagus aan de limes, 19 v.Chr. → 300 n.Chr.",
         scenes: [
           {
-            limes: "full",
+            limes: true,
             title: "De rand van het rijk",
             year: 1557,
             focus: FOCUS.limes,
@@ -44,7 +44,7 @@ export const CHAPTERS: Chapter[] = [
             text: "Hier liep eeuwenlang de noordgrens van het Romeinse rijk: de limes. De archeologiekaart van de gemeente toont de kern- en bufferzone van werelderfgoed Neder-Germaanse Limes — sinds 2021 op de UNESCO-lijst — dwars door het oosten van Nijmegen.",
           },
           {
-            limes: "full",
+            limes: true,
             title: "Het eerste legerkamp",
             year: 1557,
             pin: {
@@ -60,7 +60,7 @@ export const CHAPTERS: Chapter[] = [
             text: "Rond 19 v.Chr. legde het Romeinse leger onder veldheer Drusus een groot legerkamp aan op de Hunerberg — tijdelijk tot twee legioenen, zo'n 12.000 man. Het is het begin van de Romeinse aanwezigheid bij Nijmegen.",
           },
           {
-            limes: "full",
+            limes: true,
             title: "Commandopost op het Kops Plateau",
             year: 1557,
             pin: {
@@ -76,7 +76,7 @@ export const CHAPTERS: Chapter[] = [
             text: "Rond 12 v.Chr. verrees op het Kops Plateau een kleiner fort met enkele monumentaal gebouwde woningen — vermoedelijk een centrale commandopost van het Romeinse leger aan de grens.",
           },
           {
-            limes: "full",
+            limes: true,
             title: "Oppidum Batavorum",
             year: 1557,
             pin: {
@@ -92,7 +92,7 @@ export const CHAPTERS: Chapter[] = [
             text: "Naast de militaire kampen groeide bij het Valkhof een burgernederzetting: Oppidum Batavorum, de hoofdplaats van het district van de Bataven.",
           },
           {
-            limes: "full",
+            limes: true,
             title: "De Bataafse Opstand",
             year: 1557,
             pin: {
@@ -148,7 +148,7 @@ export const CHAPTERS: Chapter[] = [
         sub: "Terug naar het Valkhof, ± 300",
         scenes: [
           {
-            limes: "full",
+            limes: true,
             title: "Het laat-Romeinse castellum",
             year: 1557,
             pin: {
@@ -187,7 +187,7 @@ export const CHAPTERS: Chapter[] = [
         sub: "Valkhof: Franken → keizerpalts → burcht, 450 → 1155",
         scenes: [
           {
-            limes: "anchor",
+            anchor: true,
             title: "Franken op het Valkhof",
             year: 1557,
             pin: {
@@ -203,7 +203,7 @@ export const CHAPTERS: Chapter[] = [
             text: "Anders dan lang gedacht bleef het Valkhof bewoond. Het oude castellum bood onderdak aan de opkomende Frankische elite, en vlakbij lag een uitgestrekt Merovingisch grafveld met duizenden graven.",
           },
           {
-            limes: "anchor",
+            anchor: true,
             title: "De palts van Karel de Grote",
             year: 1557,
             pin: {
@@ -221,7 +221,7 @@ export const CHAPTERS: Chapter[] = [
           {
             // Composite scene: dimmed Valkhof anchor + pin image + a raid-route
             // arrow coming upriver. The wide `waalbocht` focus frames the arrow.
-            limes: "anchor",
+            anchor: true,
             title: "Vikingen plunderen de palts",
             year: 1557,
             focus: FOCUS.waalbocht,
@@ -241,7 +241,7 @@ export const CHAPTERS: Chapter[] = [
             text: "De Karolingische palts was een begeerd doelwit. Over de Waal voeren de Noormannen stroomopwaarts naar Nijmegen: in 838 vond de eerste overval plaats, in 880 belegerden en bezetten ze het Valkhof en staken het bij hun vertrek in brand. Pas rond 925 hield het plunderen op.",
           },
           {
-            limes: "anchor",
+            anchor: true,
             title: "Keizerstad: rijksdagen & Theophanu",
             year: 1557,
             pin: {
@@ -257,7 +257,7 @@ export const CHAPTERS: Chapter[] = [
             text: "Onder de Ottoonse en Salische keizers werd het Valkhof een geliefde verblijfplaats: hier werden rijksdagen gehouden (949, 996) en in 991 stierf keizerin Theophanu, moeder van Otto III, in de palts. Aan deze keizerlijke band dankt Nijmegen zijn bijnaam Keizerstad.",
           },
           {
-            limes: "anchor",
+            anchor: true,
             title: "De palts verwoest",
             year: 1557,
             pin: {
@@ -273,7 +273,7 @@ export const CHAPTERS: Chapter[] = [
             text: "In 1047 ging de palts in vlammen op: hertog Godfried met de Baard verwoestte haar tijdens zijn opstand tegen keizer Hendrik III. De keizerlijke burcht lag daarna in puin — tot Barbarossa haar een eeuw later liet herbouwen.",
           },
           {
-            limes: "anchor",
+            anchor: true,
             title: "Barbarossa's Valkhofburcht",
             year: 1557,
             pin: {
