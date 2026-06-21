@@ -58,8 +58,16 @@ export const CHAPTERS: Chapter[] = [
       "Bastions volgens de nieuwste school, tot de wal in 1874 valt.",
     threads: [
       {
+        // Data-driven: one scene per CHW_VESTINGWERKEN ring, captioned from the
+        // gemeente's own TOELICHTING (see useChapters).
         title: "De vesting groeit",
-        sub: "Kaarten 1639 → 1900",
+        sub: "Vestingringen, 1230 → 1732",
+        source: "vestingwerken",
+        scenes: [],
+      },
+      {
+        title: "De stad binnen de wallen",
+        sub: "Op de kaart, 1639 → 1850",
         scenes: [
           {
             title: "De stad in 1639",
@@ -68,34 +76,16 @@ export const CHAPTERS: Chapter[] = [
             text: "Op de oudste stadsplattegrond ligt Nijmegen strak binnen haar wallen aan de Waal.",
           },
           {
-            title: "Bastions en bolwerken",
+            title: "Het Rampjaar (1672)",
             year: 1672,
             text: "Tijdens het Rampjaar is de vesting volop in bedrijf; de bastions steken scherp naar buiten.",
           },
           {
-            title: "De 18e-eeuwse vesting",
-            year: 1783,
-            text: "De vorm verandert nauwelijks: een eeuw lang blijft de stad gevangen in haar wallen.",
-          },
-          {
-            title: "Tegen de grenzen",
+            title: "Vol tegen de wal (1850)",
             year: 1850,
             text: "Halverwege de 19e eeuw barst de dichtbevolkte stad uit haar voegen — de wal wordt een keurslijf.",
           },
-          {
-            title: "Na de slechting",
-            year: 1900,
-            text: "Met de wal weg in 1874 kan Nijmegen eindelijk de ruimte in; de eerste singels en wijken verschijnen.",
-          },
         ],
-      },
-      {
-        // Data-driven: one scene per CHW_VESTINGWERKEN ring, captioned from the
-        // gemeente's own TOELICHTING (see useChapters).
-        title: "Vestingwerken",
-        sub: "Alle vestingringen, 1230 → 1732",
-        source: "vestingwerken",
-        scenes: [],
       },
       {
         // Captions/images per point come from the gemeente Korfmacher popups
