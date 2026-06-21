@@ -44,6 +44,18 @@ body,
   max-height: none;
   overflow: visible;
 }
+
+/* Auto-opening scene-pin popups: cap tall portraits so they stay on screen
+   (the popup opens above a vertically-centred pin). Selector is deliberately
+   more specific than the .wallpop-img rule below so width:auto wins and the
+   image scales proportionally instead of being squashed. */
+.pinpop .leaflet-popup-content .wallpop-img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 40vh;
+  margin: 4px auto 6px;
+}
 .leaflet-popup-content .pp {
   font-weight: 700;
   color: #b5341f;

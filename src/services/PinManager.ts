@@ -29,13 +29,29 @@ export class PinManager {
       this.marker = null;
     }
     if (!pin) return;
-    this.marker = L.marker(pin.at, { icon: PIN_ICON })
-      .addTo(this.map)
-      .bindTooltip(pin.label, {
-        permanent: true,
-        direction: "right",
-        className: "map-tip",
-        offset: [8, -10],
-      });
+    const marker = L.marker(pin.at, { icon: PIN_ICON });
+    if (pin.image) {
+      // Illustrated pin: a click-popup with the drawing/photo + caption that
+      // auto-opens for the scene (autoPan off — the camera already framed it).
+      const credit = pin.credit ? `<div class="wallpop-cap">${pin.credit}</div>` : "";
+      marker
+        .bindPopup(
+          `<div class="pp">${pin.label}</div>` +
+            `<img class="wallpop-img" src="${pin.image}" alt="" loading="lazy">${credit}`,
+          { className: "wallpop pinpop", maxWidth: 320, autoPan: false },
+        )
+        .addTo(this.map)
+        .openPopup();
+    } else {
+      marker
+        .addTo(this.map)
+        .bindTooltip(pin.label, {
+          permanent: true,
+          direction: "right",
+          className: "map-tip",
+          offset: [8, -10],
+        });
+    }
+    this.marker = marker;
   }
 }

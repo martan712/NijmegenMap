@@ -30,6 +30,10 @@ export interface ScenePin {
   at: [number, number];
   /** Zoom to fly to (default ~15.5). */
   zoom?: number;
+  /** Local illustration shown in the pin's popup (e.g. "data/roman/valkhof.jpg"). */
+  image?: string;
+  /** Caption / attribution shown under the image. */
+  credit?: string;
 }
 
 /**
