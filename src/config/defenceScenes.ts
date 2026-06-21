@@ -37,16 +37,17 @@ function baseYearFor(ringYear: number): number {
 
 /**
  * Build one scene per ring: caption comes straight from the gemeente's
- * TOELICHTING, and `fortUpto` reveals that ring (cumulatively). Only the first
+ * TOELICHTING, and `upto` reveals that ring (cumulatively). Only the first
  * scene flies, so the view stays put while the rings accumulate.
  */
 export function buildDefenceScenes(rings: DefenceRing[]): Scene[] {
   return rings.map((ring, i) => ({
+    kind: "fort",
     title: ring.periode,
     text: ring.toelichting || "[geen toelichting in de bron]",
     year: baseYearFor(ring.year),
     focus: i === 0 ? FOCUS.fortress : undefined,
-    fortUpto: ring.year,
+    upto: ring.year,
     badge: String(ring.year),
     era: "vestingwerk",
     tag: "vesting",

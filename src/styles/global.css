@@ -58,6 +58,24 @@ body,
 .map-pin {
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
 }
+
+/* Movement-map arrowheads + arc labels. */
+.flow-arrow {
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.4));
+}
+.flow-label span {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  background: var(--panel-bg);
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 650;
+  padding: 2px 7px;
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: var(--blur);
+}
 .leaflet-tooltip.map-tip {
   background: var(--panel-bg);
   color: var(--text);

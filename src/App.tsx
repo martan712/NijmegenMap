@@ -55,8 +55,8 @@ export default function App() {
   // Growth legend visibility + dimming year.
   const legend = useMemo(() => {
     if (mode === "story") {
-      return activeScene?.growthUpto != null
-        ? { visible: true, year: activeScene.growthUpto }
+      return activeScene?.kind === "growth"
+        ? { visible: true, year: activeScene.upto }
         : { visible: false, year: 0 };
     }
     return free.growthOn
@@ -96,7 +96,13 @@ export default function App() {
       <TitleBadge />
       {badge && <YearBadge {...badge} />}
       <GrowthLegend visible={legend.visible} activeYear={legend.year} />
-      <RomanLegend visible={mode === "story" && !!activeScene?.roman} />
+      <RomanLegend
+        visible={
+          mode === "story" &&
+          activeScene?.kind === "limes" &&
+          (activeScene.mode ?? "full") === "full"
+        }
+      />
 
       {mode === "story" && storyOpen && (
         <StoryPanel

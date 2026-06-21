@@ -18,6 +18,12 @@ export const FOCUS = {
     [51.835, 5.872],
     [51.85, 5.895],
   ],
+  // All Roman sites east→west, incl. Ulpia Noviomagus in the Waterkwartier —
+  // wide enough to frame the movement arrows.
+  romanArea: [
+    [51.831, 5.838],
+    [51.858, 5.899],
+  ],
   valkhof:[
     [51.8435, 5.8595],
     [51.8525, 5.876],

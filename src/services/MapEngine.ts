@@ -5,6 +5,7 @@ import { GrowthManager } from "./GrowthManager";
 import { FortManager } from "./FortManager";
 import { RomanManager } from "./RomanManager";
 import { PinManager } from "./PinManager";
+import { FlowManager } from "./FlowManager";
 import { WallManager } from "./WallManager";
 import { WO2Manager } from "./WO2Manager";
 import { SpyManager, type LensRefs } from "./SpyManager";
@@ -25,6 +26,7 @@ export class MapEngine {
   readonly fort: FortManager;
   readonly roman: RomanManager;
   readonly pins: PinManager;
+  readonly flow: FlowManager;
   readonly wall: WallManager;
   readonly wo2: WO2Manager;
   readonly spy: SpyManager;
@@ -41,6 +43,7 @@ export class MapEngine {
     this.fort = new FortManager(this.map);
     this.roman = new RomanManager(this.map);
     this.pins = new PinManager(this.map);
+    this.flow = new FlowManager(this.map);
     this.wall = new WallManager(this.map);
     this.wo2 = new WO2Manager(this.map);
     this.spy = new SpyManager(this.map, lens);
@@ -48,9 +51,11 @@ export class MapEngine {
 
   /** Render one scene's full map state (story mode). */
   applyScene(scene: Scene): void {
-    // Pre-cartographic eras (Roman, early-medieval) show no anachronistic base
-    // — just the modern reference map under any overlay/pin.
-    if (scene.noBase) {
+    const pin = scene.kind === "limes" || scene.kind === "place" ? scene.pin : undefined;
+
+    // Base map: pre-cartographic eras (limes/place/movement) show only the
+    // modern reference map.
+    if (scene.kind === "limes" || scene.kind === "place" || scene.kind === "movement") {
       this.base.clear();
     } else {
       const entry =
@@ -58,19 +63,25 @@ export class MapEngine {
         this.manifest.find((e) => e.type !== "wo2");
       if (entry) this.base.setActive(entry);
     }
-    // A pinned scene centres on its location; otherwise use the scene focus.
-    if (scene.pin) this.map.flyTo(scene.pin.at, scene.pin.zoom ?? 15.5, { duration: 0.85 });
+
+    // Camera: a pin centres on its location; otherwise fit the scene focus.
+    // (A wall point flies itself, below, overriding any focus.)
+    if (pin) this.map.flyTo(pin.at, pin.zoom ?? 15.5, { duration: 0.85 });
     else if (scene.focus) this.map.flyToBounds(scene.focus, FLY);
-    this.growth.reveal(scene.growthUpto ?? null);
-    this.fort.reveal(scene.fortUpto ?? null);
-    // Full limes (with legend) for Roman scenes; a dimmed anchor for the
-    // post-Roman Valkhof scenes that keep the zone as a location cue.
-    this.roman.setVisible(!!scene.roman || !!scene.limesAnchor, !scene.roman);
-    this.pins.show(scene.pin ?? null);
-    this.wall.setVisible(!!scene.wall);
-    if (scene.wall && scene.wallPoint != null) this.wall.focusPoint(scene.wallPoint);
+
+    // Overlays: every manager is set each scene (value or off) so transitions
+    // between consecutive scenes animate smoothly rather than blink.
+    this.growth.reveal(scene.kind === "growth" ? scene.upto : null);
+    this.fort.reveal(scene.kind === "fort" ? scene.upto : null);
+    // Roman scenes show the full limes (+ legend); the post-Roman "anchor"
+    // scenes keep the Valkhof zone as a dimmed location cue.
+    this.roman.setVisible(scene.kind === "limes", scene.kind === "limes" && scene.mode === "anchor");
+    this.pins.show(pin ?? null);
+    this.flow.show(scene.kind === "movement" ? scene.arrows : null);
+    this.wall.setVisible(scene.kind === "wall");
+    if (scene.kind === "wall" && scene.point != null) this.wall.focusPoint(scene.point);
     else this.wall.clearHighlight();
-    this.wo2.reveal(scene.ww2Order ?? null);
+    this.wo2.reveal(scene.kind === "ww2" ? scene.order : null);
   }
 
   /** Show a chapter's overview: representative base map, no story overlays. */
@@ -92,6 +103,7 @@ export class MapEngine {
     this.fort.reveal(null);
     this.roman.setVisible(false);
     this.pins.show(null);
+    this.flow.show(null);
     this.wall.setVisible(false);
     this.wo2.reveal(null);
   }

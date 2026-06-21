@@ -32,37 +32,94 @@ export interface ScenePin {
   zoom?: number;
 }
 
-/** A single configured map state — one "page" of the book. */
-export interface Scene {
+/**
+ * One "page" of the book. Every scene shares these presentation fields; what it
+ * renders on the map is set by the concrete variant below (the `kind`).
+ */
+interface SceneBase {
   title: string;
   text: string;
   /** Base map/aerial year to render (looked up in the manifest). */
   year: number;
-  /** Extent to fly to. */
+  /** Extent to fly to (when the scene has no pin). */
   focus?: BoundsTuple;
-  /** Reveal Stadsontwikkeling polygons up to this year. */
-  growthUpto?: number;
-  /** Reveal fortification rings up to this period-year. */
-  fortUpto?: number;
-  /** Show the Romeinse Limes (gemeente Archeologie) zones overlay + legend. */
-  roman?: boolean;
-  /** Show the limes zones dimmed as a quiet geographic anchor (no legend). */
-  limesAnchor?: boolean;
-  /** Render no historical base map — modern reference map only (pre-1557 eras). */
-  noBase?: boolean;
-  /** A labelled location pin the camera centres on. */
-  pin?: ScenePin;
-  /** Show the city-wall points. */
-  wall?: boolean;
-  /** Fly to, highlight, and open the popup of this wall point (NUMMER). */
-  wallPoint?: number;
-  /** Reveal WW2 damage cumulatively up to this event order. */
-  ww2Order?: number;
   // Optional year-readout overrides.
   badge?: string;
   era?: string;
   tag?: string;
 }
+
+/** A plain historical-map page, no data overlay (the default kind). */
+export interface MapScene extends SceneBase {
+  kind?: "map";
+}
+
+/** Reveal Stadsontwikkeling (city-growth) polygons up to `upto`. */
+export interface GrowthScene extends SceneBase {
+  kind: "growth";
+  upto: number;
+}
+
+/** Reveal fortification rings up to this period-year (cumulative). */
+export interface FortScene extends SceneBase {
+  kind: "fort";
+  upto: number;
+}
+
+/** Show the city-wall points; optionally fly to + open one (by NUMMER). */
+export interface WallScene extends SceneBase {
+  kind: "wall";
+  point?: number;
+}
+
+/** Reveal WW2 damage cumulatively up to this event order. */
+export interface WW2Scene extends SceneBase {
+  kind: "ww2";
+  order: number;
+}
+
+/**
+ * A pre-cartographic Roman page on the modern reference map: the Romeinse Limes
+ * zones (`mode: "full"` with legend, or a dimmed `"anchor"`) plus a location pin.
+ */
+export interface LimesScene extends SceneBase {
+  kind: "limes";
+  mode?: "full" | "anchor";
+  pin?: ScenePin;
+}
+
+/** A located pin on the modern map, no overlay (e.g. a vanished settlement). */
+export interface PlaceScene extends SceneBase {
+  kind: "place";
+  pin: ScenePin;
+}
+
+/** One directed, curved arrow between two [lat, lon] points. */
+export interface MovementArrow {
+  from: [number, number];
+  to: [number, number];
+  /** Short label placed at the arc's apex. */
+  label?: string;
+  /** Signed bow of the curve; negative bends the other way (default 0.18). */
+  curve?: number;
+}
+
+/** A "how people moved" page: curved arrows over the modern reference map. */
+export interface MovementScene extends SceneBase {
+  kind: "movement";
+  arrows: MovementArrow[];
+}
+
+/** A configured map state — one "page" of the book. */
+export type Scene =
+  | MapScene
+  | GrowthScene
+  | FortScene
+  | WallScene
+  | WW2Scene
+  | LimesScene
+  | PlaceScene
+  | MovementScene;
 
 /** A datasource that a thread's scenes are generated from at runtime. */
 export type ThreadSource = "vestingwerken";
