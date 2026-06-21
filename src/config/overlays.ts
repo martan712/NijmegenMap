@@ -7,11 +7,12 @@ export const BLANK =
 
 /**
  * Map panes and their z-order. Higher = drawn on top.
- *   hist(350) < live(overlay 400) < growth(450) < wo2bg(455)
+ *   hist(350) < roman(360) < live(overlay 400) < growth(450) < wo2bg(455)
  *   < fort(458) < wall(459) < wo2(460) < spy(500)
  */
 export const PANES = {
   hist: 350,
+  roman: 360,
   growth: 450,
   wo2bg: 455,
   fort: 458,
@@ -50,6 +51,13 @@ export function fortColor(period: string): string {
   const t = Math.max(0, Math.min(1, (fortYearOf(period) - 1300) / (1732 - 1300)));
   return `hsl(${10 + t * 230} 75% 52%)`; // red(old) → blue(new)
 }
+
+// --- Romeinse Limes (ARC_ROMEINSE_LIMES) --------------------------------
+// UNESCO Neder-Germaanse Limes zones; colors match the gemeente WMS styling.
+export const LIMES_ZONES = [
+  { zone: "Kernzone", label: "Kernzone", fill: "#d9694a", line: "#a8341f" },
+  { zone: "Bufferzone", label: "Bufferzone", fill: "#5a8fd0", line: "#2f5f9e" },
+] as const;
 
 // --- WW2 damage (WO2_OORLOGSSCHADE) -------------------------------------
 export interface Wo2Event {

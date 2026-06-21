@@ -35,6 +35,10 @@ export interface Scene {
   growthUpto?: number;
   /** Reveal fortification rings up to this period-year. */
   fortUpto?: number;
+  /** Show the Romeinse Limes (gemeente Archeologie) zones overlay. */
+  roman?: boolean;
+  /** Drop a labelled pin on the limes component site whose SITENAAM contains this. */
+  romanPin?: string;
   /** Show the city-wall points. */
   wall?: boolean;
   /** Fly to, highlight, and open the popup of this wall point (NUMMER). */

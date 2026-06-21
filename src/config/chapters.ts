@@ -22,6 +22,48 @@ export const CHAPTERS: Chapter[] = [
       "stadsuitleg en de muren die haar moesten beschermen.",
     threads: [
       {
+        // Overlay = gemeente Archeologie WMS (ARC_ROMEINSE_LIMES): de kern- en
+        // bufferzone van werelderfgoed Neder-Germaanse Limes met haar
+        // deelgebieden (Valkhof area, Kops Plateau, Berg en Dal-aqueduct).
+        // Captions geaard op die laag — zie nijmegen-caption-accuracy.
+        title: "Romeins Nijmegen",
+        sub: "Noviomagus aan de limes",
+        scenes: [
+          {
+            title: "De rand van het rijk",
+            year: 1557,
+            focus: FOCUS.limes,
+            roman: true,
+            badge: "Romeinse tijd",
+            era: "ca. 19 v.Chr. – 270 n.Chr.",
+            tag: "romeins",
+            text: "Hier liep eeuwenlang de noordgrens van het Romeinse rijk: de limes. De gemeentelijke archeologiekaart toont de kern- en bufferzone van werelderfgoed Neder-Germaanse Limes — sinds 2021 op de UNESCO-lijst — dwars door het oosten van Nijmegen.",
+          },
+          {
+            title: "Kops Plateau & Hunerberg",
+            year: 1557,
+            focus: FOCUS.kopsplateau,
+            roman: true,
+            romanPin: "Kops Plateau",
+            badge: "Romeinse tijd",
+            era: "Romeinse legerplaatsen",
+            tag: "romeins",
+            text: "Op de hoge terrassen van het Kops Plateau en de Hunerberg lagen Romeinse legerplaatsen aan de grens — als deelgebieden van de limes vormen ze de oudste sporen van bewoning bij Nijmegen. Water kwam via een aquaduct vanaf Berg en Dal (Mariënboom).",
+          },
+          {
+            title: "Het Valkhof, kern van Noviomagus",
+            year: 1557,
+            focus: FOCUS.valkhof,
+            roman: true,
+            romanPin: "Valkhof",
+            badge: "Romeinse tijd",
+            era: "Ulpia Noviomagus Batavorum",
+            tag: "romeins",
+            text: "Rond Valkhof- en Hunnerpark ligt de kernzone van de limes. Hier groeide de Romeinse nederzetting Noviomagus uit tot een stad met marktrecht — de oorsprong waaraan Nijmegen zijn titel 'oudste stad van Nederland' ontleent.",
+          },
+        ],
+      },
+      {
         title: "De eerste stad",
         sub: "Stadsgroei tot ~1525",
         scenes: [

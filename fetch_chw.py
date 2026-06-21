@@ -24,6 +24,8 @@ SOURCES = {
     # Chapter overlays: fortifications + medieval city wall.
     ("extern_Cultuurhistorie", "CHW_VESTINGWERKEN"): "vestingwerken.geojson",
     ("extern_Historie", "HIS_STADSMUUR"): "stadsmuur.geojson",
+    # Roman limes (UNESCO Neder-Germaanse Limes) kern-/bufferzones — chapter 1.
+    ("extern_Archeologie", "ARC_ROMEINSE_LIMES"): "romeinse_limes.geojson",
     # More layers on the same services, ready when we want them:
     # ("extern_Cultuurhistorie", "CHW_VESTINGWERKEN"):    "vestingwerken.geojson",
     # ("extern_wo2", "WO2_OORLOGSMONUMENTEN_SQL"):        "wo2_monumenten.geojson",

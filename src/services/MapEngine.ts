@@ -3,6 +3,7 @@ import { MapService } from "./MapService";
 import { BaseLayerManager } from "./BaseLayerManager";
 import { GrowthManager } from "./GrowthManager";
 import { FortManager } from "./FortManager";
+import { RomanManager } from "./RomanManager";
 import { WallManager } from "./WallManager";
 import { WO2Manager } from "./WO2Manager";
 import { SpyManager, type LensRefs } from "./SpyManager";
@@ -21,6 +22,7 @@ export class MapEngine {
   readonly base: BaseLayerManager;
   readonly growth: GrowthManager;
   readonly fort: FortManager;
+  readonly roman: RomanManager;
   readonly wall: WallManager;
   readonly wo2: WO2Manager;
   readonly spy: SpyManager;
@@ -35,6 +37,7 @@ export class MapEngine {
     this.base = new BaseLayerManager(this.map);
     this.growth = new GrowthManager(this.map);
     this.fort = new FortManager(this.map);
+    this.roman = new RomanManager(this.map);
     this.wall = new WallManager(this.map);
     this.wo2 = new WO2Manager(this.map);
     this.spy = new SpyManager(this.map, lens);
@@ -42,13 +45,23 @@ export class MapEngine {
 
   /** Render one scene's full map state (story mode). */
   applyScene(scene: Scene): void {
-    const entry =
-      entryByYear(this.manifest, scene.year) ??
-      this.manifest.find((e) => e.type !== "wo2");
-    if (entry) this.base.setActive(entry);
-    if (scene.focus) this.map.flyToBounds(scene.focus, FLY);
+    // The Roman era predates every historical map, so show no anachronistic
+    // base — just the modern reference map under the limes zones.
+    if (scene.roman) {
+      this.base.clear();
+    } else {
+      const entry =
+        entryByYear(this.manifest, scene.year) ??
+        this.manifest.find((e) => e.type !== "wo2");
+      if (entry) this.base.setActive(entry);
+    }
+    // A pinned limes scene frames its own site; otherwise use the scene focus.
+    const panToPin = !!(scene.roman && scene.romanPin);
+    if (scene.focus && !panToPin) this.map.flyToBounds(scene.focus, FLY);
     this.growth.reveal(scene.growthUpto ?? null);
     this.fort.reveal(scene.fortUpto ?? null);
+    this.roman.setVisible(!!scene.roman);
+    this.roman.showPin(panToPin ? scene.romanPin! : null, panToPin);
     this.wall.setVisible(!!scene.wall);
     if (scene.wall && scene.wallPoint != null) this.wall.focusPoint(scene.wallPoint);
     else this.wall.clearHighlight();
@@ -72,6 +85,7 @@ export class MapEngine {
   clearStoryOverlays(): void {
     this.growth.reveal(null);
     this.fort.reveal(null);
+    this.roman.setVisible(false);
     this.wall.setVisible(false);
     this.wo2.reveal(null);
   }

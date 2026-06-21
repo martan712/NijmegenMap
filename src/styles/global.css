@@ -54,6 +54,25 @@ body,
   margin: 2px 0 6px;
 }
 
+/* Romeinse Limes scene pin + its permanent label (Leaflet-generated DOM). */
+.limes-pin {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+}
+.leaflet-tooltip.limes-tip {
+  background: var(--panel-bg);
+  color: var(--text);
+  border: none;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: var(--blur);
+  font-weight: 650;
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: var(--radius-md);
+}
+.leaflet-tooltip.limes-tip::before {
+  display: none; /* hide the default tooltip arrow */
+}
+
 /* City-wall (Korfmacher) popups: historical image + caption. */
 .leaflet-popup-content .wallpop-img {
   display: block;

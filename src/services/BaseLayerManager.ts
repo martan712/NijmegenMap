@@ -59,6 +59,20 @@ export class BaseLayerManager {
     this.live?.setOpacity(opacity);
   }
 
+  /** Remove the historical base entirely, revealing the modern reference map. */
+  clear(): void {
+    this.current = null;
+    this.clearLive();
+    const old = this.active;
+    this.active = null;
+    if (old) {
+      old.setOpacity(0);
+      setTimeout(() => {
+        if (this.active !== old) this.map.removeLayer(old);
+      }, 320);
+    }
+  }
+
   private layerFor(entry: ManifestEntry): BaseLayer {
     const cached = this.cache.get(entry.file);
     if (cached) return cached;

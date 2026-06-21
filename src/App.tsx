@@ -9,6 +9,7 @@ import { MapCanvas } from "./components/MapCanvas";
 import { TitleBadge } from "./components/TitleBadge";
 import { YearBadge } from "./components/YearBadge";
 import { GrowthLegend } from "./components/GrowthLegend";
+import { RomanLegend } from "./components/RomanLegend";
 import { Spine } from "./components/Spine";
 import { FreePanel } from "./components/FreePanel";
 import { StoryPanel } from "./components/story/StoryPanel";
@@ -95,6 +96,7 @@ export default function App() {
       <TitleBadge />
       {badge && <YearBadge {...badge} />}
       <GrowthLegend visible={legend.visible} activeYear={legend.year} />
+      <RomanLegend visible={mode === "story" && !!activeScene?.roman} />
 
       {mode === "story" && storyOpen && (
         <StoryPanel
