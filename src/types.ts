@@ -36,68 +36,6 @@ export interface ScenePin {
   credit?: string;
 }
 
-/**
- * One "page" of the book. Every scene shares these presentation fields; what it
- * renders on the map is set by the concrete variant below (the `kind`).
- */
-interface SceneBase {
-  title: string;
-  text: string;
-  /** Base map/aerial year to render (looked up in the manifest). */
-  year: number;
-  /** Extent to fly to (when the scene has no pin). */
-  focus?: BoundsTuple;
-  // Optional year-readout overrides.
-  badge?: string;
-  era?: string;
-  tag?: string;
-}
-
-/** A plain historical-map page, no data overlay (the default kind). */
-export interface MapScene extends SceneBase {
-  kind?: "map";
-}
-
-/** Reveal Stadsontwikkeling (city-growth) polygons up to `upto`. */
-export interface GrowthScene extends SceneBase {
-  kind: "growth";
-  upto: number;
-}
-
-/** Reveal fortification rings up to this period-year (cumulative). */
-export interface FortScene extends SceneBase {
-  kind: "fort";
-  upto: number;
-}
-
-/** Show the city-wall points; optionally fly to + open one (by NUMMER). */
-export interface WallScene extends SceneBase {
-  kind: "wall";
-  point?: number;
-}
-
-/** Reveal WW2 damage cumulatively up to this event order. */
-export interface WW2Scene extends SceneBase {
-  kind: "ww2";
-  order: number;
-}
-
-/**
- * A pre-cartographic Roman page on the modern reference map: the Romeinse Limes
- * zones (`mode: "full"` with legend, or a dimmed `"anchor"`) plus a location pin.
- */
-export interface LimesScene extends SceneBase {
-  kind: "limes";
-  mode?: "full" | "anchor";
-  pin?: ScenePin;
-}
-
-/** A located pin on the modern map, no overlay (e.g. a vanished settlement). */
-export interface PlaceScene extends SceneBase {
-  kind: "place";
-  pin: ScenePin;
-}
-
 /** One directed, curved arrow between two [lat, lon] points. */
 export interface MovementArrow {
   from: [number, number];
@@ -108,22 +46,54 @@ export interface MovementArrow {
   curve?: number;
 }
 
-/** A "how people moved" page: curved arrows over the modern reference map. */
-export interface MovementScene extends SceneBase {
-  kind: "movement";
-  arrows: MovementArrow[];
-}
+/**
+ * One "page" of the book: a configured map state.
+ *
+ * Besides the shared presentation fields, a scene declares its map layers as
+ * independent optional fields — and ANY combination may be set at once. So a
+ * single scene can show, e.g., the limes anchor + a pin image + raid arrows, or
+ * the city-growth polygons together with a located pin. Each layer maps 1:1 to
+ * a manager in MapEngine.applyScene, which sets every manager (value or off)
+ * every scene so transitions animate instead of blink.
+ */
+export interface Scene {
+  title: string;
+  text: string;
+  /** Base map/aerial year to render (looked up in the manifest). */
+  year: number;
+  /** Extent to fly to. Takes precedence over a pin's own centre. */
+  focus?: BoundsTuple;
+  // Optional year-readout overrides.
+  badge?: string;
+  era?: string;
+  tag?: string;
 
-/** A configured map state — one "page" of the book. */
-export type Scene =
-  | MapScene
-  | GrowthScene
-  | FortScene
-  | WallScene
-  | WW2Scene
-  | LimesScene
-  | PlaceScene
-  | MovementScene;
+  // ---- Composable map layers (any combination) ----
+  /**
+   * Show the historical base map for `year`. When omitted it shows
+   * automatically, unless the scene is purely pre-cartographic (only a pin,
+   * arrows and/or the limes overlay) — those render on the modern reference
+   * map. Set explicitly to override (e.g. growth polygons over the 1557 map
+   * while a pin is also shown).
+   */
+  basemap?: boolean;
+  /** A located image marker; its popup auto-opens. */
+  pin?: ScenePin;
+  /** Curved, labelled movement / raid arrows. */
+  arrows?: MovementArrow[];
+  /** Reveal Stadsontwikkeling (city-growth) polygons built up to this year. */
+  growth?: number;
+  /** Reveal fortification rings up to this period-year (cumulative). */
+  fort?: number;
+  /** Romeinse Limes overlay: full zones (+ legend) or a dimmed Valkhof anchor. */
+  limes?: "full" | "anchor";
+  /** Show the city-wall points. */
+  wall?: boolean;
+  /** Fly to + open one wall point by NUMMER (implies `wall`). */
+  wallPoint?: number;
+  /** Reveal WW2 damage cumulatively up to this event order. */
+  ww2?: number;
+}
 
 /** A datasource that a thread's scenes are generated from at runtime. */
 export type ThreadSource = "vestingwerken";

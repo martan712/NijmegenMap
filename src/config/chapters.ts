@@ -6,20 +6,25 @@ import type { Chapter } from "../types";
  *
  * Shape (see src/types.ts):
  *   Chapter → threads[] → scenes[]
- *   A Scene is one configured map state (base year + overlays + focus + caption).
+ *   A Scene is one configured map state. Its map layers are independent
+ *   optional fields (pin / arrows / growth / fort / limes / wall / ww2) and ANY
+ *   combination may be set on one scene — e.g. limes anchor + pin + raid arrows,
+ *   or growth polygons + a located pin.
  *
  * To extend the app you (almost) only edit this file: add a scene to a
  * thread, a thread to a chapter, or a whole chapter to the array.
  */
 export const CHAPTERS: Chapter[] = [
   {
-    title: "Vroeg Nijmegen",
-    short: "Middeleeuwen",
+    title: "Bataven & Romeinen",
+    short: "Romeinse tijd",
     year: 1557,
-    focus: FOCUS.oldtown,
+    focus: FOCUS.limes,
     intro:
-      "Nederland begint hier. Van het Romeinse Noviomagus en de palts van Karel " +
-      "de Grote tot de middeleeuwse stad die rond het Valkhof aan de Waal groeit.",
+      "Nederland begint hier. Lang voor de stad bestond, lag aan de Waal de " +
+      "noordgrens van het Romeinse rijk: legerkampen op de heuvels, de " +
+      "Bataafse hoofdplaats en — onder keizer Trajanus — Ulpia Noviomagus, " +
+      "de oudste stad van Nederland.",
     threads: [
       {
         // Limes-overlay (data/romeinse_limes.geojson = gemeente ARC_ROMEINSE_LIMES,
@@ -29,7 +34,7 @@ export const CHAPTERS: Chapter[] = [
         sub: "Noviomagus aan de limes, 19 v.Chr. → 300 n.Chr.",
         scenes: [
           {
-            kind: "limes",
+            limes: "full",
             title: "De rand van het rijk",
             year: 1557,
             focus: FOCUS.limes,
@@ -39,7 +44,7 @@ export const CHAPTERS: Chapter[] = [
             text: "Hier liep eeuwenlang de noordgrens van het Romeinse rijk: de limes. De archeologiekaart van de gemeente toont de kern- en bufferzone van werelderfgoed Neder-Germaanse Limes — sinds 2021 op de UNESCO-lijst — dwars door het oosten van Nijmegen.",
           },
           {
-            kind: "limes",
+            limes: "full",
             title: "Het eerste legerkamp",
             year: 1557,
             pin: {
@@ -55,7 +60,7 @@ export const CHAPTERS: Chapter[] = [
             text: "Rond 19 v.Chr. legde het Romeinse leger onder veldheer Drusus een groot legerkamp aan op de Hunerberg — tijdelijk tot twee legioenen, zo'n 12.000 man. Het is het begin van de Romeinse aanwezigheid bij Nijmegen.",
           },
           {
-            kind: "limes",
+            limes: "full",
             title: "Commandopost op het Kops Plateau",
             year: 1557,
             pin: {
@@ -71,7 +76,7 @@ export const CHAPTERS: Chapter[] = [
             text: "Rond 12 v.Chr. verrees op het Kops Plateau een kleiner fort met enkele monumentaal gebouwde woningen — vermoedelijk een centrale commandopost van het Romeinse leger aan de grens.",
           },
           {
-            kind: "limes",
+            limes: "full",
             title: "Oppidum Batavorum",
             year: 1557,
             pin: {
@@ -87,7 +92,7 @@ export const CHAPTERS: Chapter[] = [
             text: "Naast de militaire kampen groeide bij het Valkhof een burgernederzetting: Oppidum Batavorum, de hoofdplaats van het district van de Bataven.",
           },
           {
-            kind: "limes",
+            limes: "full",
             title: "De Bataafse Opstand",
             year: 1557,
             pin: {
@@ -103,7 +108,6 @@ export const CHAPTERS: Chapter[] = [
             text: "In het jaar 70 ging Oppidum Batavorum in vlammen op tijdens de opstand van de Bataven onder Julius Civilis. Daarna legerde het Tiende Legioen (Legio X Gemina) zich bij Nijmegen.",
           },
           {
-            kind: "place",
             title: "Ulpia Noviomagus, oudste stad",
             year: 1557,
             pin: {
@@ -121,7 +125,6 @@ export const CHAPTERS: Chapter[] = [
           {
             // Summary: arrows trace how the centre of Roman Nijmegen shifted
             // across the landscape over four centuries (same sourced coords).
-            kind: "movement",
             title: "Het zwaartepunt verschuift",
             year: 1557,
             focus: FOCUS.romanArea,
@@ -139,13 +142,13 @@ export const CHAPTERS: Chapter[] = [
         ],
       },
       {
-        // Bridge from the late-Roman Valkhof to the medieval city: kind "limes"
-        // (anchor) / "place" on the modern map; captions geaard op valkhof.nl.
-        title: "Van castellum tot Valkhof",
-        sub: "Romeins fort → keizerburcht, 300 → 1155",
+        // Closing beat of the Roman chapter: the frontier pulls back from the
+        // Rhine to the Waal and the Valkhof becomes Rome's last foothold here.
+        title: "Het einde van Romeins Nijmegen",
+        sub: "Terug naar het Valkhof, ± 300",
         scenes: [
           {
-            kind: "limes",
+            limes: "full",
             title: "Het laat-Romeinse castellum",
             year: 1557,
             pin: {
@@ -158,11 +161,33 @@ export const CHAPTERS: Chapter[] = [
             badge: "± 300 n.Chr.",
             era: "Laat-Romeins castellum",
             tag: "romeins",
-            text: "Rond 270–300 raakte Noviomagus in het westen verlaten en trok de bevolking terug naar het Valkhof. Daar bouwden de Romeinen een versterkt castellum; omstreeks 370 kreeg het onder keizer Valentinianus een stenen muur. De grens verschoof van de Rijn naar de Waal.",
+            text: "Rond 270–300 raakte Noviomagus in het westen verlaten en trok de bevolking terug naar het Valkhof. Daar bouwden de Romeinen een versterkt castellum; omstreeks 370 kreeg het onder keizer Valentinianus een stenen muur. De grens verschoof van de Rijn naar de Waal — tot de Romeinen in de 5e eeuw definitief vertrokken.",
           },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Keizerstad",
+    short: "Middeleeuwen",
+    year: 1557,
+    focus: FOCUS.oldtown,
+    intro:
+      "Op de Romeinse resten bouwde Karel de Grote een palts; eeuwenlang " +
+      "hielden keizers er rijksdagen. In de luwte van het Valkhof groeit aan " +
+      "de Waal de middeleeuwse stad — met stadsrechten, de Sint-Steven en, " +
+      "vanaf 1402, de Hanze.",
+    threads: [
+      {
+        // Valkhof continuity, 5e–12e eeuw: the imperial seat from the Franks
+        // through the Carolingian/Ottonian palts to Barbarossa's burcht.
+        // Captions geaard op valkhof.nl / nl.wikipedia Geschiedenis van Nijmegen;
+        // pin op het Valkhof, beeld in data/medieval/ (zie fetch_medieval_images.py).
+        title: "Van palts tot burcht",
+        sub: "Valkhof: Franken → keizerpalts → burcht, 450 → 1155",
+        scenes: [
           {
-            kind: "limes",
-            mode: "anchor",
+            limes: "anchor",
             title: "Franken op het Valkhof",
             year: 1557,
             pin: {
@@ -178,8 +203,7 @@ export const CHAPTERS: Chapter[] = [
             text: "Anders dan lang gedacht bleef het Valkhof bewoond. Het oude castellum bood onderdak aan de opkomende Frankische elite, en vlakbij lag een uitgestrekt Merovingisch grafveld met duizenden graven.",
           },
           {
-            kind: "limes",
-            mode: "anchor",
+            limes: "anchor",
             title: "De palts van Karel de Grote",
             year: 1557,
             pin: {
@@ -195,8 +219,61 @@ export const CHAPTERS: Chapter[] = [
             text: "In 777 bouwde Karel de Grote een palts op het Valkhof, deels met hergebruikte Romeinse steen. Nijmegen — toen Numaga — werd een keizerlijke verblijfplaats waar Karel meermaals verbleef, onder meer met Pasen.",
           },
           {
-            kind: "limes",
-            mode: "anchor",
+            // Composite scene: dimmed Valkhof anchor + pin image + a raid-route
+            // arrow coming upriver. The wide `waalbocht` focus frames the arrow.
+            limes: "anchor",
+            title: "Vikingen plunderen de palts",
+            year: 1557,
+            focus: FOCUS.waalbocht,
+            pin: {
+              label: "Valkhof",
+              at: [51.84782, 5.87026],
+              zoom: 16,
+              image: "data/medieval/vikingen.jpg",
+              credit: "Het Osebergschip (9e eeuw), een bewaard Vikingschip — Vikingschipmuseum Oslo, foto Petter Ulleland, CC BY-SA 4.0 (Wikimedia Commons)",
+            },
+            arrows: [
+              { from: [51.8572, 5.8475], to: [51.84782, 5.87026], label: "Noormannen", curve: 0.22 },
+            ],
+            badge: "9e eeuw",
+            era: "Vikingplunderingen",
+            tag: "vroege middeleeuwen",
+            text: "De Karolingische palts was een begeerd doelwit. Over de Waal voeren de Noormannen stroomopwaarts naar Nijmegen: in 838 vond de eerste overval plaats, in 880 belegerden en bezetten ze het Valkhof en staken het bij hun vertrek in brand. Pas rond 925 hield het plunderen op.",
+          },
+          {
+            limes: "anchor",
+            title: "Keizerstad: rijksdagen & Theophanu",
+            year: 1557,
+            pin: {
+              label: "Valkhof",
+              at: [51.84782, 5.87026],
+              zoom: 16,
+              image: "data/medieval/keizerstad.jpg",
+              credit: "Keizer Otto III ontvangt de hulde van de rijksdelen — miniatuur uit het Evangeliarium van Otto III, ca. 1000, CC BY-SA 4.0 (Wikimedia Commons)",
+            },
+            badge: "10e–11e eeuw",
+            era: "Keizerstad",
+            tag: "middeleeuwen",
+            text: "Onder de Ottoonse en Salische keizers werd het Valkhof een geliefde verblijfplaats: hier werden rijksdagen gehouden (949, 996) en in 991 stierf keizerin Theophanu, moeder van Otto III, in de palts. Aan deze keizerlijke band dankt Nijmegen zijn bijnaam Keizerstad.",
+          },
+          {
+            limes: "anchor",
+            title: "De palts verwoest",
+            year: 1557,
+            pin: {
+              label: "Valkhof",
+              at: [51.84782, 5.87026],
+              zoom: 16,
+              image: "data/medieval/palts1047.jpg",
+              credit: "Keizer Hendrik III, tegen wie hertog Godfried in opstand kwam — middeleeuwse miniatuur, publiek domein (Wikimedia Commons)",
+            },
+            badge: "1047",
+            era: "De palts verwoest",
+            tag: "middeleeuwen",
+            text: "In 1047 ging de palts in vlammen op: hertog Godfried met de Baard verwoestte haar tijdens zijn opstand tegen keizer Hendrik III. De keizerlijke burcht lag daarna in puin — tot Barbarossa haar een eeuw later liet herbouwen.",
+          },
+          {
+            limes: "anchor",
             title: "Barbarossa's Valkhofburcht",
             year: 1557,
             pin: {
@@ -214,29 +291,112 @@ export const CHAPTERS: Chapter[] = [
         ],
       },
       {
-        title: "De eerste stad",
-        sub: "Stadsgroei tot ~1525",
+        // The city itself, west of the Valkhof: from the first citizens (1184)
+        // through city rights, Gelre and the Hanze to a full medieval town.
+        // Every scene carries `growth` so the city-development polygons persist
+        // across the thread; event scenes add a located pin (data/medieval/).
+        title: "De stad aan de Waal",
+        sub: "Stadsrechten, Hanze & groei, 1184 → 1525",
         scenes: [
           {
             title: "Rond het Valkhof",
             year: 1557,
             focus: FOCUS.oldtown,
-            kind: "growth",
-            upto: 1230,
-            text: "Voor 1230 ligt de bebouwing dicht tegen het Valkhof en de Waal — de kiem van de middeleeuwse stad.",
+            growth: 1230,
+            text: "In 1184 worden de inwoners — de cives — voor het eerst genoemd; het zwaartepunt verschuift dan van het Valkhof westwaarts, naar de markt aan de Waal. Voor 1230 ligt de bebouwing nog dicht tegen het Valkhof: de kiem van de middeleeuwse stad.",
+          },
+          {
+            title: "Stadsrechten",
+            year: 1557,
+            growth: 1230,
+            pin: {
+              label: "Grote Markt",
+              at: [51.84775, 5.86505],
+              zoom: 16,
+              image: "data/medieval/stadsrechten.jpg",
+              credit: "Het wapen van Nijmegen met de dubbele Rijksadelaar — Martinvl, publiek domein (Wikimedia Commons)",
+            },
+            badge: "1230",
+            era: "Stadsrechten",
+            tag: "middeleeuwen",
+            text: "Op 31 augustus 1230 verleende rooms-koning Hendrik (VII) Nijmegen stadsrechten naar het voorbeeld van Aken. Als vrije rijksstad kreeg de stad een eigen bestuur en zegel — de status die haar bijnaam Keizerstad bekrachtigde.",
+          },
+          {
+            title: "Verpand aan Gelre",
+            year: 1557,
+            growth: 1230,
+            pin: {
+              label: "Valkhof",
+              at: [51.84782, 5.87026],
+              zoom: 16,
+              image: "data/medieval/gelre.jpg",
+              credit: "Penning met het wapenschild van de graaf van Gelre (12e eeuw) — publiek domein (Wikimedia Commons)",
+            },
+            badge: "1247",
+            era: "Verpand aan Gelre",
+            tag: "middeleeuwen",
+            text: "In 1247 verpandde rooms-koning Willem II het Rijk van Nijmegen — stad én burcht — aan de graaf van Gelre. De pandsom werd nooit afgelost; sindsdien hoort Nijmegen bij Gelre en niet meer rechtstreeks bij het keizerrijk.",
+          },
+          {
+            title: "Sint-Steven & de Maria-Omdracht",
+            year: 1557,
+            growth: 1230,
+            pin: {
+              label: "Sint-Stevenskerk",
+              at: [51.84799, 5.8649],
+              zoom: 16,
+              image: "data/medieval/sintsteven.jpg",
+              credit: "De toren van de Sint-Stevenskerk — foto Tubantia, CC BY-SA 3.0 (Wikimedia Commons)",
+            },
+            badge: "1272",
+            era: "Sint-Steven",
+            tag: "middeleeuwen",
+            text: "De Sint-Stevenskerk, de middeleeuwse hoofdkerk, werd in 1272 gewijd — naar verluidt door Albertus Magnus. Eromheen ontstond de Maria-Omdracht, een processie die het stadsleven eeuwenlang zou kleuren.",
+          },
+          {
+            title: "Pest & Jodenvervolging",
+            year: 1557,
+            growth: 1400,
+            pin: {
+              label: "Mariënburg",
+              at: [51.8447, 5.8639],
+              zoom: 16,
+              image: "data/medieval/pest1349.jpg",
+              credit: "Jodenvervolging tijdens de pest van 1349 — miniatuur uit een 14e-eeuwse kroniek (Kon. Bibliotheek van België), publiek domein (Wikimedia Commons)",
+            },
+            badge: "1349",
+            era: "Pest & vervolging",
+            tag: "middeleeuwen",
+            text: "De pest van 1349 trof ook Nijmegen — en werd, zoals in veel Rijnsteden, gevolgd door een vervolging van de joodse gemeenschap, destijds de grootste van de Lage Landen. De donkere keerzijde van de bloeiende stad.",
           },
           {
             title: "De stad breidt uit",
             year: 1557,
-            kind: "growth",
-            upto: 1400,
-            text: "Tussen 1250 en 1400 groeit Nijmegen binnen de stadsmuren tot een welvarende Hanzestad.",
+            focus: FOCUS.oldtown,
+            growth: 1400,
+            text: "Tussen 1250 en 1400 groeit Nijmegen binnen de stadsmuren tot een welvarende handelsstad.",
+          },
+          {
+            title: "Hanzestad",
+            year: 1557,
+            growth: 1400,
+            pin: {
+              label: "Waalkade",
+              at: [51.85045, 5.8645],
+              zoom: 15,
+              image: "data/medieval/hanze.jpg",
+              credit: "De Kamper Kogge, varende replica van een middeleeuwse Hanzekogge — foto Jean-Pol Grandmont, CC BY 4.0 (Wikimedia Commons)",
+            },
+            badge: "1402",
+            era: "Hanzestad",
+            tag: "middeleeuwen",
+            text: "In 1402 werd Nijmegen Hanzestad. Vanaf de Waalkade voeren koggen stroomopwaarts naar Keulen en stroomafwaarts naar Holland en de zee; de stad werd het regionale hoofd van het Keulse Hanzekwartier.",
           },
           {
             title: "Volgroeide middeleeuwse stad",
             year: 1557,
-            kind: "growth",
-            upto: 1525,
+            focus: FOCUS.oldtown,
+            growth: 1525,
             text: "Rond 1525 is de ommuurde stad zo goed als vol; verdere groei moet wachten tot de muren vallen.",
           },
         ],
@@ -293,7 +453,7 @@ export const CHAPTERS: Chapter[] = [
             title: "De ontmanteling (1874–1876)",
             year: 1879,
             focus: FOCUS.fortress,
-            kind: "wall",
+            wall: true,
             era: "ontmanteling",
             tag: "muur",
             text: "Op 11 maart 1874 verloor Nijmegen zijn vestingstatus; vanaf 1876 werden de wallen, torens en poorten gesloopt om de overvolle benedenstad lucht en betere hygiëne te geven. Stadstekenaar Rudolphus Lauwerier en fotograaf Gerard Korfmacher legden de verdwijnende vestingwerken vast. Klik op de punten voor hun afbeeldingen (collectie Museum Het Valkhof / Regionaal Archief Nijmegen).",
@@ -301,8 +461,7 @@ export const CHAPTERS: Chapter[] = [
           {
             title: "Kronenburgertoren",
             year: 1879,
-            kind: "wall",
-            point: 17,
+            wallPoint: 17,
             era: "stadsmuur",
             tag: "muur",
             text: "De Kronenburgertoren, een zware ronde toren uit de 15e eeuw, vormde de zuidwesthoek van de middeleeuwse stadsmuur. Anders dan de meeste vestingwerken bleef hij na 1876 gespaard — vandaag staat hij nog steeds, als blikvanger van het Kronenburgerpark dat op de oude wal werd aangelegd.",
@@ -310,8 +469,7 @@ export const CHAPTERS: Chapter[] = [
           {
             title: "Hezelpoort",
             year: 1879,
-            kind: "wall",
-            point: 21,
+            wallPoint: 21,
             era: "stadsmuur",
             tag: "muur",
             text: "De Hezelpoort was de westelijke stadspoort, aan de weg naar Hees. Op de tekeningen uit 1876 zijn de slopers er al druk in de weer; de poort en de aangrenzende bolwerken verdwenen volledig.",
@@ -319,8 +477,7 @@ export const CHAPTERS: Chapter[] = [
           {
             title: "Molenpoort",
             year: 1879,
-            kind: "wall",
-            point: 11,
+            wallPoint: 11,
             era: "stadsmuur",
             tag: "muur",
             text: "De Molenpoort gaf vanaf de Molenstraat toegang tot de stad. Tijdens de afbraak in 1876–1877 verdween eerst de toegangsbrug en daarna de poort zelf. De naam leeft voort in het winkelcentrum Molenpoort.",
@@ -328,8 +485,7 @@ export const CHAPTERS: Chapter[] = [
           {
             title: "Belvédère",
             year: 1879,
-            kind: "wall",
-            point: 27,
+            wallPoint: 27,
             era: "stadsmuur",
             tag: "muur",
             text: "Hoog op de Hunerberg, met uitzicht over de Waal, staat de Belvédère — oorspronkelijk een middeleeuwse muurtoren, in de 17e eeuw verbouwd tot uitkijktoren. Ook de Belvédère overleefde de slechting en is er vandaag nog, nu als restaurant.",
@@ -344,22 +500,19 @@ export const CHAPTERS: Chapter[] = [
             title: "De ingesnoerde stad",
             year: 1871,
             focus: FOCUS.fortress,
-            kind: "growth",
-            upto: 1525,
+            growth: 1525,
             text: "Vlak voor de slechting is de stad nog volledig omsloten door de oude vestingrand.",
           },
           {
             title: "De wal valt (1874)",
             year: 1900,
-            kind: "growth",
-            upto: 1900,
+            growth: 1900,
             text: "Na 1874 wordt de wal geslecht; rond de oude kern verrijzen de eerste 19e-eeuwse uitbreidingen.",
           },
           {
             title: "Eerste nieuwe wijken",
             year: 1925,
-            kind: "growth",
-            upto: 1925,
+            growth: 1925,
             text: "In het begin van de 20e eeuw groeit Nijmegen voor het eerst echt voorbij haar historische grens.",
           },
         ],
@@ -383,8 +536,7 @@ export const CHAPTERS: Chapter[] = [
             title: "Het bombardement",
             year: 1938,
             focus: FOCUS.center,
-            kind: "ww2",
-            order: 1,
+            ww2: 1,
             badge: "1944",
             era: "22 februari 1944",
             tag: "oorlog",
@@ -393,8 +545,7 @@ export const CHAPTERS: Chapter[] = [
           {
             title: "De slag om de brug",
             year: 1938,
-            kind: "ww2",
-            order: 2,
+            ww2: 2,
             badge: "1944",
             era: "17–21 september 1944",
             tag: "oorlog",
@@ -403,8 +554,7 @@ export const CHAPTERS: Chapter[] = [
           {
             title: "Granatentijd",
             year: 1938,
-            kind: "ww2",
-            order: 3,
+            ww2: 3,
             badge: "1944",
             era: "vanaf 22 september 1944",
             tag: "oorlog",
@@ -453,22 +603,19 @@ export const CHAPTERS: Chapter[] = [
             title: "Voor de uitbreiding",
             year: 1964,
             focus: FOCUS.dukenburg,
-            kind: "growth",
-            upto: 1955,
+            growth: 1955,
             text: "Het zuidwesten is rond 1960 nog grotendeels open land tussen de dorpen.",
           },
           {
             title: "Dukenburg verrijst",
             year: 1977,
-            kind: "growth",
-            upto: 1975,
+            growth: 1975,
             text: "Vanaf de jaren '60–'70 verrijst Dukenburg als grote naoorlogse uitbreiding.",
           },
           {
             title: "Lindenholt erbij",
             year: 1986,
-            kind: "growth",
-            upto: 1985,
+            growth: 1985,
             text: "In de jaren '80 komt Lindenholt erbij; het zuidwesten is dan volgebouwd.",
           },
         ],
@@ -481,15 +628,13 @@ export const CHAPTERS: Chapter[] = [
             title: "Over de Waal",
             year: 2008,
             focus: FOCUS.waalsprong,
-            kind: "growth",
-            upto: 2003,
+            growth: 2003,
             text: "Vanaf 2000 springt Nijmegen de Waal over: bij Lent verrijst een geheel nieuw stadsdeel.",
           },
           {
             title: "Ruimte voor de rivier",
             year: 2015,
-            kind: "growth",
-            upto: 2015,
+            growth: 2015,
             text: "Met 'Ruimte voor de Waal' krijgt de rivier een nevengeul; Veur Lent wordt een eiland.",
           },
           {

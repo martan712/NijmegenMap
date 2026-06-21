@@ -28,6 +28,12 @@ export const FOCUS = {
     [51.8435, 5.8595],
     [51.8525, 5.876],
   ],
+  // Frames the Waal bend west of the Valkhof — wide enough for a raid-route
+  // arrow coming upriver to the palts (the Viking scene).
+  waalbocht: [
+    [51.842, 5.842],
+    [51.858, 5.878],
+  ],
   fortress: [
     [51.8395, 5.852],
     [51.856, 5.88],

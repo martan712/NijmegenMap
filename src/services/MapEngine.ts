@@ -51,11 +51,13 @@ export class MapEngine {
 
   /** Render one scene's full map state (story mode). */
   applyScene(scene: Scene): void {
-    const pin = scene.kind === "limes" || scene.kind === "place" ? scene.pin : undefined;
-
-    // Base map: pre-cartographic eras (limes/place/movement) show only the
-    // modern reference map.
-    if (scene.kind === "limes" || scene.kind === "place" || scene.kind === "movement") {
+    // Base map: a purely pre-cartographic scene (only a pin / arrows / limes,
+    // no map-anchored overlay) shows the modern reference map; everything else
+    // shows the historical map for `year`. `basemap` overrides the default.
+    const preCartographic =
+      !!(scene.pin || scene.arrows || scene.limes) &&
+      scene.growth == null && scene.fort == null && !scene.wall && scene.ww2 == null;
+    if (!(scene.basemap ?? !preCartographic)) {
       this.base.clear();
     } else {
       const entry =
@@ -64,24 +66,24 @@ export class MapEngine {
       if (entry) this.base.setActive(entry);
     }
 
-    // Camera: a pin centres on its location; otherwise fit the scene focus.
-    // (A wall point flies itself, below, overriding any focus.)
-    if (pin) this.map.flyTo(pin.at, pin.zoom ?? 15.5, { duration: 0.85 });
-    else if (scene.focus) this.map.flyToBounds(scene.focus, FLY);
+    // Camera: an explicit focus wins (e.g. to frame arrows); otherwise a pin
+    // centres on its location. (A wall point flies itself, below.)
+    if (scene.focus) this.map.flyToBounds(scene.focus, FLY);
+    else if (scene.pin) this.map.flyTo(scene.pin.at, scene.pin.zoom ?? 15.5, { duration: 0.85 });
 
     // Overlays: every manager is set each scene (value or off) so transitions
     // between consecutive scenes animate smoothly rather than blink.
-    this.growth.reveal(scene.kind === "growth" ? scene.upto : null);
-    this.fort.reveal(scene.kind === "fort" ? scene.upto : null);
-    // Roman scenes show the full limes (+ legend); the post-Roman "anchor"
-    // scenes keep the Valkhof zone as a dimmed location cue.
-    this.roman.setVisible(scene.kind === "limes", scene.kind === "limes" && scene.mode === "anchor");
-    this.pins.show(pin ?? null);
-    this.flow.show(scene.kind === "movement" ? scene.arrows : null);
-    this.wall.setVisible(scene.kind === "wall");
-    if (scene.kind === "wall" && scene.point != null) this.wall.focusPoint(scene.point);
+    this.growth.reveal(scene.growth ?? null);
+    this.fort.reveal(scene.fort ?? null);
+    // Full limes shows the zones (+ legend); "anchor" keeps just the Valkhof
+    // zone as a dimmed location cue under post-Roman scenes.
+    this.roman.setVisible(scene.limes != null, scene.limes === "anchor");
+    this.pins.show(scene.pin ?? null);
+    this.flow.show(scene.arrows ?? null);
+    this.wall.setVisible(!!scene.wall || scene.wallPoint != null);
+    if (scene.wallPoint != null) this.wall.focusPoint(scene.wallPoint);
     else this.wall.clearHighlight();
-    this.wo2.reveal(scene.kind === "ww2" ? scene.order : null);
+    this.wo2.reveal(scene.ww2 ?? null);
   }
 
   /** Show a chapter's overview: representative base map, no story overlays. */

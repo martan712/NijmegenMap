@@ -42,12 +42,11 @@ function baseYearFor(ringYear: number): number {
  */
 export function buildDefenceScenes(rings: DefenceRing[]): Scene[] {
   return rings.map((ring, i) => ({
-    kind: "fort",
     title: ring.periode,
     text: ring.toelichting || "[geen toelichting in de bron]",
     year: baseYearFor(ring.year),
     focus: i === 0 ? FOCUS.fortress : undefined,
-    upto: ring.year,
+    fort: ring.year,
     badge: String(ring.year),
     era: "vestingwerk",
     tag: "vesting",
