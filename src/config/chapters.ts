@@ -701,6 +701,54 @@ export const CHAPTERS: Chapter[] = [
       "wordt verwoest — over de vooroorlogse plattegrond van de stad.",
     threads: [
       {
+        // Human story of 1944, alongside the destruction-overlay "Verwoesting"
+        // thread. Pin + arrows scenes (no ww2 overlay), on the 1938 pre-war map.
+        // Placed first so the chapter reads chronologically (1940 → 20 sep).
+        // Beeld in data/images/ww2/ (zie fetch_ww2_images.py).
+        title: "Bezetting & bevrijding",
+        sub: "Onderdrukking, deportatie & de Waaloversteek, 1940 → 1944",
+        scenes: [
+          {
+            title: "Bezetting & deportatie",
+            year: 1938,
+            basemap: true,
+            focus: FOCUS.oldtown,
+            pin: {
+              label: "Joods monument",
+              at: [51.8458, 5.8628],
+              zoom: 16,
+              image: "data/images/ww2/deportatie.jpg",
+              credit: "Joods monument (Paul de Swaaf) op de Kitty de Wijzeplaats, ter nagedachtenis aan de weggevoerde Nijmeegse joden — foto Vysotsky, CC BY-SA 4.0 (Wikimedia Commons)",
+            },
+            badge: "1940–1944",
+            era: "Bezetting & deportatie",
+            tag: "oorlog",
+            text: "Op 10 mei 1940 bezetten Duitse troepen Nijmegen. Voor de joodse gemeenschap — voor de oorlog zo'n 530 inwoners — werd de bezetting dodelijk: na de razzia's van oktober en november 1942 werden vrijwel alle Nijmeegse joden via Westerbork weggevoerd naar de vernietigingskampen Auschwitz en Sobibor. Slechts een handvol keerde terug.",
+          },
+          {
+            title: "De Waaloversteek",
+            year: 1938,
+            basemap: true,
+            focus: FOCUS.waaloversteek,
+            pin: {
+              label: "Noordoever",
+              at: [51.8608, 5.852],
+              zoom: 15,
+              image: "data/images/ww2/waaloversteek.jpg",
+              credit: "Geallieerde para's gaan bij Nijmegen aan land uit een overzetboot, september 1944 — Imperial War Museums, publiek domein (Wikimedia Commons)",
+            },
+            arrows: [
+              { from: [51.8548, 5.8495], to: [51.8608, 5.852], label: "82nd Airborne", curve: 0.14 },
+              { from: [51.8608, 5.852], to: [51.8592, 5.862], label: "naar de brug", curve: -0.2 },
+            ],
+            badge: "1944",
+            era: "20 september 1944",
+            tag: "oorlog",
+            text: "Om de Waalbrug te veroveren waagde de Amerikaanse 82nd Airborne op 20 september 1944 een overval bij klaarlichte dag. Ten westen van de spoorbrug, bij de elektriciteitscentrale, stak het 504e regiment in 26 wankele canvasbootjes de brede Waal over. Onder zwaar Duits vuur haalde maar de helft de overkant; de overlevenden stormden langs de noordoever oostwaarts en namen het noordelijke bruggenhoofd in — een van de gedurfdste acties van Market Garden.",
+          },
+        ],
+      },
+      {
         title: "Verwoesting",
         sub: "22 feb → 17 sep → granatentijd",
         scenes: [

@@ -34,6 +34,13 @@ export const FOCUS = {
     [51.842, 5.842],
     [51.858, 5.878],
   ],
+  // The 82nd Airborne's Waal crossing W of the bridges (Sep 1944) — frames both
+  // river banks plus the road/rail bridges to the east for orientation. North
+  // capped under the 1938 map's 51.8666 edge.
+  waaloversteek: [
+    [51.849, 5.841],
+    [51.8662, 5.871],
+  ],
   fortress: [
     [51.8395, 5.852],
     [51.856, 5.88],
