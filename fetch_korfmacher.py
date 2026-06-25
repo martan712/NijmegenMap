@@ -22,7 +22,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).parent
 DATA = ROOT / "data"
-IMG_DIR = DATA / "korfmacher"
+IMG_DIR = DATA / "images" / "korfmacher"
 BASE = "https://kaart.nijmegen.nl/public/Multimedia/Korfmacher/"
 UA = {"User-Agent": "NijmegenMap/1.0 (historical map project)"}
 
@@ -65,7 +65,7 @@ def main() -> int:
                 img = get(BASE + urllib.parse.quote(src))
                 out = IMG_DIR / f"{nummer}{ext}"
                 out.write_bytes(img)
-                feat["properties"]["PHOTO"] = f"data/korfmacher/{out.name}"
+                feat["properties"]["PHOTO"] = f"data/images/korfmacher/{out.name}"
             except Exception as e:  # noqa: BLE001
                 print(f"  {nummer}: image failed ({e})")
         print(f"  {nummer}: {'photo+' if feat['properties']['PHOTO'] else ''}caption")

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
 Download freely-licensed illustrations for the Roman / early-medieval scenes
-from Wikimedia Commons into data/roman/, and record their attribution.
+from Wikimedia Commons into data/images/roman/, and record their attribution.
 
-Each scene pin in src/config/chapters.ts references data/roman/<slug>.jpg and
+Each scene pin in src/config/chapters.ts references data/images/roman/<slug>.jpg and
 shows the caption below (which already embeds the author + licence). Rerun to
 refresh:  python3 fetch_roman_images.py
 """
@@ -15,7 +15,7 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
-OUT = Path(__file__).parent / "data" / "roman"
+OUT = Path(__file__).parent / "data" / "images" / "roman"
 API = "https://commons.wikimedia.org/w/api.php"
 UA = {"User-Agent": "NijmegenMap/1.0 (historical map project; martanvanderstraaten@gmail.com)"}
 
@@ -75,7 +75,7 @@ def main() -> int:
         except Exception as e:  # noqa: BLE001
             print(f"  {slug}: FAILED ({e})")
     (OUT / "credits.json").write_text(json.dumps(credits, ensure_ascii=False, indent=2))
-    print(f"\n{len(credits)}/{len(IMAGES)} images -> data/roman/  (captions in credits.json)")
+    print(f"\n{len(credits)}/{len(IMAGES)} images -> data/images/roman/  (captions in credits.json)")
     return 0
 
 

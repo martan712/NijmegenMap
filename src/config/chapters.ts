@@ -28,7 +28,7 @@ export const CHAPTERS: Chapter[] = [
     threads: [
       {
         // Prehistory: the deepest layer, before the Romans. Located pins on the
-        // modern reference map (no overlay). Beeld in data/prehistorie/.
+        // modern reference map (no overlay). Beeld in data/images/prehistorie/.
         title: "Prehistorie",
         sub: "Voor de Romeinen, neolithicum → 50 v.Chr.",
         scenes: [
@@ -39,7 +39,7 @@ export const CHAPTERS: Chapter[] = [
               label: "Nijmegen-Oost",
               at: [51.8385, 5.887],
               zoom: 14,
-              image: "data/prehistorie/grafheuvel.jpg",
+              image: "data/images/prehistorie/grafheuvel.jpg",
               credit: "Een grote grafheuvel uit de bronstijd (Hoogeloon) — foto Bert van As, CC BY-SA 4.0 (Wikimedia Commons)",
             },
             badge: "Prehistorie",
@@ -54,7 +54,7 @@ export const CHAPTERS: Chapter[] = [
               label: "Waterstraat",
               at: [51.85, 5.8632],
               zoom: 15,
-              image: "data/prehistorie/bataven.jpg",
+              image: "data/images/prehistorie/bataven.jpg",
               credit: "Reconstructie van een ijzertijdboerderij te Wekerom — foto Syborgh, CC BY-SA 3.0 (Wikimedia Commons)",
             },
             badge: "± 50 v.Chr.",
@@ -89,7 +89,7 @@ export const CHAPTERS: Chapter[] = [
               label: "Hunerberg",
               at: [51.8419, 5.8836],
               zoom: 15,
-              image: "data/roman/hunerberg.jpg",
+              image: "data/images/roman/hunerberg.jpg",
               credit: "Maquette van de Romeinse legioensvesting op de Hunerberg — Joris, CC BY-SA 4.0 (Wikimedia Commons)",
             },
             badge: "± 19 v.Chr.",
@@ -105,7 +105,7 @@ export const CHAPTERS: Chapter[] = [
               label: "Kops Plateau",
               at: [51.83783, 5.89225],
               zoom: 15,
-              image: "data/roman/kops.jpg",
+              image: "data/images/roman/kops.jpg",
               credit: "Romeinse ruiterhelm gevonden op het Kops Plateau — foto Carole Raddato, CC BY-SA 2.0 (Wikimedia Commons)",
             },
             badge: "± 12 v.Chr.",
@@ -121,7 +121,7 @@ export const CHAPTERS: Chapter[] = [
               label: "Valkhof",
               at: [51.84782, 5.87026],
               zoom: 16,
-              image: "data/roman/oppidum.jpg",
+              image: "data/images/roman/oppidum.jpg",
               credit: "Het Valkhof, waar Oppidum Batavorum lag — prent, Rijksmuseum (CC0)",
             },
             badge: "± 10 v.Chr.",
@@ -137,7 +137,7 @@ export const CHAPTERS: Chapter[] = [
               label: "Valkhof",
               at: [51.84782, 5.87026],
               zoom: 16,
-              image: "data/roman/civilis.jpg",
+              image: "data/images/roman/civilis.jpg",
               credit: "Rembrandt, De samenzwering van Claudius Civilis (1661–62) — publiek domein",
             },
             badge: "69–70 n.Chr.",
@@ -152,7 +152,7 @@ export const CHAPTERS: Chapter[] = [
               label: "Ulpia Noviomagus",
               at: [51.85363, 5.84522],
               zoom: 15,
-              image: "data/roman/ulpia.jpg",
+              image: "data/images/roman/ulpia.jpg",
               credit: "Reconstructie van Ulpia Noviomagus — muurschildering Peter Nuyten (foto Wouter Hinrichs, CC BY 4.0)",
             },
             badge: "± 100 n.Chr.",
@@ -193,7 +193,7 @@ export const CHAPTERS: Chapter[] = [
               label: "Valkhof",
               at: [51.84782, 5.87026],
               zoom: 16,
-              image: "data/roman/castellum.jpg",
+              image: "data/images/roman/castellum.jpg",
               credit: "Het Valkhof met de 'Romeinse kapel', tekening uit 1728 — RCE, CC BY-SA 4.0",
             },
             badge: "± 300 n.Chr.",
@@ -220,7 +220,7 @@ export const CHAPTERS: Chapter[] = [
         // Valkhof continuity, 5e–12e eeuw: the imperial seat from the Franks
         // through the Carolingian/Ottonian palts to Barbarossa's burcht.
         // Captions geaard op valkhof.nl / nl.wikipedia Geschiedenis van Nijmegen;
-        // pin op het Valkhof, beeld in data/medieval/ (zie fetch_medieval_images.py).
+        // pin op het Valkhof, beeld in data/images/medieval/ (zie fetch_medieval_images.py).
         title: "Van palts tot burcht",
         sub: "Valkhof: Franken → keizerpalts → burcht, 450 → 1155",
         scenes: [
@@ -232,7 +232,7 @@ export const CHAPTERS: Chapter[] = [
               label: "Valkhof",
               at: [51.84782, 5.87026],
               zoom: 16,
-              image: "data/roman/franken.jpg",
+              image: "data/images/roman/franken.jpg",
               credit: "Grafurn opgegraven op het Valkhof — RCE, CC BY-SA 4.0",
             },
             badge: "5e–7e eeuw",
@@ -248,7 +248,7 @@ export const CHAPTERS: Chapter[] = [
               label: "Valkhof",
               at: [51.84782, 5.87026],
               zoom: 16,
-              image: "data/roman/palts.jpg",
+              image: "data/images/roman/palts.jpg",
               credit: "De Sint-Nicolaaskapel (Karolingische kapel) op het Valkhof — RCE, CC BY-SA 4.0",
             },
             badge: "777",
@@ -267,7 +267,7 @@ export const CHAPTERS: Chapter[] = [
               label: "Valkhof",
               at: [51.84782, 5.87026],
               zoom: 16,
-              image: "data/medieval/vikingen.jpg",
+              image: "data/images/medieval/vikingen.jpg",
               credit: "Het Osebergschip (9e eeuw), een bewaard Vikingschip — Vikingschipmuseum Oslo, foto Petter Ulleland, CC BY-SA 4.0 (Wikimedia Commons)",
             },
             arrows: [
@@ -286,7 +286,7 @@ export const CHAPTERS: Chapter[] = [
               label: "Valkhof",
               at: [51.84782, 5.87026],
               zoom: 16,
-              image: "data/medieval/keizerstad.jpg",
+              image: "data/images/medieval/keizerstad.jpg",
               credit: "Keizer Otto III ontvangt de hulde van de rijksdelen — miniatuur uit het Evangeliarium van Otto III, ca. 1000, CC BY-SA 4.0 (Wikimedia Commons)",
             },
             badge: "10e–11e eeuw",
@@ -302,7 +302,7 @@ export const CHAPTERS: Chapter[] = [
               label: "Valkhof",
               at: [51.84782, 5.87026],
               zoom: 16,
-              image: "data/medieval/palts1047.jpg",
+              image: "data/images/medieval/palts1047.jpg",
               credit: "Keizer Hendrik III, tegen wie hertog Godfried in opstand kwam — middeleeuwse miniatuur, publiek domein (Wikimedia Commons)",
             },
             badge: "1047",
@@ -318,7 +318,7 @@ export const CHAPTERS: Chapter[] = [
               label: "Valkhof",
               at: [51.84782, 5.87026],
               zoom: 16,
-              image: "data/roman/barbarossa.jpg",
+              image: "data/images/roman/barbarossa.jpg",
               credit: "Het Valkhof met de Barbarossa-ruïne, prent uit 1670 — Rijksmuseum (CC0)",
             },
             badge: "1155",
@@ -332,7 +332,7 @@ export const CHAPTERS: Chapter[] = [
         // The city itself, west of the Valkhof: from the first citizens (1184)
         // through city rights, Gelre and the Hanze to a full medieval town.
         // Every scene carries `growth` so the city-development polygons persist
-        // across the thread; event scenes add a located pin (data/medieval/).
+        // across the thread; event scenes add a located pin (data/images/medieval/).
         title: "De stad aan de Waal",
         sub: "Stadsrechten, Hanze & groei, 1184 → 1525",
         scenes: [
@@ -351,7 +351,7 @@ export const CHAPTERS: Chapter[] = [
               label: "Grote Markt",
               at: [51.84775, 5.86505],
               zoom: 16,
-              image: "data/medieval/stadsrechten.jpg",
+              image: "data/images/medieval/stadsrechten.jpg",
               credit: "Het wapen van Nijmegen met de dubbele Rijksadelaar — Martinvl, publiek domein (Wikimedia Commons)",
             },
             badge: "1230",
@@ -367,7 +367,7 @@ export const CHAPTERS: Chapter[] = [
               label: "Valkhof",
               at: [51.84782, 5.87026],
               zoom: 16,
-              image: "data/medieval/gelre.jpg",
+              image: "data/images/medieval/gelre.jpg",
               credit: "Penning met het wapenschild van de graaf van Gelre (12e eeuw) — publiek domein (Wikimedia Commons)",
             },
             badge: "1247",
@@ -383,7 +383,7 @@ export const CHAPTERS: Chapter[] = [
               label: "Sint-Stevenskerk",
               at: [51.84799, 5.8649],
               zoom: 16,
-              image: "data/medieval/sintsteven.jpg",
+              image: "data/images/medieval/sintsteven.jpg",
               credit: "De toren van de Sint-Stevenskerk — foto Tubantia, CC BY-SA 3.0 (Wikimedia Commons)",
             },
             badge: "1272",
@@ -399,7 +399,7 @@ export const CHAPTERS: Chapter[] = [
               label: "Mariënburg",
               at: [51.8447, 5.8639],
               zoom: 16,
-              image: "data/medieval/pest1349.jpg",
+              image: "data/images/medieval/pest1349.jpg",
               credit: "Jodenvervolging tijdens de pest van 1349 — miniatuur uit een 14e-eeuwse kroniek (Kon. Bibliotheek van België), publiek domein (Wikimedia Commons)",
             },
             badge: "1349",
@@ -422,7 +422,7 @@ export const CHAPTERS: Chapter[] = [
               label: "Waalkade",
               at: [51.85045, 5.8645],
               zoom: 15,
-              image: "data/medieval/hanze.jpg",
+              image: "data/images/medieval/hanze.jpg",
               credit: "De Kamper Kogge, varende replica van een middeleeuwse Hanzekogge — foto Jean-Pol Grandmont, CC BY 4.0 (Wikimedia Commons)",
             },
             badge: "1402",
@@ -454,7 +454,7 @@ export const CHAPTERS: Chapter[] = [
         // Early-modern bridge (1543 → 1794): the period between the full
         // medieval city and the cartographic fortress maps. Pin scenes on the
         // closest historical base map (basemap forced on, since a lone pin would
-        // otherwise show the modern reference map). Beeld in data/earlymodern/.
+        // otherwise show the modern reference map). Beeld in data/images/earlymodern/.
         title: "Gewest, geloof & vrede",
         sub: "Van Habsburg tot de Fransen, 1543 → 1794",
         scenes: [
@@ -466,7 +466,7 @@ export const CHAPTERS: Chapter[] = [
               label: "Grote Markt",
               at: [51.84775, 5.86505],
               zoom: 16,
-              image: "data/earlymodern/venlo1543.jpg",
+              image: "data/images/earlymodern/venlo1543.jpg",
               credit: "Keizer Karel V — anoniem portret, ca. 1550 (Rijksmuseum), publiek domein (Wikimedia Commons)",
             },
             badge: "1543",
@@ -482,7 +482,7 @@ export const CHAPTERS: Chapter[] = [
               label: "Valkhof",
               at: [51.84782, 5.87026],
               zoom: 16,
-              image: "data/earlymodern/maurits1591.jpg",
+              image: "data/images/earlymodern/maurits1591.jpg",
               credit: "Prins Maurits van Oranje — Michiel van Mierevelt, publiek domein (Wikimedia Commons)",
             },
             badge: "1591",
@@ -498,7 +498,7 @@ export const CHAPTERS: Chapter[] = [
               label: "Stadhuis",
               at: [51.84715, 5.86555],
               zoom: 16,
-              image: "data/earlymodern/vrede1678.jpg",
+              image: "data/images/earlymodern/vrede1678.jpg",
               credit: "De Vrede van Nijmegen, 1678 — prent, Rijksmuseum (CC0, Wikimedia Commons)",
             },
             badge: "1678",
@@ -514,7 +514,7 @@ export const CHAPTERS: Chapter[] = [
               label: "Schipbrug naar Lent",
               at: [51.8507, 5.866],
               zoom: 15,
-              image: "data/earlymodern/franse1794.jpg",
+              image: "data/images/earlymodern/franse1794.jpg",
               credit: "Het beleg van Nijmegen in 1794, met de schipbrug naar Lent — prent, Ambroise Tardieu, publiek domein (Wikimedia Commons)",
             },
             badge: "1794",

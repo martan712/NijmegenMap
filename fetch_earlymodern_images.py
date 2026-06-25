@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
 Download freely-licensed illustrations for the early-modern ("Gewest, geloof &
-vrede") scenes from Wikimedia Commons into data/earlymodern/, and record their
+vrede") scenes from Wikimedia Commons into data/images/earlymodern/, and record their
 attribution.
 
-Each scene pin in src/config/chapters.ts references data/earlymodern/<slug>.jpg
+Each scene pin in src/config/chapters.ts references data/images/earlymodern/<slug>.jpg
 and shows the caption below. Rerun to refresh:
     python3 fetch_earlymodern_images.py
 
@@ -18,7 +18,7 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
-OUT = Path(__file__).parent / "data" / "earlymodern"
+OUT = Path(__file__).parent / "data" / "images" / "earlymodern"
 API = "https://commons.wikimedia.org/w/api.php"
 UA = {"User-Agent": "NijmegenMap/1.0 (historical map project; martanvanderstraaten@gmail.com)"}
 
@@ -68,7 +68,7 @@ def main() -> int:
         except Exception as e:  # noqa: BLE001
             print(f"  {slug}: FAILED ({e})")
     (OUT / "credits.json").write_text(json.dumps(credits, ensure_ascii=False, indent=2))
-    print(f"\n{len(credits)}/{len(IMAGES)} images -> data/earlymodern/  (captions in credits.json)")
+    print(f"\n{len(credits)}/{len(IMAGES)} images -> data/images/earlymodern/  (captions in credits.json)")
     return 0
 
 

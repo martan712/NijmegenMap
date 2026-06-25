@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
 Download freely-licensed illustrations for the medieval ("Keizerstad") scenes
-from Wikimedia Commons into data/medieval/, and record their attribution.
+from Wikimedia Commons into data/images/medieval/, and record their attribution.
 
-Each scene pin in src/config/chapters.ts references data/medieval/<slug>.jpg and
+Each scene pin in src/config/chapters.ts references data/images/medieval/<slug>.jpg and
 shows the caption below (which already embeds the author + licence). Rerun to
 refresh:  python3 fetch_medieval_images.py
 
@@ -17,7 +17,7 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
-OUT = Path(__file__).parent / "data" / "medieval"
+OUT = Path(__file__).parent / "data" / "images" / "medieval"
 API = "https://commons.wikimedia.org/w/api.php"
 UA = {"User-Agent": "NijmegenMap/1.0 (historical map project; martanvanderstraaten@gmail.com)"}
 
@@ -75,7 +75,7 @@ def main() -> int:
         except Exception as e:  # noqa: BLE001
             print(f"  {slug}: FAILED ({e})")
     (OUT / "credits.json").write_text(json.dumps(credits, ensure_ascii=False, indent=2))
-    print(f"\n{len(credits)}/{len(IMAGES)} images -> data/medieval/  (captions in credits.json)")
+    print(f"\n{len(credits)}/{len(IMAGES)} images -> data/images/medieval/  (captions in credits.json)")
     return 0
 
 

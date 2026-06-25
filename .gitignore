@@ -21,8 +21,5 @@ __pycache__/
 
 Notes
 
-data/korfmacher
-data/roman
-data/medieval
-data/earlymodern
-data/prehistorie
+# Generated illustration caches — rebuild with the fetch_*_images.py scripts
+data/images/

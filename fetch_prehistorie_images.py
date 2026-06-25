@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
 Download freely-licensed illustrations for the prehistory scenes (Chapter 1,
-"Bataven & Romeinen") from Wikimedia Commons into data/prehistorie/, and record
+"Bataven & Romeinen") from Wikimedia Commons into data/images/prehistorie/, and record
 their attribution.
 
-Each scene pin in src/config/chapters.ts references data/prehistorie/<slug>.jpg
+Each scene pin in src/config/chapters.ts references data/images/prehistorie/<slug>.jpg
 and shows the caption below. Rerun to refresh:
     python3 fetch_prehistorie_images.py
 
@@ -18,7 +18,7 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
-OUT = Path(__file__).parent / "data" / "prehistorie"
+OUT = Path(__file__).parent / "data" / "images" / "prehistorie"
 API = "https://commons.wikimedia.org/w/api.php"
 UA = {"User-Agent": "NijmegenMap/1.0 (historical map project; martanvanderstraaten@gmail.com)"}
 
@@ -64,7 +64,7 @@ def main() -> int:
         except Exception as e:  # noqa: BLE001
             print(f"  {slug}: FAILED ({e})")
     (OUT / "credits.json").write_text(json.dumps(credits, ensure_ascii=False, indent=2))
-    print(f"\n{len(credits)}/{len(IMAGES)} images -> data/prehistorie/  (captions in credits.json)")
+    print(f"\n{len(credits)}/{len(IMAGES)} images -> data/images/prehistorie/  (captions in credits.json)")
     return 0
 
 
