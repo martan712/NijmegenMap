@@ -841,6 +841,32 @@ export const CHAPTERS: Chapter[] = [
         ],
       },
       {
+        // A "what is Nijmegen now" beat beyond housing: the university as the
+        // engine of the modern knowledge city. Single pin on the 2025 aerial
+        // (basemap forced on). Beeld in data/images/modern/ (fetch_modern_images.py).
+        title: "De kennisstad",
+        sub: "Radboud Universiteit, 1923 → nu",
+        scenes: [
+          {
+            title: "De kennisstad: Radboud Universiteit",
+            year: 2025,
+            basemap: true,
+            focus: FOCUS.heyendaal,
+            pin: {
+              label: "Heyendaal",
+              at: [51.8192, 5.8661],
+              zoom: 16,
+              image: "data/images/modern/radboud.jpg",
+              credit: "Het Erasmusgebouw op de campus Heyendaal van de Radboud Universiteit — foto Roger Veringmeier, CC BY 3.0 (Wikimedia Commons)",
+            },
+            badge: "1923",
+            era: "Radboud Universiteit",
+            tag: "kennisstad",
+            text: "Naast de wederopbouw groeide Nijmegen uit tot kennisstad. In 1923 opende hier de Roomsch-Katholieke Universiteit, de eerste katholieke universiteit van Nederland; in 2004 werd zij omgedoopt tot Radboud Universiteit. Op de zuidelijke campus Heyendaal — met het Erasmusgebouw als baken en het Radboudumc ernaast — studeren en werken vandaag tienduizenden mensen: de motor van het moderne Nijmegen.",
+          },
+        ],
+      },
+      {
         title: "Waalsprong",
         sub: "Lent & Veur Lent, 2000+",
         scenes: [

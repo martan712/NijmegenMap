@@ -57,6 +57,11 @@ export const FOCUS = {
     [51.815, 5.778],
     [51.842, 5.828],
   ],
+  // Radboud-campus Heyendaal in het zuiden — universiteit + Radboudumc.
+  heyendaal: [
+    [51.812, 5.854],
+    [51.825, 5.872],
+  ],
   waalsprong: [
     [51.854, 5.852],
     [51.886, 5.912],
