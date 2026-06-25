@@ -439,6 +439,66 @@ export const CHAPTERS: Chapter[] = [
           },
         ],
       },
+      {
+        // Cultural "stad van naam": Nijmegen's medieval / early-16th-century
+        // cultural output. Pure portrait/title-page pins on the 1557 base map
+        // (basemap forced on, like the early-modern thread, since a lone pin would
+        // otherwise fall back to the modern reference map). Beeld in
+        // data/images/culture/ (zie fetch_culture_images.py).
+        title: "Stad van naam",
+        sub: "Kunst, geloof & toneel, ± 1400 → 1521",
+        scenes: [
+          {
+            title: "De gebroeders van Limburg",
+            year: 1557,
+            basemap: true,
+            focus: FOCUS.oldtown,
+            pin: {
+              label: "Stevenskerkhof",
+              at: [51.8478, 5.8651],
+              zoom: 16,
+              image: "data/images/culture/limburg.jpg",
+              credit: "De maand juni uit de Très Riches Heures du Duc de Berry — gebroeders van Limburg, ca. 1412–1416, publiek domein (Wikimedia Commons)",
+            },
+            badge: "± 1400",
+            era: "Gebroeders van Limburg",
+            tag: "cultuur",
+            text: "Rond 1385 werden in Nijmegen de broers Herman, Paul en Johan van Limburg geboren — de beroemdste miniatuurschilders van hun tijd. Voor de Franse hertog Jean de Berry verluchtten zij de Très Riches Heures, het rijkst versierde getijdenboek van de middeleeuwen. Alle drie stierven ze jong, vermoedelijk in 1416 aan de pest.",
+          },
+          {
+            title: "Mariken van Nieumeghen",
+            year: 1557,
+            basemap: true,
+            pin: {
+              label: "Grote Markt",
+              at: [51.84755, 5.8650],
+              zoom: 17,
+              image: "data/images/culture/mariken.gif",
+              credit: "Titelpagina van Mariken van Nieumeghen — Jan van Doesborch, ca. 1518, publiek domein (Wikimedia Commons)",
+            },
+            badge: "± 1515",
+            era: "Mariken van Nieumeghen",
+            tag: "cultuur",
+            text: "Het rederijkersspel Mariken van Nieumeghen, gedrukt rond 1515, speelt zich af in en rond Nijmegen. Het vertelt hoe het meisje Mariken zeven jaar lang met de duivel Moenen door de wereld trekt, tot een mirakelspel haar van haar zonden verlost. Een hoogtepunt van de Middelnederlandse letterkunde — vandaag staat Mariken in brons op de Grote Markt.",
+          },
+          {
+            title: "Petrus Canisius",
+            year: 1557,
+            basemap: true,
+            pin: {
+              label: "Broerstraat",
+              at: [51.8461, 5.8636],
+              zoom: 17,
+              image: "data/images/culture/canisius.jpg",
+              credit: "Petrus Canisius — anoniem portret, 1699, publiek domein (Wikimedia Commons)",
+            },
+            badge: "1521",
+            era: "Petrus Canisius",
+            tag: "cultuur",
+            text: "Op 8 mei 1521 werd in de Broerstraat Petrus Canisius geboren. Als jezuïet werd hij de drijvende kracht achter de katholieke Contrareformatie in Duitstalig Europa; zijn catechismus werd eeuwenlang herdrukt. In 1925 werd hij heilig verklaard en tot kerkleraar uitgeroepen — de bekendste zoon van de stad.",
+          },
+        ],
+      },
     ],
   },
   {
