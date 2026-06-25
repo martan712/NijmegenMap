@@ -11,7 +11,10 @@ export class MapService {
   constructor(container: HTMLElement) {
     this.map = L.map(container, {
       zoomControl: true,
-      minZoom: 12,
+      // minZoom 7 lets regional scenes (e.g. the Hanze trade routes to Köln,
+      // ~180 km SE) pull the camera back far enough to frame distant arrow tips;
+      // the modern CARTO reference map renders cleanly down to this zoom.
+      minZoom: 7,
       maxZoom: 19,
       zoomSnap: 0.5,
     }).setView([51.8475, 5.8625], 15);

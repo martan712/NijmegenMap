@@ -41,6 +41,14 @@ export const FOCUS = {
     [51.849, 5.841],
     [51.8662, 5.871],
   ],
+  // Regional view for the Hanze trade routes: frames Nijmegen together with the
+  // real arrow tips at Köln (~180 km SE) and Holland/the sea (NW). Needs the map's
+  // lowered minZoom (see MapService) — at this scale the 1557 raster is a small
+  // inset and the modern CARTO map shows Keulen, Rotterdam, etc. around it.
+  hanze: [
+    [50.85, 4.0],
+    [52.1, 7.2],
+  ],
   fortress: [
     [51.8395, 5.852],
     [51.856, 5.88],

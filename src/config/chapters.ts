@@ -417,6 +417,7 @@ export const CHAPTERS: Chapter[] = [
           {
             title: "Hanzestad",
             year: 1557,
+            focus: FOCUS.hanze,
             growth: 1400,
             pin: {
               label: "Waalkade",
@@ -425,6 +426,13 @@ export const CHAPTERS: Chapter[] = [
               image: "data/images/medieval/hanze.jpg",
               credit: "De Kamper Kogge, varende replica van een middeleeuwse Hanzekogge — foto Jean-Pol Grandmont, CC BY 4.0 (Wikimedia Commons)",
             },
+            // Geographic trade-route arrows from the Waalkade to the real cities:
+            // upstream (SE) to Köln/Keulen, downstream (NW) to Holland & de zee.
+            // FOCUS.hanze + the lowered map minZoom pull the camera back to show them.
+            arrows: [
+              { from: [51.85045, 5.8645], to: [50.9375, 6.9603], label: "naar Keulen", curve: 0.14 },
+              { from: [51.85045, 5.8645], to: [51.96, 4.25], label: "naar Holland & de zee", curve: -0.14 },
+            ],
             badge: "1402",
             era: "Hanzestad",
             tag: "middeleeuwen",
