@@ -116,3 +116,9 @@ body,
   line-height: 1.4;
   color: #333;
 }
+.leaflet-popup-content .wallpop-text {
+  font-size: 13px;
+  line-height: 1.45;
+  color: #222;
+  margin: 2px 0 6px;
+}

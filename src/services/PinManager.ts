@@ -18,9 +18,37 @@ const PIN_ICON = L.divIcon({
 export class PinManager {
   private map: L.Map;
   private marker: L.Marker | null = null;
+  private photoMarkers: L.Marker[] = [];
 
   constructor(map: L.Map) {
     this.map = map;
+  }
+
+  /**
+   * Several located image markers (e.g. the wall towers/gates). Unlike `show`,
+   * the popups DON'T auto-open — each opens on click, so the reader explores the
+   * points. `showPhotoPins(null)` clears them.
+   */
+  showPhotoPins(pins: ScenePin[] | null): void {
+    this.photoMarkers.forEach((m) => this.map.removeLayer(m));
+    this.photoMarkers = [];
+    if (!pins) return;
+    for (const pin of pins) {
+      const marker = L.marker(pin.at, { icon: PIN_ICON });
+      const img = pin.image
+        ? `<img class="wallpop-img" src="${pin.image}" alt="" loading="lazy">`
+        : "";
+      const text = pin.text ? `<div class="wallpop-text">${pin.text}</div>` : "";
+      const credit = pin.credit ? `<div class="wallpop-cap">${pin.credit}</div>` : "";
+      marker
+        .bindPopup(`<div class="pp">${pin.label}</div>${img}${text}${credit}`, {
+          className: "wallpop pinpop",
+          maxWidth: 340,
+          autoPan: false,
+        })
+        .addTo(this.map);
+      this.photoMarkers.push(marker);
+    }
   }
 
   show(pin: ScenePin | null): void {

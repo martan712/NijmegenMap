@@ -34,6 +34,8 @@ export interface ScenePin {
   image?: string;
   /** Caption / attribution shown under the image. */
   credit?: string;
+  /** Optional descriptive text shown in the popup (photo pins). */
+  text?: string;
 }
 
 /** One Stolperstein (memorial stone) marker: a victim at a located address. */
@@ -90,6 +92,8 @@ export interface Scene {
   basemap?: boolean;
   /** A located image marker; its popup auto-opens. */
   pin?: ScenePin;
+  /** Several located image markers; each popup opens on click (e.g. wall points). */
+  photoPins?: ScenePin[];
   /** Curved, labelled movement / raid arrows. */
   arrows?: MovementArrow[];
   /** Reveal Stadsontwikkeling (city-growth) polygons built up to this year. */
