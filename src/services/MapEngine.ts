@@ -3,11 +3,11 @@ import { MapService } from "./MapService";
 import { BaseLayerManager } from "./BaseLayerManager";
 import { GrowthManager } from "./GrowthManager";
 import { FortManager } from "./FortManager";
-import { RomanManager } from "./RomanManager";
+import { PolygonOverlayManager } from "./PolygonOverlayManager";
+import { LIMES_OVERLAY, WW2_OVERLAY } from "../config/overlays";
 import { PinManager } from "./PinManager";
 import { FlowManager } from "./FlowManager";
 import { WallManager } from "./WallManager";
-import { WO2Manager } from "./WO2Manager";
 import { MemorialManager } from "./MemorialManager";
 import { SpyManager, type LensRefs } from "./SpyManager";
 import { entryByYear } from "../lib/manifest";
@@ -25,11 +25,13 @@ export class MapEngine {
   readonly base: BaseLayerManager;
   readonly growth: GrowthManager;
   readonly fort: FortManager;
-  readonly roman: RomanManager;
+  // Polygon overlays — one renderer, two configs (the Roman limes zones and the
+  // WW2 damage). Both are categorised, conditionally-revealed polygon sets.
+  readonly limes: PolygonOverlayManager;
   readonly pins: PinManager;
   readonly flow: FlowManager;
   readonly wall: WallManager;
-  readonly wo2: WO2Manager;
+  readonly wo2: PolygonOverlayManager;
   readonly memorials: MemorialManager;
   readonly spy: SpyManager;
 
@@ -43,11 +45,11 @@ export class MapEngine {
     this.base = new BaseLayerManager(this.map);
     this.growth = new GrowthManager(this.map);
     this.fort = new FortManager(this.map);
-    this.roman = new RomanManager(this.map);
+    this.limes = new PolygonOverlayManager(this.map, LIMES_OVERLAY);
     this.pins = new PinManager(this.map);
     this.flow = new FlowManager(this.map);
     this.wall = new WallManager(this.map);
-    this.wo2 = new WO2Manager(this.map);
+    this.wo2 = new PolygonOverlayManager(this.map, WW2_OVERLAY);
     this.memorials = new MemorialManager(this.map);
     this.spy = new SpyManager(this.map, lens);
   }
@@ -85,8 +87,10 @@ export class MapEngine {
     this.fort.reveal(scene.fort ?? null);
     // The limes frontier shows the zones (+ legend); `anchor` keeps just the
     // Valkhof zone as a dimmed location cue under post-Roman scenes.
-    this.roman.setVisible(!!(scene.limes || scene.anchor), !!scene.anchor);
+    if (scene.limes || scene.anchor) this.limes.show({ dim: !!scene.anchor });
+    else this.limes.hide();
     this.pins.show(scene.pin ?? null);
+    this.pins.showPhotoPins(scene.photoPins ?? null);
     this.flow.show(scene.arrows ?? null);
     this.wall.setVisible(!!scene.wall || scene.wallPoint != null);
     if (scene.wallPoint != null) this.wall.focusPoint(scene.wallPoint);
@@ -95,7 +99,8 @@ export class MapEngine {
     // own damage); Verhalen sets it explicitly so a level stays bright only on
     // the segment that first introduces it.
     const ww2Highlight = scene.ww2Highlight === undefined ? scene.ww2 ?? null : scene.ww2Highlight;
-    this.wo2.reveal(scene.ww2 ?? null, ww2Highlight);
+    if (scene.ww2 != null) this.wo2.show({ level: scene.ww2, highlight: ww2Highlight });
+    else this.wo2.hide();
     this.memorials.show(scene.memorials ?? null);
   }
 
@@ -116,11 +121,12 @@ export class MapEngine {
   clearStoryOverlays(): void {
     this.growth.reveal(null);
     this.fort.reveal(null);
-    this.roman.setVisible(false);
+    this.limes.hide();
     this.pins.show(null);
+    this.pins.showPhotoPins(null);
     this.flow.show(null);
     this.wall.setVisible(false);
-    this.wo2.reveal(null);
+    this.wo2.hide();
     this.memorials.show(null);
   }
 

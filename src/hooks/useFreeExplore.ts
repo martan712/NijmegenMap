@@ -60,7 +60,7 @@ export function useFreeExplore(
     engine.growth.reveal(growthOn ? yearOf(entry) : null);
     engine.fort.reveal(null);
     engine.wall.setVisible(false);
-    engine.wo2.reveal(null);
+    engine.wo2.hide();
   }, [engine, active, current, timeline, growthOn, opacity]);
 
   // Spyglass enable + compare layer.
