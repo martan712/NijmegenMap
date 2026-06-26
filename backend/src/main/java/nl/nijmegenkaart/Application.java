@@ -34,6 +34,10 @@ public class Application {
         app.get("/api/segments/{id}/map", ctx ->
             ctx.json(store.map(ctx.pathParam("id"))));
 
+        // Stolpersteine memorial layer (all stones)
+        app.get("/api/stolpersteine", ctx ->
+            ctx.json(store.stolpersteine()));
+
         // Generic SPARQL SELECT (POST the query as the body)
         app.post("/api/sparql", ctx ->
             ctx.json(store.select(ctx.body())));

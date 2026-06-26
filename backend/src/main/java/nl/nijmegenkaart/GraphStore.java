@@ -38,6 +38,7 @@ public class GraphStore {
     public GraphStore() {
         load("/graph/ontology.ttl");
         load("/graph/ww2.ttl");
+        load("/graph/stolpersteine.ttl");
     }
 
     private void load(String classpathResource) {
@@ -131,6 +132,18 @@ public class GraphStore {
                 BIND("arrow" AS ?kind)
               }
             }""".formatted(segId));
+    }
+
+    /** All Stolpersteine: one memorial stone per victim, with location + inscription. */
+    public List<Map<String, Object>> stolpersteine() {
+        return select("""
+            SELECT ?s ?name ?lat ?long ?lifespan ?address ?inscription ?image WHERE {
+              ?s a nmg:Stolperstein ; rdfs:label ?name ; nmg:lat ?lat ; nmg:long ?long .
+              OPTIONAL { ?s nmg:lifespan ?lifespan }
+              OPTIONAL { ?s nmg:address ?address }
+              OPTIONAL { ?s nmg:verbatim ?inscription }
+              OPTIONAL { ?s nmg:image ?image }
+            } ORDER BY ?name""");
     }
 
     /** Auto-bibliography: distinct sources used across a story, with rights/licence. */

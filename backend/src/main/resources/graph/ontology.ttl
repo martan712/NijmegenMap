@@ -17,6 +17,7 @@ nmg:Person a owl:Class ; rdfs:subClassOf schema:Person , crm:E21_Person ; rdfs:l
 nmg:Place a owl:Class ; rdfs:subClassOf schema:Place , crm:E53_Place ; rdfs:label "Plaats"@nl .
 nmg:Building a owl:Class ; rdfs:subClassOf nmg:Place .
 nmg:Bridge a owl:Class ; rdfs:subClassOf nmg:Place .
+nmg:Stolperstein a owl:Class ; rdfs:subClassOf nmg:Place ; rdfs:label "Stolperstein (struikelsteen)"@nl .
 nmg:Organization a owl:Class ; rdfs:subClassOf schema:Organization , crm:E74_Group ; rdfs:label "Organisatie"@nl .
 nmg:MilitaryUnit a owl:Class ; rdfs:subClassOf nmg:Organization ; rdfs:label "Militaire eenheid"@nl .
 
@@ -83,3 +84,6 @@ nmg:baseYear a owl:DatatypeProperty ; rdfs:range xsd:gYear .
 nmg:overlayLevel a owl:DatatypeProperty ; rdfs:range xsd:integer .
 nmg:arrowLabel a owl:DatatypeProperty .
 nmg:arrowCurve a owl:DatatypeProperty ; rdfs:range xsd:decimal .
+nmg:address a owl:DatatypeProperty ; rdfs:subPropertyOf schema:address .
+nmg:lifespan a owl:DatatypeProperty .
+nmg:image a owl:DatatypeProperty ; rdfs:subPropertyOf schema:image .
