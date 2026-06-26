@@ -290,26 +290,110 @@
   height: 45vh;
 }
 
-/* The event scrubber — bottom-left, over the companion map. */
-.timeline {
+/* The two-layer navigator — bottom-left, over the companion map.
+   Top layer: events of the current chapter. Bottom layer: every chapter. */
+.vspine {
   pointer-events: auto;
   position: absolute;
   left: 0;
-  bottom: 22px;
+  bottom: 18px;
   width: 56vw;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
   z-index: 1300;
 }
 .track {
   display: flex;
   gap: 10px;
   align-items: flex-end;
+  max-width: calc(56vw - 32px);
+  overflow-x: auto;
   padding: 8px 16px;
   background: var(--panel-bg);
   backdrop-filter: var(--blur);
   border-radius: 999px;
   box-shadow: var(--shadow-md);
+}
+.chapterTrack {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  max-width: calc(56vw - 24px);
+  overflow-x: auto;
+  padding: 6px 8px;
+  background: var(--panel-bg);
+  backdrop-filter: var(--blur);
+  border-radius: 999px;
+  box-shadow: var(--shadow-md);
+}
+.exitChip {
+  flex: none;
+  display: flex;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  background: none;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.exitChip:hover {
+  color: var(--text);
+  background: var(--surface-hover);
+}
+.chapterChip {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  cursor: pointer;
+  background: none;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 650;
+  padding: 6px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.chapterChip:hover {
+  color: var(--text);
+  background: var(--surface-hover);
+}
+.chapterChipOn {
+  color: var(--text);
+  background: var(--surface-hover);
+}
+.chapterNum {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--border);
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 700;
+}
+.chapterChipOn .chapterNum {
+  background: var(--accent);
+  color: #fff;
+}
+.chapterName {
+  max-width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* The active chapter shows its full title; others truncate. */
+.chapterChipOn .chapterName {
+  max-width: none;
 }
 .tick {
   display: flex;
@@ -339,4 +423,12 @@
 }
 .tickLabel {
   white-space: nowrap;
+}
+.timelineStory {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 4px;
 }

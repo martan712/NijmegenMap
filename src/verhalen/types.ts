@@ -34,18 +34,46 @@ export interface Block {
 }
 
 export interface MapRow {
-  kind: "place" | "arrow";
+  // null for a base-map-only state (no focus place / arrow) that only carries
+  // year / overlay / limes.
+  kind: "place" | "arrow" | "photopin" | null;
   place?: string | null;
   lat?: string | null;
   long?: string | null;
   label?: string | null;
+  /** photopin rows: the located image + its caption + description. */
+  image?: string | null;
+  credit?: string | null;
+  text?: string | null;
   year?: string | null;
-  /** Cumulative WW2 damage-overlay level for this segment's map (nmg:overlayLevel). */
+  /** Cumulative overlay level (nmg:overlayLevel): WW2 damage order, or growth year. */
   overlay?: string | null;
+  /** Which polygon overlay this map shows (nmg:overlay → nmg:overlayKey), e.g. "limes"/"ww2". */
+  overlayKey?: string | null;
+  /** Fortification-ring reveal year (nmg:fortLevel): rings established by this year show. */
+  fort?: string | null;
   fromLat?: string | null;
   fromLong?: string | null;
   toLat?: string | null;
   toLong?: string | null;
   arrowLabel?: string | null;
   curve?: string | null;
+}
+
+export interface StoryMeta {
+  story: string;
+  label: string;
+  intro?: string | null;
+  era?: string | null;
+  year?: string | null;
+  tag?: string | null;
+}
+
+export interface StoryListEntry {
+  story: string;
+  label: string;
+  intro?: string | null;
+  era?: string | null;
+  year?: string | null;
+  tag?: string | null;
 }

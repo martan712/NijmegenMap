@@ -3,9 +3,9 @@ import type { MapEngine } from "../../services/MapEngine";
 import type { BoundsTuple, MemorialPoint } from "../../types";
 import { useVerhaal } from "../../hooks/useVerhaal";
 import { sceneFromMapRows } from "../../verhalen/sceneFromMap";
-import { fetchStolpersteine, localName, mediaUrl } from "../../verhalen/api";
-import type { Block } from "../../verhalen/types";
-import { Timeline } from "./Timeline";
+import { fetchStolpersteine, fetchStories, localName, mediaUrl } from "../../verhalen/api";
+import type { Block, StoryListEntry } from "../../verhalen/types";
+import { VerhalenSpine } from "./VerhalenSpine";
 import styles from "./verhalen.module.css";
 
 /** The fate lines of an inscription (everything after the "GEB. jjjj" line). */
@@ -151,20 +151,35 @@ function BlockView({ block }: { block: Block }) {
  */
 export function VerhalenView({
   engine,
-  storyId,
   onExit,
 }: {
   engine: MapEngine | null;
-  storyId: string;
   onExit: () => void;
 }) {
-  const { segments, content, error } = useVerhaal(storyId);
+  // The chapters (stories) and which one is open. The 2-layer spine switches
+  // between them in place — no separate full-screen picker.
+  const [stories, setStories] = useState<StoryListEntry[]>([]);
+  const [activeStory, setActiveStory] = useState<string | null>(null);
+  useEffect(() => {
+    let off = false;
+    fetchStories()
+      .then((s) => {
+        if (off) return;
+        setStories(s);
+        setActiveStory((prev) => prev ?? s[0]?.story ?? null);
+      })
+      .catch(() => {});
+    return () => { off = true; };
+  }, []);
+
+  const { segments, content, error, meta, loadedStory } = useVerhaal(activeStory ?? "");
   const columnRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
   const [activeSeg, setActiveSeg] = useState<string | null>(null);
   const [memorials, setMemorials] = useState<MemorialPoint[]>([]);
 
   const segRef = useRef<number>(-1);
+  const initedStory = useRef<string | null>(null); // story whose first segment we've shown
   const busyUntil = useRef(0);
   const ticking = useRef(false);
   const busy = () => performance.now() < busyUntil.current;
@@ -222,12 +237,28 @@ export function VerhalenView({
     const c = content[seg.seg];
     if (c) {
       const scene = sceneFromMapRows(c.mapRows);
+      // Atlas pin scenes (a single located place + an image of it) get a map
+      // marker at that spot — but with NO image on the pin, so PinManager shows
+      // just the teardrop + label and binds no click-popup (the image already
+      // lives in the narrative column).
+      const placeRows = c.mapRows.filter((r) => r.kind === "place");
+      const hasImage = c.blocks.some((b) => {
+        const t = localName(b.type);
+        return t === "ImageBlock" || t === "GalleryBlock";
+      });
+      if (hasImage && placeRows.length === 1) {
+        const p = placeRows[0];
+        scene.pin = { label: p.label ?? "", at: [Number(p.lat), Number(p.long)] };
+      }
       // Render the damage bright ONLY on the segment that first reaches this
       // level; later segments carry it forward dark (until a future segment
       // lowers the shown level). No new damage this step → nothing bright.
-      const cur = overlayAt(idx);
-      const prev = idx > 0 ? overlayAt(idx - 1) : 0;
-      scene.ww2Highlight = cur > prev ? cur : null;
+      // (Only for WW2 damage scenes; growth-overlay scenes set scene.growth.)
+      if (scene.ww2 != null) {
+        const cur = overlayAt(idx);
+        const prev = idx > 0 ? overlayAt(idx - 1) : 0;
+        scene.ww2Highlight = cur > prev ? cur : null;
+      }
       // Deportatie: turn the companion map into the city-wide memorial map.
       if (isMemorialSeg(idx) && memorialBounds) {
         scene.memorials = memorials;
@@ -239,14 +270,20 @@ export function VerhalenView({
     }
   }, [engine, segments, content, overlayAt, isMemorialSeg, memorialBounds, memorials]);
 
-  // Initial: show the first segment once content is ready.
+  // Show the first segment once a chapter's content is fully loaded — and re-run
+  // for each chapter the spine switches to. `loadedStory` guarantees segments +
+  // content belong to the now-active chapter (not the previous one lingering).
   useEffect(() => {
-    if (!engine || segments.length === 0 || segRef.current !== -1) return;
-    if (!content[segments[0].seg]) return;
+    if (!engine || !activeStory || loadedStory !== activeStory) return;
+    if (initedStory.current === activeStory) return;
+    if (segments.length === 0 || !content[segments[0].seg]) return;
+    initedStory.current = activeStory;
+    segRef.current = -1;
+    if (columnRef.current) columnRef.current.scrollTop = 0;
     engine.clearStoryOverlays();
     engine.setOpacity(1);
     goToSegment(0, false);
-  }, [engine, segments, content, goToSegment]);
+  }, [engine, activeStory, loadedStory, segments, content, goToSegment]);
 
   // Hide the +/- zoom control in the immersive surface; restore on exit.
   // (Scenes whose arrows run off the historical map drop that overlay and show
@@ -397,12 +434,9 @@ export function VerhalenView({
         }}
       >
         <header className={styles.head}>
-          <button type="button" className={styles.back} onClick={onExit}>
-            ← Atlas
-          </button>
           <span className={styles.kicker}>Verhaal</span>
-          <h1>Nijmegen in de oorlog</h1>
-          <p className={styles.lede}>1940 – 1945</p>
+          <h1>{meta?.label ?? "Nijmegen in de oorlog"}</h1>
+          {meta?.era && <p className={styles.lede}>{meta.era}</p>}
         </header>
 
         {error && <div className={styles.error}>Backend niet bereikbaar: {error}</div>}
@@ -437,7 +471,15 @@ export function VerhalenView({
 
       </div>
 
-      <Timeline segments={segments} activeSeg={activeSeg} onPick={onPick} />
+      <VerhalenSpine
+        stories={stories}
+        activeStory={activeStory}
+        onPickStory={setActiveStory}
+        segments={segments}
+        activeSeg={activeSeg}
+        onPickSeg={onPick}
+        onExit={onExit}
+      />
     </div>
   );
 }

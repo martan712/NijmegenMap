@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchBlocks, fetchMap, fetchSegments, localName } from "../verhalen/api";
-import type { Block, MapRow, Segment } from "../verhalen/types";
+import type { Block, MapRow, Segment, StoryMeta } from "../verhalen/types";
+import { fetchStoryMeta } from "../verhalen/api";
 
 export interface SegmentContent {
   blocks: Block[];
@@ -16,9 +17,25 @@ export function useVerhaal(storyId: string) {
   const [segments, setSegments] = useState<Segment[]>([]);
   const [content, setContent] = useState<Record<string, SegmentContent>>({});
   const [error, setError] = useState<string | null>(null);
+  const [meta, setMeta] = useState<StoryMeta | null>(null);
+  // The story whose content is fully loaded right now — lets the consumer tell a
+  // freshly-switched story's data apart from the previous story's lingering data.
+  const [loadedStory, setLoadedStory] = useState<string | null>(null);
 
   useEffect(() => {
     let off = false;
+    // Clear immediately so a story switch never shows the previous story's data.
+    setSegments([]);
+    setContent({});
+    setMeta(null);
+    setLoadedStory(null);
+    setError(null);
+    if (!storyId) return;
+
+    fetchStoryMeta(storyId)
+      .then((m) => { if (!off) setMeta(m); })
+      .catch(() => {});
+
     fetchSegments(storyId)
       .then(async (segs) => {
         if (off) return;
@@ -30,7 +47,9 @@ export function useVerhaal(storyId: string) {
             return [s.seg, { blocks, mapRows }] as const;
           }),
         );
-        if (!off) setContent(Object.fromEntries(entries));
+        if (off) return;
+        setContent(Object.fromEntries(entries));
+        setLoadedStory(storyId);
       })
       .catch((e) => !off && setError(String(e)));
     return () => {
@@ -38,5 +57,5 @@ export function useVerhaal(storyId: string) {
     };
   }, [storyId]);
 
-  return { segments, content, error };
+  return { segments, content, error, meta, loadedStory };
 }

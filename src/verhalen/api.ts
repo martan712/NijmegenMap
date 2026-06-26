@@ -1,4 +1,4 @@
-import type { Block, MapRow, Segment, Stolperstein } from "./types";
+import type { Block, MapRow, Segment, Stolperstein, StoryMeta, StoryListEntry } from "./types";
 
 // The Java backend (Apache Jena + Javalin). Override with VITE_API at build time.
 const API =
@@ -18,6 +18,10 @@ export const fetchMap = (segId: string) =>
   get<MapRow[]>(`/api/segments/${segId}/map`);
 export const fetchStolpersteine = () =>
   get<Stolperstein[]>(`/api/stolpersteine`);
+export const fetchStories = () =>
+  get<StoryListEntry[]>("/api/stories");
+export const fetchStoryMeta = (storyId: string) =>
+  get<StoryMeta>(`/api/stories/${storyId}/meta`);
 
 /** Last path/fragment segment of an IRI → the bare resource id. */
 export const localName = (iri: string): string =>

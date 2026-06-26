@@ -116,11 +116,7 @@ export default function App() {
       )}
 
       {mode === "verhalen" && (
-        <VerhalenView
-          engine={engine}
-          storyId="story_ww2"
-          onExit={() => setMode("story")}
-        />
+        <VerhalenView engine={engine} onExit={() => setMode("story")} />
       )}
 
       {mode === "free" && (
