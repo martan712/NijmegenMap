@@ -9,8 +9,15 @@ type DamageFeature = Feature<Geometry, DamageProps>;
 
 /**
  * WW2 damage: all 1944 building footprints (gray context) with the damage
- * polygons revealed cumulatively per event. `reveal(order)` shows everything
- * up to that event; `reveal(null)` hides both layers.
+ * polygons revealed cumulatively per event.
+ *
+ * `reveal(shown, highlight)`:
+ *   - `shown`     = highest damage order that is visible at all (everything with
+ *                   a lower-or-equal order persists, dark red);
+ *   - `highlight` = the single order rendered BRIGHT red — the moment that
+ *                   damage is first added. Pass `null` for none (so a scene that
+ *                   only carries forward earlier damage shows it all dark).
+ * `reveal(null)` hides both layers.
  */
 export class WO2Manager {
   private map: L.Map;
@@ -22,15 +29,15 @@ export class WO2Manager {
     this.map = map;
   }
 
-  reveal(order: number | null): void {
-    if (order == null) {
+  reveal(shown: number | null, highlight: number | null = null): void {
+    if (shown == null) {
       this.hide();
       return;
     }
     this.load(() => {
       if (this.buildings && !this.map.hasLayer(this.buildings)) this.buildings.addTo(this.map);
       if (this.damage && !this.map.hasLayer(this.damage)) this.damage.addTo(this.map);
-      this.update(order);
+      this.update(shown, highlight);
     });
   }
 
@@ -41,12 +48,14 @@ export class WO2Manager {
 
   // Always set stroke/fill in BOTH branches — setStyle only overrides the keys
   // you pass, so omitting them leaves a previously-hidden feature stuck off.
-  private styleFor(feature: DamageFeature, curOrder: number): L.PathOptions {
+  // `highlight` is the order shown bright (newly added this moment); everything
+  // else that's visible (o <= shown) is the darker "already damaged" red.
+  private styleFor(feature: DamageFeature, shown: number, highlight: number | null): L.PathOptions {
     const o = WO2_ORDER[feature.properties.CATEGORIE] || 99;
-    if (o > curOrder) {
+    if (o > shown) {
       return { pane: "wo2", stroke: false, fill: false, fillOpacity: 0, opacity: 0 };
     }
-    const cur = o === curOrder;
+    const cur = o === highlight;
     return {
       pane: "wo2", stroke: true, fill: true,
       color: cur ? "#e8281e" : "#7a1d16", weight: 1,
@@ -55,12 +64,12 @@ export class WO2Manager {
     };
   }
 
-  private update(curOrder: number): void {
+  private update(shown: number, highlight: number | null): void {
     if (!this.damage) return;
-    this.damage.setStyle((f) => this.styleFor(f as DamageFeature, curOrder));
+    this.damage.setStyle((f) => this.styleFor(f as DamageFeature, shown, highlight));
     this.damage.eachLayer((raw) => {
       const layer = raw as L.Path & { feature: DamageFeature };
-      const vis = (WO2_ORDER[layer.feature.properties.CATEGORIE] || 99) <= curOrder;
+      const vis = (WO2_ORDER[layer.feature.properties.CATEGORIE] || 99) <= shown;
       layer.options.interactive = vis;
       const el = (layer as unknown as { _path?: SVGElement })._path;
       if (el) {

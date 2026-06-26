@@ -97,8 +97,14 @@ export interface Scene {
   wall?: boolean;
   /** Fly to + open one wall point by NUMMER (implies `wall`). */
   wallPoint?: number;
-  /** Reveal WW2 damage cumulatively up to this event order. */
+  /** Reveal WW2 damage cumulatively up to this event order (persists, dark red). */
   ww2?: number;
+  /**
+   * Which damage order to render BRIGHT red — the moment it is first added.
+   * `null` = none bright (a scene that only carries forward earlier damage).
+   * Omitted = default to `ww2` (each Atlas scene introduces its own level).
+   */
+  ww2Highlight?: number | null;
 }
 
 /** A datasource that a thread's scenes are generated from at runtime. */
@@ -133,7 +139,7 @@ export interface Badge {
 }
 
 /** Top-level navigation mode. */
-export type Mode = "story" | "free";
+export type Mode = "story" | "free" | "verhalen";
 
 /** Free-explore base-map filter. */
 export type FilterMode = "all" | "map" | "aerial";

@@ -13,6 +13,7 @@ import { RomanLegend } from "./components/RomanLegend";
 import { Spine } from "./components/Spine";
 import { FreePanel } from "./components/FreePanel";
 import { StoryPanel } from "./components/story/StoryPanel";
+import { VerhalenView } from "./components/verhalen/VerhalenView";
 import type { Badge, Mode } from "./types";
 import styles from "./App.module.css";
 
@@ -68,6 +69,7 @@ export default function App() {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if ((e.target as HTMLElement).tagName === "SELECT") return;
+      if (mode === "verhalen") return; // VerhalenView handles its own arrow-key nav
       if (mode === "story") {
         if (story.threadIndex == null) return;
         if (e.key === "ArrowLeft") story.gotoScene(story.sceneIndex - 1);
@@ -94,7 +96,7 @@ export default function App() {
         lensYearRef={lensYearRef}
       />
       <TitleBadge />
-      {badge && <YearBadge {...badge} />}
+      {badge && mode !== "verhalen" && <YearBadge {...badge} />}
       <GrowthLegend visible={legend.visible} activeYear={legend.year} />
       <RomanLegend
         visible={mode === "story" && !!activeScene?.limes}
@@ -110,6 +112,14 @@ export default function App() {
           onGotoScene={story.gotoScene}
           onBackToChapter={story.backToChapter}
           onClose={() => setStoryOpen(false)}
+        />
+      )}
+
+      {mode === "verhalen" && (
+        <VerhalenView
+          engine={engine}
+          storyId="story_ww2"
+          onExit={() => setMode("story")}
         />
       )}
 
@@ -134,7 +144,7 @@ export default function App() {
         />
       )}
 
-      <Spine
+      {mode !== "verhalen" && <Spine
         chapters={chapters}
         mode={mode}
         activeChapter={chapterIndex}
@@ -150,7 +160,8 @@ export default function App() {
           story.openChapter(i);
         }}
         onEnterFree={() => setMode("free")}
-      />
+        onEnterVerhalen={() => setMode("verhalen")}
+      />}
 
       {error != null && (
         <div className={styles.error}>

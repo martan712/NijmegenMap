@@ -31,6 +31,12 @@ export class MapService {
     ).addTo(this.map);
   }
 
+  /** Show/hide the built-in zoom (+/–) control. */
+  setZoomControlVisible(visible: boolean): void {
+    if (visible) this.map.zoomControl.addTo(this.map);
+    else this.map.zoomControl.remove();
+  }
+
   destroy(): void {
     this.map.remove();
   }

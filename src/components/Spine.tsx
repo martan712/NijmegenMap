@@ -7,10 +7,11 @@ interface Props {
   activeChapter: number | null;
   onOpenChapter: (index: number) => void;
   onEnterFree: () => void;
+  onEnterVerhalen: () => void;
 }
 
 /** The spine: a thin always-visible ribbon of chapters + a free-explore entry. */
-export function Spine({ chapters, mode, activeChapter, onOpenChapter, onEnterFree }: Props) {
+export function Spine({ chapters, mode, activeChapter, onOpenChapter, onEnterFree, onEnterVerhalen }: Props) {
   return (
     <div className={styles.spine}>
       {chapters.map((ch, i) => (
@@ -25,6 +26,12 @@ export function Spine({ chapters, mode, activeChapter, onOpenChapter, onEnterFre
         </button>
       ))}
       <div className={styles.sep} />
+      <button
+        className={`${styles.chip} ${styles.free} ${mode === "verhalen" ? styles.active : ""}`}
+        onClick={onEnterVerhalen}
+      >
+        Verhalen
+      </button>
       <button
         className={`${styles.chip} ${styles.free} ${mode === "free" ? styles.active : ""}`}
         onClick={onEnterFree}

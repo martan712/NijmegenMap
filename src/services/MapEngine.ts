@@ -49,6 +49,11 @@ export class MapEngine {
     this.spy = new SpyManager(this.map, lens);
   }
 
+  /** Show/hide the built-in zoom (+/–) control. */
+  setZoomControlVisible(visible: boolean): void {
+    this.service.setZoomControlVisible(visible);
+  }
+
   /** Render one scene's full map state (story mode). */
   applyScene(scene: Scene): void {
     // Base map: a purely pre-cartographic scene (only a pin / arrows / limes,
@@ -83,7 +88,11 @@ export class MapEngine {
     this.wall.setVisible(!!scene.wall || scene.wallPoint != null);
     if (scene.wallPoint != null) this.wall.focusPoint(scene.wallPoint);
     else this.wall.clearHighlight();
-    this.wo2.reveal(scene.ww2 ?? null);
+    // Omitted highlight defaults to the shown level (Atlas: each scene adds its
+    // own damage); Verhalen sets it explicitly so a level stays bright only on
+    // the segment that first introduces it.
+    const ww2Highlight = scene.ww2Highlight === undefined ? scene.ww2 ?? null : scene.ww2Highlight;
+    this.wo2.reveal(scene.ww2 ?? null, ww2Highlight);
   }
 
   /** Show a chapter's overview: representative base map, no story overlays. */

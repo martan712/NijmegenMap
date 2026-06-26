@@ -1,0 +1,246 @@
+/* The Verhalen surface floats over the shared map; only the column + timeline
+   capture pointer events, so the companion map stays interactive. */
+.surface {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+/* The scrolling narrative column (right). Expands to full width on media steps,
+   when the map collapses to a corner inset. */
+.column {
+  pointer-events: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 44vw;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 8vh 48px 0;
+  background: var(--panel-bg);
+  backdrop-filter: var(--blur);
+  color: var(--text);
+  box-shadow: -12px 0 40px rgba(0, 0, 0, 0.35);
+  /* transform only — never width — so centring on media steps can't reflow the
+     content and perturb the active-block measurement (no oscillation). */
+  transition: transform 0.45s ease;
+  will-change: transform;
+  scrollbar-width: thin;
+  /* Snap each segment to the top as you scroll — a gentle "click" between
+     sections. `proximity` (not `mandatory`) so taller-than-viewport segments
+     stay fully readable instead of getting trapped. */
+  scroll-snap-type: y proximity;
+  scroll-padding-top: 8vh;
+  scroll-behavior: smooth;
+}
+/* On a media step the column glides to centre while the map ducks to a corner. */
+.column.centered {
+  transform: translateX(-28vw);
+}
+
+.head {
+  margin-bottom: 6vh;
+}
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 18px;
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--panel-bg);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 650;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.back:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+.kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+}
+.head h1 {
+  margin: 6px 0 2px;
+  font-size: 34px;
+  line-height: 1.1;
+}
+.lede {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.block {
+  margin: 0 0 5vh;
+}
+
+/* Per-segment section + its small heading. */
+.section {
+  margin-bottom: 7vh;
+  scroll-snap-align: start;
+}
+.segHead {
+  margin: 0 0 3.5vh;
+  padding-top: 3vh;
+  border-top: 1px solid var(--border);
+}
+.segTick {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+}
+.segHead h2 {
+  margin: 5px 0 0;
+  font-size: 25px;
+  line-height: 1.15;
+}
+
+/* Document / diary reader (scan + transcript). */
+.document {
+  margin: 0;
+}
+.document img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+}
+.transcript {
+  margin: 12px 0 0;
+  font-size: 16px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+.document figcaption {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* Authored connective prose (editorial spine). */
+.narrative {
+  font-size: 19px;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Verbatim primary source — visually distinct from the authored spine. */
+.quote {
+  margin: 0;
+  padding: 14px 22px;
+  border-left: 3px solid var(--accent);
+  background: rgba(255, 138, 61, 0.07);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+.quote p {
+  margin: 0 0 8px;
+  font-size: 21px;
+  line-height: 1.5;
+  font-style: italic;
+}
+.quote cite {
+  font-style: normal;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.audio {
+  margin: 0;
+}
+.audio audio {
+  width: 100%;
+}
+.gallery {
+  margin: 0;
+}
+.gallery img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+}
+.audio figcaption,
+.gallery figcaption {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.error {
+  margin-bottom: 4vh;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: rgba(232, 40, 30, 0.15);
+  border: 1px solid var(--wo2-current);
+  color: #ffd9d6;
+  font-size: 14px;
+}
+
+.spacer {
+  height: 45vh;
+}
+
+/* The event scrubber — bottom-left, over the companion map. */
+.timeline {
+  pointer-events: auto;
+  position: absolute;
+  left: 0;
+  bottom: 22px;
+  width: 56vw;
+  display: flex;
+  justify-content: center;
+  z-index: 1300;
+}
+.track {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  padding: 8px 16px;
+  background: var(--panel-bg);
+  backdrop-filter: var(--blur);
+  border-radius: 999px;
+  box-shadow: var(--shadow-md);
+}
+.tick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 650;
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--muted);
+  transition: all 0.2s ease;
+}
+.tickOn {
+  color: var(--text);
+}
+.tickOn .dot {
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(255, 138, 61, 0.25);
+}
+.tickLabel {
+  white-space: nowrap;
+}
