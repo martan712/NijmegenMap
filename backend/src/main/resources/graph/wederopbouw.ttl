@@ -1,0 +1,108 @@
+# Atlas chapter: Wederopbouw — Verhalen migration.
+# 10 segments across 4 threads: Wederopbouw (3), Naoorlogse wijken (3),
+# De kennisstad (1), Waalsprong (3).
+@prefix nmg:    <https://nijmegenkaart.nl/ns#> .
+@prefix id:     <https://nijmegenkaart.nl/id/> .
+@prefix schema: <http://schema.org/> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+
+############################  STORY  ############################
+id:story_wederopbouw a nmg:Story ;
+    rdfs:label "Wederopbouw"@nl ;
+    nmg:introText "Na de oorlog herrijst het centrum en spreidt de stad zich uit: naoorlogse wijken in het zuiden en, later, de Waalsprong in het noorden."@nl ;
+    nmg:eraLabel "na 1945"@nl ;
+    nmg:representativeYear "2025"^^xsd:gYear ;
+    nmg:tag "wederopbouw" ;
+    nmg:storyOrder 5 ;
+    nmg:hasSegment id:seg_wed_1 , id:seg_wed_2 , id:seg_wed_3 ,
+                    id:seg_wed_4 , id:seg_wed_5 , id:seg_wed_6 ,
+                    id:seg_wed_7 ,
+                    id:seg_wed_8 , id:seg_wed_9 , id:seg_wed_10 .
+
+# --- Thread 1: Wederopbouw ---
+
+# 1. Het verwoeste hart (no pin)
+id:seg_wed_1 a nmg:Segment ; nmg:order 1 ; nmg:tickLabel "Het verwoeste hart" ;
+    nmg:mapState id:map_wed_1 ; nmg:hasBlock id:block_wed_1_1 .
+id:map_wed_1 a nmg:MapState ; nmg:baseYear "1949"^^xsd:gYear ; nmg:focusPlace id:centrum .
+id:block_wed_1_1 a nmg:NarrativeBlock ; nmg:order 1 ;
+    schema:text "Op de luchtfoto van 1949 zijn de littekens van de oorlog in het centrum nog goed te zien."@nl .
+
+# 2. Een nieuw centrum (no pin)
+id:seg_wed_2 a nmg:Segment ; nmg:order 2 ; nmg:tickLabel "Een nieuw centrum" ;
+    nmg:mapState id:map_wed_2 ; nmg:hasBlock id:block_wed_2_1 .
+id:map_wed_2 a nmg:MapState ; nmg:baseYear "1957"^^xsd:gYear ; nmg:focusPlace id:centrum .
+id:block_wed_2_1 a nmg:NarrativeBlock ; nmg:order 1 ;
+    schema:text "In de jaren '50 verrijst een modern, ruimer opgezet stadshart op de oude fundamenten."@nl .
+
+# 3. De stad hersteld (no pin)
+id:seg_wed_3 a nmg:Segment ; nmg:order 3 ; nmg:tickLabel "De stad hersteld" ;
+    nmg:mapState id:map_wed_3 ; nmg:hasBlock id:block_wed_3_1 .
+id:map_wed_3 a nmg:MapState ; nmg:baseYear "1967"^^xsd:gYear ; nmg:focusPlace id:centrum .
+id:block_wed_3_1 a nmg:NarrativeBlock ; nmg:order 1 ;
+    schema:text "Tegen het eind van de jaren '60 is de wederopbouw grotendeels voltooid."@nl .
+
+# --- Thread 2: Naoorlogse wijken ---
+
+# 4. Voor de uitbreiding (no pin — growth overlay)
+id:seg_wed_4 a nmg:Segment ; nmg:order 4 ; nmg:tickLabel "Voor de uitbreiding" ;
+    nmg:mapState id:map_wed_4 ; nmg:hasBlock id:block_wed_4_1 .
+id:map_wed_4 a nmg:MapState ; nmg:baseYear "1964"^^xsd:gYear ; nmg:overlayLevel 1955 ;
+    nmg:focusPlace id:dukenburg , id:centrum .
+id:block_wed_4_1 a nmg:NarrativeBlock ; nmg:order 1 ;
+    schema:text "Het zuidwesten is rond 1960 nog grotendeels open land tussen de dorpen."@nl .
+
+# 5. Dukenburg verrijst (no pin — growth overlay)
+id:seg_wed_5 a nmg:Segment ; nmg:order 5 ; nmg:tickLabel "Dukenburg verrijst" ;
+    nmg:mapState id:map_wed_5 ; nmg:hasBlock id:block_wed_5_1 .
+id:map_wed_5 a nmg:MapState ; nmg:baseYear "1977"^^xsd:gYear ; nmg:overlayLevel 1975 ;
+    nmg:focusPlace id:dukenburg , id:centrum .
+id:block_wed_5_1 a nmg:NarrativeBlock ; nmg:order 1 ;
+    schema:text "Vanaf de jaren '60–'70 verrijst Dukenburg als grote naoorlogse uitbreiding."@nl .
+
+# 6. Lindenholt erbij (no pin — growth overlay)
+id:seg_wed_6 a nmg:Segment ; nmg:order 6 ; nmg:tickLabel "Lindenholt erbij" ;
+    nmg:mapState id:map_wed_6 ; nmg:hasBlock id:block_wed_6_1 .
+id:map_wed_6 a nmg:MapState ; nmg:baseYear "1986"^^xsd:gYear ; nmg:overlayLevel 1985 ;
+    nmg:focusPlace id:lindenholt , id:centrum .
+id:block_wed_6_1 a nmg:NarrativeBlock ; nmg:order 1 ;
+    schema:text "In de jaren '80 komt Lindenholt erbij; het zuidwesten is dan volgebouwd."@nl .
+
+# --- Thread 3: De kennisstad ---
+
+# 7. De kennisstad: Radboud Universiteit (pin)
+id:seg_wed_7 a nmg:Segment ; nmg:order 7 ; nmg:tickLabel "De kennisstad: Radboud Universiteit" ;
+    nmg:mapState id:map_wed_7 ; nmg:hasBlock id:block_wed_7_1 , id:block_wed_7_2 .
+id:map_wed_7 a nmg:MapState ; nmg:baseYear "2025"^^xsd:gYear ;
+    nmg:focusPlace id:heyendaal .
+id:block_wed_7_1 a nmg:NarrativeBlock ; nmg:order 1 ;
+    schema:text "Naast de wederopbouw groeide Nijmegen uit tot kennisstad. In 1923 opende hier de Roomsch-Katholieke Universiteit, de eerste katholieke universiteit van Nederland; in 2004 werd zij omgedoopt tot Radboud Universiteit. Op de zuidelijke campus Heyendaal — met het Erasmusgebouw als baken en het Radboudumc ernaast — studeren en werken vandaag tienduizenden mensen: de motor van het moderne Nijmegen."@nl .
+id:block_wed_7_2 a nmg:ImageBlock ; nmg:order 2 ; nmg:references id:src_wed_radboud .
+
+# --- Thread 4: Waalsprong ---
+
+# 8. Over de Waal (no pin — growth overlay)
+id:seg_wed_8 a nmg:Segment ; nmg:order 8 ; nmg:tickLabel "Over de Waal" ;
+    nmg:mapState id:map_wed_8 ; nmg:hasBlock id:block_wed_8_1 .
+id:map_wed_8 a nmg:MapState ; nmg:baseYear "2008"^^xsd:gYear ; nmg:overlayLevel 2003 ;
+    nmg:focusPlace id:waalsprong , id:centrum .
+id:block_wed_8_1 a nmg:NarrativeBlock ; nmg:order 1 ;
+    schema:text "Vanaf 2000 springt Nijmegen de Waal over: bij Lent verrijst een geheel nieuw stadsdeel."@nl .
+
+# 9. Ruimte voor de rivier (no pin — growth overlay)
+id:seg_wed_9 a nmg:Segment ; nmg:order 9 ; nmg:tickLabel "Ruimte voor de rivier" ;
+    nmg:mapState id:map_wed_9 ; nmg:hasBlock id:block_wed_9_1 .
+id:map_wed_9 a nmg:MapState ; nmg:baseYear "2015"^^xsd:gYear ; nmg:overlayLevel 2015 ;
+    nmg:focusPlace id:waalsprong , id:centrum .
+id:block_wed_9_1 a nmg:NarrativeBlock ; nmg:order 1 ;
+    schema:text "Met 'Ruimte voor de Waal' krijgt de rivier een nevengeul; Veur Lent wordt een eiland."@nl .
+
+# 10. Nijmegen nu (no pin)
+id:seg_wed_10 a nmg:Segment ; nmg:order 10 ; nmg:tickLabel "Nijmegen nu" ;
+    nmg:mapState id:map_wed_10 ; nmg:hasBlock id:block_wed_10_1 .
+id:map_wed_10 a nmg:MapState ; nmg:baseYear "2025"^^xsd:gYear ;
+    nmg:focusPlace id:centrum , id:waalsprong .
+id:block_wed_10_1 a nmg:NarrativeBlock ; nmg:order 1 ;
+    schema:text "De actuele luchtfoto toont de hele gemeente — van de middeleeuwse kern tot de Waalsprong."@nl .

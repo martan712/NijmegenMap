@@ -1,0 +1,249 @@
+# Canonical source / actor definitions — photographs, recordings, diaries and
+# the people/units they involve. Chapters reference these by id (nmg:references,
+# nmg:cites, nmg:depicts, nmg:derivedFrom, …); they no longer define their own.
+@prefix nmg:    <https://nijmegenkaart.nl/ns#> .
+@prefix id:     <https://nijmegenkaart.nl/id/> .
+@prefix schema: <http://schema.org/> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix wd:     <http://www.wikidata.org/entity/> .
+
+############################  ROMAN  ############################
+# Prehistorie thread
+id:src_pre_grafheuvel a nmg:Photograph ;
+    rdfs:label "Een grote grafheuvel uit de bronstijd (Hoogeloon) — foto Bert van As, CC BY-SA 4.0 (Wikimedia Commons)"@nl ;
+    nmg:mediaPath "data/images/prehistorie/grafheuvel.jpg" ;
+    dct:license <https://creativecommons.org/licenses/by-sa/4.0/> .
+
+id:src_pre_bataven a nmg:Photograph ;
+    rdfs:label "Reconstructie van een ijzertijdboerderij te Wekerom — foto Syborgh, CC BY-SA 3.0 (Wikimedia Commons)"@nl ;
+    nmg:mediaPath "data/images/prehistorie/bataven.jpg" ;
+    dct:license <https://creativecommons.org/licenses/by-sa/3.0/> .
+
+# Romeins Nijmegen thread
+id:src_rom_hunerberg a nmg:Photograph ;
+    rdfs:label "Maquette van de Romeinse legioensvesting op de Hunerberg — Joris, CC BY-SA 4.0 (Wikimedia Commons)"@nl ;
+    nmg:mediaPath "data/images/roman/hunerberg.jpg" ;
+    dct:license <https://creativecommons.org/licenses/by-sa/4.0/> .
+
+id:src_rom_kops a nmg:Photograph ;
+    rdfs:label "Romeinse ruiterhelm gevonden op het Kops Plateau — foto Carole Raddato, CC BY-SA 2.0 (Wikimedia Commons)"@nl ;
+    nmg:mediaPath "data/images/roman/kops.jpg" ;
+    dct:license <https://creativecommons.org/licenses/by-sa/2.0/> .
+
+id:src_rom_oppidum a nmg:Photograph ;
+    rdfs:label "Het Valkhof, waar Oppidum Batavorum lag — prent, Rijksmuseum (CC0)"@nl ;
+    nmg:mediaPath "data/images/roman/oppidum.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/zero/1.0/> .
+
+id:src_rom_civilis a nmg:Photograph ;
+    rdfs:label "Rembrandt, De samenzwering van Claudius Civilis (1661–62) — publiek domein"@nl ;
+    nmg:mediaPath "data/images/roman/civilis.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/mark/1.0/> .
+
+id:src_rom_ulpia a nmg:Photograph ;
+    rdfs:label "Reconstructie van Ulpia Noviomagus — muurschildering Peter Nuyten (foto Wouter Hinrichs, CC BY 4.0)"@nl ;
+    nmg:mediaPath "data/images/roman/ulpia.jpg" ;
+    dct:license <https://creativecommons.org/licenses/by/4.0/> .
+
+# Het einde thread
+id:src_rom_castellum a nmg:Photograph ;
+    rdfs:label "Het Valkhof met de 'Romeinse kapel', tekening uit 1728 — RCE, CC BY-SA 4.0"@nl ;
+    nmg:mediaPath "data/images/roman/castellum.jpg" ;
+    dct:license <https://creativecommons.org/licenses/by-sa/4.0/> .
+
+############################  MIDDELEEUWEN  ############################
+# Thread 1: Van palts tot burcht
+id:src_vmk_franken a nmg:Photograph ;
+    rdfs:label "Grafurn opgegraven op het Valkhof — RCE, CC BY-SA 4.0"@nl ;
+    nmg:mediaPath "data/images/roman/franken.jpg" ;
+    dct:license <https://creativecommons.org/licenses/by-sa/4.0/> .
+
+id:src_vmk_palts a nmg:Photograph ;
+    rdfs:label "De Sint-Nicolaaskapel (Karolingische kapel) op het Valkhof — RCE, CC BY-SA 4.0"@nl ;
+    nmg:mediaPath "data/images/roman/palts.jpg" ;
+    dct:license <https://creativecommons.org/licenses/by-sa/4.0/> .
+
+id:src_vmk_vikingen a nmg:Photograph ;
+    rdfs:label "Het Osebergschip (9e eeuw), een bewaard Vikingschip — Vikingschipmuseum Oslo, foto Petter Ulleland, CC BY-SA 4.0 (Wikimedia Commons)"@nl ;
+    nmg:mediaPath "data/images/medieval/vikingen.jpg" ;
+    dct:license <https://creativecommons.org/licenses/by-sa/4.0/> .
+
+id:src_vmk_keizerstad a nmg:Photograph ;
+    rdfs:label "Keizer Otto III ontvangt de hulde van de rijksdelen — miniatuur uit het Evangeliarium van Otto III, ca. 1000, CC BY-SA 4.0 (Wikimedia Commons)"@nl ;
+    nmg:mediaPath "data/images/medieval/keizerstad.jpg" ;
+    dct:license <https://creativecommons.org/licenses/by-sa/4.0/> .
+
+id:src_vmk_palts1047 a nmg:Photograph ;
+    rdfs:label "Keizer Hendrik III, tegen wie hertog Godfried in opstand kwam — middeleeuwse miniatuur, publiek domein (Wikimedia Commons)"@nl ;
+    nmg:mediaPath "data/images/medieval/palts1047.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/mark/1.0/> .
+
+id:src_vmk_barbarossa a nmg:Photograph ;
+    rdfs:label "Het Valkhof met de Barbarossa-ruïne, prent uit 1670 — Rijksmuseum (CC0)"@nl ;
+    nmg:mediaPath "data/images/roman/barbarossa.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/zero/1.0/> .
+
+# Thread 2: De stad aan de Waal
+id:src_vmk_stadsrechten a nmg:Photograph ;
+    rdfs:label "Het wapen van Nijmegen met de dubbele Rijksadelaar — Martinvl, publiek domein (Wikimedia Commons)"@nl ;
+    nmg:mediaPath "data/images/medieval/stadsrechten.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/mark/1.0/> .
+
+id:src_vmk_gelre a nmg:Photograph ;
+    rdfs:label "Penning met het wapenschild van de graaf van Gelre (12e eeuw) — publiek domein (Wikimedia Commons)"@nl ;
+    nmg:mediaPath "data/images/medieval/gelre.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/mark/1.0/> .
+
+id:src_vmk_sintsteven a nmg:Photograph ;
+    rdfs:label "De toren van de Sint-Stevenskerk — foto Tubantia, CC BY-SA 3.0 (Wikimedia Commons)"@nl ;
+    nmg:mediaPath "data/images/medieval/sintsteven.jpg" ;
+    dct:license <https://creativecommons.org/licenses/by-sa/3.0/> .
+
+id:src_vmk_pest a nmg:Photograph ;
+    rdfs:label "Jodenvervolging tijdens de pest van 1349 — miniatuur uit een 14e-eeuwse kroniek (Kon. Bibliotheek van België), publiek domein (Wikimedia Commons)"@nl ;
+    nmg:mediaPath "data/images/medieval/pest1349.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/mark/1.0/> .
+
+id:src_vmk_hanze a nmg:Photograph ;
+    rdfs:label "De Kamper Kogge, varende replica van een middeleeuwse Hanzekogge — foto Jean-Pol Grandmont, CC BY 4.0 (Wikimedia Commons)"@nl ;
+    nmg:mediaPath "data/images/medieval/hanze.jpg" ;
+    dct:license <https://creativecommons.org/licenses/by/4.0/> .
+
+# Thread 3: Stad van naam
+id:src_vmk_limburg a nmg:Photograph ;
+    rdfs:label "De maand juni uit de Très Riches Heures du Duc de Berry — gebroeders van Limburg, ca. 1412–1416, publiek domein (Wikimedia Commons)"@nl ;
+    nmg:mediaPath "data/images/culture/limburg.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/mark/1.0/> .
+
+id:src_vmk_mariken a nmg:Photograph ;
+    rdfs:label "Titelpagina van Mariken van Nieumeghen — Jan van Doesborch, ca. 1518, publiek domein (Wikimedia Commons)"@nl ;
+    nmg:mediaPath "data/images/culture/mariken.gif" ;
+    dct:license <https://creativecommons.org/publicdomain/mark/1.0/> .
+
+id:src_vmk_canisius a nmg:Photograph ;
+    rdfs:label "Petrus Canisius — anoniem portret, 1699, publiek domein (Wikimedia Commons)"@nl ;
+    nmg:mediaPath "data/images/culture/canisius.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/mark/1.0/> .
+
+############################  VESTING  ############################
+# Thread 1: Gewest, geloof & vrede
+id:src_vst_venlo a nmg:Photograph ;
+    rdfs:label "Keizer Karel V — anoniem portret, ca. 1550 (Rijksmuseum), publiek domein (Wikimedia Commons)"@nl ;
+    nmg:mediaPath "data/images/earlymodern/venlo1543.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/mark/1.0/> .
+
+id:src_vst_maurits a nmg:Photograph ;
+    rdfs:label "Prins Maurits van Oranje — Michiel van Mierevelt, publiek domein (Wikimedia Commons)"@nl ;
+    nmg:mediaPath "data/images/earlymodern/maurits1591.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/mark/1.0/> .
+
+id:src_vst_vrede a nmg:Photograph ;
+    rdfs:label "De Vrede van Nijmegen, 1678 — prent, Rijksmuseum (CC0, Wikimedia Commons)"@nl ;
+    nmg:mediaPath "data/images/earlymodern/vrede1678.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/zero/1.0/> .
+
+id:src_vst_fransen a nmg:Photograph ;
+    rdfs:label "Het beleg van Nijmegen in 1794, met de schipbrug naar Lent — prent, Ambroise Tardieu, publiek domein (Wikimedia Commons)"@nl ;
+    nmg:mediaPath "data/images/earlymodern/franse1794.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/mark/1.0/> .
+
+# Stadsmuur & poorten — Lauwerier/Korfmacher drawings of the vestingwerken just
+# before their demolition (1876–1878), from data/stadswallen.geojson (Collectie
+# Museum Het Valkhof / Regionaal Archief Nijmegen). Artworks are public domain.
+id:src_vst_kronenburg a nmg:Photograph ;
+    rdfs:label "Rudolphus Lauwerier (1797–1883), De stadsmuur en de Kronenburgertoren, met op de achtergrond de aanleg van de spoordijk, 1878 — Collectie Museum Het Valkhof"@nl ;
+    nmg:mediaPath "data/images/korfmacher/17.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/mark/1.0/> .
+
+id:src_vst_hezel a nmg:Photograph ;
+    rdfs:label "Rudolphus Lauwerier (1797–1883), Slopers aan het werk op de Hezelpoort en de bolwerken, 1876 — Collectie Museum Het Valkhof"@nl ;
+    nmg:mediaPath "data/images/korfmacher/21.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/mark/1.0/> .
+
+id:src_vst_molen a nmg:Photograph ;
+    rdfs:label "Rudolphus Lauwerier (1797–1883), De Molenpoort tijdens de afbraak van de wal; de toegangsbrug is reeds verdwenen, 1876 — Collectie Museum Het Valkhof"@nl ;
+    nmg:mediaPath "data/images/korfmacher/11.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/mark/1.0/> .
+
+id:src_vst_belvedere a nmg:Photograph ;
+    rdfs:label "Rudolphus Lauwerier (1797–1883), Gezicht vanaf de wal onderaan de Voerweg op de Belvédère, links de Hunnerpoort, 1878 — Collectie Museum Het Valkhof"@nl ;
+    nmg:mediaPath "data/images/korfmacher/27.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/mark/1.0/> .
+
+############################  WW2  ############################
+id:unit_504_pir a nmg:MilitaryUnit ;
+    rdfs:label "504th Parachute Infantry Regiment, 82nd Airborne"@en ; owl:sameAs wd:Q7727349 .
+id:person_dozy a nmg:Person ; rdfs:label "Petronella Dozy"@nl .
+
+id:src_radio_oranje a nmg:AudioRecording ;
+    rdfs:label "Radio Oranje, 19 sep 1944 — reportage bevrijding Eindhoven/Arnhem/Nijmegen"@nl ;
+    nmg:documents id:market_garden ;
+    nmg:mediaPath "data/stories/ww2/audio/radio-oranje-19sep1944.ogg" ;
+    dct:license <https://creativecommons.org/publicdomain/mark/1.0/> ; nmg:rightsClass "a" ;
+    dct:source <https://commons.wikimedia.org/wiki/File:Radio_Oranje_19-sep.-1944_REPORTAGE_OVER_BEVRIJDING_EINDHOVEN,_ARNHEM_EN_NIJMEGEN.wav> .
+
+id:src_photo_bezetting a nmg:Photograph ;
+    rdfs:label "Een Duitse Panzer IV rijdt door de Sint Annastraat, mei 1940 — Foto Van der Horst, CC BY-SA 4.0 (Wikimedia Commons)"@nl ;
+    nmg:depicts id:bezetting ; dct:creator "Foto Van der Horst" ;
+    nmg:mediaPath "data/stories/ww2/photos/bezetting.jpg" ;
+    dct:license <https://creativecommons.org/licenses/by-sa/4.0/> ; nmg:rightsClass "a" .
+
+id:src_photo_deportatie a nmg:Photograph ;
+    rdfs:label "De met hakenkruisen besmeurde Nieuwe Synagoge in Nijmegen, 1942 — J.F.M. Trum, Fotopersbureau Gelderland, CC BY-SA 4.0 (Wikimedia Commons)"@nl ;
+    nmg:depicts id:deportatie ; dct:creator "J.F.M. Trum, Fotopersbureau Gelderland" ;
+    nmg:mediaPath "data/stories/ww2/photos/deportatie.jpg" ;
+    dct:license <https://creativecommons.org/licenses/by-sa/4.0/> ; nmg:rightsClass "a" .
+
+id:src_photo_bombardement a nmg:Photograph ;
+    rdfs:label "De verwoeste binnenstad na het bombardement van 22 februari 1944 — J.C.M. Otto (NIOD), publiek domein (Wikimedia Commons)"@nl ;
+    nmg:depicts id:bombardement ; dct:creator "J.C.M. Otto (NIOD)" ;
+    nmg:mediaPath "data/stories/ww2/photos/bombardement.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/mark/1.0/> ; nmg:rightsClass "a" .
+
+id:src_photo_marketgarden a nmg:Photograph ;
+    rdfs:label "Geallieerde parachutisten dalen neer boven Nederland, 17 september 1944 — US Army, publiek domein (Wikimedia Commons)"@nl ;
+    nmg:depicts id:market_garden ; dct:creator "US Army" ;
+    nmg:mediaPath "data/stories/ww2/photos/marketgarden.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/mark/1.0/> ; nmg:rightsClass "a" .
+
+id:src_photo_clamber a nmg:Photograph ;
+    rdfs:label "Geallieerde para's gaan bij Nijmegen aan land uit een overzetboot, sep 1944 — Imperial War Museums, publiek domein (Wikimedia Commons)"@nl ;
+    nmg:depicts id:de_waaloversteek ; dct:creator "Imperial War Museums" ;
+    nmg:mediaPath "data/images/ww2/waaloversteek.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/mark/1.0/> ; nmg:rightsClass "a" .
+
+id:src_photo_brug a nmg:Photograph ;
+    rdfs:label "Britse troepen passeren de veroverde Waalbrug bij Nijmegen, sep 1944 — Rijksmuseum, CC0 (Wikimedia Commons)"@nl ;
+    nmg:depicts id:brug_genomen ; dct:creator "Rijksmuseum" ;
+    nmg:mediaPath "data/stories/ww2/photos/bruggenomen.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/zero/1.0/> ; nmg:rightsClass "a" .
+
+id:src_photo_frontstad a nmg:Photograph ;
+    rdfs:label "Een geallieerde verkeersregelaar op een gehavende kruising in Nijmegen, 1945 — P.J. Bosman (Regionaal Archief Nijmegen), CC0 (Wikimedia Commons)"@nl ;
+    nmg:depicts id:frontstad ; dct:creator "P.J. Bosman (Regionaal Archief Nijmegen)" ;
+    nmg:mediaPath "data/stories/ww2/photos/frontstad.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/zero/1.0/> ; nmg:rightsClass "a" .
+
+id:src_photo_bevrijding a nmg:Photograph ;
+    rdfs:label "Bevrijdingsfeesten met een wagenspel, 1945 — J.F.M. Trum, Fotopersbureau Gelderland, CC BY-SA 4.0 (Wikimedia Commons)"@nl ;
+    nmg:depicts id:bevrijding ; dct:creator "J.F.M. Trum, Fotopersbureau Gelderland" ;
+    nmg:mediaPath "data/stories/ww2/photos/bevrijding.jpg" ;
+    dct:license <https://creativecommons.org/licenses/by-sa/4.0/> ; nmg:rightsClass "a" .
+
+# Verbatim primary source (short attributed excerpt — rights class b).
+id:diary_dozy a nmg:Diary ; rdfs:label "Dagboek Petronella Dozy"@nl ;
+    nmg:authoredBy id:person_dozy ; nmg:rightsClass "b" .
+id:quote_dozy_parachutes a nmg:Quote ;
+    nmg:derivedFrom id:diary_dozy ; nmg:about id:market_garden ;
+    nmg:locator "17 september 1944" ; dct:language "nl" ;
+    nmg:verbatim "… de lucht hing vol met rood-wit-blauw-oranje parachutes …" .
+
+############################  WEDEROPBOUW  ############################
+id:src_wed_radboud a nmg:Photograph ;
+    rdfs:label "Het Erasmusgebouw op de campus Heyendaal van de Radboud Universiteit — foto Roger Veringmeier, CC BY 3.0 (Wikimedia Commons)"@nl ;
+    nmg:mediaPath "data/images/modern/radboud.jpg" ;
+    dct:license <https://creativecommons.org/licenses/by/3.0/> .
+

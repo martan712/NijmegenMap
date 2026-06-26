@@ -87,3 +87,36 @@ nmg:arrowCurve a owl:DatatypeProperty ; rdfs:range xsd:decimal .
 nmg:address a owl:DatatypeProperty ; rdfs:subPropertyOf schema:address .
 nmg:lifespan a owl:DatatypeProperty .
 nmg:image a owl:DatatypeProperty ; rdfs:subPropertyOf schema:image .
+
+# --- NEW: Story grouping / chapter metadata ---
+nmg:hasStory a owl:ObjectProperty ; rdfs:domain nmg:Segment ; rdfs:range nmg:Story .
+nmg:introText a owl:DatatypeProperty ; rdfs:domain nmg:Story ; rdfs:range xsd:string .
+nmg:eraLabel a owl:DatatypeProperty ; rdfs:domain nmg:Story ; rdfs:range xsd:string .
+nmg:representativeYear a owl:DatatypeProperty ; rdfs:domain nmg:Story ; rdfs:range xsd:gYear .
+nmg:tag a owl:DatatypeProperty ; rdfs:domain nmg:Story ; rdfs:range xsd:string .
+# Chronological position of a story in the picker (1 = oldest era). Stories
+# without one are hidden from the picker (e.g. prototypes / deep-dives).
+nmg:storyOrder a owl:DatatypeProperty ; rdfs:domain nmg:Story ; rdfs:range xsd:integer .
+
+# --- NEW: Block type for image pins (Atlas pin scenes) ---
+nmg:PinBlock a owl:Class ; rdfs:subClassOf nmg:Block .
+
+# --- NEW: polygon overlays (the Roman limes zones, the WW2 damage, …) ---
+# One type + edge for every conditionally-rendered polygon set. A MapState
+# points at the overlay it shows; nmg:overlayKey selects the frontend OverlayDef
+# (geometry + colours), and nmg:overlayLevel (reused) drives a cumulative reveal.
+nmg:PolygonOverlay a owl:Class .
+nmg:overlay a owl:ObjectProperty ; rdfs:domain nmg:MapState ; rdfs:range nmg:PolygonOverlay .
+nmg:overlayKey a owl:DatatypeProperty ; rdfs:domain nmg:PolygonOverlay ; rdfs:range xsd:string .
+
+# --- NEW: photo pins — a located image shown as a clickable map marker ---
+# A MapState lists its pins (nmg:photoPin). Each PhotoPin sits at a place
+# (nmg:atPlace), shows an image source (nmg:references) and its own caption
+# (schema:text); clicking the marker opens image + text (e.g. the Stadsmuur &
+# poorten Korfmacher drawings, each at its tower/gate).
+nmg:PhotoPin a owl:Class .
+nmg:photoPin a owl:ObjectProperty ; rdfs:domain nmg:MapState ; rdfs:range nmg:PhotoPin .
+nmg:atPlace a owl:ObjectProperty ; rdfs:domain nmg:PhotoPin ; rdfs:range nmg:Place .
+
+# --- NEW: fortification-ring overlay reveal year (Vestingwerken) ---
+nmg:fortLevel a owl:DatatypeProperty ; rdfs:domain nmg:MapState ; rdfs:range xsd:gYear .

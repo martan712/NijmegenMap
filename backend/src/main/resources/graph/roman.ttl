@@ -1,0 +1,125 @@
+# Atlas chapter: Bataven & Romeinen — Verhalen migration.
+# 10 segments across 3 threads: Prehistorie (2), Romeins Nijmegen (7),
+# Het einde van Romeins Nijmegen (1).
+@prefix nmg:    <https://nijmegenkaart.nl/ns#> .
+@prefix id:     <https://nijmegenkaart.nl/id/> .
+@prefix schema: <http://schema.org/> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+
+############################  STORY  ############################
+id:story_bataven a nmg:Story ;
+    rdfs:label "Bataven & Romeinen"@nl ;
+    nmg:introText "Nederland begint hier. Lang voor de stad woonden er al mensen bij de rivierovergang — en aan de Waal lag eeuwenlang de noordgrens van het Romeinse rijk: legerkampen op de heuvels, de Bataafse hoofdplaats en, onder keizer Trajanus, Ulpia Noviomagus, de oudste stad van Nederland."@nl ;
+    nmg:eraLabel "Romeinse tijd"@nl ;
+    nmg:representativeYear "1557"^^xsd:gYear ;
+    nmg:tag "romeins" ;
+    nmg:storyOrder 1 ;
+    nmg:hasSegment id:seg_pre_1 , id:seg_pre_2 ,
+                    id:seg_rom_1 , id:seg_rom_2 , id:seg_rom_3 , id:seg_rom_4 ,
+                    id:seg_rom_5 , id:seg_rom_6 , id:seg_rom_7 ,
+                    id:seg_end_1 .
+
+# --- Thread 1: Prehistorie ---
+
+# 1. Grafheuvels en urnenvelden
+id:seg_pre_1 a nmg:Segment ; nmg:order 1 ; nmg:tickLabel "Grafheuvels en urnenvelden" ;
+    nmg:mapState id:map_pre_1 ; nmg:hasBlock id:block_pre_1_1 , id:block_pre_1_2 .
+id:map_pre_1 a nmg:MapState ; nmg:baseYear "1557"^^xsd:gYear ;
+    nmg:focusPlace id:nijmegen_oost .
+id:block_pre_1_1 a nmg:NarrativeBlock ; nmg:order 1 ;
+    schema:text "Al lang voor de Romeinen woonden hier mensen. In Nijmegen-Oost liggen sporen uit het neolithicum tot de late bronstijd: grafheuvels en urnenvelden. De rivierovergang en de hoge stuwwal maakten deze plek al vroeg aantrekkelijk om te wonen."@nl .
+id:block_pre_1_2 a nmg:ImageBlock ; nmg:order 2 ; nmg:references id:src_pre_grafheuvel .
+
+# 2. De eerste Bataven
+id:seg_pre_2 a nmg:Segment ; nmg:order 2 ; nmg:tickLabel "De eerste Bataven" ;
+    nmg:mapState id:map_pre_2 ; nmg:hasBlock id:block_pre_2_1 , id:block_pre_2_2 .
+id:map_pre_2 a nmg:MapState ; nmg:baseYear "1557"^^xsd:gYear ;
+    nmg:focusPlace id:waterstraat .
+id:block_pre_2_1 a nmg:NarrativeBlock ; nmg:order 1 ;
+    schema:text "Rond 50 v.Chr. vestigden zich de eerste Bataven in het gebied; de Waterstraat in de benedenstad gaat terug op een van de oudste wegen van Nederland. Wanneer kort daarna de Romeinen arriveren, treffen ze hier dus al bewoning aan — het begin van Romeins Nijmegen."@nl .
+id:block_pre_2_2 a nmg:ImageBlock ; nmg:order 2 ; nmg:references id:src_pre_bataven .
+
+# --- Thread 2: Romeins Nijmegen ---
+
+# 3. De rand van het rijk (no pin — limes overlay only)
+id:seg_rom_1 a nmg:Segment ; nmg:order 3 ; nmg:tickLabel "De rand van het rijk" ;
+    nmg:mapState id:map_rom_1 ; nmg:hasBlock id:block_rom_1_1 .
+id:map_rom_1 a nmg:MapState ; nmg:baseYear "1557"^^xsd:gYear ; nmg:overlay id:overlay_limes ;
+    nmg:focusPlace id:hunerberg .
+id:block_rom_1_1 a nmg:NarrativeBlock ; nmg:order 1 ;
+    schema:text "Hier liep eeuwenlang de noordgrens van het Romeinse rijk: de limes. De archeologiekaart van de gemeente toont de kern- en bufferzone van werelderfgoed Neder-Germaanse Limes — sinds 2021 op de UNESCO-lijst — dwars door het oosten van Nijmegen."@nl .
+
+# 4. Het eerste legerkamp
+id:seg_rom_2 a nmg:Segment ; nmg:order 4 ; nmg:tickLabel "Het eerste legerkamp" ;
+    nmg:mapState id:map_rom_2 ; nmg:hasBlock id:block_rom_2_1 , id:block_rom_2_2 .
+id:map_rom_2 a nmg:MapState ; nmg:baseYear "1557"^^xsd:gYear ; nmg:overlay id:overlay_limes ;
+    nmg:focusPlace id:hunerberg .
+id:block_rom_2_1 a nmg:NarrativeBlock ; nmg:order 1 ;
+    schema:text "Rond 19 v.Chr. legde het Romeinse leger onder veldheer Drusus een groot legerkamp aan op de Hunerberg — tijdelijk tot twee legioenen, zo'n 12.000 man. Het is het begin van de Romeinse aanwezigheid bij Nijmegen."@nl .
+id:block_rom_2_2 a nmg:ImageBlock ; nmg:order 2 ; nmg:references id:src_rom_hunerberg .
+
+# 5. Commandopost op het Kops Plateau
+id:seg_rom_3 a nmg:Segment ; nmg:order 5 ; nmg:tickLabel "Commandopost op het Kops Plateau" ;
+    nmg:mapState id:map_rom_3 ; nmg:hasBlock id:block_rom_3_1 , id:block_rom_3_2 .
+id:map_rom_3 a nmg:MapState ; nmg:baseYear "1557"^^xsd:gYear ; nmg:overlay id:overlay_limes ;
+    nmg:focusPlace id:kops_plateau .
+id:block_rom_3_1 a nmg:NarrativeBlock ; nmg:order 1 ;
+    schema:text "Rond 12 v.Chr. verrees op het Kops Plateau een kleiner fort met enkele monumentaal gebouwde woningen — vermoedelijk een centrale commandopost van het Romeinse leger aan de grens."@nl .
+id:block_rom_3_2 a nmg:ImageBlock ; nmg:order 2 ; nmg:references id:src_rom_kops .
+
+# 6. Oppidum Batavorum
+id:seg_rom_4 a nmg:Segment ; nmg:order 6 ; nmg:tickLabel "Oppidum Batavorum" ;
+    nmg:mapState id:map_rom_4 ; nmg:hasBlock id:block_rom_4_1 , id:block_rom_4_2 .
+id:map_rom_4 a nmg:MapState ; nmg:baseYear "1557"^^xsd:gYear ; nmg:overlay id:overlay_limes ;
+    nmg:focusPlace id:valkhof .
+id:block_rom_4_1 a nmg:NarrativeBlock ; nmg:order 1 ;
+    schema:text "Naast de militaire kampen groeide bij het Valkhof een burgernederzetting: Oppidum Batavorum, de hoofdplaats van het district van de Bataven."@nl .
+id:block_rom_4_2 a nmg:ImageBlock ; nmg:order 2 ; nmg:references id:src_rom_oppidum .
+
+# 7. De Bataafse Opstand
+id:seg_rom_5 a nmg:Segment ; nmg:order 7 ; nmg:tickLabel "De Bataafse Opstand" ;
+    nmg:mapState id:map_rom_5 ; nmg:hasBlock id:block_rom_5_1 , id:block_rom_5_2 .
+id:map_rom_5 a nmg:MapState ; nmg:baseYear "1557"^^xsd:gYear ; nmg:overlay id:overlay_limes ;
+    nmg:focusPlace id:valkhof .
+id:block_rom_5_1 a nmg:NarrativeBlock ; nmg:order 1 ;
+    schema:text "In het jaar 70 ging Oppidum Batavorum in vlammen op tijdens de opstand van de Bataven onder Julius Civilis. Daarna legerde het Tiende Legioen (Legio X Gemina) zich bij Nijmegen."@nl .
+id:block_rom_5_2 a nmg:ImageBlock ; nmg:order 2 ; nmg:references id:src_rom_civilis .
+
+# 8. Ulpia Noviomagus, oudste stad
+id:seg_rom_6 a nmg:Segment ; nmg:order 8 ; nmg:tickLabel "Ulpia Noviomagus, oudste stad" ;
+    nmg:mapState id:map_rom_6 ; nmg:hasBlock id:block_rom_6_1 , id:block_rom_6_2 .
+id:map_rom_6 a nmg:MapState ; nmg:baseYear "1557"^^xsd:gYear ;
+    nmg:focusPlace id:ulpia .
+id:block_rom_6_1 a nmg:NarrativeBlock ; nmg:order 1 ;
+    schema:text "Na de opstand verrees in het westen — het huidige Waterkwartier — een geheel nieuwe stad: Ulpia Noviomagus Batavorum. Onder keizer Trajanus kreeg ze omstreeks 100 marktrecht; daaraan ontleent Nijmegen zijn titel 'oudste stad van Nederland'."@nl .
+id:block_rom_6_2 a nmg:ImageBlock ; nmg:order 2 ; nmg:references id:src_rom_ulpia .
+
+# 9. Het zwaartepunt verschuift (arrows, no pin)
+id:seg_rom_7 a nmg:Segment ; nmg:order 9 ; nmg:tickLabel "Het zwaartepunt verschuift" ;
+    nmg:mapState id:map_rom_7 ; nmg:hasBlock id:block_rom_7_1 .
+id:map_rom_7 a nmg:MapState ; nmg:baseYear "1557"^^xsd:gYear ;
+    nmg:focusPlace id:hunerberg , id:kops_plateau , id:valkhof , id:ulpia ;
+    nmg:arrow id:arrow_rom_1 , id:arrow_rom_2 , id:arrow_rom_3 , id:arrow_rom_4 .
+id:arrow_rom_1 a nmg:Arrow ; nmg:arrowFrom id:hunerberg ; nmg:arrowTo id:kops_plateau ;
+    nmg:arrowLabel "19 v.Chr." ; nmg:arrowCurve 0.18 .
+id:arrow_rom_2 a nmg:Arrow ; nmg:arrowFrom id:kops_plateau ; nmg:arrowTo id:valkhof ;
+    nmg:arrowLabel "12 v.Chr." ; nmg:arrowCurve 0.18 .
+id:arrow_rom_3 a nmg:Arrow ; nmg:arrowFrom id:valkhof ; nmg:arrowTo id:ulpia ;
+    nmg:arrowLabel "na 70" ; nmg:arrowCurve 0.22 .
+id:arrow_rom_4 a nmg:Arrow ; nmg:arrowFrom id:ulpia ; nmg:arrowTo id:valkhof ;
+    nmg:arrowLabel "± 300" ; nmg:arrowCurve -0.22 .
+id:block_rom_7_1 a nmg:NarrativeBlock ; nmg:order 1 ;
+    schema:text "Vier eeuwen lang verschoof het hart van Romeins Nijmegen over het landschap: van de legerkampen op de Hunerberg en het Kops Plateau naar de burgerstad bij het Valkhof, na de opstand westwaarts naar Ulpia Noviomagus, en rond 300 weer terug naar het Valkhof."@nl .
+
+# --- Thread 3: Het einde van Romeins Nijmegen ---
+
+# 10. Het laat-Romeinse castellum
+id:seg_end_1 a nmg:Segment ; nmg:order 10 ; nmg:tickLabel "Het laat-Romeinse castellum" ;
+    nmg:mapState id:map_end_1 ; nmg:hasBlock id:block_end_1_1 , id:block_end_1_2 .
+id:map_end_1 a nmg:MapState ; nmg:baseYear "1557"^^xsd:gYear ; nmg:overlay id:overlay_limes ;
+    nmg:focusPlace id:valkhof .
+id:block_end_1_1 a nmg:NarrativeBlock ; nmg:order 1 ;
+    schema:text "Rond 270–300 raakte Noviomagus in het westen verlaten en trok de bevolking terug naar het Valkhof. Daar bouwden de Romeinen een versterkt castellum; omstreeks 370 kreeg het onder keizer Valentinianus een stenen muur. De grens verschoof van de Rijn naar de Waal — tot de Romeinen in de 5e eeuw definitief vertrokken."@nl .
+id:block_end_1_2 a nmg:ImageBlock ; nmg:order 2 ; nmg:references id:src_rom_castellum .

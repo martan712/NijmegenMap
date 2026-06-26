@@ -1,0 +1,54 @@
+# Canonical place definitions — the single source of truth for every located
+# point used by the chapters. Chapters reference these ids (nmg:focusPlace,
+# nmg:arrowFrom/To, nmg:occurredAt); they no longer define their own places.
+# Coordinates are the agreed values; fix them HERE if one is wrong.
+@prefix nmg:  <https://nijmegenkaart.nl/ns#> .
+@prefix id:   <https://nijmegenkaart.nl/id/> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix wd:   <http://www.wikidata.org/entity/> .
+
+#####################  OLD TOWN / CENTRE  #####################
+id:valkhof a nmg:Place ; rdfs:label "Valkhof"@nl ; nmg:lat 51.84782 ; nmg:long 5.87026 .
+id:grote_markt a nmg:Place ; rdfs:label "Grote Markt"@nl ; nmg:lat 51.84775 ; nmg:long 5.86505 .
+id:sint_stevenskerk a nmg:Place ; rdfs:label "Sint-Stevenskerk"@nl ; nmg:lat 51.84799 ; nmg:long 5.8649 .
+id:stadhuis a nmg:Building ; rdfs:label "Stadhuis"@nl ; nmg:lat 51.84715 ; nmg:long 5.86555 .
+id:broerstraat a nmg:Place ; rdfs:label "Broerstraat"@nl ; nmg:lat 51.8461 ; nmg:long 5.8636 .
+id:stevenskerkhof a nmg:Place ; rdfs:label "Stevenskerkhof"@nl ; nmg:lat 51.8478 ; nmg:long 5.8651 .
+id:marienburg a nmg:Place ; rdfs:label "Mariënburg"@nl ; nmg:lat 51.8447 ; nmg:long 5.8639 .
+id:waalkade a nmg:Place ; rdfs:label "Waalkade"@nl ; nmg:lat 51.85045 ; nmg:long 5.8645 .
+id:binnenstad a nmg:Place ; rdfs:label "Verwoeste binnenstad"@nl ; nmg:lat 51.8478 ; nmg:long 5.8635 .
+id:joods_monument a nmg:Place ; rdfs:label "Joods monument"@nl ; nmg:lat 51.8458 ; nmg:long 5.8628 .
+id:centrum a nmg:Place ; rdfs:label "Centrum"@nl ; nmg:lat 51.848 ; nmg:long 5.865 .
+
+#####################  ROMAN  #####################
+id:nijmegen_oost a nmg:Place ; rdfs:label "Nijmegen-Oost"@nl ; nmg:lat 51.8385 ; nmg:long 5.887 .
+id:waterstraat a nmg:Place ; rdfs:label "Waterstraat"@nl ; nmg:lat 51.85 ; nmg:long 5.8632 .
+id:hunerberg a nmg:Place ; rdfs:label "Hunerberg"@nl ; nmg:lat 51.8419 ; nmg:long 5.8836 .
+id:kops_plateau a nmg:Place ; rdfs:label "Kops Plateau"@nl ; nmg:lat 51.83783 ; nmg:long 5.89225 .
+id:ulpia a nmg:Place ; rdfs:label "Ulpia Noviomagus Batavorum"@nl ; nmg:lat 51.85363 ; nmg:long 5.84522 .
+
+#####################  FORTRESS / GATES (Vestingstad)  #####################
+id:schipbrug_lent a nmg:Place ; rdfs:label "Schipbrug naar Lent"@nl ; nmg:lat 51.8507 ; nmg:long 5.866 .
+id:kronenburgertoren a nmg:Place ; rdfs:label "Kronenburgertoren"@nl ; nmg:lat 51.846 ; nmg:long 5.862 .
+id:hezelpoort a nmg:Place ; rdfs:label "Hezelpoort"@nl ; nmg:lat 51.847 ; nmg:long 5.858 .
+id:molenpoort a nmg:Place ; rdfs:label "Molenpoort"@nl ; nmg:lat 51.848 ; nmg:long 5.864 .
+id:belvedere a nmg:Place ; rdfs:label "Belvédère"@nl ; nmg:lat 51.843 ; nmg:long 5.878 .
+
+#####################  WW2  #####################
+id:waalbrug a nmg:Bridge ; rdfs:label "Waalbrug"@nl ; nmg:lat 51.857 ; nmg:long 5.866 ; owl:sameAs wd:Q1798831 .
+id:annastraat a nmg:Place ; rdfs:label "Sint Annastraat"@nl ; nmg:lat 51.838 ; nmg:long 5.846 .
+id:nieuwe_synagoge a nmg:Building ; rdfs:label "Nieuwe Synagoge"@nl ; nmg:lat 51.8466 ; nmg:long 5.8612 .
+id:landingszone a nmg:Place ; rdfs:label "Landingszone (Groesbeekse heuvels)"@nl ; nmg:lat 51.812 ; nmg:long 5.905 .
+id:elektriciteitscentrale a nmg:Building ; rdfs:label "PGEM-elektriciteitscentrale (zuidoever)"@nl ; nmg:lat 51.8548 ; nmg:long 5.8495 .
+id:noordoever a nmg:Place ; rdfs:label "Noordoever (landingsplek)"@nl ; nmg:lat 51.8608 ; nmg:long 5.852 .
+
+#####################  MODERN / WAALSPRONG  #####################
+id:heyendaal a nmg:Place ; rdfs:label "Heyendaal (Radboud Universiteit)"@nl ; nmg:lat 51.8192 ; nmg:long 5.8661 .
+id:waalsprong a nmg:Place ; rdfs:label "Waalsprong"@nl ; nmg:lat 51.87 ; nmg:long 5.885 .
+id:dukenburg a nmg:Place ; rdfs:label "Dukenburg"@nl ; nmg:lat 51.823 ; nmg:long 5.802 .
+id:lindenholt a nmg:Place ; rdfs:label "Lindenholt"@nl ; nmg:lat 51.838 ; nmg:long 5.792 .
+
+#####################  REGIONAL (Hanze trade routes)  #####################
+id:keulen a nmg:Place ; rdfs:label "Keulen"@nl ; nmg:lat 50.9375 ; nmg:long 6.9603 .
+id:holland a nmg:Place ; rdfs:label "Holland & de zee"@nl ; nmg:lat 51.96 ; nmg:long 4.25 .

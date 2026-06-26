@@ -1,0 +1,14 @@
+# Shared polygon-overlay instances. A MapState references one of these via
+# nmg:overlay; the frontend maps nmg:overlayKey → its OverlayDef (the GeoJSON
+# source + per-category colours). See src/config/overlays.ts.
+@prefix nmg:  <https://nijmegenkaart.nl/ns#> .
+@prefix id:   <https://nijmegenkaart.nl/id/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+id:overlay_limes a nmg:PolygonOverlay ;
+    nmg:overlayKey "limes" ;
+    rdfs:label "Neder-Germaanse Limes (kern- en bufferzone)"@nl .
+
+id:overlay_ww2 a nmg:PolygonOverlay ;
+    nmg:overlayKey "ww2" ;
+    rdfs:label "Oorlogsschade 1944"@nl .
