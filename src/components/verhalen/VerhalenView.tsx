@@ -435,7 +435,6 @@ export function VerhalenView({
           );
         })}
 
-        <div className={styles.spacer} />
       </div>
 
       <Timeline segments={segments} activeSeg={activeSeg} onPick={onPick} />
