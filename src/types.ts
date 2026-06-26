@@ -36,6 +36,17 @@ export interface ScenePin {
   credit?: string;
 }
 
+/** One Stolperstein (memorial stone) marker: a victim at a located address. */
+export interface MemorialPoint {
+  lat: number;
+  lng: number;
+  name: string;
+  lifespan?: string;
+  address?: string;
+  inscription?: string;
+  image?: string;
+}
+
 /** One directed, curved arrow between two [lat, lon] points. */
 export interface MovementArrow {
   from: [number, number];
@@ -105,6 +116,8 @@ export interface Scene {
    * Omitted = default to `ww2` (each Atlas scene introduces its own level).
    */
   ww2Highlight?: number | null;
+  /** Stolpersteine memorial markers (the Deportatie segment's memorial map). */
+  memorials?: MemorialPoint[];
 }
 
 /** A datasource that a thread's scenes are generated from at runtime. */

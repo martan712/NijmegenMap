@@ -10,6 +10,17 @@ export interface Segment {
   date?: string | null;
 }
 
+export interface Stolperstein {
+  s: string; // IRI
+  name: string;
+  lat: string;
+  long: string;
+  lifespan?: string | null;
+  address?: string | null;
+  inscription?: string | null;
+  image?: string | null;
+}
+
 export interface Block {
   block: string; // IRI
   type: string; // IRI, e.g. .../ns#GalleryBlock

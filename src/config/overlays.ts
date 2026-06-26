@@ -18,6 +18,7 @@ export const PANES = {
   fort: 458,
   wall: 459,
   wo2: 460,
+  memorial: 470,
   spy: 500,
 } as const;
 

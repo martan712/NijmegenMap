@@ -1,11 +1,85 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { MapEngine } from "../../services/MapEngine";
+import type { BoundsTuple, MemorialPoint } from "../../types";
 import { useVerhaal } from "../../hooks/useVerhaal";
 import { sceneFromMapRows } from "../../verhalen/sceneFromMap";
-import { localName, mediaUrl } from "../../verhalen/api";
+import { fetchStolpersteine, localName, mediaUrl } from "../../verhalen/api";
 import type { Block } from "../../verhalen/types";
 import { Timeline } from "./Timeline";
 import styles from "./verhalen.module.css";
+
+/** The fate lines of an inscription (everything after the "GEB. jjjj" line). */
+function fateOf(inscription?: string): string {
+  if (!inscription) return "";
+  const parts = inscription.split(" / ");
+  const gi = parts.findIndex((p) => /^GEB\./i.test(p));
+  return (gi >= 0 ? parts.slice(gi + 1) : parts).join(" · ");
+}
+
+/**
+ * The Stolpersteine "memorial wall": a searchable, capped-height list of victims
+ * (155 is too many to dump in full). Type to filter by name or street; click a
+ * name to fly the companion map to that stone. The fate shows on hover.
+ */
+function MemorialWall({
+  points,
+  onSelect,
+}: {
+  points: MemorialPoint[];
+  onSelect: (p: MemorialPoint) => void;
+}) {
+  const [q, setQ] = useState("");
+  const needle = q.trim().toLowerCase();
+  const shown = needle
+    ? points.filter(
+        (p) =>
+          p.name.toLowerCase().includes(needle) ||
+          (p.address ?? "").toLowerCase().includes(needle),
+      )
+    : points;
+  return (
+    <div className={styles.memorial}>
+      <div className={styles.memorialHead}>
+        <span className={styles.segTick}>Struikelstenen</span>
+        <h2>{points.length} namen</h2>
+        <p className={styles.memorialLede}>
+          Voor elk weggevoerd slachtoffer ligt een struikelsteen bij hun laatste
+          woning. Zoek een naam of klik er een om de steen op de kaart te tonen.
+        </p>
+      </div>
+      <div className={styles.memorialTools}>
+        <input
+          className={styles.memorialSearch}
+          type="search"
+          placeholder="Zoek op naam of straat…"
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+        />
+        <span className={styles.memorialCount}>
+          {shown.length} / {points.length}
+        </span>
+      </div>
+      <div className={styles.memorialGrid}>
+        {shown.map((p) => (
+          <button
+            key={`${p.name}-${p.address ?? ""}`}
+            type="button"
+            className={styles.victim}
+            title={fateOf(p.inscription)}
+            onClick={() => onSelect(p)}
+          >
+            <span className={styles.victimName}>{p.name}</span>
+            {p.lifespan && <span className={styles.victimYears}>{p.lifespan}</span>}
+          </button>
+        ))}
+        {shown.length === 0 && <p className={styles.memorialEmpty}>Geen naam gevonden.</p>}
+      </div>
+      <p className={styles.memorialSource}>
+        Bron: Wikipedia, “Lijst van Stolpersteine in Nijmegen” (CC BY-SA) · coördinaten via PDOK
+      </p>
+    </div>
+  );
+}
 
 type Frame = "full" | "companion";
 
@@ -88,6 +162,7 @@ export function VerhalenView({
   const columnRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
   const [activeSeg, setActiveSeg] = useState<string | null>(null);
+  const [memorials, setMemorials] = useState<MemorialPoint[]>([]);
 
   const segRef = useRef<number>(-1);
   const busyUntil = useRef(0);
@@ -105,6 +180,38 @@ export function VerhalenView({
     return row ? Number(row.overlay) : 0;
   }, [segments, content]);
 
+  // Stolpersteine: fetched once; shown on the Deportatie segment's companion map.
+  useEffect(() => {
+    let off = false;
+    fetchStolpersteine()
+      .then((rows) => {
+        if (off) return;
+        setMemorials(rows.map((r) => ({
+          lat: Number(r.lat), lng: Number(r.long), name: r.name,
+          lifespan: r.lifespan ?? undefined, address: r.address ?? undefined,
+          inscription: r.inscription ?? undefined, image: r.image ?? undefined,
+        })));
+      })
+      .catch(() => {}); // memorial layer is optional; ignore if backend lacks it
+    return () => { off = true; };
+  }, []);
+
+  // Which segment is the Deportatie one (gets the memorial map + victim wall).
+  const isMemorialSeg = useCallback(
+    (idx: number) => localName(segments[idx]?.event ?? "") === "deportatie",
+    [segments],
+  );
+  const memorialBounds = useMemo<BoundsTuple | null>(() => {
+    if (memorials.length === 0) return null;
+    const lats = memorials.map((p) => p.lat);
+    const lngs = memorials.map((p) => p.lng);
+    const pad = 0.002;
+    return [
+      [Math.min(...lats) - pad, Math.min(...lngs) - pad],
+      [Math.max(...lats) + pad, Math.max(...lngs) + pad],
+    ];
+  }, [memorials]);
+
   // Fly the companion map to a segment's state.
   const goToSegment = useCallback((idx: number, animate: boolean) => {
     if (!engine || idx < 0 || idx >= segments.length) return;
@@ -121,11 +228,16 @@ export function VerhalenView({
       const cur = overlayAt(idx);
       const prev = idx > 0 ? overlayAt(idx - 1) : 0;
       scene.ww2Highlight = cur > prev ? cur : null;
+      // Deportatie: turn the companion map into the city-wide memorial map.
+      if (isMemorialSeg(idx) && memorialBounds) {
+        scene.memorials = memorials;
+        scene.focus = memorialBounds;
+      }
       engine.applyScene(scene);
       busyUntil.current = performance.now() + 950; // cover the map flight
       window.setTimeout(() => engine.map.invalidateSize({ animate: false }), animate ? 480 : 40);
     }
-  }, [engine, segments, content, overlayAt]);
+  }, [engine, segments, content, overlayAt, isMemorialSeg, memorialBounds, memorials]);
 
   // Initial: show the first segment once content is ready.
   useEffect(() => {
@@ -245,6 +357,13 @@ export function VerhalenView({
     [segments, navigateTo],
   );
 
+  // Click a victim card → fly the companion map to that stone and open its popup.
+  const onSelectVictim = useCallback((p: MemorialPoint) => {
+    if (!engine) return;
+    engine.map.flyTo([p.lat, p.lng], 18, { duration: 0.6 });
+    engine.memorials.highlight(p);
+  }, [engine]);
+
   // Arrow keys step between segments (↑/← previous, ↓/→ next).
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -307,6 +426,11 @@ export function VerhalenView({
                   <BlockView block={b} />
                 </div>
               ))}
+              {isMemorialSeg(si) && memorials.length > 0 && (
+                <div data-block data-seg={si} className={styles.block}>
+                  <MemorialWall points={memorials} onSelect={onSelectVictim} />
+                </div>
+              )}
             </section>
           );
         })}

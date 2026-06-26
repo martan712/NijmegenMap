@@ -8,6 +8,7 @@ import { PinManager } from "./PinManager";
 import { FlowManager } from "./FlowManager";
 import { WallManager } from "./WallManager";
 import { WO2Manager } from "./WO2Manager";
+import { MemorialManager } from "./MemorialManager";
 import { SpyManager, type LensRefs } from "./SpyManager";
 import { entryByYear } from "../lib/manifest";
 import type { Chapter, ManifestEntry, Scene } from "../types";
@@ -29,6 +30,7 @@ export class MapEngine {
   readonly flow: FlowManager;
   readonly wall: WallManager;
   readonly wo2: WO2Manager;
+  readonly memorials: MemorialManager;
   readonly spy: SpyManager;
 
   private service: MapService;
@@ -46,6 +48,7 @@ export class MapEngine {
     this.flow = new FlowManager(this.map);
     this.wall = new WallManager(this.map);
     this.wo2 = new WO2Manager(this.map);
+    this.memorials = new MemorialManager(this.map);
     this.spy = new SpyManager(this.map, lens);
   }
 
@@ -93,6 +96,7 @@ export class MapEngine {
     // the segment that first introduces it.
     const ww2Highlight = scene.ww2Highlight === undefined ? scene.ww2 ?? null : scene.ww2Highlight;
     this.wo2.reveal(scene.ww2 ?? null, ww2Highlight);
+    this.memorials.show(scene.memorials ?? null);
   }
 
   /** Show a chapter's overview: representative base map, no story overlays. */
@@ -117,6 +121,7 @@ export class MapEngine {
     this.flow.show(null);
     this.wall.setVisible(false);
     this.wo2.reveal(null);
+    this.memorials.show(null);
   }
 
   setOpacity(opacity: number): void {
