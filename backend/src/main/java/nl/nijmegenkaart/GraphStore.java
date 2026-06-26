@@ -37,8 +37,26 @@ public class GraphStore {
 
     public GraphStore() {
         load("/graph/ontology.ttl");
+        load("/graph/overlays.ttl");
+        load("/graph/places.ttl");
+        load("/graph/sources.ttl");
         load("/graph/ww2.ttl");
         load("/graph/stolpersteine.ttl");
+        // Chapter instance files — created by other agents in the migration pipeline.
+        // Non-fatal: if a file doesn't exist yet the graph simply won't have those triples.
+        loadOptional("/graph/roman.ttl");
+        loadOptional("/graph/middeleeuwen.ttl");
+        loadOptional("/graph/vesting.ttl");
+        loadOptional("/graph/wederopbouw.ttl");
+    }
+
+    private void loadOptional(String classpathResource) {
+        try (InputStream in = getClass().getResourceAsStream(classpathResource)) {
+            if (in == null) return;
+            RDFDataMgr.read(model, in, Lang.TURTLE);
+        } catch (Exception e) {
+            System.err.println("Warning: could not load " + classpathResource + ": " + e.getMessage());
+        }
     }
 
     private void load(String classpathResource) {
@@ -114,22 +132,39 @@ public class GraphStore {
     /** Companion-map state for a segment: focus places + arrows (Place->Place). */
     public List<Map<String, Object>> map(String segId) {
         return select("""
-            SELECT ?kind ?place ?lat ?long ?label ?year ?overlay
-                   ?fromLat ?fromLong ?toLat ?toLong ?arrowLabel ?curve WHERE {
+            SELECT ?kind ?place ?lat ?long ?label ?year ?overlay ?overlayKey ?fort
+                   ?fromLat ?fromLong ?toLat ?toLong ?arrowLabel ?curve
+                   ?image ?credit ?text WHERE {
               id:%s nmg:mapState ?m .
               OPTIONAL { ?m nmg:baseYear ?year }
               OPTIONAL { ?m nmg:overlayLevel ?overlay }
-              {
-                ?m nmg:focusPlace ?place . ?place nmg:lat ?lat ; nmg:long ?long .
-                OPTIONAL { ?place rdfs:label ?label }
-                BIND("place" AS ?kind)
-              } UNION {
-                ?m nmg:arrow ?a .
-                ?a nmg:arrowFrom ?f ; nmg:arrowTo ?t ;
-                   nmg:arrowLabel ?arrowLabel ; nmg:arrowCurve ?curve .
-                ?f nmg:lat ?fromLat ; nmg:long ?fromLong .
-                ?t nmg:lat ?toLat ; nmg:long ?toLong .
-                BIND("arrow" AS ?kind)
+              OPTIONAL { ?m nmg:fortLevel ?fort }
+              OPTIONAL { ?m nmg:overlay ?ov . ?ov nmg:overlayKey ?overlayKey }
+              # Places/arrows/photo-pins are OPTIONAL so a base-map-only state (e.g.
+              # a city-growth scene with no pin) still returns one row carrying its
+              # baseYear + overlayLevel — the frontend needs those even with no pin.
+              OPTIONAL {
+                {
+                  ?m nmg:focusPlace ?place . ?place nmg:lat ?lat ; nmg:long ?long .
+                  OPTIONAL { ?place rdfs:label ?label }
+                  BIND("place" AS ?kind)
+                } UNION {
+                  ?m nmg:arrow ?a .
+                  ?a nmg:arrowFrom ?f ; nmg:arrowTo ?t ;
+                     nmg:arrowLabel ?arrowLabel ; nmg:arrowCurve ?curve .
+                  ?f nmg:lat ?fromLat ; nmg:long ?fromLong .
+                  ?t nmg:lat ?toLat ; nmg:long ?toLong .
+                  BIND("arrow" AS ?kind)
+                } UNION {
+                  ?m nmg:photoPin ?pin . ?pin nmg:atPlace ?place .
+                  ?place nmg:lat ?lat ; nmg:long ?long .
+                  OPTIONAL { ?place rdfs:label ?label }
+                  OPTIONAL { ?pin schema:text ?text }
+                  OPTIONAL { ?pin nmg:references ?src .
+                             ?src nmg:mediaPath ?image .
+                             OPTIONAL { ?src rdfs:label ?credit } }
+                  BIND("photopin" AS ?kind)
+                }
               }
             }""".formatted(segId));
     }
@@ -158,5 +193,39 @@ public class GraphStore {
               OPTIONAL { ?src dct:license ?license }
               OPTIONAL { ?src nmg:rightsClass ?rights }
             } ORDER BY ?label""".formatted(storyId));
+    }
+
+    // ---- Story listing / metadata ------------------------------------------------
+
+    /**
+     * Stories for the picker, chronologically ordered. Only stories with an
+     * explicit nmg:storyOrder appear here (so prototype/duplicate stories without
+     * one are hidden). ?story is the bare resource id the frontend navigates by.
+     */
+    public List<Map<String, Object>> stories() {
+        return select("""
+            SELECT ?story ?label ?intro ?era ?year ?tag ?ord WHERE {
+              ?id a nmg:Story ; nmg:storyOrder ?ord .
+              OPTIONAL { ?id rdfs:label ?label }
+              OPTIONAL { ?id nmg:introText ?intro }
+              OPTIONAL { ?id nmg:eraLabel ?era }
+              OPTIONAL { ?id nmg:representativeYear ?year }
+              OPTIONAL { ?id nmg:tag ?tag }
+              BIND(STRAFTER(STR(?id), "https://nijmegenkaart.nl/id/") AS ?story)
+            } ORDER BY ?ord""");
+    }
+
+    /** Metadata for a single story. */
+    public Map<String, Object> storyMeta(String storyId) {
+        List<Map<String, Object>> rows = select("""
+            SELECT ?label ?intro ?era ?year ?tag WHERE {
+              VALUES ?s { id:%s }
+              OPTIONAL { ?s rdfs:label ?label }
+              OPTIONAL { ?s nmg:introText ?intro }
+              OPTIONAL { ?s nmg:eraLabel ?era }
+              OPTIONAL { ?s nmg:representativeYear ?year }
+              OPTIONAL { ?s nmg:tag ?tag }
+            }""".formatted(storyId));
+        return rows.isEmpty() ? Map.of() : rows.get(0);
     }
 }

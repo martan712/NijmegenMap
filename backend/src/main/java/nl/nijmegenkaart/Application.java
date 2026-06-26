@@ -38,6 +38,12 @@ public class Application {
         app.get("/api/stolpersteine", ctx ->
             ctx.json(store.stolpersteine()));
 
+        // Story listing & metadata
+        app.get("/api/stories", ctx ->
+            ctx.json(store.stories()));
+        app.get("/api/stories/{id}/meta", ctx ->
+            ctx.json(store.storyMeta(ctx.pathParam("id"))));
+
         // Generic SPARQL SELECT (POST the query as the body)
         app.post("/api/sparql", ctx ->
             ctx.json(store.select(ctx.body())));
