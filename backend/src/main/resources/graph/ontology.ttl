@@ -1,0 +1,85 @@
+# NijmegenMap ontology (v0.1) — domain + provenance + narrative model.
+# Reuses schema.org / CIDOC-CRM / PROV-O / CITO / Dublin Core; Wikidata via owl:sameAs.
+@prefix nmg:   <https://nijmegenkaart.nl/ns#> .
+@prefix schema:<http://schema.org/> .
+@prefix crm:   <http://www.cidoc-crm.org/cidoc-crm/> .
+@prefix prov:  <http://www.w3.org/ns/prov#> .
+@prefix cito:  <http://purl.org/spar/cito/> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+# 1. DOMAIN CLASSES
+nmg:Event a owl:Class ; rdfs:subClassOf schema:Event , crm:E5_Event ; rdfs:label "Historische gebeurtenis"@nl .
+nmg:Person a owl:Class ; rdfs:subClassOf schema:Person , crm:E21_Person ; rdfs:label "Persoon"@nl .
+nmg:Place a owl:Class ; rdfs:subClassOf schema:Place , crm:E53_Place ; rdfs:label "Plaats"@nl .
+nmg:Building a owl:Class ; rdfs:subClassOf nmg:Place .
+nmg:Bridge a owl:Class ; rdfs:subClassOf nmg:Place .
+nmg:Organization a owl:Class ; rdfs:subClassOf schema:Organization , crm:E74_Group ; rdfs:label "Organisatie"@nl .
+nmg:MilitaryUnit a owl:Class ; rdfs:subClassOf nmg:Organization ; rdfs:label "Militaire eenheid"@nl .
+
+# Sources & verbatim content (provenance core)
+nmg:Source a owl:Class ; rdfs:subClassOf schema:CreativeWork , crm:E31_Document , prov:Entity ; rdfs:label "Bron"@nl .
+nmg:Diary a owl:Class ; rdfs:subClassOf nmg:Source .
+nmg:Photograph a owl:Class ; rdfs:subClassOf nmg:Source , schema:Photograph .
+nmg:AudioRecording a owl:Class ; rdfs:subClassOf nmg:Source , schema:AudioObject .
+nmg:ArchivalRecord a owl:Class ; rdfs:subClassOf nmg:Source .
+nmg:Book a owl:Class ; rdfs:subClassOf nmg:Source , schema:Book .
+
+nmg:ContentUnit a owl:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "Bronfragment (woordelijk)"@nl .
+nmg:Quote a owl:Class ; rdfs:subClassOf nmg:ContentUnit .
+nmg:Transcript a owl:Class ; rdfs:subClassOf nmg:ContentUnit .
+nmg:Scan a owl:Class ; rdfs:subClassOf nmg:ContentUnit .
+nmg:Clip a owl:Class ; rdfs:subClassOf nmg:ContentUnit .
+
+# 2. NARRATIVE / STORY MODEL
+nmg:Story a owl:Class ; rdfs:subClassOf schema:CreativeWork ; rdfs:label "Verhaallijn"@nl .
+nmg:Segment a owl:Class ; rdfs:label "Segment (timeline-stap)"@nl .
+nmg:Block a owl:Class ; rdfs:label "Inhoudsblok"@nl .
+nmg:NarrativeBlock a owl:Class ; rdfs:subClassOf nmg:Block .
+nmg:QuoteBlock a owl:Class ; rdfs:subClassOf nmg:Block .
+nmg:DocumentBlock a owl:Class ; rdfs:subClassOf nmg:Block .
+nmg:AudioBlock a owl:Class ; rdfs:subClassOf nmg:Block .
+nmg:ImageBlock a owl:Class ; rdfs:subClassOf nmg:Block .
+nmg:GalleryBlock a owl:Class ; rdfs:subClassOf nmg:Block .
+nmg:MapState a owl:Class ; rdfs:label "Kaarttoestand"@nl .
+nmg:Arrow a owl:Class ; rdfs:label "Bewegingspijl"@nl .
+
+# 3. OBJECT PROPERTIES
+nmg:occurredAt a owl:ObjectProperty ; rdfs:subPropertyOf schema:location ; rdfs:domain nmg:Event ; rdfs:range nmg:Place .
+nmg:hadParticipant a owl:ObjectProperty ; rdfs:subPropertyOf schema:participant .
+nmg:partOf a owl:ObjectProperty ; rdfs:subPropertyOf schema:superEvent .
+nmg:locatedIn a owl:ObjectProperty ; rdfs:subPropertyOf schema:containedInPlace .
+nmg:documents a owl:ObjectProperty ; rdfs:label "documenteert"@nl .
+nmg:depicts a owl:ObjectProperty ; rdfs:subPropertyOf schema:about .
+nmg:authoredBy a owl:ObjectProperty ; rdfs:subPropertyOf dct:creator ; rdfs:range nmg:Person .
+nmg:derivedFrom a owl:ObjectProperty ; rdfs:subPropertyOf prov:wasDerivedFrom .
+nmg:about a owl:ObjectProperty ; rdfs:subPropertyOf schema:about .
+nmg:hasSegment a owl:ObjectProperty ; rdfs:domain nmg:Story ; rdfs:range nmg:Segment .
+nmg:hasBlock a owl:ObjectProperty ; rdfs:domain nmg:Segment ; rdfs:range nmg:Block .
+nmg:primaryEvent a owl:ObjectProperty ; rdfs:domain nmg:Segment ; rdfs:range nmg:Event .
+nmg:mapState a owl:ObjectProperty ; rdfs:domain nmg:Segment ; rdfs:range nmg:MapState .
+nmg:references a owl:ObjectProperty ; rdfs:domain nmg:Block ; rdfs:range nmg:ContentUnit .
+nmg:cites a owl:ObjectProperty ; rdfs:subPropertyOf cito:citesAsEvidence .
+nmg:focusPlace a owl:ObjectProperty ; rdfs:domain nmg:MapState ; rdfs:range nmg:Place .
+nmg:arrow a owl:ObjectProperty ; rdfs:domain nmg:MapState ; rdfs:range nmg:Arrow .
+nmg:arrowFrom a owl:ObjectProperty ; rdfs:domain nmg:Arrow ; rdfs:range nmg:Place .
+nmg:arrowTo a owl:ObjectProperty ; rdfs:domain nmg:Arrow ; rdfs:range nmg:Place .
+
+# 4. DATATYPE PROPERTIES
+nmg:startDate a owl:DatatypeProperty ; rdfs:subPropertyOf schema:startDate ; rdfs:range xsd:date .
+nmg:endDate a owl:DatatypeProperty ; rdfs:subPropertyOf schema:endDate ; rdfs:range xsd:date .
+nmg:lat a owl:DatatypeProperty ; rdfs:subPropertyOf geo:lat ; rdfs:range xsd:decimal .
+nmg:long a owl:DatatypeProperty ; rdfs:subPropertyOf geo:long ; rdfs:range xsd:decimal .
+nmg:verbatim a owl:DatatypeProperty ; rdfs:subPropertyOf schema:text .
+nmg:locator a owl:DatatypeProperty .
+nmg:mediaPath a owl:DatatypeProperty .
+nmg:order a owl:DatatypeProperty ; rdfs:range xsd:integer .
+nmg:tickLabel a owl:DatatypeProperty .
+nmg:rightsClass a owl:DatatypeProperty .
+nmg:baseYear a owl:DatatypeProperty ; rdfs:range xsd:gYear .
+nmg:overlayLevel a owl:DatatypeProperty ; rdfs:range xsd:integer .
+nmg:arrowLabel a owl:DatatypeProperty .
+nmg:arrowCurve a owl:DatatypeProperty ; rdfs:range xsd:decimal .

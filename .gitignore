@@ -23,3 +23,5 @@ Notes
 
 # Generated illustration caches — rebuild with the fetch_*_images.py scripts
 data/images/
+# Fetched story media (photos/docs/audio) — rebuild with fetch_ww2_story.py
+data/stories/

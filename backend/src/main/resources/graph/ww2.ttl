@@ -1,0 +1,200 @@
+# Instance data — the WW2 story "Nijmegen in de oorlog, 1940–1945".
+# Eight narrative segments. NOTE: this file uses ONLY the existing ontology classes
+# (Event/Place/Source/Photograph/AudioRecording/Quote/Story/Segment/*Block/MapState/
+# Arrow). Adding a segment = append an Event + a MapState + a Segment + its Blocks.
+# All media are real, sourced, openly-licensed (see Notes/verhalen/sources-ww2-*).
+@prefix nmg:    <https://nijmegenkaart.nl/ns#> .
+@prefix id:     <https://nijmegenkaart.nl/id/> .
+@prefix schema: <http://schema.org/> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix wd:     <http://www.wikidata.org/entity/> .
+
+# Licence IRIs reused below.
+# PD  = <https://creativecommons.org/publicdomain/mark/1.0/>
+# CC0 = <https://creativecommons.org/publicdomain/zero/1.0/>
+# BYSA= <https://creativecommons.org/licenses/by-sa/4.0/>
+
+############################  PLACES  ############################
+id:grote_markt a nmg:Place ; rdfs:label "Grote Markt"@nl ; nmg:lat 51.8475 ; nmg:long 5.8649 .
+id:binnenstad a nmg:Place ; rdfs:label "Verwoeste binnenstad"@nl ; nmg:lat 51.8478 ; nmg:long 5.8635 .
+id:annastraat a nmg:Place ; rdfs:label "Sint Annastraat"@nl ; nmg:lat 51.838 ; nmg:long 5.846 .
+id:nieuwe_synagoge a nmg:Building ; rdfs:label "Nieuwe Synagoge"@nl ; nmg:lat 51.8466 ; nmg:long 5.8612 .
+id:landingszone a nmg:Place ; rdfs:label "Landingszone (Groesbeekse heuvels)"@nl ; nmg:lat 51.812 ; nmg:long 5.905 .
+id:waalbrug a nmg:Bridge ; rdfs:label "Waalbrug"@nl ; nmg:lat 51.857 ; nmg:long 5.866 ; owl:sameAs wd:Q1798831 .
+id:elektriciteitscentrale a nmg:Building ; rdfs:label "PGEM-elektriciteitscentrale (zuidoever)"@nl ; nmg:lat 51.8548 ; nmg:long 5.8495 .
+id:noordoever a nmg:Place ; rdfs:label "Noordoever (landingsplek)"@nl ; nmg:lat 51.8608 ; nmg:long 5.852 .
+
+############################  ACTORS  ############################
+id:unit_504_pir a nmg:MilitaryUnit ;
+    rdfs:label "504th Parachute Infantry Regiment, 82nd Airborne"@en ; owl:sameAs wd:Q7727349 .
+id:person_dozy a nmg:Person ; rdfs:label "Petronella Dozy"@nl .
+
+############################  EVENTS  ############################
+id:bezetting a nmg:Event ; rdfs:label "Bezetting van Nijmegen"@nl ;
+    nmg:startDate "1940-05-10"^^xsd:date ; nmg:occurredAt id:annastraat .
+id:deportatie a nmg:Event ; rdfs:label "Deportatie van de joodse gemeenschap"@nl ;
+    nmg:startDate "1942-11-17"^^xsd:date ; nmg:occurredAt id:nieuwe_synagoge .
+id:bombardement a nmg:Event ; rdfs:label "Het vergissingsbombardement"@nl ;
+    nmg:startDate "1944-02-22"^^xsd:date ; nmg:occurredAt id:binnenstad .
+id:market_garden a nmg:Event ; rdfs:label "Operatie Market Garden"@nl ;
+    nmg:startDate "1944-09-17"^^xsd:date ; owl:sameAs wd:Q156721 ;
+    nmg:occurredAt id:landingszone .
+id:de_waaloversteek a nmg:Event ; rdfs:label "De Waaloversteek"@nl ;
+    nmg:startDate "1944-09-20"^^xsd:date ; nmg:partOf id:market_garden ;
+    nmg:occurredAt id:elektriciteitscentrale , id:noordoever , id:waalbrug ;
+    nmg:hadParticipant id:unit_504_pir .
+id:brug_genomen a nmg:Event ; rdfs:label "De brug genomen"@nl ;
+    nmg:startDate "1944-09-20"^^xsd:date ; nmg:partOf id:market_garden ; nmg:occurredAt id:waalbrug .
+id:frontstad a nmg:Event ; rdfs:label "Frontstad"@nl ;
+    nmg:startDate "1944-10-15"^^xsd:date ; nmg:occurredAt id:annastraat .
+id:bevrijding a nmg:Event ; rdfs:label "Bevrijding & nasleep"@nl ;
+    nmg:startDate "1945-04-01"^^xsd:date ; nmg:occurredAt id:grote_markt .
+
+############################  SOURCES  ############################
+id:src_radio_oranje a nmg:AudioRecording ;
+    rdfs:label "Radio Oranje, 19 sep 1944 — reportage bevrijding Eindhoven/Arnhem/Nijmegen"@nl ;
+    nmg:documents id:market_garden ;
+    nmg:mediaPath "data/stories/ww2/audio/radio-oranje-19sep1944.ogg" ;
+    dct:license <https://creativecommons.org/publicdomain/mark/1.0/> ; nmg:rightsClass "a" ;
+    dct:source <https://commons.wikimedia.org/wiki/File:Radio_Oranje_19-sep.-1944_REPORTAGE_OVER_BEVRIJDING_EINDHOVEN,_ARNHEM_EN_NIJMEGEN.wav> .
+
+id:src_photo_bezetting a nmg:Photograph ;
+    rdfs:label "Een Duitse Panzer IV rijdt door de Sint Annastraat, mei 1940 — Foto Van der Horst, CC BY-SA 4.0 (Wikimedia Commons)"@nl ;
+    nmg:depicts id:bezetting ; dct:creator "Foto Van der Horst" ;
+    nmg:mediaPath "data/stories/ww2/photos/bezetting.jpg" ;
+    dct:license <https://creativecommons.org/licenses/by-sa/4.0/> ; nmg:rightsClass "a" .
+
+id:src_photo_deportatie a nmg:Photograph ;
+    rdfs:label "De met hakenkruisen besmeurde Nieuwe Synagoge in Nijmegen, 1942 — J.F.M. Trum, Fotopersbureau Gelderland, CC BY-SA 4.0 (Wikimedia Commons)"@nl ;
+    nmg:depicts id:deportatie ; dct:creator "J.F.M. Trum, Fotopersbureau Gelderland" ;
+    nmg:mediaPath "data/stories/ww2/photos/deportatie.jpg" ;
+    dct:license <https://creativecommons.org/licenses/by-sa/4.0/> ; nmg:rightsClass "a" .
+
+id:src_photo_bombardement a nmg:Photograph ;
+    rdfs:label "De verwoeste binnenstad na het bombardement van 22 februari 1944 — J.C.M. Otto (NIOD), publiek domein (Wikimedia Commons)"@nl ;
+    nmg:depicts id:bombardement ; dct:creator "J.C.M. Otto (NIOD)" ;
+    nmg:mediaPath "data/stories/ww2/photos/bombardement.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/mark/1.0/> ; nmg:rightsClass "a" .
+
+id:src_photo_marketgarden a nmg:Photograph ;
+    rdfs:label "Geallieerde parachutisten dalen neer boven Nederland, 17 september 1944 — US Army, publiek domein (Wikimedia Commons)"@nl ;
+    nmg:depicts id:market_garden ; dct:creator "US Army" ;
+    nmg:mediaPath "data/stories/ww2/photos/marketgarden.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/mark/1.0/> ; nmg:rightsClass "a" .
+
+id:src_photo_clamber a nmg:Photograph ;
+    rdfs:label "Geallieerde para's gaan bij Nijmegen aan land uit een overzetboot, sep 1944 — Imperial War Museums, publiek domein (Wikimedia Commons)"@nl ;
+    nmg:depicts id:de_waaloversteek ; dct:creator "Imperial War Museums" ;
+    nmg:mediaPath "data/images/ww2/waaloversteek.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/mark/1.0/> ; nmg:rightsClass "a" .
+
+id:src_photo_brug a nmg:Photograph ;
+    rdfs:label "Britse troepen passeren de veroverde Waalbrug bij Nijmegen, sep 1944 — Rijksmuseum, CC0 (Wikimedia Commons)"@nl ;
+    nmg:depicts id:brug_genomen ; dct:creator "Rijksmuseum" ;
+    nmg:mediaPath "data/stories/ww2/photos/bruggenomen.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/zero/1.0/> ; nmg:rightsClass "a" .
+
+id:src_photo_frontstad a nmg:Photograph ;
+    rdfs:label "Een geallieerde verkeersregelaar op een gehavende kruising in Nijmegen, 1945 — P.J. Bosman (Regionaal Archief Nijmegen), CC0 (Wikimedia Commons)"@nl ;
+    nmg:depicts id:frontstad ; dct:creator "P.J. Bosman (Regionaal Archief Nijmegen)" ;
+    nmg:mediaPath "data/stories/ww2/photos/frontstad.jpg" ;
+    dct:license <https://creativecommons.org/publicdomain/zero/1.0/> ; nmg:rightsClass "a" .
+
+id:src_photo_bevrijding a nmg:Photograph ;
+    rdfs:label "Bevrijdingsfeesten met een wagenspel, 1945 — J.F.M. Trum, Fotopersbureau Gelderland, CC BY-SA 4.0 (Wikimedia Commons)"@nl ;
+    nmg:depicts id:bevrijding ; dct:creator "J.F.M. Trum, Fotopersbureau Gelderland" ;
+    nmg:mediaPath "data/stories/ww2/photos/bevrijding.jpg" ;
+    dct:license <https://creativecommons.org/licenses/by-sa/4.0/> ; nmg:rightsClass "a" .
+
+# Verbatim primary source (short attributed excerpt — rights class b).
+id:diary_dozy a nmg:Diary ; rdfs:label "Dagboek Petronella Dozy"@nl ;
+    nmg:authoredBy id:person_dozy ; nmg:rightsClass "b" .
+id:quote_dozy_parachutes a nmg:Quote ;
+    nmg:derivedFrom id:diary_dozy ; nmg:about id:market_garden ;
+    nmg:locator "17 september 1944" ; dct:language "nl" ;
+    nmg:verbatim "… de lucht hing vol met rood-wit-blauw-oranje parachutes …" .
+
+############################  STORY  ############################
+id:story_ww2 a nmg:Story ; rdfs:label "Nijmegen in de oorlog, 1940–1945"@nl ;
+    nmg:hasSegment id:seg_bezetting , id:seg_deportatie , id:seg_bombardement ,
+                   id:seg_marketgarden , id:seg_waaloversteek , id:seg_brug ,
+                   id:seg_frontstad , id:seg_bevrijding .
+
+# --- 1. Bezetting ---
+id:seg_bezetting a nmg:Segment ; nmg:order 1 ; nmg:tickLabel "Bezetting" ;
+    nmg:primaryEvent id:bezetting ; nmg:mapState id:map_bezetting ; nmg:hasBlock id:b_bez_1 , id:b_bez_2 .
+id:map_bezetting a nmg:MapState ; nmg:baseYear "1938"^^xsd:gYear ; nmg:focusPlace id:annastraat , id:waalbrug .
+id:b_bez_1 a nmg:NarrativeBlock ; nmg:order 1 ; nmg:about id:bezetting ; nmg:cites id:src_photo_bezetting ;
+    schema:text "Op 10 mei 1940 trokken Duitse troepen Nijmegen binnen; de stad lag pal aan de Duitse grens en werd meteen bezet. In de eerste oorlogsjaren veranderde het dagelijks leven sluipend — distributie, verduistering, en vanaf 1941 de eerste maatregelen tegen joodse inwoners en de wegvoering van mannen voor de Arbeitseinsatz." .
+id:b_bez_2 a nmg:GalleryBlock ; nmg:order 2 ; nmg:references id:src_photo_bezetting .
+
+# --- 2. Deportatie ---
+id:seg_deportatie a nmg:Segment ; nmg:order 2 ; nmg:tickLabel "Deportatie" ;
+    nmg:primaryEvent id:deportatie ; nmg:mapState id:map_deportatie ; nmg:hasBlock id:b_dep_1 , id:b_dep_2 .
+id:map_deportatie a nmg:MapState ; nmg:baseYear "1938"^^xsd:gYear ; nmg:focusPlace id:nieuwe_synagoge .
+id:b_dep_1 a nmg:NarrativeBlock ; nmg:order 1 ; nmg:about id:deportatie ; nmg:cites id:src_photo_deportatie ;
+    schema:text "Nijmegen telde voor de oorlog een joodse gemeenschap van zo'n 530 mensen. De Nieuwe Synagoge werd met hakenkruisen besmeurd; in oktober en november 1942 volgden de razzia's. Vrijwel alle Nijmeegse joden werden via Westerbork weggevoerd naar Auschwitz en Sobibor — slechts een handvol keerde terug." .
+id:b_dep_2 a nmg:GalleryBlock ; nmg:order 2 ; nmg:references id:src_photo_deportatie .
+
+# --- 3. Het vergissingsbombardement ---
+id:seg_bombardement a nmg:Segment ; nmg:order 3 ; nmg:tickLabel "Bombardement" ;
+    nmg:primaryEvent id:bombardement ; nmg:mapState id:map_bombardement ; nmg:hasBlock id:b_bom_1 , id:b_bom_2 .
+id:map_bombardement a nmg:MapState ; nmg:baseYear "1938"^^xsd:gYear ; nmg:overlayLevel 1 ; nmg:focusPlace id:binnenstad , id:grote_markt .
+id:b_bom_1 a nmg:NarrativeBlock ; nmg:order 1 ; nmg:about id:bombardement ; nmg:cites id:src_photo_bombardement ;
+    schema:text "Op 22 februari 1944 wierpen Amerikaanse bommenwerpers bij vergissing hun lading op het hart van Nijmegen. In enkele minuten werd de middeleeuwse binnenstad rond de Grote Markt weggevaagd; bijna achthonderd mensen kwamen om. Het was het zwaarst getroffen stadshart van bezet Nederland." .
+id:b_bom_2 a nmg:GalleryBlock ; nmg:order 2 ; nmg:references id:src_photo_bombardement .
+
+# --- 4. Market Garden begint ---
+id:seg_marketgarden a nmg:Segment ; nmg:order 4 ; nmg:tickLabel "Market Garden" ;
+    nmg:primaryEvent id:market_garden ; nmg:mapState id:map_marketgarden ;
+    nmg:hasBlock id:b_mg_1 , id:b_mg_2 , id:b_mg_3 .
+id:map_marketgarden a nmg:MapState ; nmg:baseYear "1938"^^xsd:gYear ; nmg:overlayLevel 2 ;
+    nmg:focusPlace id:landingszone , id:waalbrug ; nmg:arrow id:arrow_mg .
+id:arrow_mg a nmg:Arrow ; nmg:arrowFrom id:landingszone ; nmg:arrowTo id:waalbrug ;
+    nmg:arrowLabel "82nd Airborne" ; nmg:arrowCurve 0.18 .
+id:b_mg_1 a nmg:NarrativeBlock ; nmg:order 1 ; nmg:about id:market_garden ; nmg:cites id:src_photo_marketgarden ;
+    schema:text "Op 17 september 1944 begon Operatie Market Garden. Boven Groesbeek en de heuvels ten zuiden van Nijmegen daalden duizenden parachutisten neer; de Amerikaanse 82nd Airborne kreeg de opdracht de Waalbrug te veroveren. Voor de Nijmegenaren leek de bevrijding ineens nabij." .
+id:b_mg_2 a nmg:QuoteBlock ; nmg:order 2 ; nmg:references id:quote_dozy_parachutes .
+id:b_mg_3 a nmg:GalleryBlock ; nmg:order 3 ; nmg:references id:src_photo_marketgarden .
+
+# --- 5. De Waaloversteek ---
+id:seg_waaloversteek a nmg:Segment ; nmg:order 5 ; nmg:tickLabel "Waaloversteek" ;
+    nmg:primaryEvent id:de_waaloversteek ; nmg:mapState id:map_waaloversteek ;
+    nmg:hasBlock id:b_wo_1 , id:b_wo_2 , id:b_wo_3 .
+id:map_waaloversteek a nmg:MapState ; nmg:baseYear "1938"^^xsd:gYear ; nmg:overlayLevel 2 ;
+    nmg:focusPlace id:waalbrug , id:elektriciteitscentrale , id:noordoever ; nmg:arrow id:arrow_crossing .
+id:arrow_crossing a nmg:Arrow ; nmg:arrowFrom id:elektriciteitscentrale ; nmg:arrowTo id:noordoever ;
+    nmg:arrowLabel "82nd Airborne" ; nmg:arrowCurve 0.14 .
+id:b_wo_1 a nmg:NarrativeBlock ; nmg:order 1 ; nmg:about id:de_waaloversteek ; nmg:cites id:src_radio_oranje ;
+    schema:text "Om de Waalbrug intact te nemen waagde de 82nd Airborne op 20 september 1944 een overval bij klaarlichte dag. Ten westen van de spoorbrug, bij de elektriciteitscentrale, stak het 504e regiment in 26 wankele canvasbootjes de brede Waal over. Onder zwaar Duits vuur haalde maar de helft de overkant; de overlevenden namen het noordelijke bruggenhoofd in." .
+id:b_wo_2 a nmg:AudioBlock ; nmg:order 2 ; nmg:references id:src_radio_oranje .
+id:b_wo_3 a nmg:GalleryBlock ; nmg:order 3 ; nmg:references id:src_photo_clamber .
+
+# --- 6. De brug genomen → granatentijd ---
+id:seg_brug a nmg:Segment ; nmg:order 6 ; nmg:tickLabel "De brug genomen" ;
+    nmg:primaryEvent id:brug_genomen ; nmg:mapState id:map_brug ; nmg:hasBlock id:b_brug_1 , id:b_brug_2 .
+id:map_brug a nmg:MapState ; nmg:baseYear "1938"^^xsd:gYear ; nmg:overlayLevel 3 ; nmg:focusPlace id:waalbrug .
+id:b_brug_1 a nmg:NarrativeBlock ; nmg:order 1 ; nmg:about id:brug_genomen ; nmg:cites id:src_photo_brug ;
+    schema:text "Diezelfde avond viel de Waalbrug onbeschadigd in geallieerde handen. Maar de opmars naar Arnhem strandde, en Nijmegen bleef maandenlang frontstad. De brug werd een levensader én een doelwit; Duitse beschietingen begonnen aan wat de Nijmegenaren de granatentijd zouden noemen." .
+id:b_brug_2 a nmg:GalleryBlock ; nmg:order 2 ; nmg:references id:src_photo_brug .
+
+# --- 7. Frontstad, winter 1944–45 ---
+id:seg_frontstad a nmg:Segment ; nmg:order 7 ; nmg:tickLabel "Frontstad" ;
+    nmg:primaryEvent id:frontstad ; nmg:mapState id:map_frontstad ; nmg:hasBlock id:b_fr_1 , id:b_fr_2 .
+id:map_frontstad a nmg:MapState ; nmg:baseYear "1938"^^xsd:gYear ; nmg:overlayLevel 3 ; nmg:focusPlace id:annastraat , id:grote_markt .
+id:b_fr_1 a nmg:NarrativeBlock ; nmg:order 1 ; nmg:about id:frontstad ; nmg:cites id:src_photo_frontstad ;
+    schema:text "Van najaar 1944 tot begin 1945 lag Nijmegen in de vuurlinie. Duitse granaten en V-1's troffen de stad; honderden burgers kwamen alsnog om. Tussen het puin, met geallieerde troepen in de straten, probeerden de Nijmegenaren een normaal bestaan vol te houden." .
+id:b_fr_2 a nmg:GalleryBlock ; nmg:order 2 ; nmg:references id:src_photo_frontstad .
+
+# --- 8. Bevrijding & nasleep ---
+id:seg_bevrijding a nmg:Segment ; nmg:order 8 ; nmg:tickLabel "Bevrijding" ;
+    nmg:primaryEvent id:bevrijding ; nmg:mapState id:map_bevrijding ; nmg:hasBlock id:b_bev_1 , id:b_bev_2 .
+# Aftermath: stay on the 1938 plan with the full (level 3) damage still shown —
+# the liberated city is also the wrecked city.
+id:map_bevrijding a nmg:MapState ; nmg:baseYear "1938"^^xsd:gYear ; nmg:overlayLevel 3 ; nmg:focusPlace id:grote_markt .
+id:b_bev_1 a nmg:NarrativeBlock ; nmg:order 1 ; nmg:about id:bevrijding ; nmg:cites id:src_photo_bevrijding ;
+    schema:text "Pas in het voorjaar van 1945, toen het front oostwaarts trok, kwam Nijmegen echt tot rust. De stad vierde haar bevrijding — maar keek uit op een verwoest centrum. De wederopbouw zou decennia duren." .
+id:b_bev_2 a nmg:GalleryBlock ; nmg:order 2 ; nmg:references id:src_photo_bevrijding .
