@@ -5,13 +5,15 @@ interface Props {
   visible: boolean;
   /** Periods established after this year are dimmed as "future". */
   activeYear: number;
+  /** Overrides placement (the Verhalen surface positions it over the map). */
+  style?: React.CSSProperties;
 }
 
 /** Legend for the Stadsontwikkeling overlay; future periods are dimmed. */
-export function GrowthLegend({ visible, activeYear }: Props) {
+export function GrowthLegend({ visible, activeYear, style }: Props) {
   if (!visible) return null;
   return (
-    <div className={styles.legend}>
+    <div className={styles.legend} style={style}>
       <div className={styles.lgTitle}>Stadsontwikkeling</div>
       {GROWTH_PERIODS.map((p) => {
         const future = !(GROWTH_PERIOD_YEAR[p] <= activeYear);
