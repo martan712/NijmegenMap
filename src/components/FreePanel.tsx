@@ -19,6 +19,8 @@ interface Props {
   onToggleSpy: () => void;
   spyIndex: number;
   onSpyIndex: (index: number) => void;
+  /** Back to the Verhalen surface. */
+  onExit: () => void;
 }
 
 const TICK_COUNT = 6;
@@ -28,7 +30,7 @@ export function FreePanel(props: Props) {
   const {
     timeline, current, onScrub, playing, onTogglePlay, onStep,
     opacity, onOpacity, filter, onFilter, growthOn, onToggleGrowth,
-    spyOn, onToggleSpy, spyIndex, onSpyIndex,
+    spyOn, onToggleSpy, spyIndex, onSpyIndex, onExit,
   } = props;
 
   const ticks = useMemo(() => {
@@ -72,6 +74,12 @@ export function FreePanel(props: Props) {
       </div>
 
       <div className={styles.row}>
+        <div className={styles.ctrl}>
+          <button className={styles.chip} title="Terug naar de verhalen" onClick={onExit}>
+            ← Verhalen
+          </button>
+        </div>
+
         <div className={styles.ctrl}>
           <label htmlFor="opacity">Transparantie</label>
           <input

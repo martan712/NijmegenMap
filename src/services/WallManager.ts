@@ -18,8 +18,8 @@ const HIGHLIGHT = { radius: 9, color: "#ffffff", weight: 3, fillColor: "#ff8a3d"
 const SECONDARY = { radius: 4, color: "#1a1d23", weight: 1, fillColor: "#9bb3c9", fillOpacity: 0.9 };
 const FOCUS_ZOOM = 16;
 
-/** How the wall points render this time: full Atlas style, or Verhalen's muted
- *  secondary style with the curated (accent) points skipped to avoid doubling. */
+/** How the wall points render this time: the full accent style, or Verhalen's
+ *  muted secondary style with the curated (accent) points skipped to avoid doubling. */
 export interface WallRenderOptions {
   secondary?: boolean;
   /** NUMMERs already shown as accent photo pins, so they're omitted here. */

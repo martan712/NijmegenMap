@@ -9,15 +9,12 @@ import { WallManager } from "./WallManager";
 import { MemorialManager } from "./MemorialManager";
 import { SpyManager, type LensRefs } from "./SpyManager";
 import { SceneManager } from "./scene/SceneManager";
-import { entryByYear } from "../lib/manifest";
-import type { Chapter, ManifestEntry, Scene } from "../types";
-
-const FLY = { duration: 0.85, padding: [20, 20] as L.PointTuple };
+import type { ManifestEntry } from "../types";
 
 /**
  * Top-level map orchestration. Owns the map + every layer manager and exposes
- * intent-level methods (apply a scene, open a chapter, render a free year).
- * React calls these; it never touches Leaflet directly.
+ * intent-level methods (render a typed scene, show a free-explore year). React
+ * calls these; it never touches Leaflet directly.
  */
 export class MapEngine {
   readonly map: L.Map;
@@ -60,74 +57,9 @@ export class MapEngine {
     this.service.setZoomControlVisible(visible);
   }
 
-  /** Render one scene's full map state (story mode). */
-  applyScene(scene: Scene): void {
-    // Base map: a purely pre-cartographic scene (only a pin / arrows / limes,
-    // no map-anchored overlay) shows the modern reference map; everything else
-    // shows the historical map for `year`. `basemap` overrides the default.
-    const preCartographic =
-      !!(scene.pin || scene.arrows || scene.limes || scene.anchor) &&
-      scene.growth == null && scene.fort == null && !scene.wall && scene.ww2 == null;
-    if (!(scene.basemap ?? !preCartographic)) {
-      this.base.clear();
-    } else {
-      const entry =
-        entryByYear(this.manifest, scene.year) ??
-        this.manifest.find((e) => e.type !== "wo2");
-      if (entry) this.base.setActive(entry);
-    }
-
-    // Camera: an explicit focus wins (e.g. to frame arrows); otherwise a pin
-    // centres on its location. (A wall point flies itself, below.)
-    if (scene.focus) this.map.flyToBounds(scene.focus, FLY);
-    else if (scene.pin) this.map.flyTo(scene.pin.at, scene.pin.zoom ?? 15.5, { duration: 0.85 });
-
-    // Overlays: every manager is set each scene (value or off) so transitions
-    // between consecutive scenes animate smoothly rather than blink.
-    if (scene.growth != null) this.overlays.growth.show({ level: scene.growth });
-    else this.overlays.growth.hide();
-    if (scene.fort != null) this.overlays.fort.show({ level: scene.fort });
-    else this.overlays.fort.hide();
-    // The limes frontier shows the zones (+ legend); `anchor` keeps just the
-    // Valkhof zone as a dimmed location cue under post-Roman scenes.
-    if (scene.limes || scene.anchor) this.overlays.limes.show({ dim: !!scene.anchor });
-    else this.overlays.limes.hide();
-    this.pins.show(scene.pin ?? null);
-    this.pins.showPhotoPins(scene.photoPins ?? null);
-    this.flow.show(scene.arrows ?? null);
-    this.wall.setVisible(!!scene.wall || scene.wallPoint != null);
-    if (scene.wallPoint != null) this.wall.focusPoint(scene.wallPoint);
-    else this.wall.clearHighlight();
-    // Omitted highlight defaults to the shown level (Atlas: each scene adds its
-    // own damage); Verhalen sets it explicitly so a level stays bright only on
-    // the segment that first introduces it.
-    const ww2Highlight = scene.ww2Highlight === undefined ? scene.ww2 ?? null : scene.ww2Highlight;
-    if (scene.ww2 != null) this.overlays.ww2.show({ level: scene.ww2, highlight: ww2Highlight });
-    else this.overlays.ww2.hide();
-    this.memorials.show(scene.memorials ?? null);
-  }
-
-  /** Show a chapter's overview: representative base map, no story overlays. */
-  applyChapterOverview(chapter: Chapter): void {
-    this.clearStoryOverlays();
-    const entry = entryByYear(this.manifest, chapter.year);
-    if (entry) this.base.setActive(entry);
-    this.map.flyToBounds(chapter.focus, FLY);
-  }
-
   /** Render a base year in free-explore mode (overlays handled separately). */
   showFreeEntry(entry: ManifestEntry): void {
     this.base.setActive(entry);
-  }
-
-  /** Turn off every scene-driven overlay (used on mode transitions). */
-  clearStoryOverlays(): void {
-    Object.values(this.overlays).forEach((o) => o.hide());
-    this.pins.show(null);
-    this.pins.showPhotoPins(null);
-    this.flow.show(null);
-    this.wall.setVisible(false);
-    this.memorials.show(null);
   }
 
   setOpacity(opacity: number): void {

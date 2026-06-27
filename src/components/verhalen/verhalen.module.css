@@ -315,26 +315,69 @@
   position: absolute;
   left: 0;
   bottom: 18px;
+  /* Span the companion map (56vw) and centre each track within it. */
   width: 56vw;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 8px;
   z-index: 1300;
 }
+
+/* A horizontally-scrollable track that hugs its content (capped at the map
+   width) with the native scrollbar hidden; the flanking arrows (rendered by
+   ScrollRow, hidden at each edge) page it left/right. */
+.scrollWrap {
+  position: relative;
+  width: fit-content;
+  max-width: calc(56vw - 24px);
+}
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+}
+.arrow:hover {
+  background: var(--surface-hover);
+}
+.arrowLeft {
+  left: 4px;
+}
+.arrowRight {
+  right: 4px;
+}
+
 /* Top layer: one block per storyline, scrolls sideways if they overflow. */
 .threadTrack {
   display: flex;
   gap: 14px;
   align-items: flex-end;
-  max-width: calc(56vw - 24px);
+  max-width: 100%;
   overflow-x: auto;
   padding: 10px 16px;
   background: var(--panel-bg);
   backdrop-filter: var(--blur);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
-  scrollbar-width: thin;
+  scrollbar-width: none;
+}
+.threadTrack::-webkit-scrollbar,
+.chapterTrack::-webkit-scrollbar {
+  display: none;
 }
 .threadBlock {
   flex: none;
@@ -395,32 +438,35 @@
   display: flex;
   gap: 6px;
   align-items: center;
-  max-width: calc(56vw - 24px);
+  max-width: 100%;
   overflow-x: auto;
   padding: 6px 8px;
   background: var(--panel-bg);
   backdrop-filter: var(--blur);
   border-radius: 999px;
   box-shadow: var(--shadow-md);
-  scrollbar-width: thin;
+  scrollbar-width: none;
 }
+/* The map-explore exit: an orange icon button pinned to the left of the chapter
+   track (position: sticky) so it stays put while the chapters scroll past it. */
 .exitChip {
+  position: sticky;
+  left: 0;
+  z-index: 4;
   flex: none;
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
   border: none;
   cursor: pointer;
-  background: none;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 700;
-  padding: 6px 10px;
-  border-radius: 999px;
-  white-space: nowrap;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
 }
 .exitChip:hover {
-  color: var(--text);
-  background: var(--surface-hover);
+  background: #ff7a24;
 }
 .chapterChip {
   flex: none;
