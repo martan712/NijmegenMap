@@ -13,7 +13,18 @@ type WallFeature = Feature<Geometry, WallProps>;
 
 const NORMAL = { radius: 5, color: "#1a1d23", weight: 1.5, fillColor: "#ffd27d", fillOpacity: 0.95 };
 const HIGHLIGHT = { radius: 9, color: "#ffffff", weight: 3, fillColor: "#ff8a3d", fillOpacity: 1 };
+// Verhalen's secondary style: muted slate points that sit behind the curated
+// accent photo pins, marking every other recorded vestingwerk.
+const SECONDARY = { radius: 4, color: "#1a1d23", weight: 1, fillColor: "#9bb3c9", fillOpacity: 0.9 };
 const FOCUS_ZOOM = 16;
+
+/** How the wall points render this time: full Atlas style, or Verhalen's muted
+ *  secondary style with the curated (accent) points skipped to avoid doubling. */
+export interface WallRenderOptions {
+  secondary?: boolean;
+  /** NUMMERs already shown as accent photo pins, so they're omitted here. */
+  skip?: Iterable<number | string>;
+}
 
 // Korfmacher popups often concatenate two image captions; keep just the first
 // (it matches the single image we show), ending at "… Collectie … Valkhof".
@@ -29,12 +40,18 @@ export class WallManager {
   private loaded = false;
   private byNummer = new Map<string, L.CircleMarker>();
   private highlighted: L.CircleMarker | null = null;
+  private style = NORMAL;
+  private skip = new Set<string>();
 
   constructor(map: L.Map) {
     this.map = map;
   }
 
-  setVisible(on: boolean): void {
+  setVisible(on: boolean, opts?: WallRenderOptions): void {
+    if (opts) {
+      this.style = opts.secondary ? SECONDARY : NORMAL;
+      this.skip = new Set([...(opts.skip ?? [])].map(String));
+    }
     if (!on) {
       this.clearHighlight();
       if (this.layer && this.map.hasLayer(this.layer)) this.map.removeLayer(this.layer);
@@ -82,7 +99,9 @@ export class WallManager {
       .then((gj) => {
         this.layer = L.geoJSON<WallProps>(gj, {
           pane: "wall",
-          pointToLayer: (_f, latlng) => L.circleMarker(latlng, { pane: "wall", ...NORMAL }),
+          // Skip points already shown as curated accent photo pins (Verhalen).
+          filter: (f) => !this.skip.has(String((f as WallFeature).properties.NUMMER)),
+          pointToLayer: (_f, latlng) => L.circleMarker(latlng, { pane: "wall", ...this.style }),
           onEachFeature: (f, layer) => {
             const pr = (f as WallFeature).properties;
             if (pr.NUMMER != null) this.byNummer.set(String(pr.NUMMER), layer as L.CircleMarker);

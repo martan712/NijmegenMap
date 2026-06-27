@@ -95,14 +95,61 @@ export const WO2_DESC: Record<string, string> = Object.fromEntries(
   WO2_EVENTS.map((e) => [e.cat, e.desc]),
 );
 
-// --- Unified polygon overlays -------------------------------------------
-// The limes zones and the WW2 damage are the same thing: a GeoJSON of polygons,
-// each assigned a category by one feature property, styled per category, and
-// (optionally) revealed cumulatively by an order. One PolygonOverlayManager
-// renders any overlay described by an OverlayDef; the graph names which overlay
-// a MapState shows (nmg:overlay → nmg:overlayKey) — see PolygonOverlayManager.
+// --- Unified feature overlays -------------------------------------------
+// Every map overlay (the Roman limes zones, the WW2 damage, the city-growth
+// polygons, the fortification rings) is the same thing: a GeoJSON of features,
+// styled per feature and (optionally) revealed cumulatively. One
+// FeatureOverlayManager renders any overlay described by an OverlayDef; the graph
+// names which overlay a MapState shows (its nmg:overlayKey). An OverlayDef carries
+// the style/interactivity/popup as functions of (feature, state) so the manager
+// stays purely mechanical. `import type` keeps Leaflet a compile-time type only —
+// no runtime Leaflet in this data+math module.
+import type L from "leaflet";
+import type { Feature, Geometry } from "geojson";
 
-/** One category of features within an overlay (a value of `categoryProp`). */
+type Props = Record<string, string | null | undefined>;
+type PolyFeature = Feature<Geometry, Props>;
+
+/** Reveal state shared by all overlays (each uses the subset it needs). */
+export interface OverlayState {
+  /** Highest cumulative level visible (≤ this stays shown). Undefined = show all. */
+  level?: number | null;
+  /** The single order/level rendered bright (just-added). Null = none bright. */
+  highlight?: number | null;
+  /** Anchor variant: only the configured `dim.site` feature, desaturated. */
+  dim?: boolean;
+}
+
+const OFF: L.PathOptions = { stroke: false, fill: false, fillOpacity: 0, opacity: 0 };
+
+/** A feature overlay: a GeoJSON layer with per-feature style + reveal logic. */
+export interface OverlayDef {
+  /** Stable key matching the graph's nmg:overlayKey. */
+  key: string;
+  /** Map pane the features draw into. */
+  pane: keyof typeof PANES;
+  /** GeoJSON URL for the features. */
+  src: string;
+  /** Always-on context layer drawn underneath (e.g. the 1944 building footprints). */
+  background?: {
+    src: string;
+    pane: keyof typeof PANES;
+    fill: string;
+    line: string;
+    weight: number;
+    fillOpacity: number;
+  };
+  /** Per-feature paint for the current reveal state. */
+  style: (feature: PolyFeature, state: OverlayState) => L.PathOptions;
+  /** Whether a feature is hit-testable in the current state (default: always). */
+  interactive?: (feature: PolyFeature, state: OverlayState) => boolean;
+  /** Popup HTML for a feature, or null for none. */
+  popup?: (feature: PolyFeature) => string | null;
+  /** Draw order: higher draws on top (e.g. Kernzone over Bufferzone). */
+  sortKey?: (feature: PolyFeature) => number;
+}
+
+/** One category of features within a category overlay (a value of `categoryProp`). */
 export interface OverlayCategory {
   /** The `categoryProp` value that selects this category. */
   match: string;
@@ -117,35 +164,86 @@ export interface OverlayCategory {
   desc?: string;
 }
 
-/** A polygon overlay: a GeoJSON of categorised, conditionally-rendered polygons. */
-export interface OverlayDef {
-  /** Stable key matching the graph's nmg:overlayKey. */
+/**
+ * Build an OverlayDef for a "category overlay": features assigned a category by
+ * one feature property, styled per category, optionally revealed cumulatively by
+ * each category's `order` (the limes zones and the WW2 damage). Earlier categories
+ * draw on top; a category with an `order` is hidden until its order is reached and
+ * rendered bright when it is the highlighted (just-added) one.
+ */
+function categoryOverlay(cfg: {
   key: string;
-  /** Map pane the polygons draw into. */
   pane: keyof typeof PANES;
-  /** GeoJSON URL for the polygons. */
   src: string;
-  /** Feature property whose value selects a category. */
   categoryProp: string;
   categories: OverlayCategory[];
-  /** Feature properties tried in order for a per-feature popup title. */
   nameProps?: string[];
-  /** Always-on context layer drawn underneath (e.g. the 1944 building footprints). */
-  background?: {
-    src: string;
-    pane: keyof typeof PANES;
-    fill: string;
-    line: string;
-    weight: number;
-    fillOpacity: number;
-  };
-  /** Bright style for the single highlighted order (cumulative overlays). */
+  background?: OverlayDef["background"];
+  /** Bright style for the highlighted order. */
   highlight?: { fill: string; line: string; fillOpacity?: number; weight?: number };
-  /** Dim "anchor" variant: show only features whose name contains `site`, desaturated. */
+  /** Dim "anchor" variant: only features whose name contains `site`, desaturated. */
   dim?: { site: string; fill: string; line: string; fillOpacity: number; weight: number };
+}): OverlayDef {
+  const { pane, categoryProp, categories, nameProps = [], highlight, dim } = cfg;
+  const conditional = categories.some((c) => c.order != null);
+  const idx = (f: PolyFeature) =>
+    categories.findIndex((c) => c.match === (f.properties?.[categoryProp] ?? ""));
+  const catOf = (f: PolyFeature) => categories[idx(f)];
+
+  return {
+    key: cfg.key,
+    pane,
+    src: cfg.src,
+    background: cfg.background,
+    sortKey: (f) => {
+      const i = idx(f);
+      return i < 0 ? -Infinity : categories.length - i; // lower index → on top
+    },
+    style: (f, s) => {
+      // Anchor variant: show only the configured site, desaturated.
+      if (s.dim && dim) {
+        const names = nameProps
+          .map((p) => (f.properties?.[p] ?? "").toLowerCase())
+          .join(" ");
+        if (!names.includes(dim.site)) return { pane, ...OFF };
+        return { pane, color: dim.line, weight: dim.weight, fillColor: dim.fill, fillOpacity: dim.fillOpacity };
+      }
+      const cat = catOf(f);
+      if (!cat) return { pane, ...(conditional ? OFF : {}) };
+      // Cumulative category: hidden until its order is reached; bright when it is
+      // the highlighted (just-added) order, else the darker "already there".
+      if (cat.order != null && s.level != null) {
+        if (cat.order > s.level) return { pane, ...OFF };
+        if (cat.order === s.highlight && highlight) {
+          return {
+            pane, stroke: true, fill: true, color: highlight.line, fillColor: highlight.fill,
+            weight: highlight.weight ?? 1, opacity: 0.9, fillOpacity: highlight.fillOpacity ?? 0.55,
+          };
+        }
+      }
+      return {
+        pane, stroke: true, fill: true, color: cat.line, fillColor: cat.fill,
+        weight: cat.weight ?? 1, opacity: 0.45, fillOpacity: cat.fillOpacity ?? 0.35,
+      };
+    },
+    interactive: conditional
+      ? (f, s) => {
+          const cat = catOf(f);
+          return s.level == null || cat?.order == null || cat.order <= s.level;
+        }
+      : undefined,
+    popup: (f) => {
+      const title = nameProps.map((p) => f.properties?.[p]).find((v) => v);
+      const cat = catOf(f);
+      const head = title || cat?.label;
+      if (!head) return null;
+      const body = cat?.desc ?? (title && cat?.label ? cat.label : "");
+      return `<div class="pp">${head}</div>${body ? `<div>${body}</div>` : ""}`;
+    },
+  };
 }
 
-export const LIMES_OVERLAY: OverlayDef = {
+export const LIMES_OVERLAY = categoryOverlay({
   key: "limes",
   pane: "roman",
   src: "data/romeinse_limes.geojson",
@@ -161,9 +259,9 @@ export const LIMES_OVERLAY: OverlayDef = {
     label: z.label,
   })),
   dim: { site: "valkhof", fill: "#9aa3ad", line: "#4b5563", fillOpacity: 0.35, weight: 1.5 },
-};
+});
 
-export const WW2_OVERLAY: OverlayDef = {
+export const WW2_OVERLAY = categoryOverlay({
   key: "ww2",
   pane: "wo2",
   src: "data/wo2_oorlogsschade.geojson",
@@ -188,10 +286,61 @@ export const WW2_OVERLAY: OverlayDef = {
     label: e.label,
     desc: e.desc,
   })),
+});
+
+// City growth (Stadsontwikkeling): all periods always visible — built areas
+// (period-year ≤ level) solid dark, not-yet-built faint dashed outlines. `level`
+// is a year. Only built areas are clickable.
+export const GROWTH_OVERLAY: OverlayDef = {
+  key: "growth",
+  pane: "growth",
+  src: "data/stadsontwikkeling.geojson",
+  style: (f, s) => {
+    const p = f.properties?.PERIODE ?? "";
+    const built = GROWTH_PERIOD_YEAR[p] <= (s.level ?? 0);
+    return {
+      pane: "growth",
+      color: built ? "#1a1d23" : growthColor(p),
+      weight: 1,
+      opacity: built ? 0.7 : 0.35,
+      dashArray: built ? undefined : "3 4",
+      fillColor: growthColor(p),
+      fillOpacity: built ? 0.5 : 0.0,
+    };
+  },
+  interactive: (f, s) => GROWTH_PERIOD_YEAR[f.properties?.PERIODE ?? ""] <= (s.level ?? 0),
+  popup: (f) => {
+    const pr = f.properties ?? {};
+    return (
+      `<div class="pp">${pr.PERIODE ?? ""}</div>` +
+      (pr.WIJKEN && pr.WIJKEN !== "None" ? `<div class="pw">${pr.WIJKEN}</div>` : "") +
+      `<div>${pr.OMSCHRIJVING || ""}</div>`
+    );
+  },
+};
+
+// Fortifications (Vestingwerken): dated ring LINES, revealed cumulatively by the
+// year embedded in PERIODE. `level` is a year; un-revealed rings draw at weight 0.
+export const FORT_OVERLAY: OverlayDef = {
+  key: "fort",
+  pane: "fort",
+  src: "data/vestingwerken.geojson",
+  style: (f, s) => {
+    const period = f.properties?.PERIODE ?? "";
+    const on = s.level == null || fortYearOf(period) <= s.level;
+    return { pane: "fort", color: fortColor(period), weight: on ? 3 : 0, opacity: on ? 0.92 : 0 };
+  },
+  interactive: (f, s) => s.level == null || fortYearOf(f.properties?.PERIODE ?? "") <= (s.level ?? 0),
+  popup: (f) => {
+    const pr = f.properties ?? {};
+    return `<div class="pp">${pr.PERIODE ?? ""}</div><div>${pr.TOELICHTING || ""}</div>`;
+  },
 };
 
 /** Every overlay, keyed for lookup by the graph's overlayKey. */
 export const OVERLAYS: Record<string, OverlayDef> = {
   [LIMES_OVERLAY.key]: LIMES_OVERLAY,
   [WW2_OVERLAY.key]: WW2_OVERLAY,
+  [GROWTH_OVERLAY.key]: GROWTH_OVERLAY,
+  [FORT_OVERLAY.key]: FORT_OVERLAY,
 };

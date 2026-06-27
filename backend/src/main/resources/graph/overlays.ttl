@@ -12,3 +12,15 @@ id:overlay_limes a nmg:PolygonOverlay ;
 id:overlay_ww2 a nmg:PolygonOverlay ;
     nmg:overlayKey "ww2" ;
     rdfs:label "Oorlogsschade 1944"@nl .
+
+# Stadsontwikkeling + Vestingwerken are the same kind of overlay: categorised,
+# cumulatively-revealed feature layers. The scene endpoint infers these keys from
+# a bare nmg:overlayLevel (growth) / nmg:fortLevel (fort); these instances let a
+# MapState also reference them explicitly via nmg:overlay.
+id:overlay_growth a nmg:PolygonOverlay ;
+    nmg:overlayKey "growth" ;
+    rdfs:label "Stadsontwikkeling"@nl .
+
+id:overlay_fort a nmg:PolygonOverlay ;
+    nmg:overlayKey "fort" ;
+    rdfs:label "Vestingwerken"@nl .

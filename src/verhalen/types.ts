@@ -45,31 +45,16 @@ export interface Block {
   locator?: string | null;
 }
 
-export interface MapRow {
-  // null for a base-map-only state (no focus place / arrow) that only carries
-  // year / overlay / limes.
-  kind: "place" | "arrow" | "photopin" | null;
-  place?: string | null;
-  lat?: string | null;
-  long?: string | null;
-  label?: string | null;
-  /** photopin rows: the located image + its caption + description. */
-  image?: string | null;
-  credit?: string | null;
-  text?: string | null;
-  year?: string | null;
-  /** Cumulative overlay level (nmg:overlayLevel): WW2 damage order, or growth year. */
-  overlay?: string | null;
-  /** Which polygon overlay this map shows (nmg:overlay → nmg:overlayKey), e.g. "limes"/"ww2". */
-  overlayKey?: string | null;
-  /** Fortification-ring reveal year (nmg:fortLevel): rings established by this year show. */
-  fort?: string | null;
-  fromLat?: string | null;
-  fromLong?: string | null;
-  toLat?: string | null;
-  toLong?: string | null;
-  arrowLabel?: string | null;
-  curve?: string | null;
+/**
+ * One typed component of a segment's companion-map scene (from
+ * `/api/segments/{id}/scene`). `type` is the discriminator the SceneManager
+ * dispatches on — BaseMap, PolygonOverlay (with `key`/`level`), FocusPlace,
+ * PhotoPin, Arrow, MemorialLayer; every other field is a SPARQL lexical form
+ * (a string) or absent.
+ */
+export interface SceneComponent {
+  type: string;
+  [key: string]: string | null | undefined;
 }
 
 export interface StoryMeta {

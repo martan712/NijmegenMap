@@ -1,15 +1,14 @@
 import L from "leaflet";
 import { MapService } from "./MapService";
 import { BaseLayerManager } from "./BaseLayerManager";
-import { GrowthManager } from "./GrowthManager";
-import { FortManager } from "./FortManager";
-import { PolygonOverlayManager } from "./PolygonOverlayManager";
-import { LIMES_OVERLAY, WW2_OVERLAY } from "../config/overlays";
+import { FeatureOverlayManager } from "./FeatureOverlayManager";
+import { OVERLAYS } from "../config/overlays";
 import { PinManager } from "./PinManager";
 import { FlowManager } from "./FlowManager";
 import { WallManager } from "./WallManager";
 import { MemorialManager } from "./MemorialManager";
 import { SpyManager, type LensRefs } from "./SpyManager";
+import { SceneManager } from "./scene/SceneManager";
 import { entryByYear } from "../lib/manifest";
 import type { Chapter, ManifestEntry, Scene } from "../types";
 
@@ -23,17 +22,16 @@ const FLY = { duration: 0.85, padding: [20, 20] as L.PointTuple };
 export class MapEngine {
   readonly map: L.Map;
   readonly base: BaseLayerManager;
-  readonly growth: GrowthManager;
-  readonly fort: FortManager;
-  // Polygon overlays — one renderer, two configs (the Roman limes zones and the
-  // WW2 damage). Both are categorised, conditionally-revealed polygon sets.
-  readonly limes: PolygonOverlayManager;
+  // One unified renderer per overlay key (limes, ww2, growth, fort) — each a
+  // categorised, conditionally-revealed feature layer (see FeatureOverlayManager).
+  readonly overlays: Record<string, FeatureOverlayManager>;
   readonly pins: PinManager;
   readonly flow: FlowManager;
   readonly wall: WallManager;
-  readonly wo2: PolygonOverlayManager;
   readonly memorials: MemorialManager;
   readonly spy: SpyManager;
+  /** Renders backend-described, type-driven scenes (the Verhalen surface). */
+  readonly scene: SceneManager;
 
   private service: MapService;
   private manifest: ManifestEntry[];
@@ -43,15 +41,18 @@ export class MapEngine {
     this.map = this.service.map;
     this.manifest = manifest;
     this.base = new BaseLayerManager(this.map);
-    this.growth = new GrowthManager(this.map);
-    this.fort = new FortManager(this.map);
-    this.limes = new PolygonOverlayManager(this.map, LIMES_OVERLAY);
+    this.overlays = Object.fromEntries(
+      Object.values(OVERLAYS).map((def) => [def.key, new FeatureOverlayManager(this.map, def)]),
+    );
     this.pins = new PinManager(this.map);
     this.flow = new FlowManager(this.map);
     this.wall = new WallManager(this.map);
-    this.wo2 = new PolygonOverlayManager(this.map, WW2_OVERLAY);
     this.memorials = new MemorialManager(this.map);
     this.spy = new SpyManager(this.map, lens);
+    this.scene = new SceneManager({
+      map: this.map, manifest: this.manifest, base: this.base, overlays: this.overlays,
+      pins: this.pins, flow: this.flow, memorials: this.memorials, wall: this.wall,
+    });
   }
 
   /** Show/hide the built-in zoom (+/–) control. */
@@ -83,12 +84,14 @@ export class MapEngine {
 
     // Overlays: every manager is set each scene (value or off) so transitions
     // between consecutive scenes animate smoothly rather than blink.
-    this.growth.reveal(scene.growth ?? null);
-    this.fort.reveal(scene.fort ?? null);
+    if (scene.growth != null) this.overlays.growth.show({ level: scene.growth });
+    else this.overlays.growth.hide();
+    if (scene.fort != null) this.overlays.fort.show({ level: scene.fort });
+    else this.overlays.fort.hide();
     // The limes frontier shows the zones (+ legend); `anchor` keeps just the
     // Valkhof zone as a dimmed location cue under post-Roman scenes.
-    if (scene.limes || scene.anchor) this.limes.show({ dim: !!scene.anchor });
-    else this.limes.hide();
+    if (scene.limes || scene.anchor) this.overlays.limes.show({ dim: !!scene.anchor });
+    else this.overlays.limes.hide();
     this.pins.show(scene.pin ?? null);
     this.pins.showPhotoPins(scene.photoPins ?? null);
     this.flow.show(scene.arrows ?? null);
@@ -99,8 +102,8 @@ export class MapEngine {
     // own damage); Verhalen sets it explicitly so a level stays bright only on
     // the segment that first introduces it.
     const ww2Highlight = scene.ww2Highlight === undefined ? scene.ww2 ?? null : scene.ww2Highlight;
-    if (scene.ww2 != null) this.wo2.show({ level: scene.ww2, highlight: ww2Highlight });
-    else this.wo2.hide();
+    if (scene.ww2 != null) this.overlays.ww2.show({ level: scene.ww2, highlight: ww2Highlight });
+    else this.overlays.ww2.hide();
     this.memorials.show(scene.memorials ?? null);
   }
 
@@ -119,14 +122,11 @@ export class MapEngine {
 
   /** Turn off every scene-driven overlay (used on mode transitions). */
   clearStoryOverlays(): void {
-    this.growth.reveal(null);
-    this.fort.reveal(null);
-    this.limes.hide();
+    Object.values(this.overlays).forEach((o) => o.hide());
     this.pins.show(null);
     this.pins.showPhotoPins(null);
     this.flow.show(null);
     this.wall.setVisible(false);
-    this.wo2.hide();
     this.memorials.show(null);
   }
 

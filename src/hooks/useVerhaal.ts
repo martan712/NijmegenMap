@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { fetchBlocks, fetchMap, fetchSegments, localName } from "../verhalen/api";
-import type { Block, MapRow, Segment, StoryMeta } from "../verhalen/types";
+import { fetchBlocks, fetchScene, fetchSegments, localName } from "../verhalen/api";
+import type { Block, SceneComponent, Segment, StoryMeta } from "../verhalen/types";
 import { fetchStoryMeta } from "../verhalen/api";
 
 export interface SegmentContent {
   blocks: Block[];
-  mapRows: MapRow[];
+  components: SceneComponent[];
 }
 
 /**
@@ -43,8 +43,8 @@ export function useVerhaal(storyId: string) {
         const entries = await Promise.all(
           segs.map(async (s) => {
             const id = localName(s.seg);
-            const [blocks, mapRows] = await Promise.all([fetchBlocks(id), fetchMap(id)]);
-            return [s.seg, { blocks, mapRows }] as const;
+            const [blocks, components] = await Promise.all([fetchBlocks(id), fetchScene(id)]);
+            return [s.seg, { blocks, components }] as const;
           }),
         );
         if (off) return;

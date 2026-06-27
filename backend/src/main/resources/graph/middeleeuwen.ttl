@@ -34,6 +34,7 @@ id:thread_vmk_naam a nmg:Thread ; rdfs:label "Stad van naam"@nl ; nmg:order 3 ;
 id:seg_vmk_1 a nmg:Segment ; nmg:order 1 ; nmg:tickLabel "Franken op het Valkhof" ;
     nmg:mapState id:map_vmk_1 ; nmg:hasBlock id:block_vmk_1_1 , id:block_vmk_1_2 .
 id:map_vmk_1 a nmg:MapState ; nmg:baseYear "1557"^^xsd:gYear ;
+    nmg:overlay id:overlay_limes ; nmg:overlayDim true ;
     nmg:focusPlace id:valkhof .
 id:block_vmk_1_1 a nmg:NarrativeBlock ; nmg:order 1 ;
     schema:text "Anders dan lang gedacht bleef het Valkhof bewoond. Het oude castellum bood onderdak aan de opkomende Frankische elite, en vlakbij lag een uitgestrekt Merovingisch grafveld met duizenden graven."@nl .
@@ -43,6 +44,7 @@ id:block_vmk_1_2 a nmg:ImageBlock ; nmg:order 2 ; nmg:references id:src_vmk_fran
 id:seg_vmk_2 a nmg:Segment ; nmg:order 2 ; nmg:tickLabel "De palts van Karel de Grote" ;
     nmg:mapState id:map_vmk_2 ; nmg:hasBlock id:block_vmk_2_1 , id:block_vmk_2_2 .
 id:map_vmk_2 a nmg:MapState ; nmg:baseYear "1557"^^xsd:gYear ;
+    nmg:overlay id:overlay_limes ; nmg:overlayDim true ;
     nmg:focusPlace id:valkhof .
 id:block_vmk_2_1 a nmg:NarrativeBlock ; nmg:order 1 ;
     schema:text "In 777 bouwde Karel de Grote een palts op het Valkhof, deels met hergebruikte Romeinse steen. Nijmegen — toen Numaga — werd een keizerlijke verblijfplaats waar Karel meermaals verbleef, onder meer met Pasen."@nl .
@@ -52,6 +54,7 @@ id:block_vmk_2_2 a nmg:ImageBlock ; nmg:order 2 ; nmg:references id:src_vmk_palt
 id:seg_vmk_3 a nmg:Segment ; nmg:order 3 ; nmg:tickLabel "Vikingen plunderen de palts" ;
     nmg:mapState id:map_vmk_3 ; nmg:hasBlock id:block_vmk_3_1 , id:block_vmk_3_2 .
 id:map_vmk_3 a nmg:MapState ; nmg:baseYear "1557"^^xsd:gYear ;
+    nmg:overlay id:overlay_limes ; nmg:overlayDim true ;
     nmg:focusPlace id:valkhof ;
     nmg:arrow id:arrow_vmk_3 .
 id:arrow_vmk_3 a nmg:Arrow ; nmg:arrowFrom id:grote_markt ; nmg:arrowTo id:valkhof ;
@@ -64,6 +67,7 @@ id:block_vmk_3_2 a nmg:ImageBlock ; nmg:order 2 ; nmg:references id:src_vmk_viki
 id:seg_vmk_4 a nmg:Segment ; nmg:order 4 ; nmg:tickLabel "Keizerstad: rijksdagen & Theophanu" ;
     nmg:mapState id:map_vmk_4 ; nmg:hasBlock id:block_vmk_4_1 , id:block_vmk_4_2 .
 id:map_vmk_4 a nmg:MapState ; nmg:baseYear "1557"^^xsd:gYear ;
+    nmg:overlay id:overlay_limes ; nmg:overlayDim true ;
     nmg:focusPlace id:valkhof .
 id:block_vmk_4_1 a nmg:NarrativeBlock ; nmg:order 1 ;
     schema:text "Onder de Ottoonse en Salische keizers werd het Valkhof een geliefde verblijfplaats: hier werden rijksdagen gehouden (949, 996) en in 991 stierf keizerin Theophanu, moeder van Otto III, in de palts. Aan deze keizerlijke band dankt Nijmegen zijn bijnaam Keizerstad."@nl .
@@ -73,6 +77,7 @@ id:block_vmk_4_2 a nmg:ImageBlock ; nmg:order 2 ; nmg:references id:src_vmk_keiz
 id:seg_vmk_5 a nmg:Segment ; nmg:order 5 ; nmg:tickLabel "De palts verwoest" ;
     nmg:mapState id:map_vmk_5 ; nmg:hasBlock id:block_vmk_5_1 , id:block_vmk_5_2 .
 id:map_vmk_5 a nmg:MapState ; nmg:baseYear "1557"^^xsd:gYear ;
+    nmg:overlay id:overlay_limes ; nmg:overlayDim true ;
     nmg:focusPlace id:valkhof .
 id:block_vmk_5_1 a nmg:NarrativeBlock ; nmg:order 1 ;
     schema:text "In 1047 ging de palts in vlammen op: hertog Godfried met de Baard verwoestte haar tijdens zijn opstand tegen keizer Hendrik III. De keizerlijke burcht lag daarna in puin — tot Barbarossa haar een eeuw later liet herbouwen."@nl .
@@ -82,6 +87,7 @@ id:block_vmk_5_2 a nmg:ImageBlock ; nmg:order 2 ; nmg:references id:src_vmk_palt
 id:seg_vmk_6 a nmg:Segment ; nmg:order 6 ; nmg:tickLabel "Barbarossa's Valkhofburcht" ;
     nmg:mapState id:map_vmk_6 ; nmg:hasBlock id:block_vmk_6_1 , id:block_vmk_6_2 .
 id:map_vmk_6 a nmg:MapState ; nmg:baseYear "1557"^^xsd:gYear ;
+    nmg:overlay id:overlay_limes ; nmg:overlayDim true ;
     nmg:focusPlace id:valkhof .
 id:block_vmk_6_1 a nmg:NarrativeBlock ; nmg:order 1 ;
     schema:text "Keizer Frederik Barbarossa liet de palts omstreeks 1155 herbouwen tot een echte burcht. In de luwte van het Valkhof groeit aan de Waal de middeleeuwse stad — het vervolg van dit verhaal."@nl .

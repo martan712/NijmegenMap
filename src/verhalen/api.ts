@@ -1,4 +1,4 @@
-import type { Block, MapRow, Segment, Stolperstein, StoryMeta, StoryListEntry } from "./types";
+import type { Block, SceneComponent, Segment, Stolperstein, StoryMeta, StoryListEntry } from "./types";
 
 // The Java backend (Apache Jena + Javalin). Override with VITE_API at build time.
 const API =
@@ -14,8 +14,8 @@ export const fetchSegments = (storyId: string) =>
   get<Segment[]>(`/api/stories/${storyId}/segments`);
 export const fetchBlocks = (segId: string) =>
   get<Block[]>(`/api/segments/${segId}/blocks`);
-export const fetchMap = (segId: string) =>
-  get<MapRow[]>(`/api/segments/${segId}/map`);
+export const fetchScene = (segId: string) =>
+  get<SceneComponent[]>(`/api/segments/${segId}/scene`);
 export const fetchStolpersteine = () =>
   get<Stolperstein[]>(`/api/stolpersteine`);
 export const fetchStories = () =>

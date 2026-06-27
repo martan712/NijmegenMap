@@ -65,11 +65,16 @@ id:b_bez_2 a nmg:GalleryBlock ; nmg:order 2 ; nmg:references id:src_photo_bezett
 
 # --- 2. Deportatie ---
 id:seg_deportatie a nmg:Segment ; nmg:order 2 ; nmg:tickLabel "Deportatie" ;
-    nmg:primaryEvent id:deportatie ; nmg:mapState id:map_deportatie ; nmg:hasBlock id:b_dep_1 , id:b_dep_2 .
-id:map_deportatie a nmg:MapState ; nmg:baseYear "1938"^^xsd:gYear ; nmg:focusPlace id:nieuwe_synagoge .
+    nmg:primaryEvent id:deportatie ; nmg:mapState id:map_deportatie ;
+    nmg:hasBlock id:b_dep_1 , id:b_dep_2 , id:b_dep_3 .
+# nmg:showMemorial turns the companion map into the city-wide Stolpersteine
+# memorial; the MemorialWallBlock renders the searchable victim wall in the column.
+id:map_deportatie a nmg:MapState ; nmg:baseYear "1938"^^xsd:gYear ;
+    nmg:focusPlace id:nieuwe_synagoge ; nmg:showMemorial true .
 id:b_dep_1 a nmg:NarrativeBlock ; nmg:order 1 ; nmg:about id:deportatie ; nmg:cites id:src_photo_deportatie ;
     schema:text "Nijmegen telde voor de oorlog een joodse gemeenschap van zo'n 530 mensen. De Nieuwe Synagoge werd met hakenkruisen besmeurd; in oktober en november 1942 volgden de razzia's. Vrijwel alle Nijmeegse joden werden via Westerbork weggevoerd naar Auschwitz en Sobibor — slechts een handvol keerde terug." .
 id:b_dep_2 a nmg:GalleryBlock ; nmg:order 2 ; nmg:references id:src_photo_deportatie .
+id:b_dep_3 a nmg:MemorialWallBlock ; nmg:order 3 .
 
 # --- 3. Het vergissingsbombardement ---
 id:seg_bombardement a nmg:Segment ; nmg:order 3 ; nmg:tickLabel "Bombardement" ;

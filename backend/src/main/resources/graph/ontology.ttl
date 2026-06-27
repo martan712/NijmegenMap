@@ -115,6 +115,10 @@ nmg:PinBlock a owl:Class ; rdfs:subClassOf nmg:Block .
 nmg:PolygonOverlay a owl:Class .
 nmg:overlay a owl:ObjectProperty ; rdfs:domain nmg:MapState ; rdfs:range nmg:PolygonOverlay .
 nmg:overlayKey a owl:DatatypeProperty ; rdfs:domain nmg:PolygonOverlay ; rdfs:range xsd:string .
+# Anchor variant: render the overlay's "dim" location cue instead of the full
+# layer (the limes overlay → only the dimmed Valkhof zone, anchoring post-Roman
+# Valkhof scenes). The scene endpoint emits it as `dim` on the PolygonOverlay.
+nmg:overlayDim a owl:DatatypeProperty ; rdfs:domain nmg:MapState ; rdfs:range xsd:boolean .
 
 # --- NEW: photo pins — a located image shown as a clickable map marker ---
 # A MapState lists its pins (nmg:photoPin). Each PhotoPin sits at a place
@@ -126,4 +130,20 @@ nmg:photoPin a owl:ObjectProperty ; rdfs:domain nmg:MapState ; rdfs:range nmg:Ph
 nmg:atPlace a owl:ObjectProperty ; rdfs:domain nmg:PhotoPin ; rdfs:range nmg:Place .
 
 # --- NEW: fortification-ring overlay reveal year (Vestingwerken) ---
+# Like nmg:overlayLevel but for the fort overlay; the scene endpoint emits a
+# PolygonOverlay component with key "fort" (a bare nmg:overlayLevel ⇒ "growth").
 nmg:fortLevel a owl:DatatypeProperty ; rdfs:domain nmg:MapState ; rdfs:range xsd:gYear .
+
+# --- NEW: type-driven scene components ---
+# The /api/segments/{id}/scene endpoint returns a MapState as an ordered list of
+# typed components (BaseMap, PolygonOverlay, FocusPlace, PhotoPin, Arrow,
+# MemorialLayer); the frontend SceneManager dispatches each by its component type
+# to a registered renderer. nmg:showMemorial turns the companion map into the
+# city-wide Stolpersteine memorial layer.
+nmg:showMemorial a owl:DatatypeProperty ; rdfs:domain nmg:MapState ; rdfs:range xsd:boolean .
+# nmg:showWall draws the city-wide layer of Lauwerier/Korfmacher wall points
+# (data/stadswallen.geojson) in a muted secondary colour, behind the curated
+# accent photo pins, so the reader can explore every recorded vestingwerk.
+nmg:showWall a owl:DatatypeProperty ; rdfs:domain nmg:MapState ; rdfs:range xsd:boolean .
+# A panel block that renders the searchable Stolpersteine victim wall.
+nmg:MemorialWallBlock a owl:Class ; rdfs:subClassOf nmg:Block .

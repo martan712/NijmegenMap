@@ -136,44 +136,83 @@ public class GraphStore {
             } ORDER BY ?order""".formatted(segId));
     }
 
-    /** Companion-map state for a segment: focus places + arrows (Place->Place). */
-    public List<Map<String, Object>> map(String segId) {
-        return select("""
-            SELECT ?kind ?place ?lat ?long ?label ?year ?overlay ?overlayKey ?fort
-                   ?fromLat ?fromLong ?toLat ?toLong ?arrowLabel ?curve
-                   ?image ?credit ?text WHERE {
+    /**
+     * Companion-map state for a segment, as an ordered list of TYPED components.
+     * Each row carries a ?type discriminator (the component family) that the
+     * frontend SceneManager dispatches to a registered renderer — so a story is
+     * authored entirely in the graph and the frontend only decides how to draw
+     * each declared type. Component families:
+     *   BaseMap         — the historical base map year (nmg:baseYear)
+     *   PolygonOverlay  — a categorised, conditionally-revealed feature layer; its
+     *                     `key` is the explicit nmg:overlayKey, else inferred
+     *                     ("growth" from a bare nmg:overlayLevel, "fort" from
+     *                     nmg:fortLevel); `level` drives the cumulative reveal and
+     *                     `dim` (nmg:overlayDim) requests the anchor cue variant.
+     *   FocusPlace      — a located label pin (nmg:focusPlace)
+     *   PhotoPin        — a located, clickable image marker (nmg:photoPin)
+     *   Arrow           — a Place->Place movement arrow (nmg:arrow)
+     *   MemorialLayer   — the city-wide Stolpersteine layer (nmg:showMemorial)
+     *   WallLayer       — the muted city-wall point layer (nmg:showWall)
+     */
+    public List<Map<String, Object>> scene(String segId) {
+        List<Map<String, Object>> out = new ArrayList<>();
+        out.addAll(select("""
+            SELECT ("BaseMap" AS ?type) ?year WHERE {
+              id:%s nmg:mapState ?m . ?m nmg:baseYear ?year .
+            }""".formatted(segId)));
+        // One PolygonOverlay per state: explicit nmg:overlay wins; else a bare
+        // nmg:overlayLevel is the city-growth overlay; else nmg:fortLevel is the
+        // fortification rings. `level` is whichever level property is present.
+        out.addAll(select("""
+            SELECT ("PolygonOverlay" AS ?type) ?key ?level ?dim WHERE {
               id:%s nmg:mapState ?m .
-              OPTIONAL { ?m nmg:baseYear ?year }
-              OPTIONAL { ?m nmg:overlayLevel ?overlay }
-              OPTIONAL { ?m nmg:fortLevel ?fort }
-              OPTIONAL { ?m nmg:overlay ?ov . ?ov nmg:overlayKey ?overlayKey }
-              # Places/arrows/photo-pins are OPTIONAL so a base-map-only state (e.g.
-              # a city-growth scene with no pin) still returns one row carrying its
-              # baseYear + overlayLevel — the frontend needs those even with no pin.
-              OPTIONAL {
-                {
-                  ?m nmg:focusPlace ?place . ?place nmg:lat ?lat ; nmg:long ?long .
-                  OPTIONAL { ?place rdfs:label ?label }
-                  BIND("place" AS ?kind)
-                } UNION {
-                  ?m nmg:arrow ?a .
-                  ?a nmg:arrowFrom ?f ; nmg:arrowTo ?t ;
-                     nmg:arrowLabel ?arrowLabel ; nmg:arrowCurve ?curve .
-                  ?f nmg:lat ?fromLat ; nmg:long ?fromLong .
-                  ?t nmg:lat ?toLat ; nmg:long ?toLong .
-                  BIND("arrow" AS ?kind)
-                } UNION {
-                  ?m nmg:photoPin ?pin . ?pin nmg:atPlace ?place .
-                  ?place nmg:lat ?lat ; nmg:long ?long .
-                  OPTIONAL { ?place rdfs:label ?label }
-                  OPTIONAL { ?pin schema:text ?text }
-                  OPTIONAL { ?pin nmg:references ?src .
-                             ?src nmg:mediaPath ?image .
-                             OPTIONAL { ?src rdfs:label ?credit } }
-                  BIND("photopin" AS ?kind)
-                }
+              OPTIONAL { ?m nmg:overlayDim ?dim }
+              {
+                ?m nmg:overlay ?ov . ?ov nmg:overlayKey ?key .
+                OPTIONAL { ?m nmg:overlayLevel ?level }
+              } UNION {
+                ?m nmg:overlayLevel ?level .
+                FILTER NOT EXISTS { ?m nmg:overlay ?ov }
+                BIND("growth" AS ?key)
+              } UNION {
+                ?m nmg:fortLevel ?level .
+                BIND("fort" AS ?key)
               }
-            }""".formatted(segId));
+            }""".formatted(segId)));
+        out.addAll(select("""
+            SELECT ("FocusPlace" AS ?type) ?place ?lat ?long ?label WHERE {
+              id:%s nmg:mapState ?m . ?m nmg:focusPlace ?place .
+              ?place nmg:lat ?lat ; nmg:long ?long .
+              OPTIONAL { ?place rdfs:label ?label }
+            }""".formatted(segId)));
+        out.addAll(select("""
+            SELECT ("Arrow" AS ?type) ?fromLat ?fromLong ?toLat ?toLong ?arrowLabel ?curve WHERE {
+              id:%s nmg:mapState ?m . ?m nmg:arrow ?a .
+              ?a nmg:arrowFrom ?f ; nmg:arrowTo ?t ;
+                 nmg:arrowLabel ?arrowLabel ; nmg:arrowCurve ?curve .
+              ?f nmg:lat ?fromLat ; nmg:long ?fromLong .
+              ?t nmg:lat ?toLat ; nmg:long ?toLong .
+            }""".formatted(segId)));
+        out.addAll(select("""
+            SELECT ("PhotoPin" AS ?type) ?lat ?long ?label ?image ?credit ?text WHERE {
+              id:%s nmg:mapState ?m . ?m nmg:photoPin ?pin . ?pin nmg:atPlace ?place .
+              ?place nmg:lat ?lat ; nmg:long ?long .
+              OPTIONAL { ?place rdfs:label ?label }
+              OPTIONAL { ?pin schema:text ?text }
+              OPTIONAL { ?pin nmg:references ?src . ?src nmg:mediaPath ?image .
+                         OPTIONAL { ?src rdfs:label ?credit } }
+            }""".formatted(segId)));
+        out.addAll(select("""
+            SELECT ("MemorialLayer" AS ?type) ?dataset WHERE {
+              id:%s nmg:mapState ?m . ?m nmg:showMemorial true .
+              BIND("stolpersteine" AS ?dataset)
+            }""".formatted(segId)));
+        out.addAll(select("""
+            SELECT ("WallLayer" AS ?type) ?dataset WHERE {
+              id:%s nmg:mapState ?m . ?m nmg:showWall true .
+              BIND("stadswallen" AS ?dataset)
+            }""".formatted(segId)));
+        return out;
     }
 
     /** All Stolpersteine: one memorial stone per victim, with location + inscription. */

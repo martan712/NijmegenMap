@@ -31,8 +31,10 @@ public class Application {
         // Per-segment content + companion-map state
         app.get("/api/segments/{id}/blocks", ctx ->
             ctx.json(store.blocks(ctx.pathParam("id"))));
-        app.get("/api/segments/{id}/map", ctx ->
-            ctx.json(store.map(ctx.pathParam("id"))));
+        // Typed scene components for a segment's companion map (the SceneManager
+        // dispatches each by its ?type to a registered renderer).
+        app.get("/api/segments/{id}/scene", ctx ->
+            ctx.json(store.scene(ctx.pathParam("id"))));
 
         // Stolpersteine memorial layer (all stones)
         app.get("/api/stolpersteine", ctx ->

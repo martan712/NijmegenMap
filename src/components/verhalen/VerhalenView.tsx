@@ -1,85 +1,15 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { MapEngine } from "../../services/MapEngine";
-import type { BoundsTuple, MemorialPoint } from "../../types";
+import type { MemorialPoint } from "../../types";
 import { useVerhaal } from "../../hooks/useVerhaal";
-import { sceneFromMapRows } from "../../verhalen/sceneFromMap";
-import { fetchStolpersteine, fetchStories, localName, mediaUrl } from "../../verhalen/api";
-import type { Block, StoryListEntry, ThreadGroup } from "../../verhalen/types";
+import { fetchStolpersteine, fetchStories, localName } from "../../verhalen/api";
+import type { StoryListEntry, ThreadGroup } from "../../verhalen/types";
 import { VerhalenSpine } from "./VerhalenSpine";
+import { PanelBlock, type PanelContext } from "./panel/registry";
+import { RomanLegend } from "../RomanLegend";
+import { GrowthLegend } from "../GrowthLegend";
+import { YearBadge } from "../YearBadge";
 import styles from "./verhalen.module.css";
-
-/** The fate lines of an inscription (everything after the "GEB. jjjj" line). */
-function fateOf(inscription?: string): string {
-  if (!inscription) return "";
-  const parts = inscription.split(" / ");
-  const gi = parts.findIndex((p) => /^GEB\./i.test(p));
-  return (gi >= 0 ? parts.slice(gi + 1) : parts).join(" · ");
-}
-
-/**
- * The Stolpersteine "memorial wall": a searchable, capped-height list of victims
- * (155 is too many to dump in full). Type to filter by name or street; click a
- * name to fly the companion map to that stone. The fate shows on hover.
- */
-function MemorialWall({
-  points,
-  onSelect,
-}: {
-  points: MemorialPoint[];
-  onSelect: (p: MemorialPoint) => void;
-}) {
-  const [q, setQ] = useState("");
-  const needle = q.trim().toLowerCase();
-  const shown = needle
-    ? points.filter(
-        (p) =>
-          p.name.toLowerCase().includes(needle) ||
-          (p.address ?? "").toLowerCase().includes(needle),
-      )
-    : points;
-  return (
-    <div className={styles.memorial}>
-      <div className={styles.memorialHead}>
-        <span className={styles.segTick}>Struikelstenen</span>
-        <h2>{points.length} namen</h2>
-        <p className={styles.memorialLede}>
-          Voor elk weggevoerd slachtoffer ligt een struikelsteen bij hun laatste
-          woning. Zoek een naam of klik er een om de steen op de kaart te tonen.
-        </p>
-      </div>
-      <div className={styles.memorialTools}>
-        <input
-          className={styles.memorialSearch}
-          type="search"
-          placeholder="Zoek op naam of straat…"
-          value={q}
-          onChange={(e) => setQ(e.target.value)}
-        />
-        <span className={styles.memorialCount}>
-          {shown.length} / {points.length}
-        </span>
-      </div>
-      <div className={styles.memorialGrid}>
-        {shown.map((p) => (
-          <button
-            key={`${p.name}-${p.address ?? ""}`}
-            type="button"
-            className={styles.victim}
-            title={fateOf(p.inscription)}
-            onClick={() => onSelect(p)}
-          >
-            <span className={styles.victimName}>{p.name}</span>
-            {p.lifespan && <span className={styles.victimYears}>{p.lifespan}</span>}
-          </button>
-        ))}
-        {shown.length === 0 && <p className={styles.memorialEmpty}>Geen naam gevonden.</p>}
-      </div>
-      <p className={styles.memorialSource}>
-        Bron: Wikipedia, “Lijst van Stolpersteine in Nijmegen” (CC BY-SA) · coördinaten via PDOK
-      </p>
-    </div>
-  );
-}
 
 type Frame = "full" | "companion";
 
@@ -97,46 +27,6 @@ function setFrame(engine: MapEngine, frame: Frame, animate: boolean): void {
     el.style.width = "56vw";
     el.style.height = "100vh";
     el.style.zIndex = "0";
-  }
-}
-
-function BlockView({ block }: { block: Block }) {
-  switch (localName(block.type)) {
-    case "NarrativeBlock":
-      return <p className={styles.narrative}>{block.text}</p>;
-    case "QuoteBlock":
-      return (
-        <blockquote className={styles.quote}>
-          <p>{block.verbatim}</p>
-          <cite>{[block.credit, block.locator].filter(Boolean).join(" · ")}</cite>
-        </blockquote>
-      );
-    case "AudioBlock":
-      return (
-        <figure className={styles.audio}>
-          {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-          <audio controls preload="metadata" src={block.mediaPath ? mediaUrl(block.mediaPath) : undefined} />
-          <figcaption>{block.credit}</figcaption>
-        </figure>
-      );
-    case "DocumentBlock":
-      return (
-        <figure className={styles.document}>
-          {block.mediaPath && <img src={mediaUrl(block.mediaPath)} alt={block.credit ?? ""} />}
-          {block.verbatim && <p className={styles.transcript}>{block.verbatim}</p>}
-          <figcaption>{[block.credit, block.locator].filter(Boolean).join(" · ")}</figcaption>
-        </figure>
-      );
-    case "GalleryBlock":
-    case "ImageBlock":
-      return (
-        <figure className={styles.gallery}>
-          {block.mediaPath && <img src={mediaUrl(block.mediaPath)} alt={block.credit ?? ""} />}
-          <figcaption>{block.credit}</figcaption>
-        </figure>
-      );
-    default:
-      return <p className={styles.narrative}>{block.text ?? block.verbatim}</p>;
   }
 }
 
@@ -208,14 +98,15 @@ export function VerhalenView({
   const navTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
   const animRef = useRef<number>(0); // fastScrollTo rAF handle
 
-  // The cumulative damage level shown at a segment (0 = none).
+  // The cumulative WW2 damage level shown at a segment (0 = none).
   const overlayAt = useCallback((idx: number): number => {
-    const rows = content[segments[idx]?.seg]?.mapRows;
-    const row = rows?.find((r) => r.overlay != null);
-    return row ? Number(row.overlay) : 0;
+    const comps = content[segments[idx]?.seg]?.components;
+    const ww2 = comps?.find((c) => c.type === "PolygonOverlay" && c.key === "ww2");
+    return ww2?.level != null ? Number(ww2.level) : 0;
   }, [segments, content]);
 
-  // Stolpersteine: fetched once; shown on the Deportatie segment's companion map.
+  // Stolpersteine: fetched once; shown on the segment whose scene declares a
+  // MemorialLayer component (the Deportatie segment).
   useEffect(() => {
     let off = false;
     fetchStolpersteine()
@@ -231,23 +122,8 @@ export function VerhalenView({
     return () => { off = true; };
   }, []);
 
-  // Which segment is the Deportatie one (gets the memorial map + victim wall).
-  const isMemorialSeg = useCallback(
-    (idx: number) => localName(segments[idx]?.event ?? "") === "deportatie",
-    [segments],
-  );
-  const memorialBounds = useMemo<BoundsTuple | null>(() => {
-    if (memorials.length === 0) return null;
-    const lats = memorials.map((p) => p.lat);
-    const lngs = memorials.map((p) => p.lng);
-    const pad = 0.002;
-    return [
-      [Math.min(...lats) - pad, Math.min(...lngs) - pad],
-      [Math.max(...lats) + pad, Math.max(...lngs) + pad],
-    ];
-  }, [memorials]);
-
-  // Fly the companion map to a segment's state.
+  // Fly the companion map to a segment's state by rendering its typed scene
+  // components through the SceneManager.
   const goToSegment = useCallback((idx: number, animate: boolean) => {
     if (!engine || idx < 0 || idx >= segments.length) return;
     segRef.current = idx;
@@ -256,39 +132,26 @@ export function VerhalenView({
     setFrame(engine, "companion", animate);
     const c = content[seg.seg];
     if (c) {
-      const scene = sceneFromMapRows(c.mapRows);
-      // Atlas pin scenes (a single located place + an image of it) get a map
-      // marker at that spot — but with NO image on the pin, so PinManager shows
-      // just the teardrop + label and binds no click-popup (the image already
-      // lives in the narrative column).
-      const placeRows = c.mapRows.filter((r) => r.kind === "place");
+      // Render WW2 damage bright ONLY on the segment that first reaches this
+      // level; later segments carry it forward dark (overlayAt returns 0 when a
+      // scene has no ww2 overlay, so non-WW2 scenes never highlight).
+      const cur = overlayAt(idx);
+      const prev = idx > 0 ? overlayAt(idx - 1) : 0;
+      // A lone focus place gets a teardrop when the column also shows an image of
+      // it (so the reader sees where that illustrated place is on the map).
       const hasImage = c.blocks.some((b) => {
         const t = localName(b.type);
         return t === "ImageBlock" || t === "GalleryBlock";
       });
-      if (hasImage && placeRows.length === 1) {
-        const p = placeRows[0];
-        scene.pin = { label: p.label ?? "", at: [Number(p.lat), Number(p.long)] };
-      }
-      // Render the damage bright ONLY on the segment that first reaches this
-      // level; later segments carry it forward dark (until a future segment
-      // lowers the shown level). No new damage this step → nothing bright.
-      // (Only for WW2 damage scenes; growth-overlay scenes set scene.growth.)
-      if (scene.ww2 != null) {
-        const cur = overlayAt(idx);
-        const prev = idx > 0 ? overlayAt(idx - 1) : 0;
-        scene.ww2Highlight = cur > prev ? cur : null;
-      }
-      // Deportatie: turn the companion map into the city-wide memorial map.
-      if (isMemorialSeg(idx) && memorialBounds) {
-        scene.memorials = memorials;
-        scene.focus = memorialBounds;
-      }
-      engine.applyScene(scene);
+      engine.scene.render(c.components, {
+        memorials,
+        highlightLevel: cur > prev ? cur : null,
+        markLoneFocus: hasImage,
+      });
       busyUntil.current = performance.now() + 950; // cover the map flight
       window.setTimeout(() => engine.map.invalidateSize({ animate: false }), animate ? 480 : 40);
     }
-  }, [engine, segments, content, overlayAt, isMemorialSeg, memorialBounds, memorials]);
+  }, [engine, segments, content, overlayAt, memorials]);
 
   // Show the first segment once a chapter's content is fully loaded — and re-run
   // for each chapter the spine switches to. `loadedStory` guarantees segments +
@@ -301,7 +164,7 @@ export function VerhalenView({
     const target = pendingSeg.current === "last" ? segments.length - 1 : pendingSeg.current;
     pendingSeg.current = 0;
     segRef.current = -1;
-    engine.clearStoryOverlays();
+    engine.scene.clear();
     engine.setOpacity(1);
     goToSegment(target, false);
     const el = sectionRefs.current[target];
@@ -310,8 +173,8 @@ export function VerhalenView({
 
   // Hide the +/- zoom control in the immersive surface; restore on exit.
   // (Scenes whose arrows run off the historical map drop that overlay and show
-  // the modern reference map instead — see sceneFromMapRows — so there's no
-  // confusing half-historical / half-modern split.)
+  // the modern reference map instead — see SceneManager.applyBaseAndCamera — so
+  // there's no confusing half-historical / half-modern split.)
   useEffect(() => {
     if (!engine) return;
     engine.setZoomControlVisible(false);
@@ -439,12 +302,37 @@ export function VerhalenView({
     return i < 0 ? 0 : i;
   }, [segments, activeSeg]);
 
+  // Map chrome over the companion map for the active segment: the legend that
+  // explains its overlay (the limes zones or the city-growth periods) and a
+  // per-segment year readout. The dimmed-Valkhof anchor cue (limes with `dim`)
+  // is a location hint, not the full frontier, so it gets no legend.
+  const chrome = useMemo(() => {
+    const comps = activeSeg ? content[activeSeg]?.components : undefined;
+    const limes = comps?.some(
+      (c) => c.type === "PolygonOverlay" && c.key === "limes" && c.dim !== "true",
+    ) ?? false;
+    const growth = comps?.find((c) => c.type === "PolygonOverlay" && c.key === "growth");
+    const seg = segments[activeIndex];
+    const year = seg?.date ? seg.date.slice(0, 4) : meta?.year ?? null;
+    return {
+      limes,
+      growthYear: growth?.level != null ? Number(growth.level) : null,
+      badge: year ? { label: year, era: meta?.era ?? undefined, tag: meta?.tag ?? "" } : null,
+    };
+  }, [activeSeg, content, segments, activeIndex, meta]);
+
   // Click a victim card → fly the companion map to that stone and open its popup.
   const onSelectVictim = useCallback((p: MemorialPoint) => {
     if (!engine) return;
     engine.map.flyTo([p.lat, p.lng], 18, { duration: 0.6 });
     engine.memorials.highlight(p);
   }, [engine]);
+
+  // Shared data the type-driven panel blocks may need (the memorial wall).
+  const panelCtx = useMemo<PanelContext>(
+    () => ({ memorials, onSelectVictim }),
+    [memorials, onSelectVictim],
+  );
 
   // Arrow keys step between segments (↑/← previous, ↓/→ next).
   useEffect(() => {
@@ -506,14 +394,9 @@ export function VerhalenView({
                   </div>
                   {c.blocks.map((b) => (
                     <div key={b.block} data-block data-seg={si} className={styles.block}>
-                      <BlockView block={b} />
+                      <PanelBlock block={b} ctx={panelCtx} />
                     </div>
                   ))}
-                  {isMemorialSeg(si) && memorials.length > 0 && (
-                    <div data-block data-seg={si} className={styles.block}>
-                      <MemorialWall points={memorials} onSelect={onSelectVictim} />
-                    </div>
-                  )}
                 </section>
               );
             })}
@@ -521,6 +404,18 @@ export function VerhalenView({
         ))}
 
       </div>
+
+      {/* Chrome over the companion map (left): a per-segment year badge at the
+          map's top-right, and the active overlay's legend at its top-left. */}
+      {chrome.badge && (
+        <YearBadge {...chrome.badge} style={{ top: 12, right: "calc(44vw + 12px)" }} />
+      )}
+      <RomanLegend visible={chrome.limes} style={{ top: 78, left: 12, right: "auto" }} />
+      <GrowthLegend
+        visible={chrome.growthYear != null}
+        activeYear={chrome.growthYear ?? 0}
+        style={{ top: 78, left: 12 }}
+      />
 
       <VerhalenSpine
         stories={stories}

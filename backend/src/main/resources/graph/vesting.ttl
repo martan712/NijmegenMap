@@ -153,10 +153,10 @@ id:block_vst_7_1 a nmg:NarrativeBlock ; nmg:order 1 ;
 # 8. Stadsmuur & poorten — one section; each tower/gate is a clickable photo pin.
 id:seg_vst_8 a nmg:Segment ; nmg:order 16 ; nmg:tickLabel "Stadsmuur & poorten" ;
     nmg:mapState id:map_vst_8 ; nmg:hasBlock id:block_vst_8_1 .
-id:map_vst_8 a nmg:MapState ; nmg:baseYear "1879"^^xsd:gYear ;
+id:map_vst_8 a nmg:MapState ; nmg:baseYear "1879"^^xsd:gYear ; nmg:showWall true ;
     nmg:photoPin id:pin_kronenburg , id:pin_hezel , id:pin_molen , id:pin_belvedere .
 id:block_vst_8_1 a nmg:NarrativeBlock ; nmg:order 1 ;
-    schema:text "Op 11 maart 1874 verloor Nijmegen zijn vestingstatus; vanaf 1876 werden de wallen, torens en poorten gesloopt om de overvolle benedenstad lucht en betere hygiëne te geven. Stadstekenaar Rudolphus Lauwerier en fotograaf Gerard Korfmacher legden de verdwijnende vestingwerken vast. Klik op de punten op de kaart voor hun tekeningen (collectie Museum Het Valkhof / Regionaal Archief Nijmegen)."@nl .
+    schema:text "Op 11 maart 1874 verloor Nijmegen zijn vestingstatus; vanaf 1876 werden de wallen, torens en poorten gesloopt om de overvolle benedenstad lucht en betere hygiëne te geven. Stadstekenaar Rudolphus Lauwerier en fotograaf Gerard Korfmacher legden de verdwijnende vestingwerken vast. Klik op de punten op de kaart voor hun tekeningen (collectie Museum Het Valkhof / Regionaal Archief Nijmegen). De oranje punten markeren de bekendste vestingwerken; enkele — zoals de Kronenburgertoren en de Belvédère — staan vandaag nog in het stadsbeeld. De lichtere punten tonen alle overige plekken die de tekenaars vastlegden."@nl .
 
 id:pin_kronenburg a nmg:PhotoPin ; nmg:atPlace id:kronenburgertoren ; nmg:references id:src_vst_kronenburg ;
     schema:text "De Kronenburgertoren, een zware ronde toren uit de 15e eeuw, vormde de zuidwesthoek van de middeleeuwse stadsmuur. Anders dan de meeste vestingwerken bleef hij na 1876 gespaard — vandaag staat hij nog steeds, als blikvanger van het Kronenburgerpark dat op de oude wal werd aangelegd."@nl .

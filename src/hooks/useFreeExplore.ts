@@ -57,10 +57,11 @@ export function useFreeExplore(
     const entry = timeline[current];
     if (entry) engine.showFreeEntry(entry);
     engine.setOpacity(opacity);
-    engine.growth.reveal(growthOn ? yearOf(entry) : null);
-    engine.fort.reveal(null);
+    if (growthOn && entry) engine.overlays.growth.show({ level: yearOf(entry) });
+    else engine.overlays.growth.hide();
+    engine.overlays.fort.hide();
     engine.wall.setVisible(false);
-    engine.wo2.hide();
+    engine.overlays.ww2.hide();
   }, [engine, active, current, timeline, growthOn, opacity]);
 
   // Spyglass enable + compare layer.
