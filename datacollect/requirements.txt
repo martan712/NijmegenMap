@@ -1,0 +1,4 @@
+# Only the raster stages (maps / tiles / finalize) need these; the fetch stages
+# run on the standard library alone.
+Pillow>=10
+numpy>=1.24

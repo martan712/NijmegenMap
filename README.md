@@ -21,11 +21,19 @@ live WMS render of just the current viewport and overlays it on top. Pan/zoom
 out and it's dropped again. Best of both: instant overview + crisp close-ups.
 
 ```
-build_maps.py   → fetches every layer (≤3000px, auto-downscales on server 500s)
-                  as a transparent WebP into maps/, and writes maps.json
-maps.json       → manifest: year, type, era, label, file, [[S,W],[N,E]] bounds
-index.html      → loads maps.json, preloads all images, crossfades between years
+datacollect maps  → fetches every layer (≤3000px, auto-downscales on server 500s)
+                    as a transparent WebP into maps/, and writes maps.json
+maps.json         → manifest: year, type, era, label, file, [[S,W],[N,E]] bounds
+index.html        → loads maps.json, preloads all images, crossfades between years
 ```
+
+All build/fetch logic lives in the **`datacollect/`** Python package — a single
+data-collection tool with one stage per concern (run `python -m datacollect list`
+to see them). It is layered: `sources/` (reusable upstream clients — Commons,
+WFS, WMS, PDOK, Wikipedia), `stages/` (the collection logic, one CLI subcommand
+each), and `catalog/` (declarative content — image sets, vector layers, story
+media, the timeline). Adding an image set, a vector layer, or a map year is a
+local edit in `catalog/`; the registry + auto-discovery wire it into the CLI.
 
 ### Key facts about the source WMS
 
@@ -39,17 +47,22 @@ index.html      → loads maps.json, preloads all images, crossfades between yea
 ## Run
 
 ```bash
-python3 build_maps.py        # one-time: download maps/ + maps.json (~50 MB)
-python3 -m http.server 8765  # serve
-# open http://localhost:8765
+pip install -r datacollect/requirements.txt   # Pillow + numpy (raster stages only)
+python3 -m datacollect maps    # one-time: download maps/ + maps.json (~50 MB)
+python3 -m datacollect tiles   # render the local XYZ tile pyramid into tiles/
+python3 -m datacollect finalize  # reconcile maps.json with the tiles on disk
+python3 -m http.server 8765    # serve  (open http://localhost:8765)
 ```
 
-`build_maps.py` is idempotent — re-running only fetches missing layers.
+Every stage is idempotent — re-running only fetches what's missing. Run
+`python3 -m datacollect all` to collect everything (images, vectors, stories,
+stolpersteine + the raster pipeline) in dependency order, or `fetch` for just the
+lightweight source fetches.
 
 ## City growth (Stadsontwikkeling)
 
-`fetch_chw.py` pulls the city's *Cultuurhistorische Waardenkaart* polygons from
-the open GeoServer WFS:
+The `vectors` stage (`python3 -m datacollect vectors`) pulls the city's
+*Cultuurhistorische Waardenkaart* polygons from the open GeoServer WFS:
 
 ```
 https://services.nijmegen.nl/geoservices/extern_Cultuurhistorie/ows  (WFS, GeoJSON, EPSG:4326)
@@ -64,8 +77,8 @@ live on the same service for future annotation layers.
 
 ## WW2 damage stops
 
-`fetch_chw.py` also pulls two layers used for three dedicated **1944 timeline
-stops** (spliced in after the 1938 map):
+The `vectors` stage also pulls two layers used for three dedicated **1944
+timeline stops** (spliced in after the 1938 map):
 
 - `extern_wo2:WO2_OORLOGSSCHADE` — 1565 damage polygons, attribute `CATEGORIE`
   with the three events: *Bombardement 22 feb*, *Bevrijding 17–21 sep*,
