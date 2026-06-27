@@ -22,7 +22,7 @@ out and it's dropped again. Best of both: instant overview + crisp close-ups.
 
 ```
 datacollect maps  → fetches every layer (≤3000px, auto-downscales on server 500s)
-                    as a transparent WebP into maps/, and writes maps.json
+                    as a transparent WebP into public/maps/, writes public/maps.json
 maps.json         → manifest: year, type, era, label, file, [[S,W],[N,E]] bounds
 index.html        → loads maps.json, preloads all images, crossfades between years
 ```
@@ -48,8 +48,8 @@ local edit in `catalog/`; the registry + auto-discovery wire it into the CLI.
 
 ```bash
 pip install -r datacollect/requirements.txt   # Pillow + numpy (raster stages only)
-python3 -m datacollect maps    # one-time: download maps/ + maps.json (~50 MB)
-python3 -m datacollect tiles   # render the local XYZ tile pyramid into tiles/
+python3 -m datacollect maps    # one-time: download public/maps/ + maps.json (~50 MB)
+python3 -m datacollect tiles   # render the local XYZ tile pyramid into public/tiles/
 python3 -m datacollect finalize  # reconcile maps.json with the tiles on disk
 python3 -m http.server 8765    # serve  (open http://localhost:8765)
 ```

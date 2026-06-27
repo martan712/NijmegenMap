@@ -40,6 +40,6 @@ Story id for WW2 is `story_ww2`; first segment is `seg_waaloversteek`.
 CORS is open (any host) for the Vite dev server.
 
 ## Media
-`mediaPath` values are repo-relative (e.g. `data/images/ww2/waaloversteek.jpg`),
-served by the existing frontend `public/data -> ../data` symlink. The Radio Oranje
+`mediaPath` values are site-root-relative (e.g. `data/images/ww2/waaloversteek.jpg`),
+served directly from `public/data/`. The Radio Oranje
 audio is not fetched yet (path points to its future `data/stories/ww2/audio/` home).

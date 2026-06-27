@@ -14,12 +14,12 @@ import os
 from dataclasses import dataclass
 from typing import Optional
 
-from ...core import ROOT, register_content
+from ...core import PUBLIC, register_content
 from ...sources import wms
 
-OUT_DIR = ROOT / "maps"
-MANIFEST = ROOT / "maps.json"
-TILE_DIR = ROOT / "tiles"
+OUT_DIR = PUBLIC / "maps"
+MANIFEST = PUBLIC / "maps.json"
+TILE_DIR = PUBLIC / "tiles"
 
 # maps stage
 MAX_EDGE = 3000          # server hard cap is "< 4000"

@@ -3,7 +3,7 @@ import type { MovementArrow, ScenePin } from "../../types";
 import type { ComponentRenderer } from "./types";
 
 const num = (s: string | null | undefined): number => Number(s);
-/** A repo-relative mediaPath ("data/…") → a URL served by the public/data symlink. */
+/** A site-root-relative mediaPath ("data/…") → a URL served from public/data. */
 const mediaUrl = (p: string): string => "/" + p.replace(/^\//, "");
 
 /**

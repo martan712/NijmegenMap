@@ -27,5 +27,5 @@ export const fetchStoryMeta = (storyId: string) =>
 export const localName = (iri: string): string =>
   iri.includes("#") ? iri.split("#").pop()! : iri.split("/").pop()!;
 
-/** A repo-relative mediaPath ("data/…") → a URL served by the public/data symlink. */
+/** A site-root-relative mediaPath ("data/…") → a URL served from public/data. */
 export const mediaUrl = (p: string): string => "/" + p.replace(/^\//, "");

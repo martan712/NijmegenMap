@@ -1,15 +1,18 @@
-# Generated data — rebuild with build_maps.py then build_tiles.py
-maps/
-tiles/
-maps.json
+# Generated map assets under the Vite public root — rebuild with the
+# datacollect raster stages (maps -> tiles -> finalize).
+public/maps/
+public/tiles/
+public/maps.json
+
+# Generated caches under public/data (the *.geojson there stay tracked):
+#   illustration caches — rebuild with the images stage
+public/data/images/
+#   fetched story media (photos/docs/audio) — rebuild with the stories stage
+public/data/stories/
 
 # Node / Vite
 node_modules/
 dist/
-public/maps
-public/tiles
-public/maps.json
-public/data
 
 # Python
 __pycache__/
@@ -20,8 +23,3 @@ __pycache__/
 .DS_Store
 
 Notes
-
-# Generated illustration caches — rebuild with the fetch_*_images.py scripts
-data/images/
-# Fetched story media (photos/docs/audio) — rebuild with fetch_ww2_story.py
-data/stories/
