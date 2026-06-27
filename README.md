@@ -31,9 +31,17 @@ All build/fetch logic lives in the **`datacollect/`** Python package — a singl
 data-collection tool with one stage per concern (run `python -m datacollect list`
 to see them). It is layered: `sources/` (reusable upstream clients — Commons,
 WFS, WMS, PDOK, Wikipedia), `stages/` (the collection logic, one CLI subcommand
-each), and `catalog/` (declarative content — image sets, vector layers, story
-media, the timeline). Adding an image set, a vector layer, or a map year is a
-local edit in `catalog/`; the registry + auto-discovery wire it into the CLI.
+each), `catalog/` (declarative content — places, sources, overlays, the narrative
+`chapters/`, vector layers, the timeline), and `graph/` (the ontology model +
+Turtle emitter). Adding a source, a vector layer, a map year, or a story segment
+is a local edit in `catalog/`; the registry + auto-discovery wire it into the CLI.
+
+The **Verhalen** knowledge graph (the React story frontend's data) is authored
+entirely in `catalog/` and emitted to the backend's Turtle files by the **`graph`**
+stage — `python -m datacollect graph` regenerates `places.ttl`, `sources.ttl`,
+`overlays.ttl` and one file per chapter. Media is one flat pool keyed by global
+slug: `data/images/<slug>.<ext>` (`data/audio/<slug>.<ext>` for recordings),
+fetched by the **`media`** stage, which reuses any local copy before downloading.
 
 ### Key facts about the source WMS
 
@@ -55,9 +63,9 @@ python3 -m http.server 8765    # serve  (open http://localhost:8765)
 ```
 
 Every stage is idempotent — re-running only fetches what's missing. Run
-`python3 -m datacollect all` to collect everything (images, vectors, stories,
-stolpersteine + the raster pipeline) in dependency order, or `fetch` for just the
-lightweight source fetches.
+`python3 -m datacollect all` to collect everything (media, vectors, korfmacher,
+stolpersteine, graph + the raster pipeline) in dependency order, or `fetch` for
+just the lightweight source fetches and the graph build.
 
 ## City growth (Stadsontwikkeling)
 

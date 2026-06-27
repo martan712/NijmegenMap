@@ -5,10 +5,10 @@ public/tiles/
 public/maps.json
 
 # Generated caches under public/data (the *.geojson there stay tracked):
-#   illustration caches — rebuild with the images stage
+#   flat media pool: images + Korfmacher drawings (data/images), audio
+#   recordings (data/audio) — rebuild with: python -m datacollect media
 public/data/images/
-#   fetched story media (photos/docs/audio) — rebuild with the stories stage
-public/data/stories/
+public/data/audio/
 
 # Node / Vite
 node_modules/

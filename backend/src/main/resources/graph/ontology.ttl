@@ -1,5 +1,7 @@
-# NijmegenMap ontology (v0.1) — domain + provenance + narrative model.
+# NijmegenMap ontology (v0.2) — domain + provenance + narrative model.
 # Reuses schema.org / CIDOC-CRM / PROV-O / CITO / Dublin Core; Wikidata via owl:sameAs.
+# The instance data (places, sources, overlays, chapters) is GENERATED from the
+# Python catalog by `python -m datacollect graph`; this schema is hand-maintained.
 @prefix nmg:   <https://nijmegenkaart.nl/ns#> .
 @prefix schema:<http://schema.org/> .
 @prefix crm:   <http://www.cidoc-crm.org/cidoc-crm/> .
@@ -11,7 +13,9 @@
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
 
-# 1. DOMAIN CLASSES
+# =====================================================================
+# 1. DOMAIN CLASSES  (each subclasses a standard so we stay interoperable)
+# =====================================================================
 nmg:Event a owl:Class ; rdfs:subClassOf schema:Event , crm:E5_Event ; rdfs:label "Historische gebeurtenis"@nl .
 nmg:Person a owl:Class ; rdfs:subClassOf schema:Person , crm:E21_Person ; rdfs:label "Persoon"@nl .
 nmg:Place a owl:Class ; rdfs:subClassOf schema:Place , crm:E53_Place ; rdfs:label "Plaats"@nl .
@@ -35,12 +39,17 @@ nmg:Transcript a owl:Class ; rdfs:subClassOf nmg:ContentUnit .
 nmg:Scan a owl:Class ; rdfs:subClassOf nmg:ContentUnit .
 nmg:Clip a owl:Class ; rdfs:subClassOf nmg:ContentUnit .
 
+# =====================================================================
 # 2. NARRATIVE / STORY MODEL
 # A Story is a chapter (era); it groups one or more Threads (verhaallijnen),
-# each of which is an ordered sequence of Segments (timeline-steps).
+# each an ordered sequence of Segments (timeline-steps). A Segment carries a
+# MapState (the companion-map scene) and ordered content Blocks.
+# =====================================================================
 nmg:Story a owl:Class ; rdfs:subClassOf schema:CreativeWork ; rdfs:label "Hoofdstuk"@nl .
 nmg:Thread a owl:Class ; rdfs:subClassOf schema:CreativeWork ; rdfs:label "Verhaallijn"@nl .
 nmg:Segment a owl:Class ; rdfs:label "Segment (timeline-stap)"@nl .
+
+# Content blocks (each subclasses nmg:Block).
 nmg:Block a owl:Class ; rdfs:label "Inhoudsblok"@nl .
 nmg:NarrativeBlock a owl:Class ; rdfs:subClassOf nmg:Block .
 nmg:QuoteBlock a owl:Class ; rdfs:subClassOf nmg:Block .
@@ -48,102 +57,95 @@ nmg:DocumentBlock a owl:Class ; rdfs:subClassOf nmg:Block .
 nmg:AudioBlock a owl:Class ; rdfs:subClassOf nmg:Block .
 nmg:ImageBlock a owl:Class ; rdfs:subClassOf nmg:Block .
 nmg:GalleryBlock a owl:Class ; rdfs:subClassOf nmg:Block .
+nmg:PinBlock a owl:Class ; rdfs:subClassOf nmg:Block .
+# Renders the searchable Stolpersteine victim wall in the panel column.
+nmg:MemorialWallBlock a owl:Class ; rdfs:subClassOf nmg:Block .
+
+# Companion-map scene primitives. A MapState is emitted by the scene endpoint as
+# an ordered list of typed components dispatched by the frontend SceneManager.
 nmg:MapState a owl:Class ; rdfs:label "Kaarttoestand"@nl .
 nmg:Arrow a owl:Class ; rdfs:label "Bewegingspijl"@nl .
+# A located image shown as a clickable map marker (e.g. the Korfmacher drawings).
+nmg:PhotoPin a owl:Class .
+# A conditionally-rendered polygon set (the Roman limes, the WW2 damage, …); the
+# frontend maps nmg:overlayKey -> its OverlayDef (geometry + colours).
+nmg:PolygonOverlay a owl:Class .
 
-# 3. OBJECT PROPERTIES
+# =====================================================================
+# 3. OBJECT PROPERTIES  (edges)
+# =====================================================================
+# Domain relations
 nmg:occurredAt a owl:ObjectProperty ; rdfs:subPropertyOf schema:location ; rdfs:domain nmg:Event ; rdfs:range nmg:Place .
 nmg:hadParticipant a owl:ObjectProperty ; rdfs:subPropertyOf schema:participant .
 nmg:partOf a owl:ObjectProperty ; rdfs:subPropertyOf schema:superEvent .
 nmg:locatedIn a owl:ObjectProperty ; rdfs:subPropertyOf schema:containedInPlace .
+
+# Provenance relations
 nmg:documents a owl:ObjectProperty ; rdfs:label "documenteert"@nl .
 nmg:depicts a owl:ObjectProperty ; rdfs:subPropertyOf schema:about .
 nmg:authoredBy a owl:ObjectProperty ; rdfs:subPropertyOf dct:creator ; rdfs:range nmg:Person .
 nmg:derivedFrom a owl:ObjectProperty ; rdfs:subPropertyOf prov:wasDerivedFrom .
 nmg:about a owl:ObjectProperty ; rdfs:subPropertyOf schema:about .
-# A Story groups Threads; a Thread groups its ordered Segments (reusing
-# nmg:order on the Thread for its position in the chapter, and on the Segment for
-# its position within the thread).
+nmg:cites a owl:ObjectProperty ; rdfs:subPropertyOf cito:citesAsEvidence .
+
+# Story structure
 nmg:hasThread a owl:ObjectProperty ; rdfs:domain nmg:Story ; rdfs:range nmg:Thread .
 nmg:hasSegment a owl:ObjectProperty ; rdfs:domain nmg:Thread ; rdfs:range nmg:Segment .
 nmg:hasBlock a owl:ObjectProperty ; rdfs:domain nmg:Segment ; rdfs:range nmg:Block .
 nmg:primaryEvent a owl:ObjectProperty ; rdfs:domain nmg:Segment ; rdfs:range nmg:Event .
 nmg:mapState a owl:ObjectProperty ; rdfs:domain nmg:Segment ; rdfs:range nmg:MapState .
 nmg:references a owl:ObjectProperty ; rdfs:domain nmg:Block ; rdfs:range nmg:ContentUnit .
-nmg:cites a owl:ObjectProperty ; rdfs:subPropertyOf cito:citesAsEvidence .
+
+# MapState scene details
 nmg:focusPlace a owl:ObjectProperty ; rdfs:domain nmg:MapState ; rdfs:range nmg:Place .
+nmg:overlay a owl:ObjectProperty ; rdfs:domain nmg:MapState ; rdfs:range nmg:PolygonOverlay .
 nmg:arrow a owl:ObjectProperty ; rdfs:domain nmg:MapState ; rdfs:range nmg:Arrow .
 nmg:arrowFrom a owl:ObjectProperty ; rdfs:domain nmg:Arrow ; rdfs:range nmg:Place .
 nmg:arrowTo a owl:ObjectProperty ; rdfs:domain nmg:Arrow ; rdfs:range nmg:Place .
+nmg:photoPin a owl:ObjectProperty ; rdfs:domain nmg:MapState ; rdfs:range nmg:PhotoPin .
+nmg:atPlace a owl:ObjectProperty ; rdfs:domain nmg:PhotoPin ; rdfs:range nmg:Place .
 
-# 4. DATATYPE PROPERTIES
-nmg:startDate a owl:DatatypeProperty ; rdfs:subPropertyOf schema:startDate ; rdfs:range xsd:date .
-nmg:endDate a owl:DatatypeProperty ; rdfs:subPropertyOf schema:endDate ; rdfs:range xsd:date .
+# =====================================================================
+# 4. DATATYPE PROPERTIES  (literals)
+# =====================================================================
+# Geometry / time
 nmg:lat a owl:DatatypeProperty ; rdfs:subPropertyOf geo:lat ; rdfs:range xsd:decimal .
 nmg:long a owl:DatatypeProperty ; rdfs:subPropertyOf geo:long ; rdfs:range xsd:decimal .
-nmg:verbatim a owl:DatatypeProperty ; rdfs:subPropertyOf schema:text .
-nmg:locator a owl:DatatypeProperty .
-nmg:mediaPath a owl:DatatypeProperty .
-nmg:order a owl:DatatypeProperty ; rdfs:range xsd:integer .
-nmg:tickLabel a owl:DatatypeProperty .
-nmg:rightsClass a owl:DatatypeProperty .
-nmg:baseYear a owl:DatatypeProperty ; rdfs:range xsd:gYear .
-nmg:overlayLevel a owl:DatatypeProperty ; rdfs:range xsd:integer .
-nmg:arrowLabel a owl:DatatypeProperty .
-nmg:arrowCurve a owl:DatatypeProperty ; rdfs:range xsd:decimal .
+nmg:startDate a owl:DatatypeProperty ; rdfs:subPropertyOf schema:startDate ; rdfs:range xsd:date .
+nmg:endDate a owl:DatatypeProperty ; rdfs:subPropertyOf schema:endDate ; rdfs:range xsd:date .
+
+# Source / content literals
+nmg:verbatim a owl:DatatypeProperty ; rdfs:subPropertyOf schema:text ; rdfs:comment "Word-for-word source text."@en .
+nmg:locator a owl:DatatypeProperty ; rdfs:comment "Page no., archive id, or audio timecode."@en .
+nmg:mediaPath a owl:DatatypeProperty ; rdfs:comment "Path under data/ (served from public/data)."@en .
+nmg:image a owl:DatatypeProperty ; rdfs:subPropertyOf schema:image .
+nmg:rightsClass a owl:DatatypeProperty ; rdfs:comment "'a' free | 'b' quotable-with-attribution | 'c' permission-required."@en .
+
+# Place / Stolperstein literals
 nmg:address a owl:DatatypeProperty ; rdfs:subPropertyOf schema:address .
 nmg:lifespan a owl:DatatypeProperty .
-nmg:image a owl:DatatypeProperty ; rdfs:subPropertyOf schema:image .
 
-# --- NEW: Story grouping / chapter metadata ---
-nmg:hasStory a owl:ObjectProperty ; rdfs:domain nmg:Segment ; rdfs:range nmg:Story .
+# Story / segment ordering & labels
+nmg:order a owl:DatatypeProperty ; rdfs:range xsd:integer ; rdfs:comment "Sequence index for threads/segments/blocks (avoids rdf:List)."@en .
+nmg:tickLabel a owl:DatatypeProperty ; rdfs:comment "Short timeline label, e.g. '20 sep'."@en .
 nmg:introText a owl:DatatypeProperty ; rdfs:domain nmg:Story ; rdfs:range xsd:string .
 nmg:eraLabel a owl:DatatypeProperty ; rdfs:domain nmg:Story ; rdfs:range xsd:string .
 nmg:representativeYear a owl:DatatypeProperty ; rdfs:domain nmg:Story ; rdfs:range xsd:gYear .
 nmg:tag a owl:DatatypeProperty ; rdfs:domain nmg:Story ; rdfs:range xsd:string .
-# Chronological position of a story in the picker (1 = oldest era). Stories
-# without one are hidden from the picker (e.g. prototypes / deep-dives).
+# Chronological position in the picker (1 = oldest). Stories without one are hidden.
 nmg:storyOrder a owl:DatatypeProperty ; rdfs:domain nmg:Story ; rdfs:range xsd:integer .
 
-# --- NEW: Block type for image pins (Atlas pin scenes) ---
-nmg:PinBlock a owl:Class ; rdfs:subClassOf nmg:Block .
-
-# --- NEW: polygon overlays (the Roman limes zones, the WW2 damage, …) ---
-# One type + edge for every conditionally-rendered polygon set. A MapState
-# points at the overlay it shows; nmg:overlayKey selects the frontend OverlayDef
-# (geometry + colours), and nmg:overlayLevel (reused) drives a cumulative reveal.
-nmg:PolygonOverlay a owl:Class .
-nmg:overlay a owl:ObjectProperty ; rdfs:domain nmg:MapState ; rdfs:range nmg:PolygonOverlay .
+# MapState scene literals
+nmg:baseYear a owl:DatatypeProperty ; rdfs:range xsd:gYear ; rdfs:comment "Historical base-map year for the MapState."@en .
 nmg:overlayKey a owl:DatatypeProperty ; rdfs:domain nmg:PolygonOverlay ; rdfs:range xsd:string .
-# Anchor variant: render the overlay's "dim" location cue instead of the full
-# layer (the limes overlay → only the dimmed Valkhof zone, anchoring post-Roman
-# Valkhof scenes). The scene endpoint emits it as `dim` on the PolygonOverlay.
+# Cumulative-reveal level: an integer step (ww2 damage 1|2|3) or a year (city growth).
+nmg:overlayLevel a owl:DatatypeProperty ; rdfs:range xsd:integer .
+# Anchor-cue variant: render the overlay's dimmed location zone, not the full layer.
 nmg:overlayDim a owl:DatatypeProperty ; rdfs:domain nmg:MapState ; rdfs:range xsd:boolean .
-
-# --- NEW: photo pins — a located image shown as a clickable map marker ---
-# A MapState lists its pins (nmg:photoPin). Each PhotoPin sits at a place
-# (nmg:atPlace), shows an image source (nmg:references) and its own caption
-# (schema:text); clicking the marker opens image + text (e.g. the Stadsmuur &
-# poorten Korfmacher drawings, each at its tower/gate).
-nmg:PhotoPin a owl:Class .
-nmg:photoPin a owl:ObjectProperty ; rdfs:domain nmg:MapState ; rdfs:range nmg:PhotoPin .
-nmg:atPlace a owl:ObjectProperty ; rdfs:domain nmg:PhotoPin ; rdfs:range nmg:Place .
-
-# --- NEW: fortification-ring overlay reveal year (Vestingwerken) ---
-# Like nmg:overlayLevel but for the fort overlay; the scene endpoint emits a
-# PolygonOverlay component with key "fort" (a bare nmg:overlayLevel ⇒ "growth").
+# Like overlayLevel but for the fortification rings (Vestingwerken); the scene
+# endpoint emits a PolygonOverlay with key "fort".
 nmg:fortLevel a owl:DatatypeProperty ; rdfs:domain nmg:MapState ; rdfs:range xsd:gYear .
-
-# --- NEW: type-driven scene components ---
-# The /api/segments/{id}/scene endpoint returns a MapState as an ordered list of
-# typed components (BaseMap, PolygonOverlay, FocusPlace, PhotoPin, Arrow,
-# MemorialLayer); the frontend SceneManager dispatches each by its component type
-# to a registered renderer. nmg:showMemorial turns the companion map into the
-# city-wide Stolpersteine memorial layer.
 nmg:showMemorial a owl:DatatypeProperty ; rdfs:domain nmg:MapState ; rdfs:range xsd:boolean .
-# nmg:showWall draws the city-wide layer of Lauwerier/Korfmacher wall points
-# (data/stadswallen.geojson) in a muted secondary colour, behind the curated
-# accent photo pins, so the reader can explore every recorded vestingwerk.
 nmg:showWall a owl:DatatypeProperty ; rdfs:domain nmg:MapState ; rdfs:range xsd:boolean .
-# A panel block that renders the searchable Stolpersteine victim wall.
-nmg:MemorialWallBlock a owl:Class ; rdfs:subClassOf nmg:Block .
+nmg:arrowLabel a owl:DatatypeProperty .
+nmg:arrowCurve a owl:DatatypeProperty ; rdfs:range xsd:decimal .

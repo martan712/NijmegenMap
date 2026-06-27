@@ -1,6 +1,7 @@
 """Import every submodule of a package so its @register_stage decorators and
 catalog registrations run as a side effect. This is what makes "drop a file in
-catalog/images/ and it shows up" work — no central list to edit."""
+catalog/ (or catalog/chapters/) and it shows up" work — no central list to edit.
+Recurses into subpackages, so chapter modules are discovered too."""
 import importlib
 import pkgutil
 

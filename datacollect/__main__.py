@@ -8,29 +8,35 @@ on startup, so this file never needs editing to add a source or dataset.
   python -m datacollect all              every stage, in dependency order
   python -m datacollect list             list discovered stages and content
 
-Stages (discovered): images, vectors, korfmacher, stories, stolpersteine,
+Stages (discovered): media, vectors, korfmacher, stolpersteine, graph,
 maps, tiles, finalize. The raster stages (maps/tiles/finalize) need Pillow +
 numpy; the fetch stages do not. Re-running any stage is safe.
+
+The instance ontology is built by the `graph` stage from the declarative catalog
+(catalog/places.py, sources.py, overlays.py, chapters/*.py); it runs after the
+fetches so it can fold in fetched credits + the gemeente TOELICHTING text.
 """
 import argparse
 import sys
 import time
 
-from . import catalog, stages
+from . import catalog, graph, stages
 from .core import STAGES, content, import_submodules
+from .graph import model
 
-# Group commands: ordered sequences of stage names (korfmacher after vectors;
-# tiles after maps; finalize after tiles).
+# Group commands: ordered sequences of stage names. graph runs last so it can
+# fold in credits.json (media) and vestingwerken.geojson (vectors).
 GROUPS = {
-    "fetch": ["images", "vectors", "korfmacher", "stories", "stolpersteine"],
-    "all": ["images", "vectors", "korfmacher", "stories", "stolpersteine",
+    "fetch": ["media", "vectors", "korfmacher", "stolpersteine", "graph"],
+    "all": ["media", "vectors", "korfmacher", "stolpersteine", "graph",
             "maps", "tiles", "finalize"],
 }
 
 
 def _discover():
-    import_submodules(stages)    # registers stages + content dataclasses
-    import_submodules(catalog)   # registers declarative content
+    import_submodules(stages)    # registers stages
+    import_submodules(catalog)   # registers declarative content (model registries)
+    _ = graph                    # ensure the graph package is importable
 
 
 def _run_stage(stage, args):
@@ -44,11 +50,16 @@ def _cmd_list(_args):
     print("Stages:")
     for name, stage in STAGES.items():
         print(f"  {name:<14} {stage.help}")
-    print("\nContent:")
-    for kind in ("images", "vectors", "stories", "timeline"):
+    print("\nCatalog (graph model):")
+    print(f"  {'places':<14} {len(model.PLACES)} item(s)")
+    print(f"  {'sources':<14} {len(model.SOURCES)} item(s)")
+    print(f"  {'overlays':<14} {len(model.OVERLAYS)} item(s)")
+    print(f"  {'chapters':<14} {len(model.CHAPTERS)} item(s): "
+          + ", ".join(c.story.slug for c in model.CHAPTERS))
+    print("\nContent (geo / raster):")
+    for kind in ("vectors", "timeline"):
         items = content(kind)
-        names = ", ".join(getattr(i, "name", getattr(i, "story", "")) for i in items
-                          if hasattr(i, "name") or hasattr(i, "story"))
+        names = ", ".join(getattr(i, "name", "") for i in items if hasattr(i, "name"))
         print(f"  {kind:<14} {len(items)} item(s)" + (f": {names}" if names else ""))
 
 
