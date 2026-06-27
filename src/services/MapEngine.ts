@@ -7,6 +7,7 @@ import { PinManager } from "./PinManager";
 import { FlowManager } from "./FlowManager";
 import { WallManager } from "./WallManager";
 import { MemorialManager } from "./MemorialManager";
+import { HeritageManager } from "./HeritageManager";
 import { SpyManager, type LensRefs } from "./SpyManager";
 import { SceneManager } from "./scene/SceneManager";
 import type { ManifestEntry } from "../types";
@@ -26,6 +27,7 @@ export class MapEngine {
   readonly flow: FlowManager;
   readonly wall: WallManager;
   readonly memorials: MemorialManager;
+  readonly heritage: HeritageManager;
   readonly spy: SpyManager;
   /** Renders backend-described, type-driven scenes (the Verhalen surface). */
   readonly scene: SceneManager;
@@ -45,10 +47,12 @@ export class MapEngine {
     this.flow = new FlowManager(this.map);
     this.wall = new WallManager(this.map);
     this.memorials = new MemorialManager(this.map);
+    this.heritage = new HeritageManager(this.map);
     this.spy = new SpyManager(this.map, lens);
     this.scene = new SceneManager({
       map: this.map, manifest: this.manifest, base: this.base, overlays: this.overlays,
-      pins: this.pins, flow: this.flow, memorials: this.memorials, wall: this.wall,
+      pins: this.pins, flow: this.flow, memorials: this.memorials,
+      heritage: this.heritage, wall: this.wall,
     });
   }
 

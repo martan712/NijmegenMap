@@ -160,7 +160,16 @@ id:seg_vfg_7 a nmg:Segment ;
     nmg:hasBlock id:block_vfg_7_1 .
 id:map_vfg_7 a nmg:MapState ;
     nmg:baseYear "1783"^^xsd:gYear ;
-    nmg:fortLevel "1732"^^xsd:gYear .
+    nmg:fortLevel "1732"^^xsd:gYear ;
+    nmg:showHeritage true ;
+    nmg:heritageCategory "verdedigings" ;
+    nmg:heritageCategory "fort" ;
+    nmg:heritageCategory "kazerne" ;
+    nmg:heritageCategory "kazemat" ;
+    nmg:heritageCategory "stadsmuur" ;
+    nmg:heritageCategory "poort" ;
+    nmg:heritageCategory "arsenaal" ;
+    nmg:heritageCategory "verdedigingstoren" .
 id:block_vfg_7_1 a nmg:NarrativeBlock ;
     nmg:order 1 ;
     schema:text "In 1725 werd Menno van Coehoorn als inspecteur-generaal der fortificatiën opgevolgd door De Bruyn. Onder zijn leiding werden de lunetten Nieuwwerk en het bastion Utrecht gebouwd. In 1726 werd aan de overzijde van de Waal het lunet Hollandia aangelegd. De lunetten Bottendaal werden met een extra lunet vergroot. In 1748 werden al deze buitenwerken met een enveloppe met glacis en een bedekte weg onderling verbonden en omgeven door een wal."@nl .

@@ -160,6 +160,12 @@ class Map:
     pins: tuple = ()                 # Pin
     memorial: bool = False
     wall: bool = False
+    heritage: bool = False           # show the Wikidata heritage layer
+    heritage_cats: tuple = ()        # category substrings to include (empty = all)
+    # Period filter: drop monuments with a KNOWN inception outside the range
+    # (undated ones always pass, so marquee medieval churches aren't lost).
+    heritage_before: Optional[int] = None
+    heritage_after: Optional[int] = None
 
 
 # Block kinds map 1:1 to ontology subclasses of nmg:Block.

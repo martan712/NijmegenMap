@@ -1,11 +1,12 @@
 import type L from "leaflet";
-import type { ManifestEntry, MemorialPoint } from "../../types";
+import type { HeritagePoint, ManifestEntry, MemorialPoint } from "../../types";
 import type { SceneComponent } from "../../verhalen/types";
 import type { BaseLayerManager } from "../BaseLayerManager";
 import type { FeatureOverlayManager } from "../FeatureOverlayManager";
 import type { PinManager } from "../PinManager";
 import type { FlowManager } from "../FlowManager";
 import type { MemorialManager } from "../MemorialManager";
+import type { HeritageManager } from "../HeritageManager";
 import type { WallManager } from "../WallManager";
 
 export type { SceneComponent };
@@ -18,6 +19,7 @@ export type { SceneComponent };
  */
 export interface RenderContext {
   memorials?: MemorialPoint[];
+  heritage?: HeritagePoint[];
   highlightLevel?: number | null;
   markLoneFocus?: boolean;
 }
@@ -32,6 +34,7 @@ export interface SceneDeps {
   pins: PinManager;
   flow: FlowManager;
   memorials: MemorialManager;
+  heritage: HeritageManager;
   wall: WallManager;
 }
 

@@ -33,6 +33,20 @@ export interface Stolperstein {
   image?: string | null;
 }
 
+export interface Heritage {
+  s: string; // IRI
+  name: string;
+  lat: string;
+  long: string;
+  categories?: string | null;
+  inception?: string | null;
+  renovations?: string | null;
+  architects?: string | null;
+  style?: string | null;
+  monumentId?: string | null;
+  image?: string | null;
+}
+
 export interface Block {
   block: string; // IRI
   type: string; // IRI, e.g. .../ns#GalleryBlock

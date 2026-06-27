@@ -49,6 +49,21 @@ export interface MemorialPoint {
   image?: string;
 }
 
+/** One Wikidata heritage place (rijksmonument etc.): a located, enriched marker. */
+export interface HeritagePoint {
+  lat: number;
+  lng: number;
+  name: string;
+  /** "; "-joined Wikidata type labels (P31); also the per-chapter filter key. */
+  categories?: string;
+  inception?: string;
+  renovations?: string;
+  architects?: string;
+  style?: string;
+  monumentId?: string;
+  image?: string;
+}
+
 /** One directed, curved arrow between two [lat, lon] points. */
 export interface MovementArrow {
   from: [number, number];

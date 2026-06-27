@@ -3,6 +3,8 @@ import { entryByYear } from "../../lib/manifest";
 import type { BoundsTuple } from "../../types";
 import {
   arrowRenderer,
+  filterHeritage,
+  heritageRenderer,
   memorialRenderer,
   overlayRenderer,
   photoPinRenderer,
@@ -41,6 +43,7 @@ export class SceneManager {
     PhotoPin: photoPinRenderer,
     Arrow: arrowRenderer,
     MemorialLayer: memorialRenderer,
+    HeritageLayer: heritageRenderer,
     WallLayer: wallRenderer,
   };
 
@@ -104,6 +107,12 @@ export class SceneManager {
       if (c.type === "Arrow") {
         pts.push([num(c.fromLat), num(c.fromLong)], [num(c.toLat), num(c.toLong)]);
       }
+    }
+    // With no explicit anchors, a heritage scene frames its (filtered) monuments.
+    if (!pts.length) {
+      const heritage = filterHeritage(
+        components.find((c) => c.type === "HeritageLayer"), ctx.heritage);
+      if (heritage.length) return boundsOf(heritage.map((h) => [h.lat, h.lng]), 0.002);
     }
     return pts.length ? boundsOf(pts, 0.004) : undefined;
   }

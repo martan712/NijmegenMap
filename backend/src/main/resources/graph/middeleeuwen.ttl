@@ -248,6 +248,15 @@ id:seg_vmk_14 a nmg:Segment ;
 id:map_vmk_14 a nmg:MapState ;
     nmg:baseYear "1557"^^xsd:gYear ;
     nmg:overlayLevel 1525 ;
+    nmg:showHeritage true ;
+    nmg:heritageCategory "kerk" ;
+    nmg:heritageCategory "kapel" ;
+    nmg:heritageCategory "klooster" ;
+    nmg:heritageCategory "synagoge" ;
+    nmg:heritageCategory "pastorie" ;
+    nmg:heritageCategory "torenspits" ;
+    nmg:heritageCategory "ruïne" ;
+    nmg:heritageBefore "1550"^^xsd:gYear ;
     nmg:focusPlace id:grote_markt , id:valkhof .
 id:block_vmk_14_1 a nmg:NarrativeBlock ;
     nmg:order 1 ;

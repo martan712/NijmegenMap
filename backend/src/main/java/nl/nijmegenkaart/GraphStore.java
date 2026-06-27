@@ -48,6 +48,7 @@ public class GraphStore {
         loadOptional("/graph/middeleeuwen.ttl");
         loadOptional("/graph/vesting.ttl");
         loadOptional("/graph/wederopbouw.ttl");
+        loadOptional("/graph/wikidata.ttl");
     }
 
     private void loadOptional(String classpathResource) {
@@ -153,6 +154,9 @@ public class GraphStore {
      *   Arrow           — a Place->Place movement arrow (nmg:arrow)
      *   MemorialLayer   — the city-wide Stolpersteine layer (nmg:showMemorial)
      *   WallLayer       — the muted city-wall point layer (nmg:showWall)
+     *   HeritageLayer   — the Wikidata heritage layer (nmg:showHeritage); its
+     *                     `categories` is a comma-joined nmg:heritageCategory list
+     *                     (empty = show all) the frontend filters the dataset by
      */
     public List<Map<String, Object>> scene(String segId) {
         List<Map<String, Object>> out = new ArrayList<>();
@@ -212,6 +216,16 @@ public class GraphStore {
               id:%s nmg:mapState ?m . ?m nmg:showWall true .
               BIND("stadswallen" AS ?dataset)
             }""".formatted(segId)));
+        out.addAll(select("""
+            SELECT ("HeritageLayer" AS ?type) ?dataset
+                   (GROUP_CONCAT(?cat; SEPARATOR=",") AS ?categories)
+                   (SAMPLE(?bf) AS ?before) (SAMPLE(?af) AS ?after) WHERE {
+              id:%s nmg:mapState ?m . ?m nmg:showHeritage true .
+              OPTIONAL { ?m nmg:heritageCategory ?cat }
+              OPTIONAL { ?m nmg:heritageBefore ?bf }
+              OPTIONAL { ?m nmg:heritageAfter ?af }
+              BIND("heritage" AS ?dataset)
+            } GROUP BY ?dataset""".formatted(segId)));
         return out;
     }
 
@@ -225,6 +239,31 @@ public class GraphStore {
               OPTIONAL { ?s nmg:verbatim ?inscription }
               OPTIONAL { ?s nmg:image ?image }
             } ORDER BY ?name""");
+    }
+
+    /**
+     * All Wikidata heritage places (one per monument), with the enrichment the
+     * popup shows. Multi-valued fields (category, renovation, architect) are
+     * joined per place; `categories` also drives the frontend's per-chapter filter.
+     */
+    public List<Map<String, Object>> heritage() {
+        return select("""
+            SELECT ?s ?name ?lat ?long
+                   (GROUP_CONCAT(DISTINCT ?cat; SEPARATOR="; ") AS ?categories)
+                   (SAMPLE(?inc) AS ?inception)
+                   (GROUP_CONCAT(DISTINCT ?ren; SEPARATOR=", ") AS ?renovations)
+                   (GROUP_CONCAT(DISTINCT ?archName; SEPARATOR=", ") AS ?architects)
+                   (SAMPLE(?sty) AS ?style) (SAMPLE(?mid) AS ?monumentId)
+                   (SAMPLE(?img) AS ?image) WHERE {
+              ?s a nmg:Place ; rdfs:label ?name ; nmg:lat ?lat ; nmg:long ?long ;
+                 nmg:category ?cat .
+              OPTIONAL { ?s nmg:inception ?inc }
+              OPTIONAL { ?s nmg:renovation ?ren }
+              OPTIONAL { ?s nmg:architect ?arch . ?arch rdfs:label ?archName }
+              OPTIONAL { ?s nmg:style ?sty }
+              OPTIONAL { ?s nmg:monumentId ?mid }
+              OPTIONAL { ?s nmg:image ?img }
+            } GROUP BY ?s ?name ?lat ?long ORDER BY ?name""");
     }
 
     /** Auto-bibliography: distinct sources used across a story, with rights/licence. */

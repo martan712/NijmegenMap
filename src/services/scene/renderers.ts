@@ -1,5 +1,6 @@
 import type { OverlayState } from "../../config/overlays";
-import type { MovementArrow, ScenePin } from "../../types";
+import type { HeritagePoint, MovementArrow, ScenePin } from "../../types";
+import type { SceneComponent } from "../../verhalen/types";
 import type { ComponentRenderer } from "./types";
 
 const num = (s: string | null | undefined): number => Number(s);
@@ -72,6 +73,39 @@ export const arrowRenderer: ComponentRenderer = (components, _ctx, deps) => {
 /** MemorialLayer: the city-wide Stolpersteine markers (data supplied via context). */
 export const memorialRenderer: ComponentRenderer = (components, ctx, deps) => {
   deps.memorials.show(components.length && ctx.memorials?.length ? ctx.memorials : null);
+};
+
+/**
+ * The heritage points a scene shows: the shared dataset filtered by the
+ * component's comma-joined `categories` (a point matches if any of its "; "-joined
+ * category labels contains any filter term, case-insensitively). No categories =
+ * the whole set. Shared by the renderer and the camera so both agree on the set.
+ */
+export function filterHeritage(
+  component: SceneComponent | undefined,
+  points: HeritagePoint[] | undefined,
+): HeritagePoint[] {
+  if (!component || !points?.length) return [];
+  const terms = (component.categories ?? "")
+    .split(",").map((t) => t.trim().toLowerCase()).filter(Boolean);
+  const before = component.before ? Number(component.before) : null;
+  const after = component.after ? Number(component.after) : null;
+  return points.filter((p) => {
+    const cats = (p.categories ?? "").toLowerCase();
+    if (terms.length && !terms.some((t) => cats.includes(t))) return false;
+    // Period filter: only drop monuments with a KNOWN out-of-range inception;
+    // undated ones pass (the medieval churches mostly have no recorded year).
+    const inc = p.inception ? Number(p.inception) : null;
+    if (inc != null && before != null && inc > before) return false;
+    if (inc != null && after != null && inc < after) return false;
+    return true;
+  });
+}
+
+/** HeritageLayer: the Wikidata monuments, filtered per chapter (see filterHeritage). */
+export const heritageRenderer: ComponentRenderer = (components, ctx, deps) => {
+  const pts = filterHeritage(components[0], ctx.heritage);
+  deps.heritage.show(pts.length ? pts : null);
 };
 
 // The wall points already shown as curated accent photo pins (vesting.ttl

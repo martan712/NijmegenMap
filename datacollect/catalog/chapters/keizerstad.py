@@ -70,7 +70,10 @@ Chapter(
                         Narr("In 1402 werd Nijmegen Hanzestad. Vanaf de Waalkade voeren koggen stroomopwaarts naar Keulen en stroomafwaarts naar Holland en de zee; de stad werd het regionale hoofd van het Keulse Hanzekwartier."),
                         Img("hanze"))),
             Segment("vmk_14", 14, "Volgroeide middeleeuwse stad",
-                    map=Map(base=1557, level=1525, focus=("grote_markt", "valkhof")),
+                    map=Map(base=1557, level=1525, focus=("grote_markt", "valkhof"),
+                            heritage=True, heritage_before=1550,
+                            heritage_cats=("kerk", "kapel", "klooster", "synagoge",
+                                           "pastorie", "torenspits", "ruïne")),
                     blocks=(
                         Narr("Rond 1525 is de ommuurde stad zo goed als vol; verdere groei moet wachten tot de muren vallen."),)),
         )),

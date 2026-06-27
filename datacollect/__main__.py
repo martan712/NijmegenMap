@@ -8,9 +8,9 @@ on startup, so this file never needs editing to add a source or dataset.
   python -m datacollect all              every stage, in dependency order
   python -m datacollect list             list discovered stages and content
 
-Stages (discovered): media, vectors, korfmacher, stolpersteine, graph,
-maps, tiles, finalize. The raster stages (maps/tiles/finalize) need Pillow +
-numpy; the fetch stages do not. Re-running any stage is safe.
+Stages (discovered): media, vectors, korfmacher, stolpersteine, wikidata,
+graph, maps, tiles, finalize. The raster stages (maps/tiles/finalize) need
+Pillow + numpy; the fetch stages do not. Re-running any stage is safe.
 
 The instance ontology is built by the `graph` stage from the declarative catalog
 (catalog/places.py, sources.py, overlays.py, chapters/*.py); it runs after the
@@ -27,9 +27,10 @@ from .graph import model
 # Group commands: ordered sequences of stage names. graph runs last so it can
 # fold in credits.json (media) and vestingwerken.geojson (vectors).
 GROUPS = {
-    "fetch": ["media", "vectors", "korfmacher", "stolpersteine", "graph"],
-    "all": ["media", "vectors", "korfmacher", "stolpersteine", "graph",
-            "maps", "tiles", "finalize"],
+    "fetch": ["media", "vectors", "korfmacher", "stolpersteine", "wikidata",
+              "graph"],
+    "all": ["media", "vectors", "korfmacher", "stolpersteine", "wikidata",
+            "graph", "maps", "tiles", "finalize"],
 }
 
 

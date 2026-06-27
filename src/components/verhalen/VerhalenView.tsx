@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { MapEngine } from "../../services/MapEngine";
-import type { MemorialPoint } from "../../types";
+import type { HeritagePoint, MemorialPoint } from "../../types";
 import { useVerhaal } from "../../hooks/useVerhaal";
-import { fetchStolpersteine, fetchStories, localName } from "../../verhalen/api";
+import { fetchHeritage, fetchStolpersteine, fetchStories, localName } from "../../verhalen/api";
 import type { StoryListEntry, ThreadGroup } from "../../verhalen/types";
 import { VerhalenSpine } from "./VerhalenSpine";
 import { PanelBlock, type PanelContext } from "./panel/registry";
@@ -83,6 +83,7 @@ export function VerhalenView({
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
   const [activeSeg, setActiveSeg] = useState<string | null>(null);
   const [memorials, setMemorials] = useState<MemorialPoint[]>([]);
+  const [heritage, setHeritage] = useState<HeritagePoint[]>([]);
 
   const segRef = useRef<number>(-1);
   const initedStory = useRef<string | null>(null); // story whose first segment we've shown
@@ -122,6 +123,25 @@ export function VerhalenView({
     return () => { off = true; };
   }, []);
 
+  // Wikidata heritage monuments: fetched once; each scene that declares a
+  // HeritageLayer shows the per-chapter category-filtered subset.
+  useEffect(() => {
+    let off = false;
+    fetchHeritage()
+      .then((rows) => {
+        if (off) return;
+        setHeritage(rows.map((r) => ({
+          lat: Number(r.lat), lng: Number(r.long), name: r.name,
+          categories: r.categories ?? undefined, inception: r.inception ?? undefined,
+          renovations: r.renovations ?? undefined, architects: r.architects ?? undefined,
+          style: r.style ?? undefined, monumentId: r.monumentId ?? undefined,
+          image: r.image ?? undefined,
+        })));
+      })
+      .catch(() => {}); // heritage layer is optional; ignore if backend lacks it
+    return () => { off = true; };
+  }, []);
+
   // Fly the companion map to a segment's state by rendering its typed scene
   // components through the SceneManager.
   const goToSegment = useCallback((idx: number, animate: boolean) => {
@@ -145,13 +165,14 @@ export function VerhalenView({
       });
       engine.scene.render(c.components, {
         memorials,
+        heritage,
         highlightLevel: cur > prev ? cur : null,
         markLoneFocus: hasImage,
       });
       busyUntil.current = performance.now() + 950; // cover the map flight
       window.setTimeout(() => engine.map.invalidateSize({ animate: false }), animate ? 480 : 40);
     }
-  }, [engine, segments, content, overlayAt, memorials]);
+  }, [engine, segments, content, overlayAt, memorials, heritage]);
 
   // Show the first segment once a chapter's content is fully loaded — and re-run
   // for each chapter the spine switches to. `loadedStory` guarantees segments +

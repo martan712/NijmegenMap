@@ -147,6 +147,14 @@ def _map_pairs(mp: m.Map):
         pairs.append(("nmg:showMemorial", "true"))
     if mp.wall:
         pairs.append(("nmg:showWall", "true"))
+    if mp.heritage:
+        pairs.append(("nmg:showHeritage", "true"))
+        for cat in mp.heritage_cats:
+            pairs.append(("nmg:heritageCategory", lit(cat)))
+        if mp.heritage_before is not None:
+            pairs.append(("nmg:heritageBefore", year(mp.heritage_before)))
+        if mp.heritage_after is not None:
+            pairs.append(("nmg:heritageAfter", year(mp.heritage_after)))
     if mp.focus:
         pairs.append(("nmg:focusPlace", " , ".join(f"id:{f}" for f in mp.focus)))
     if mp.arrows:

@@ -40,6 +40,10 @@ public class Application {
         app.get("/api/stolpersteine", ctx ->
             ctx.json(store.stolpersteine()));
 
+        // Wikidata heritage layer (all monuments; filtered per-chapter on the client)
+        app.get("/api/heritage", ctx ->
+            ctx.json(store.heritage()));
+
         // Story listing & metadata
         app.get("/api/stories", ctx ->
             ctx.json(store.stories()));

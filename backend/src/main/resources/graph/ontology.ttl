@@ -87,6 +87,7 @@ nmg:authoredBy a owl:ObjectProperty ; rdfs:subPropertyOf dct:creator ; rdfs:rang
 nmg:derivedFrom a owl:ObjectProperty ; rdfs:subPropertyOf prov:wasDerivedFrom .
 nmg:about a owl:ObjectProperty ; rdfs:subPropertyOf schema:about .
 nmg:cites a owl:ObjectProperty ; rdfs:subPropertyOf cito:citesAsEvidence .
+nmg:architect a owl:ObjectProperty ; rdfs:subPropertyOf schema:architect ; rdfs:comment "Architect — a Wikidata person or firm."@en .
 
 # Story structure
 nmg:hasThread a owl:ObjectProperty ; rdfs:domain nmg:Story ; rdfs:range nmg:Thread .
@@ -125,6 +126,13 @@ nmg:rightsClass a owl:DatatypeProperty ; rdfs:comment "'a' free | 'b' quotable-w
 nmg:address a owl:DatatypeProperty ; rdfs:subPropertyOf schema:address .
 nmg:lifespan a owl:DatatypeProperty .
 
+# Heritage / monument literals (Wikidata-sourced; see the wikidata stage).
+nmg:inception a owl:DatatypeProperty ; rdfs:subPropertyOf dct:created ; rdfs:range xsd:gYear ; rdfs:comment "Original construction year (earliest P571)."@en .
+nmg:renovation a owl:DatatypeProperty ; rdfs:range xsd:gYear ; rdfs:comment "A later construction/renovation year (P571 after the earliest)."@en .
+nmg:style a owl:DatatypeProperty ; rdfs:comment "Architectural style label (P149)."@en .
+nmg:category a owl:DatatypeProperty ; rdfs:comment "Wikidata type label (P31) — used to filter the heritage layer per chapter."@en .
+nmg:monumentId a owl:DatatypeProperty ; rdfs:comment "Rijksmonument register number (P359)."@en .
+
 # Story / segment ordering & labels
 nmg:order a owl:DatatypeProperty ; rdfs:range xsd:integer ; rdfs:comment "Sequence index for threads/segments/blocks (avoids rdf:List)."@en .
 nmg:tickLabel a owl:DatatypeProperty ; rdfs:comment "Short timeline label, e.g. '20 sep'."@en .
@@ -147,5 +155,13 @@ nmg:overlayDim a owl:DatatypeProperty ; rdfs:domain nmg:MapState ; rdfs:range xs
 nmg:fortLevel a owl:DatatypeProperty ; rdfs:domain nmg:MapState ; rdfs:range xsd:gYear .
 nmg:showMemorial a owl:DatatypeProperty ; rdfs:domain nmg:MapState ; rdfs:range xsd:boolean .
 nmg:showWall a owl:DatatypeProperty ; rdfs:domain nmg:MapState ; rdfs:range xsd:boolean .
+# Show the Wikidata heritage layer; nmg:heritageCategory (repeatable) restricts it
+# to matching nmg:category substrings (none = all).
+nmg:showHeritage a owl:DatatypeProperty ; rdfs:domain nmg:MapState ; rdfs:range xsd:boolean .
+nmg:heritageCategory a owl:DatatypeProperty ; rdfs:domain nmg:MapState ; rdfs:range xsd:string .
+# Period filter for the heritage layer: a monument with a known inception outside
+# [after, before] is hidden; undated monuments always pass.
+nmg:heritageBefore a owl:DatatypeProperty ; rdfs:domain nmg:MapState ; rdfs:range xsd:gYear .
+nmg:heritageAfter a owl:DatatypeProperty ; rdfs:domain nmg:MapState ; rdfs:range xsd:gYear .
 nmg:arrowLabel a owl:DatatypeProperty .
 nmg:arrowCurve a owl:DatatypeProperty ; rdfs:range xsd:decimal .

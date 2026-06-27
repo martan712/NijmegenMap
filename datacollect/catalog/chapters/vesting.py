@@ -53,7 +53,11 @@ Chapter(
                     map=Map(base=1783, fort=1702),
                     blocks=(Toelichting("1700-1702 Versterking Coehoorn"),)),
             Segment("vfg_7", 11, "1726–1732",
-                    map=Map(base=1783, fort=1732), blocks=(Toelichting("1726-1732"),)),
+                    map=Map(base=1783, fort=1732, heritage=True,
+                            heritage_cats=("verdedigings", "fort", "kazerne",
+                                           "kazemat", "stadsmuur", "poort",
+                                           "arsenaal", "verdedigingstoren")),
+                    blocks=(Toelichting("1726-1732"),)),
         )),
         Thread("vst_binnen", "De stad binnen de wallen", 3, (
             Segment("vst_5", 12, "De stad in 1639", map=Map(base=1639), blocks=(
