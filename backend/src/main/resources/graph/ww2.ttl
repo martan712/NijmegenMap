@@ -44,9 +44,16 @@ id:story_ww2 a nmg:Story ; rdfs:label "Nijmegen in de oorlog, 1940–1945"@nl ;
     nmg:introText "Van de Duitse inval tot de bevrijding: bezetting en deportatie, het vergissingsbombardement dat het hart van de stad wegvaagde, de Waaloversteek van Market Garden, en de lange granatentijd als frontstad."@nl ;
     nmg:representativeYear "1938"^^xsd:gYear ;
     nmg:storyOrder 4 ;
-    nmg:hasSegment id:seg_bezetting , id:seg_deportatie , id:seg_bombardement ,
-                   id:seg_marketgarden , id:seg_waaloversteek , id:seg_brug ,
-                   id:seg_frontstad , id:seg_bevrijding .
+    nmg:hasThread id:thread_ww2_bezetting , id:thread_ww2_marketgarden ,
+                  id:thread_ww2_frontstad .
+
+############################  THREADS (verhaallijnen)  ############################
+id:thread_ww2_bezetting a nmg:Thread ; rdfs:label "Bezetting & deportatie"@nl ; nmg:order 1 ;
+    nmg:hasSegment id:seg_bezetting , id:seg_deportatie , id:seg_bombardement .
+id:thread_ww2_marketgarden a nmg:Thread ; rdfs:label "Market Garden"@nl ; nmg:order 2 ;
+    nmg:hasSegment id:seg_marketgarden , id:seg_waaloversteek , id:seg_brug .
+id:thread_ww2_frontstad a nmg:Thread ; rdfs:label "Frontstad & bevrijding"@nl ; nmg:order 3 ;
+    nmg:hasSegment id:seg_frontstad , id:seg_bevrijding .
 
 # --- 1. Bezetting ---
 id:seg_bezetting a nmg:Segment ; nmg:order 1 ; nmg:tickLabel "Bezetting" ;

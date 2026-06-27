@@ -83,6 +83,20 @@
   margin: 0 0 5vh;
 }
 
+/* A verhaallijn group in the column: its title is the big "title-size" header,
+   each event below it a smaller subheader (.segHead h2). */
+.thread {
+  margin-bottom: 2vh;
+}
+.threadTitle {
+  margin: 7vh 0 1vh;
+  font-size: 34px;
+  line-height: 1.1;
+}
+.thread:first-of-type .threadTitle {
+  margin-top: 0;
+}
+
 /* Per-segment section + its small heading. */
 .section {
   margin-bottom: 7vh;
@@ -100,10 +114,13 @@
   font-weight: 700;
   color: var(--accent);
 }
+/* Event subheaders sit a clear step below the storyline title (.head h1, 34px). */
 .segHead h2 {
   margin: 5px 0 0;
-  font-size: 25px;
-  line-height: 1.15;
+  font-size: 20px;
+  font-weight: 650;
+  line-height: 1.2;
+  color: var(--muted);
 }
 
 /* Document / diary reader (scan + transcript). */
@@ -291,7 +308,8 @@
 }
 
 /* The two-layer navigator — bottom-left, over the companion map.
-   Top layer: events of the current chapter. Bottom layer: every chapter. */
+   Top layer: the verhaallijnen (storylines) of the open chapter, each with a
+   progress strip of n scene-blocks. Bottom layer: every chapter. */
 .vspine {
   pointer-events: auto;
   position: absolute;
@@ -300,22 +318,79 @@
   width: 56vw;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
   z-index: 1300;
 }
-.track {
+/* Top layer: one block per storyline, scrolls sideways if they overflow. */
+.threadTrack {
   display: flex;
-  gap: 10px;
+  gap: 14px;
   align-items: flex-end;
-  max-width: calc(56vw - 32px);
+  max-width: calc(56vw - 24px);
   overflow-x: auto;
-  padding: 8px 16px;
+  padding: 10px 16px;
   background: var(--panel-bg);
   backdrop-filter: var(--blur);
-  border-radius: 999px;
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
+  scrollbar-width: thin;
 }
+.threadBlock {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 84px;
+  max-width: 180px;
+}
+/* The progress strip: n scene-blocks, sat above the storyline title. */
+.progress {
+  display: flex;
+  gap: 3px;
+  align-items: stretch;
+  height: 6px;
+}
+.pblock {
+  flex: 1;
+  min-width: 5px;
+  border: none;
+  border-radius: 2px;
+  padding: 0;
+  background: var(--border);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.pblock:hover {
+  background: var(--muted);
+}
+.pblockOn,
+.pblockOn:hover {
+  background: var(--accent);
+}
+.threadName {
+  border: none;
+  cursor: pointer;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.2;
+  text-align: left;
+  padding: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.threadName:hover {
+  color: var(--text);
+}
+.threadNameOn {
+  color: var(--text);
+  white-space: normal;
+}
+/* Bottom layer: every chapter. */
 .chapterTrack {
   display: flex;
   gap: 6px;
@@ -327,6 +402,7 @@
   backdrop-filter: var(--blur);
   border-radius: 999px;
   box-shadow: var(--shadow-md);
+  scrollbar-width: thin;
 }
 .exitChip {
   flex: none;
@@ -391,44 +467,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-/* The active chapter shows its full title; others truncate. */
 .chapterChipOn .chapterName {
   max-width: none;
-}
-.tick {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 650;
-}
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--muted);
-  transition: all 0.2s ease;
-}
-.tickOn {
-  color: var(--text);
-}
-.tickOn .dot {
-  background: var(--accent);
-  box-shadow: 0 0 0 4px rgba(255, 138, 61, 0.25);
-}
-.tickLabel {
-  white-space: nowrap;
-}
-.timelineStory {
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--accent);
-  margin-bottom: 4px;
 }

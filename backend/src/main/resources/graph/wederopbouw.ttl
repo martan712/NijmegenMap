@@ -16,10 +16,18 @@ id:story_wederopbouw a nmg:Story ;
     nmg:representativeYear "2025"^^xsd:gYear ;
     nmg:tag "wederopbouw" ;
     nmg:storyOrder 5 ;
-    nmg:hasSegment id:seg_wed_1 , id:seg_wed_2 , id:seg_wed_3 ,
-                    id:seg_wed_4 , id:seg_wed_5 , id:seg_wed_6 ,
-                    id:seg_wed_7 ,
-                    id:seg_wed_8 , id:seg_wed_9 , id:seg_wed_10 .
+    nmg:hasThread id:thread_wed_opbouw , id:thread_wed_wijken ,
+                  id:thread_wed_kennis , id:thread_wed_waal .
+
+############################  THREADS (verhaallijnen)  ############################
+id:thread_wed_opbouw a nmg:Thread ; rdfs:label "Wederopbouw"@nl ; nmg:order 1 ;
+    nmg:hasSegment id:seg_wed_1 , id:seg_wed_2 , id:seg_wed_3 .
+id:thread_wed_wijken a nmg:Thread ; rdfs:label "Naoorlogse wijken"@nl ; nmg:order 2 ;
+    nmg:hasSegment id:seg_wed_4 , id:seg_wed_5 , id:seg_wed_6 .
+id:thread_wed_kennis a nmg:Thread ; rdfs:label "De kennisstad"@nl ; nmg:order 3 ;
+    nmg:hasSegment id:seg_wed_7 .
+id:thread_wed_waal a nmg:Thread ; rdfs:label "Waalsprong"@nl ; nmg:order 4 ;
+    nmg:hasSegment id:seg_wed_8 , id:seg_wed_9 , id:seg_wed_10 .
 
 # --- Thread 1: Wederopbouw ---
 

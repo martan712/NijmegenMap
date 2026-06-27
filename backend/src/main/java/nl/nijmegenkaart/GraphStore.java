@@ -98,16 +98,23 @@ public class GraphStore {
 
     // ---- Typed views (one SPARQL query each) -------------------------------
 
-    /** Ordered segments of a story = the timeline ticks. */
+    /**
+     * Ordered segments of a story = the timeline ticks, grouped by verhaallijn
+     * (thread). Each row carries its thread (bare id + label + order) so the
+     * frontend can split the chapter into its storylines. Ordered by thread, then
+     * by the segment's position within the thread.
+     */
     public List<Map<String, Object>> segments(String storyId) {
         return select("""
-            SELECT ?seg ?order ?tick ?event ?eventLabel ?date WHERE {
-              id:%s nmg:hasSegment ?seg .
+            SELECT ?seg ?order ?tick ?event ?eventLabel ?date ?thread ?threadLabel ?threadOrder WHERE {
+              id:%s nmg:hasThread ?th .
+              ?th nmg:order ?threadOrder ; rdfs:label ?threadLabel ; nmg:hasSegment ?seg .
               ?seg nmg:order ?order ; nmg:tickLabel ?tick .
+              BIND(STRAFTER(STR(?th), "https://nijmegenkaart.nl/id/") AS ?thread)
               OPTIONAL { ?seg nmg:primaryEvent ?event .
                          OPTIONAL { ?event rdfs:label ?eventLabel }
                          OPTIONAL { ?event nmg:startDate ?date } }
-            } ORDER BY ?order""".formatted(storyId));
+            } ORDER BY ?threadOrder ?order""".formatted(storyId));
     }
 
     /** Ordered blocks of a segment, resolving referenced verbatim/media content. */
@@ -185,7 +192,7 @@ public class GraphStore {
     public List<Map<String, Object>> bibliography(String storyId) {
         return select("""
             SELECT DISTINCT ?src ?label ?license ?rights WHERE {
-              id:%s nmg:hasSegment ?seg . ?seg nmg:hasBlock ?b .
+              id:%s nmg:hasThread ?th . ?th nmg:hasSegment ?seg . ?seg nmg:hasBlock ?b .
               { ?b nmg:cites ?src }
               UNION { ?b nmg:references ?src }
               UNION { ?b nmg:references ?cu . ?cu nmg:derivedFrom ?src }

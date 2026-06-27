@@ -17,11 +17,21 @@ id:story_vesting a nmg:Story ;
     nmg:representativeYear "1850"^^xsd:gYear ;
     nmg:tag "vesting" ;
     nmg:storyOrder 3 ;
-    nmg:hasSegment id:seg_vst_1 , id:seg_vst_2 , id:seg_vst_3 , id:seg_vst_4 ,
-                    id:seg_vfg_1 , id:seg_vfg_2 , id:seg_vfg_3 , id:seg_vfg_4 ,
-                    id:seg_vfg_5 , id:seg_vfg_6 , id:seg_vfg_7 ,
-                    id:seg_vst_5 , id:seg_vst_6 , id:seg_vst_7 ,
-                    id:seg_vst_13 , id:seg_vst_8 , id:seg_vst_14 , id:seg_vst_15 .
+    nmg:hasThread id:thread_vst_gewest , id:thread_vst_groeit , id:thread_vst_binnen ,
+                  id:thread_vst_muur , id:thread_vst_slechting .
+
+############################  THREADS (verhaallijnen)  ############################
+id:thread_vst_gewest a nmg:Thread ; rdfs:label "Gewest, geloof & vrede"@nl ; nmg:order 1 ;
+    nmg:hasSegment id:seg_vst_1 , id:seg_vst_2 , id:seg_vst_3 , id:seg_vst_4 .
+id:thread_vst_groeit a nmg:Thread ; rdfs:label "De vesting groeit"@nl ; nmg:order 2 ;
+    nmg:hasSegment id:seg_vfg_1 , id:seg_vfg_2 , id:seg_vfg_3 , id:seg_vfg_4 ,
+                    id:seg_vfg_5 , id:seg_vfg_6 , id:seg_vfg_7 .
+id:thread_vst_binnen a nmg:Thread ; rdfs:label "De stad binnen de wallen"@nl ; nmg:order 3 ;
+    nmg:hasSegment id:seg_vst_5 , id:seg_vst_6 , id:seg_vst_7 .
+id:thread_vst_muur a nmg:Thread ; rdfs:label "Stadsmuur & poorten"@nl ; nmg:order 4 ;
+    nmg:hasSegment id:seg_vst_8 .
+id:thread_vst_slechting a nmg:Thread ; rdfs:label "Slechting & uitbreiding"@nl ; nmg:order 5 ;
+    nmg:hasSegment id:seg_vst_13 , id:seg_vst_14 , id:seg_vst_15 .
 
 # --- Thread 1: Gewest, geloof & vrede ---
 

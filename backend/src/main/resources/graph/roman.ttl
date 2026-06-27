@@ -16,10 +16,16 @@ id:story_bataven a nmg:Story ;
     nmg:representativeYear "1557"^^xsd:gYear ;
     nmg:tag "romeins" ;
     nmg:storyOrder 1 ;
-    nmg:hasSegment id:seg_pre_1 , id:seg_pre_2 ,
-                    id:seg_rom_1 , id:seg_rom_2 , id:seg_rom_3 , id:seg_rom_4 ,
-                    id:seg_rom_5 , id:seg_rom_6 , id:seg_rom_7 ,
-                    id:seg_end_1 .
+    nmg:hasThread id:thread_pre , id:thread_rom , id:thread_end .
+
+############################  THREADS (verhaallijnen)  ############################
+id:thread_pre a nmg:Thread ; rdfs:label "Prehistorie"@nl ; nmg:order 1 ;
+    nmg:hasSegment id:seg_pre_1 , id:seg_pre_2 .
+id:thread_rom a nmg:Thread ; rdfs:label "Romeins Nijmegen"@nl ; nmg:order 2 ;
+    nmg:hasSegment id:seg_rom_1 , id:seg_rom_2 , id:seg_rom_3 , id:seg_rom_4 ,
+                    id:seg_rom_5 , id:seg_rom_6 , id:seg_rom_7 .
+id:thread_end a nmg:Thread ; rdfs:label "Het einde van Romeins Nijmegen"@nl ; nmg:order 3 ;
+    nmg:hasSegment id:seg_end_1 .
 
 # --- Thread 1: Prehistorie ---
 

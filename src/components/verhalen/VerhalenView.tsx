@@ -4,7 +4,7 @@ import type { BoundsTuple, MemorialPoint } from "../../types";
 import { useVerhaal } from "../../hooks/useVerhaal";
 import { sceneFromMapRows } from "../../verhalen/sceneFromMap";
 import { fetchStolpersteine, fetchStories, localName, mediaUrl } from "../../verhalen/api";
-import type { Block, StoryListEntry } from "../../verhalen/types";
+import type { Block, StoryListEntry, ThreadGroup } from "../../verhalen/types";
 import { VerhalenSpine } from "./VerhalenSpine";
 import styles from "./verhalen.module.css";
 
@@ -156,8 +156,8 @@ export function VerhalenView({
   engine: MapEngine | null;
   onExit: () => void;
 }) {
-  // The chapters (stories) and which one is open. The 2-layer spine switches
-  // between them in place — no separate full-screen picker.
+  // The chapters (stories) and which one is open. The bottom spine switches
+  // between them; the top spine shows the open chapter's verhaallijnen.
   const [stories, setStories] = useState<StoryListEntry[]>([]);
   const [activeStory, setActiveStory] = useState<string | null>(null);
   useEffect(() => {
@@ -173,6 +173,22 @@ export function VerhalenView({
   }, []);
 
   const { segments, content, error, meta, loadedStory } = useVerhaal(activeStory ?? "");
+
+  // Split the open chapter into its verhaallijnen (threads are contiguous runs in
+  // the thread-ordered segment array the backend returns).
+  const threads = useMemo<ThreadGroup[]>(() => {
+    const out: ThreadGroup[] = [];
+    segments.forEach((s, i) => {
+      const id = s.thread ?? "_";
+      const last = out[out.length - 1];
+      if (!last || last.id !== id) {
+        out.push({ id, label: s.threadLabel ?? "", segIdx: [i] });
+      } else {
+        last.segIdx.push(i);
+      }
+    });
+    return out;
+  }, [segments]);
   const columnRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
   const [activeSeg, setActiveSeg] = useState<string | null>(null);
@@ -180,6 +196,10 @@ export function VerhalenView({
 
   const segRef = useRef<number>(-1);
   const initedStory = useRef<string | null>(null); // story whose first segment we've shown
+  // Which segment to land on once a freshly-switched story finishes loading: 0
+  // when entering from the front, "last" when rolling in from the next story's
+  // left edge.
+  const pendingSeg = useRef<number | "last">(0);
   const busyUntil = useRef(0);
   const ticking = useRef(false);
   const busy = () => performance.now() < busyUntil.current;
@@ -278,11 +298,14 @@ export function VerhalenView({
     if (initedStory.current === activeStory) return;
     if (segments.length === 0 || !content[segments[0].seg]) return;
     initedStory.current = activeStory;
+    const target = pendingSeg.current === "last" ? segments.length - 1 : pendingSeg.current;
+    pendingSeg.current = 0;
     segRef.current = -1;
-    if (columnRef.current) columnRef.current.scrollTop = 0;
     engine.clearStoryOverlays();
     engine.setOpacity(1);
-    goToSegment(0, false);
+    goToSegment(target, false);
+    const el = sectionRefs.current[target];
+    if (columnRef.current) columnRef.current.scrollTop = el ? Math.max(0, el.offsetTop - 40) : 0;
   }, [engine, activeStory, loadedStory, segments, content, goToSegment]);
 
   // Hide the +/- zoom control in the immersive surface; restore on exit.
@@ -384,15 +407,37 @@ export function VerhalenView({
     goToSegment(idx, true);
   }, [segments, fastScrollTo, goToSegment]);
 
+  // Switch to another storyline, landing on its first segment ("first") or its
+  // last ("last", when rolling in backwards). The init effect reads pendingSeg
+  // once the new story's content has loaded.
+  const switchStory = useCallback((storyId: string, landing: "first" | "last") => {
+    if (storyId === activeStory) return;
+    pendingSeg.current = landing === "last" ? "last" : 0;
+    setActiveStory(storyId);
+  }, [activeStory]);
+
   const stepSegment = useCallback((dir: 1 | -1) => {
     const base = navRef.current ?? nearestIndex();
-    navigateTo(Math.max(0, Math.min(segments.length - 1, base + dir)));
-  }, [segments, navigateTo, nearestIndex]);
+    const next = base + dir;
+    // Within a chapter, stepping the (thread-ordered) index rolls between scenes
+    // and across storylines automatically. At the chapter's own edge, roll over
+    // into the previous / next chapter.
+    if (next < 0 || next >= segments.length) {
+      const si = stories.findIndex((s) => s.story === activeStory);
+      const ni = si + dir;
+      if (ni >= 0 && ni < stories.length) {
+        switchStory(stories[ni].story, dir === 1 ? "first" : "last");
+      }
+      return;
+    }
+    navigateTo(next);
+  }, [segments, stories, activeStory, navigateTo, nearestIndex, switchStory]);
 
-  const onPick = useCallback(
-    (segIri: string) => navigateTo(segments.findIndex((s) => s.seg === segIri)),
-    [segments, navigateTo],
-  );
+  // Where we are in the active story, for the spine's progress strip.
+  const activeIndex = useMemo(() => {
+    const i = segments.findIndex((s) => s.seg === activeSeg);
+    return i < 0 ? 0 : i;
+  }, [segments, activeSeg]);
 
   // Click a victim card → fly the companion map to that stone and open its popup.
   const onSelectVictim = useCallback((p: MemorialPoint) => {
@@ -434,50 +479,56 @@ export function VerhalenView({
         }}
       >
         <header className={styles.head}>
-          <span className={styles.kicker}>Verhaal</span>
-          <h1>{meta?.label ?? "Nijmegen in de oorlog"}</h1>
-          {meta?.era && <p className={styles.lede}>{meta.era}</p>}
+          <span className={styles.kicker}>
+            {[meta?.label, meta?.era].filter(Boolean).join(" · ") || "Verhaal"}
+          </span>
         </header>
 
         {error && <div className={styles.error}>Backend niet bereikbaar: {error}</div>}
 
-        {segments.map((s, si) => {
-          const c = content[s.seg];
-          if (!c) return null;
-          return (
-            <section
-              key={s.seg}
-              ref={(el) => {
-                sectionRefs.current[si] = el;
-              }}
-              className={styles.section}
-            >
-              <div className={styles.segHead}>
-                <h2>{s.eventLabel ?? s.tick}</h2>
-              </div>
-              {c.blocks.map((b) => (
-                <div key={b.block} data-block data-seg={si} className={styles.block}>
-                  <BlockView block={b} />
-                </div>
-              ))}
-              {isMemorialSeg(si) && memorials.length > 0 && (
-                <div data-block data-seg={si} className={styles.block}>
-                  <MemorialWall points={memorials} onSelect={onSelectVictim} />
-                </div>
-              )}
-            </section>
-          );
-        })}
+        {threads.map((t) => (
+          <div key={t.id} className={styles.thread}>
+            <h1 className={styles.threadTitle}>{t.label}</h1>
+            {t.segIdx.map((si) => {
+              const s = segments[si];
+              const c = content[s.seg];
+              if (!c) return null;
+              return (
+                <section
+                  key={s.seg}
+                  ref={(el) => {
+                    sectionRefs.current[si] = el;
+                  }}
+                  className={styles.section}
+                >
+                  <div className={styles.segHead}>
+                    <h2>{s.eventLabel ?? s.tick}</h2>
+                  </div>
+                  {c.blocks.map((b) => (
+                    <div key={b.block} data-block data-seg={si} className={styles.block}>
+                      <BlockView block={b} />
+                    </div>
+                  ))}
+                  {isMemorialSeg(si) && memorials.length > 0 && (
+                    <div data-block data-seg={si} className={styles.block}>
+                      <MemorialWall points={memorials} onSelect={onSelectVictim} />
+                    </div>
+                  )}
+                </section>
+              );
+            })}
+          </div>
+        ))}
 
       </div>
 
       <VerhalenSpine
         stories={stories}
         activeStory={activeStory}
-        onPickStory={setActiveStory}
-        segments={segments}
-        activeSeg={activeSeg}
-        onPickSeg={onPick}
+        threads={threads}
+        activeIndex={activeIndex}
+        onPickStory={(id) => switchStory(id, "first")}
+        onPickSegIndex={navigateTo}
         onExit={onExit}
       />
     </div>

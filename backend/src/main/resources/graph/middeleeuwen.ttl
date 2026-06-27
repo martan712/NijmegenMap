@@ -16,11 +16,17 @@ id:story_keizerstad a nmg:Story ;
     nmg:representativeYear "1557"^^xsd:gYear ;
     nmg:tag "middeleeuwen" ;
     nmg:storyOrder 2 ;
+    nmg:hasThread id:thread_vmk_palts , id:thread_vmk_stad , id:thread_vmk_naam .
+
+############################  THREADS (verhaallijnen)  ############################
+id:thread_vmk_palts a nmg:Thread ; rdfs:label "Van palts tot burcht"@nl ; nmg:order 1 ;
     nmg:hasSegment id:seg_vmk_1 , id:seg_vmk_2 , id:seg_vmk_3 , id:seg_vmk_4 ,
-                    id:seg_vmk_5 , id:seg_vmk_6 ,
-                    id:seg_vmk_7 , id:seg_vmk_8 , id:seg_vmk_9 , id:seg_vmk_10 ,
-                    id:seg_vmk_11 , id:seg_vmk_12 , id:seg_vmk_13 , id:seg_vmk_14 ,
-                    id:seg_vmk_15 , id:seg_vmk_16 , id:seg_vmk_17 .
+                    id:seg_vmk_5 , id:seg_vmk_6 .
+id:thread_vmk_stad a nmg:Thread ; rdfs:label "De stad aan de Waal"@nl ; nmg:order 2 ;
+    nmg:hasSegment id:seg_vmk_7 , id:seg_vmk_8 , id:seg_vmk_9 , id:seg_vmk_10 ,
+                    id:seg_vmk_11 , id:seg_vmk_12 , id:seg_vmk_13 , id:seg_vmk_14 .
+id:thread_vmk_naam a nmg:Thread ; rdfs:label "Stad van naam"@nl ; nmg:order 3 ;
+    nmg:hasSegment id:seg_vmk_15 , id:seg_vmk_16 , id:seg_vmk_17 .
 
 # --- Thread 1: Van palts tot burcht ---
 

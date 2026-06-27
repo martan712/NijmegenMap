@@ -36,7 +36,10 @@ nmg:Scan a owl:Class ; rdfs:subClassOf nmg:ContentUnit .
 nmg:Clip a owl:Class ; rdfs:subClassOf nmg:ContentUnit .
 
 # 2. NARRATIVE / STORY MODEL
-nmg:Story a owl:Class ; rdfs:subClassOf schema:CreativeWork ; rdfs:label "Verhaallijn"@nl .
+# A Story is a chapter (era); it groups one or more Threads (verhaallijnen),
+# each of which is an ordered sequence of Segments (timeline-steps).
+nmg:Story a owl:Class ; rdfs:subClassOf schema:CreativeWork ; rdfs:label "Hoofdstuk"@nl .
+nmg:Thread a owl:Class ; rdfs:subClassOf schema:CreativeWork ; rdfs:label "Verhaallijn"@nl .
 nmg:Segment a owl:Class ; rdfs:label "Segment (timeline-stap)"@nl .
 nmg:Block a owl:Class ; rdfs:label "Inhoudsblok"@nl .
 nmg:NarrativeBlock a owl:Class ; rdfs:subClassOf nmg:Block .
@@ -58,7 +61,11 @@ nmg:depicts a owl:ObjectProperty ; rdfs:subPropertyOf schema:about .
 nmg:authoredBy a owl:ObjectProperty ; rdfs:subPropertyOf dct:creator ; rdfs:range nmg:Person .
 nmg:derivedFrom a owl:ObjectProperty ; rdfs:subPropertyOf prov:wasDerivedFrom .
 nmg:about a owl:ObjectProperty ; rdfs:subPropertyOf schema:about .
-nmg:hasSegment a owl:ObjectProperty ; rdfs:domain nmg:Story ; rdfs:range nmg:Segment .
+# A Story groups Threads; a Thread groups its ordered Segments (reusing
+# nmg:order on the Thread for its position in the chapter, and on the Segment for
+# its position within the thread).
+nmg:hasThread a owl:ObjectProperty ; rdfs:domain nmg:Story ; rdfs:range nmg:Thread .
+nmg:hasSegment a owl:ObjectProperty ; rdfs:domain nmg:Thread ; rdfs:range nmg:Segment .
 nmg:hasBlock a owl:ObjectProperty ; rdfs:domain nmg:Segment ; rdfs:range nmg:Block .
 nmg:primaryEvent a owl:ObjectProperty ; rdfs:domain nmg:Segment ; rdfs:range nmg:Event .
 nmg:mapState a owl:ObjectProperty ; rdfs:domain nmg:Segment ; rdfs:range nmg:MapState .

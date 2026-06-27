@@ -8,6 +8,18 @@ export interface Segment {
   event?: string | null;
   eventLabel?: string | null;
   date?: string | null;
+  /** The verhaallijn (thread) this segment belongs to, within its chapter. */
+  thread?: string | null;
+  threadLabel?: string | null;
+  threadOrder?: string | null;
+}
+
+/** A verhaallijn: an ordered run of segments within a chapter. Derived frontend-side. */
+export interface ThreadGroup {
+  id: string;
+  label: string;
+  /** Global segment indices (into the chapter's flat segment array), in order. */
+  segIdx: number[];
 }
 
 export interface Stolperstein {
