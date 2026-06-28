@@ -255,8 +255,8 @@ public class GraphStore {
                    (GROUP_CONCAT(DISTINCT ?archName; SEPARATOR=", ") AS ?architects)
                    (SAMPLE(?sty) AS ?style) (SAMPLE(?mid) AS ?monumentId)
                    (SAMPLE(?img) AS ?image) WHERE {
-              ?s a nmg:Place ; rdfs:label ?name ; nmg:lat ?lat ; nmg:long ?long ;
-                 nmg:category ?cat .
+              ?s a/rdfs:subClassOf* nmg:Place ; rdfs:label ?name ; nmg:lat ?lat ; nmg:long ?long ;
+                 nmg:wikidataSet "rijksmonument" ; nmg:category ?cat .
               OPTIONAL { ?s nmg:inception ?inc }
               OPTIONAL { ?s nmg:renovation ?ren }
               OPTIONAL { ?s nmg:architect ?arch . ?arch rdfs:label ?archName }

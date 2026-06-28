@@ -132,6 +132,7 @@ nmg:renovation a owl:DatatypeProperty ; rdfs:range xsd:gYear ; rdfs:comment "A l
 nmg:style a owl:DatatypeProperty ; rdfs:comment "Architectural style label (P149)."@en .
 nmg:category a owl:DatatypeProperty ; rdfs:comment "Wikidata type label (P31) — used to filter the heritage layer per chapter."@en .
 nmg:monumentId a owl:DatatypeProperty ; rdfs:comment "Rijksmonument register number (P359)."@en .
+nmg:wikidataSet a owl:DatatypeProperty ; rdfs:range xsd:string ; rdfs:comment "Catalog WikidataSet key the instance was minted from (for per-set filtering)."@en .
 
 # Story / segment ordering & labels
 nmg:order a owl:DatatypeProperty ; rdfs:range xsd:integer ; rdfs:comment "Sequence index for threads/segments/blocks (avoids rdf:List)."@en .
