@@ -16,7 +16,7 @@ import type { WikidataInstance } from "../verhalen/types";
  */
 export class WikidataLayerManager {
   private map: L.Map;
-  private renderer: L.Canvas;
+  private renderer: L.SVG;
   private layer: L.LayerGroup | null = null;
   /** One Promise per set key — fetched once, then cached for the session. */
   private cache = new Map<string, Promise<WikidataLayerPoint[]>>();
@@ -25,7 +25,9 @@ export class WikidataLayerManager {
 
   constructor(map: L.Map) {
     this.map = map;
-    this.renderer = L.canvas({ pane: "wikidata" });
+    // SVG (not canvas) so only the drawn dots capture clicks and the gaps fall
+    // through to panes below; a canvas would swallow clicks across the whole map.
+    this.renderer = L.svg({ pane: "wikidata" });
   }
 
   /**

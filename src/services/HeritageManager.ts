@@ -12,12 +12,17 @@ import type { HeritagePoint } from "../types";
  */
 export class HeritageManager {
   private map: L.Map;
-  private renderer: L.Canvas;
+  private renderer: L.SVG;
   private layer: L.LayerGroup | null = null;
 
   constructor(map: L.Map) {
     this.map = map;
-    this.renderer = L.canvas({ pane: "heritage" });
+    // SVG (not canvas): a canvas renderer's element spans the whole map and
+    // swallows clicks everywhere — including empty areas — so it would block the
+    // panes below it (e.g. the wall points). With SVG, only the drawn dots are
+    // interactive; clicks in the gaps fall through. A few hundred points render
+    // fine in SVG.
+    this.renderer = L.svg({ pane: "heritage" });
   }
 
   show(points: HeritagePoint[] | null): void {

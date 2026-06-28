@@ -8,13 +8,15 @@ import type { MemorialPoint } from "../types";
  */
 export class MemorialManager {
   private map: L.Map;
-  private renderer: L.Canvas;
+  private renderer: L.SVG;
   private layer: L.LayerGroup | null = null;
   private byKey = new Map<string, L.CircleMarker>();
 
   constructor(map: L.Map) {
     this.map = map;
-    this.renderer = L.canvas({ pane: "memorial" });
+    // SVG (not canvas) so only the drawn stones capture clicks and the gaps fall
+    // through to panes below; a canvas would swallow clicks across the whole map.
+    this.renderer = L.svg({ pane: "memorial" });
   }
 
   private key(p: MemorialPoint): string {
