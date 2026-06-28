@@ -88,6 +88,7 @@ nmg:derivedFrom a owl:ObjectProperty ; rdfs:subPropertyOf prov:wasDerivedFrom .
 nmg:about a owl:ObjectProperty ; rdfs:subPropertyOf schema:about .
 nmg:cites a owl:ObjectProperty ; rdfs:subPropertyOf cito:citesAsEvidence .
 nmg:architect a owl:ObjectProperty ; rdfs:subPropertyOf schema:architect ; rdfs:comment "Architect — a Wikidata person or firm."@en .
+nmg:creator a owl:ObjectProperty ; rdfs:subPropertyOf dct:creator ; rdfs:comment "Creator/artist of a public artwork — a Wikidata person or firm (P170)."@en .
 
 # Story structure
 nmg:hasThread a owl:ObjectProperty ; rdfs:domain nmg:Story ; rdfs:range nmg:Thread .

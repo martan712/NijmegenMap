@@ -1,6 +1,7 @@
 """One HTTP getter for every source: a shared User-Agent, optional retries, and
 optional detection of WMS/WFS XML error bodies. Sources build on this rather
 than touching urllib directly."""
+import gzip
 import json
 import time
 import urllib.error
@@ -8,13 +9,22 @@ import urllib.request
 
 UA = "NijmegenMap/1.0 (historical map project; martanvanderstraaten@gmail.com)"
 
+# Advertise gzip. urllib otherwise defaults to "Accept-Encoding: identity"
+# (asking for an UNcompressed body, since it won't auto-decompress), and
+# Wikimedia's WDQS edge runs an emergency Varnish rule that aggressively
+# rate-limits (1 req/min) clients demanding uncompressed responses during an
+# outage — which is why the pipeline got 429s where curl (gzip-friendly) did
+# not. We send gzip and decompress below; servers that can't gzip just reply
+# uncompressed.
+ACCEPT_ENCODING = "gzip"
+
 
 def http_get(url, *, timeout=60, headers=None, tries=1, retry_delay=1.5,
              detect_xml_error=False):
     """GET url -> bytes. With tries>1, retries on any error after retry_delay.
     With detect_xml_error, a leading "<?xml" body (a WMS/WFS error page) is
     raised as a failure carrying the server's message."""
-    hdrs = {"User-Agent": UA}
+    hdrs = {"User-Agent": UA, "Accept-Encoding": ACCEPT_ENCODING}
     if headers:
         hdrs.update(headers)
     last = None
@@ -23,6 +33,8 @@ def http_get(url, *, timeout=60, headers=None, tries=1, retry_delay=1.5,
             req = urllib.request.Request(url, headers=hdrs)
             with urllib.request.urlopen(req, timeout=timeout) as r:
                 data = r.read()
+                if r.headers.get("Content-Encoding") == "gzip":
+                    data = gzip.decompress(data)
             if detect_xml_error and data[:5] == b"<?xml":
                 raise RuntimeError(data[:120].decode("utf-8", "replace").strip())
             return data
