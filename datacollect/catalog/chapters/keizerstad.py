@@ -1,6 +1,6 @@
 """Chapter: Keizerstad — 17 segments across 3 threads
 (Van palts tot burcht · De stad aan de Waal · Stad van naam)."""
-from ...graph import Arrow, Chapter, Img, Map, Narr, Segment, Story, Thread
+from ...graph import ArtWall, Arrow, Chapter, Img, Map, Narr, Segment, Story, Thread
 
 # Recurring map for the early-medieval palts scenes: the limes overlay dimmed to
 # its Valkhof zone as a location cue.
@@ -83,9 +83,12 @@ Chapter(
                         Narr("Rond 1385 werden in Nijmegen de broers Herman, Paul en Johan van Limburg geboren — de beroemdste miniatuurschilders van hun tijd. Voor de Franse hertog Jean de Berry verluchtten zij de Très Riches Heures, het rijkst versierde getijdenboek van de middeleeuwen. Alle drie stierven ze jong, vermoedelijk in 1416 aan de pest."),
                         Img("limburg"))),
             Segment("vmk_16", 16, "Mariken van Nieumeghen",
-                    map=Map(base=1557, focus=("grote_markt",)), blocks=(
+                    map=Map(base=1557, focus=("grote_markt",),
+                            wikidata="publicart", wikidata_depicts=("Mariken van Nieumeghen",)), blocks=(
                         Narr("Het rederijkersspel Mariken van Nieumeghen, gedrukt rond 1515, speelt zich af in en rond Nijmegen. Het vertelt hoe het meisje Mariken zeven jaar lang met de duivel Moenen door de wereld trekt, tot een mirakelspel haar van haar zonden verlost. Een hoogtepunt van de Middelnederlandse letterkunde — vandaag staat Mariken in brons op de Grote Markt."),
-                        Img("mariken"))),
+                        Img("mariken"),
+                        ArtWall(title="Mariken in brons",
+                                depicts="Mariken van Nieumeghen"))),
             Segment("vmk_17", 17, "Petrus Canisius",
                     map=Map(base=1557, focus=("broerstraat",)), blocks=(
                         Narr("Op 8 mei 1521 werd in de Broerstraat Petrus Canisius geboren. Als jezuïet werd hij de drijvende kracht achter de katholieke Contrareformatie in Duitstalig Europa; zijn catechismus werd eeuwenlang herdrukt. In 1925 werd hij heilig verklaard en tot kerkleraar uitgeroepen — de bekendste zoon van de stad."),

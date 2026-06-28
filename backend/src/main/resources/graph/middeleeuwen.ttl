@@ -283,9 +283,11 @@ id:seg_vmk_16 a nmg:Segment ;
     nmg:order 16 ;
     nmg:tickLabel "Mariken van Nieumeghen" ;
     nmg:mapState id:map_vmk_16 ;
-    nmg:hasBlock id:block_vmk_16_1 , id:block_vmk_16_2 .
+    nmg:hasBlock id:block_vmk_16_1 , id:block_vmk_16_2 , id:block_vmk_16_3 .
 id:map_vmk_16 a nmg:MapState ;
     nmg:baseYear "1557"^^xsd:gYear ;
+    nmg:showWikidataLayer "publicart" ;
+    nmg:depictsFilter "Mariken van Nieumeghen" ;
     nmg:focusPlace id:grote_markt .
 id:block_vmk_16_1 a nmg:NarrativeBlock ;
     nmg:order 1 ;
@@ -293,6 +295,11 @@ id:block_vmk_16_1 a nmg:NarrativeBlock ;
 id:block_vmk_16_2 a nmg:ImageBlock ;
     nmg:order 2 ;
     nmg:references id:src_mariken .
+id:block_vmk_16_3 a nmg:ArtWallBlock ;
+    nmg:order 3 ;
+    schema:text "Mariken in brons"@nl ;
+    nmg:wikidataSet "publicart" ;
+    nmg:depictsFilter "Mariken van Nieumeghen" .
 id:seg_vmk_17 a nmg:Segment ;
     nmg:order 17 ;
     nmg:tickLabel "Petrus Canisius" ;

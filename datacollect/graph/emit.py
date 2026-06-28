@@ -129,6 +129,7 @@ _BLOCK_TYPE = {
     "Narrative": "nmg:NarrativeBlock", "Image": "nmg:ImageBlock",
     "Gallery": "nmg:GalleryBlock", "Audio": "nmg:AudioBlock",
     "Quote": "nmg:QuoteBlock", "MemorialWall": "nmg:MemorialWallBlock",
+    "ArtWall": "nmg:ArtWallBlock",
 }
 
 def _map_pairs(mp: m.Map):
@@ -165,6 +166,10 @@ def _map_pairs(mp: m.Map):
             pairs.append(("nmg:heritageBefore", year(mp.heritage_before)))
         if mp.heritage_after is not None:
             pairs.append(("nmg:heritageAfter", year(mp.heritage_after)))
+        for dep in mp.wikidata_depicts:
+            pairs.append(("nmg:depictsFilter", lit(dep)))
+        if mp.wikidata_dated_only:
+            pairs.append(("nmg:datedOnly", "true"))
     if mp.focus:
         pairs.append(("nmg:focusPlace", " , ".join(f"id:{f}" for f in mp.focus)))
     if mp.arrows:
@@ -187,6 +192,20 @@ def _block_pairs(b: m.Block):
         pairs.append(("nmg:references", f"id:src_{b.src}"))
     if b.ref:
         pairs.append(("nmg:references", f"id:{b.ref}"))
+    # ArtWall: reuse the wikidata-layer filter predicates so the panel and the
+    # companion map can be filtered identically (see nmg:showWikidataLayer).
+    if b.kind == "ArtWall":
+        pairs.append(("nmg:wikidataSet", lit(b.art_set or "publicart")))
+        if b.art_before is not None:
+            pairs.append(("nmg:heritageBefore", year(b.art_before)))
+        if b.art_after is not None:
+            pairs.append(("nmg:heritageAfter", year(b.art_after)))
+        if b.art_depicts:
+            pairs.append(("nmg:depictsFilter", lit(b.art_depicts)))
+        if b.art_cats:
+            pairs.append(("nmg:heritageCategory", lit(b.art_cats)))
+        if b.art_dated_only:
+            pairs.append(("nmg:datedOnly", "true"))
     return pairs
 
 def chapter_ttl(ch: m.Chapter):

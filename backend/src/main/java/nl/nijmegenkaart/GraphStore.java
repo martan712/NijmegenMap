@@ -121,7 +121,8 @@ public class GraphStore {
     /** Ordered blocks of a segment, resolving referenced verbatim/media content. */
     public List<Map<String, Object>> blocks(String segId) {
         return select("""
-            SELECT ?block ?type ?order ?text ?ref ?verbatim ?mediaPath ?credit ?locator WHERE {
+            SELECT ?block ?type ?order ?text ?ref ?verbatim ?mediaPath ?credit ?locator
+                   ?set ?before ?after ?depicts ?categories ?datedOnly WHERE {
               id:%s nmg:hasBlock ?block .
               ?block a ?type ; nmg:order ?order .
               OPTIONAL { ?block schema:text ?text }
@@ -134,6 +135,12 @@ public class GraphStore {
                 OPTIONAL { ?ref nmg:derivedFrom ?src .
                            OPTIONAL { ?src rdfs:label ?credit } }
               }
+              OPTIONAL { ?block nmg:wikidataSet ?set }
+              OPTIONAL { ?block nmg:heritageBefore ?before }
+              OPTIONAL { ?block nmg:heritageAfter ?after }
+              OPTIONAL { ?block nmg:depictsFilter ?depicts }
+              OPTIONAL { ?block nmg:heritageCategory ?categories }
+              OPTIONAL { ?block nmg:datedOnly ?datedOnly }
             } ORDER BY ?order""".formatted(segId));
     }
 
@@ -232,11 +239,15 @@ public class GraphStore {
         out.addAll(select("""
             SELECT ("WikidataLayer" AS ?type) ?set
                    (GROUP_CONCAT(?cat; SEPARATOR=",") AS ?categories)
-                   (SAMPLE(?bf) AS ?before) (SAMPLE(?af) AS ?after) WHERE {
+                   (SAMPLE(?bf) AS ?before) (SAMPLE(?af) AS ?after)
+                   (GROUP_CONCAT(?dep; SEPARATOR=",") AS ?depicts)
+                   (SAMPLE(?dated) AS ?datedOnly) WHERE {
               id:%s nmg:mapState ?m . ?m nmg:showWikidataLayer ?set .
               OPTIONAL { ?m nmg:heritageCategory ?cat }
               OPTIONAL { ?m nmg:heritageBefore ?bf }
               OPTIONAL { ?m nmg:heritageAfter ?af }
+              OPTIONAL { ?m nmg:depictsFilter ?dep }
+              OPTIONAL { ?m nmg:datedOnly ?dated }
             } GROUP BY ?set""".formatted(segId)));
         return out;
     }
@@ -297,12 +308,14 @@ public class GraphStore {
         return select("""
             SELECT ?s ?name ?lat ?long
                    (GROUP_CONCAT(DISTINCT ?cat; SEPARATOR="; ") AS ?categories)
-                   (SAMPLE(?inc) AS ?inception) (SAMPLE(?img) AS ?image) WHERE {
+                   (SAMPLE(?inc) AS ?inception) (SAMPLE(?img) AS ?image)
+                   (GROUP_CONCAT(DISTINCT ?dep; SEPARATOR="; ") AS ?depicts) WHERE {
               ?s a/rdfs:subClassOf* nmg:Place ; nmg:wikidataSet "%s" ;
                  rdfs:label ?name ; nmg:lat ?lat ; nmg:long ?long .
               OPTIONAL { ?s nmg:category ?cat }
               OPTIONAL { ?s nmg:inception ?inc }
               OPTIONAL { ?s nmg:image ?img }
+              OPTIONAL { ?s nmg:depicts ?depNode . ?depNode rdfs:label ?dep }
             } GROUP BY ?s ?name ?lat ?long ORDER BY ?name""".formatted(safeSet));
     }
 

@@ -12,7 +12,7 @@ import type { WikidataInstance } from "../verhalen/types";
  * fetches lazily and caches per set key so new catalog sets need no VerhalenView
  * changes — a scene that declares nmg:showWikidataLayer "<key>" just works.
  *
- * Distinct from the heritage layer (blue #2e6bff): uses amber #e08a00.
+ * Distinct from the heritage layer (blue #2e6bff): uses magenta #e6007e.
  */
 export class WikidataLayerManager {
   private map: L.Map;
@@ -38,7 +38,7 @@ export class WikidataLayerManager {
    */
   show(
     set: string | null,
-    filters: { categories?: string | null; before?: string | null; after?: string | null },
+    filters: { categories?: string | null; before?: string | null; after?: string | null; depicts?: string | null; datedOnly?: string | null },
   ): void {
     this.latestSet = set;
     if (!set) {
@@ -56,6 +56,7 @@ export class WikidataLayerManager {
             categories: r.categories ?? undefined,
             inception: r.inception ?? undefined,
             image: r.image ?? undefined,
+            depicts: r.depicts ?? undefined,
           })),
         ),
       );
@@ -71,7 +72,7 @@ export class WikidataLayerManager {
 
   private _filter(
     points: WikidataLayerPoint[],
-    filters: { categories?: string | null; before?: string | null; after?: string | null },
+    filters: { categories?: string | null; before?: string | null; after?: string | null; depicts?: string | null; datedOnly?: string | null },
   ): WikidataLayerPoint[] {
     const terms = (filters.categories ?? "")
       .split(",")
@@ -79,12 +80,21 @@ export class WikidataLayerManager {
       .filter(Boolean);
     const before = filters.before ? Number(filters.before) : null;
     const after = filters.after ? Number(filters.after) : null;
+    const datedOnly = filters.datedOnly === "true";
+    const depTerms = (filters.depicts ?? "")
+      .split(",")
+      .map((t) => t.trim().toLowerCase())
+      .filter(Boolean);
     return points.filter((p) => {
       const cats = (p.categories ?? "").toLowerCase();
       if (terms.length && !terms.some((t) => cats.includes(t))) return false;
       const inc = p.inception ? Number(p.inception) : null;
+      // Undated works pass by default; `datedOnly` opts into a clean per-era slice.
+      if (datedOnly && inc == null) return false;
       if (inc != null && before != null && inc > before) return false;
       if (inc != null && after != null && inc < after) return false;
+      const dep = (p.depicts ?? "").toLowerCase();
+      if (depTerms.length && !depTerms.some((t) => dep.includes(t))) return false;
       return true;
     });
   }
@@ -103,11 +113,11 @@ export class WikidataLayerManager {
       const m = L.circleMarker([p.lat, p.lng], {
         pane: "wikidata",
         renderer: this.renderer,
-        radius: 5,
-        weight: 2,
+        radius: 8,
+        weight: 2.5,
         color: "#ffffff",
-        fillColor: "#e08a00",
-        fillOpacity: 0.95,
+        fillColor: "#e6007e",
+        fillOpacity: 1,
       });
       m.bindPopup(this._popupHtml(p), {
         className: "wallpop",
@@ -120,7 +130,7 @@ export class WikidataLayerManager {
   }
 
   private _popupHtml(p: WikidataLayerPoint): string {
-    const sub = [p.categories, p.inception && `ca. ${p.inception}`]
+    const sub = [p.categories, p.inception && `ca. ${p.inception}`, p.depicts && `toont: ${p.depicts}`]
       .filter(Boolean)
       .join(" — ");
     const img = p.image

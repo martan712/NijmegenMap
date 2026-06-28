@@ -1,7 +1,7 @@
 """Chapter: Nijmegen in de oorlog, 1940–1945 — 8 segments across 3 threads
 (Bezetting & deportatie · Market Garden · Frontstad & bevrijding). The only
 chapter with primary Events; its actors/events/quote are emitted into ww2.ttl."""
-from ...graph import (Actor, Arrow, Audio, Chapter, Event, Gallery, Map,
+from ...graph import (Actor, ArtWall, Arrow, Audio, Chapter, Event, Gallery, Map,
                       MemorialWall, Narr, Quote, QuoteB, Segment, Story, Thread)
 
 Chapter(
@@ -95,6 +95,15 @@ Chapter(
                         Narr("Pas in het voorjaar van 1945, toen het front oostwaarts trok, kwam Nijmegen echt tot rust. De stad vierde haar bevrijding — maar keek uit op een verwoest centrum. De wederopbouw zou decennia duren.",
                              about="bevrijding", cites="bevrijding"),
                         Gallery("bevrijding"))),
+        )),
+        Thread("ww2_herdenking", "De oorlog herdacht", 4, (
+            Segment("herdenking", 9, "De oorlog in brons en steen",
+                    map=Map(base=1938, focus=("binnenstad", "waalbrug"),
+                            wikidata="publicart", heritage_cats=("oorlogsmonument",)),
+                    blocks=(
+                        Narr("Tot op vandaag draagt de stad haar oorlog in brons en steen. Verspreid door Nijmegen herinneren tientallen oorlogsmonumenten aan wat hier gebeurde — de weggevoerde joodse gemeenschap, de Waaloversteek, de gevallenen en de bevrijding. Samen vormen ze het naoorlogse geheugen van de stad."),
+                        ArtWall(title="De oorlog herdacht",
+                                cats="oorlogsmonument"))),
         )),
     ),
 )

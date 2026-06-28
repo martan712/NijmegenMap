@@ -170,6 +170,10 @@ class Map:
     # heritage_cats / heritage_before / heritage_after also serve as this layer's
     # filters (reusing the same ontology predicates).
     wikidata: Optional[str] = None
+    wikidata_depicts: tuple = ()     # depicts-label substrings to filter by (empty = all)
+    # When True, drop works with no known inception year (default: keep them, as
+    # the heritage layer does). Use for clean per-era art slices.
+    wikidata_dated_only: bool = False
 
 
 # Block kinds map 1:1 to ontology subclasses of nmg:Block.
@@ -184,6 +188,15 @@ class Block:
     # Text pulled from a fetched dataset at build time, NOT authored here:
     # (geojson filename, match-property, match-value, text-property).
     fetch: Optional[tuple] = None
+    # ArtWall: a right-panel section showing a filtered slice of a Wikidata set
+    # (e.g. public art). Reuses the wikidata-layer filter axes so the panel and
+    # the companion map can be filtered identically per scene.
+    art_set: Optional[str] = None        # nmg:wikidataSet key (e.g. "publicart")
+    art_before: Optional[int] = None     # only works with inception <= this year
+    art_after: Optional[int] = None      # only works with inception >= this year
+    art_depicts: Optional[str] = None    # comma-separated depicts-label substrings
+    art_cats: Optional[str] = None       # comma-separated category substrings
+    art_dated_only: bool = False         # drop works with no known inception year
 
 
 def Narr(text, *, about=None, cites=None):
@@ -194,6 +207,16 @@ def Gallery(src):   return Block("Gallery", src=src)
 def Audio(src):     return Block("Audio", src=src)
 def QuoteB(ref):    return Block("Quote", ref=ref)
 def MemorialWall(): return Block("MemorialWall")
+
+def ArtWall(*, set="publicart", title=None, after=None, before=None,
+            depicts=None, cats=None, dated_only=False):
+    """A right-panel gallery of a Wikidata set's works, filtered to those relevant
+    to the scene (by inception period, depicted subject, and/or category). The
+    companion map shows the geographically-fitting subset via Map(wikidata=…).
+    `dated_only=True` drops works with no recorded year (for a clean per-era slice)."""
+    return Block("ArtWall", text=title, art_set=set, art_before=before,
+                 art_after=after, art_depicts=depicts, art_cats=cats,
+                 art_dated_only=dated_only)
 
 def Toelichting(periode):
     """A NarrativeBlock whose text is the gemeente's CHW_VESTINGWERKEN

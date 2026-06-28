@@ -1,17 +1,20 @@
 import type { FC } from "react";
 import { localName, mediaUrl } from "../../../verhalen/api";
 import type { Block } from "../../../verhalen/types";
-import type { MemorialPoint } from "../../../types";
+import type { MemorialPoint, WikidataLayerPoint } from "../../../types";
 import { MemorialWall } from "./MemorialWall";
+import { ArtWall } from "./ArtWall";
 import styles from "../verhalen.module.css";
 
 /**
  * Shared data a panel block may need beyond its own fields (the Stolpersteine
- * dataset + the "fly to a stone" callback for the memorial wall).
+ * dataset + the "fly to a stone" callback for the memorial wall; the "fly to an
+ * artwork" callback for the art wall).
  */
 export interface PanelContext {
   memorials: MemorialPoint[];
   onSelectVictim: (p: MemorialPoint) => void;
+  onSelectArt: (p: WikidataLayerPoint) => void;
 }
 
 interface PanelProps {
@@ -58,6 +61,21 @@ const Memorial: FC<PanelProps> = ({ ctx }) =>
     <MemorialWall points={ctx.memorials} onSelect={ctx.onSelectVictim} />
   ) : null;
 
+const Art: FC<PanelProps> = ({ block, ctx }) => (
+  <ArtWall
+    title={block.text}
+    set={block.set ?? "publicart"}
+    filters={{
+      before: block.before,
+      after: block.after,
+      depicts: block.depicts,
+      categories: block.categories,
+      datedOnly: block.datedOnly,
+    }}
+    onSelect={ctx.onSelectArt}
+  />
+);
+
 const Fallback: FC<PanelProps> = ({ block }) => (
   <p className={styles.narrative}>{block.text ?? block.verbatim}</p>
 );
@@ -71,6 +89,7 @@ const REGISTRY: Record<string, FC<PanelProps>> = {
   GalleryBlock: Gallery,
   ImageBlock: Gallery,
   MemorialWallBlock: Memorial,
+  ArtWallBlock: Art,
 };
 
 /** Renders one block by dispatching on its backend type (defaults to narrative). */

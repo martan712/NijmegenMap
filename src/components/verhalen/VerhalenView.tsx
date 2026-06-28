@@ -334,7 +334,12 @@ export function VerhalenView({
     ) ?? false;
     const growth = comps?.find((c) => c.type === "PolygonOverlay" && c.key === "growth");
     const seg = segments[activeIndex];
-    const year = seg?.date ? seg.date.slice(0, 4) : meta?.year ?? null;
+    // The badge must show the map actually on screen: the scene's BaseMap year
+    // (the same value SceneManager.applyBaseAndCamera picks the layer from).
+    // Fall back to the segment's narrative date / chapter year only for scenes
+    // with no period map (arrow/limes scenes show the modern reference map).
+    const baseMap = comps?.find((c) => c.type === "BaseMap");
+    const year = baseMap?.year ?? (seg?.date ? seg.date.slice(0, 4) : meta?.year ?? null);
     return {
       limes,
       growthYear: growth?.level != null ? Number(growth.level) : null,
@@ -349,10 +354,16 @@ export function VerhalenView({
     engine.memorials.highlight(p);
   }, [engine]);
 
-  // Shared data the type-driven panel blocks may need (the memorial wall).
+  // Click an art card → fly the companion map to that artwork's marker.
+  const onSelectArt = useCallback((p: { lat: number; lng: number }) => {
+    if (!engine) return;
+    engine.map.flyTo([p.lat, p.lng], 17, { duration: 0.6 });
+  }, [engine]);
+
+  // Shared data the type-driven panel blocks may need (the memorial + art walls).
   const panelCtx = useMemo<PanelContext>(
-    () => ({ memorials, onSelectVictim }),
-    [memorials, onSelectVictim],
+    () => ({ memorials, onSelectVictim, onSelectArt }),
+    [memorials, onSelectVictim, onSelectArt],
   );
 
   // Arrow keys step between segments (↑/← previous, ↓/→ next).

@@ -65,7 +65,8 @@ id:story_ww2 a nmg:Story ;
     nmg:storyOrder 4 ;
     nmg:hasThread id:thread_ww2_bezetting ,
         id:thread_ww2_marketgarden ,
-        id:thread_ww2_frontstad .
+        id:thread_ww2_frontstad ,
+        id:thread_ww2_herdenking .
 id:thread_ww2_bezetting a nmg:Thread ;
     rdfs:label "Bezetting & deportatie"@nl ;
     nmg:order 1 ;
@@ -247,3 +248,25 @@ id:block_bevrijding_1 a nmg:NarrativeBlock ;
 id:block_bevrijding_2 a nmg:GalleryBlock ;
     nmg:order 2 ;
     nmg:references id:src_bevrijding .
+id:thread_ww2_herdenking a nmg:Thread ;
+    rdfs:label "De oorlog herdacht"@nl ;
+    nmg:order 4 ;
+    nmg:hasSegment id:seg_herdenking .
+id:seg_herdenking a nmg:Segment ;
+    nmg:order 9 ;
+    nmg:tickLabel "De oorlog in brons en steen" ;
+    nmg:mapState id:map_herdenking ;
+    nmg:hasBlock id:block_herdenking_1 , id:block_herdenking_2 .
+id:map_herdenking a nmg:MapState ;
+    nmg:baseYear "1938"^^xsd:gYear ;
+    nmg:showWikidataLayer "publicart" ;
+    nmg:heritageCategory "oorlogsmonument" ;
+    nmg:focusPlace id:binnenstad , id:waalbrug .
+id:block_herdenking_1 a nmg:NarrativeBlock ;
+    nmg:order 1 ;
+    schema:text "Tot op vandaag draagt de stad haar oorlog in brons en steen. Verspreid door Nijmegen herinneren tientallen oorlogsmonumenten aan wat hier gebeurde — de weggevoerde joodse gemeenschap, de Waaloversteek, de gevallenen en de bevrijding. Samen vormen ze het naoorlogse geheugen van de stad."@nl .
+id:block_herdenking_2 a nmg:ArtWallBlock ;
+    nmg:order 2 ;
+    schema:text "De oorlog herdacht"@nl ;
+    nmg:wikidataSet "publicart" ;
+    nmg:heritageCategory "oorlogsmonument" .

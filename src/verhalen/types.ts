@@ -56,6 +56,7 @@ export interface WikidataInstance {
   categories?: string | null;
   inception?: string | null;
   image?: string | null;
+  depicts?: string | null;
 }
 
 export interface Block {
@@ -68,6 +69,13 @@ export interface Block {
   mediaPath?: string | null;
   credit?: string | null;
   locator?: string | null;
+  // ArtWall block: the Wikidata set + filters for its right-panel gallery.
+  set?: string | null;
+  before?: string | null;
+  after?: string | null;
+  depicts?: string | null;
+  categories?: string | null;
+  datedOnly?: string | null;
 }
 
 /**

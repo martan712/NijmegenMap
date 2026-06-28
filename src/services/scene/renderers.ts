@@ -115,7 +115,7 @@ export const heritageRenderer: ComponentRenderer = (components, ctx, deps) => {
  */
 export function filterWikidataPoints(
   points: WikidataLayerPoint[],
-  filters: { categories?: string | null; before?: string | null; after?: string | null },
+  filters: { categories?: string | null; before?: string | null; after?: string | null; depicts?: string | null; datedOnly?: string | null },
 ): WikidataLayerPoint[] {
   const terms = (filters.categories ?? "")
     .split(",")
@@ -123,12 +123,22 @@ export function filterWikidataPoints(
     .filter(Boolean);
   const before = filters.before ? Number(filters.before) : null;
   const after = filters.after ? Number(filters.after) : null;
+  const datedOnly = filters.datedOnly === "true";
+  const depTerms = (filters.depicts ?? "")
+    .split(",")
+    .map((t) => t.trim().toLowerCase())
+    .filter(Boolean);
   return points.filter((p) => {
     const cats = (p.categories ?? "").toLowerCase();
     if (terms.length && !terms.some((t) => cats.includes(t))) return false;
     const inc = p.inception ? Number(p.inception) : null;
+    // Undated works pass the period filter by default (like the heritage layer),
+    // unless the scene opts into `datedOnly` (a clean per-era slice).
+    if (datedOnly && inc == null) return false;
     if (inc != null && before != null && inc > before) return false;
     if (inc != null && after != null && inc < after) return false;
+    const dep = (p.depicts ?? "").toLowerCase();
+    if (depTerms.length && !depTerms.some((t) => dep.includes(t))) return false;
     return true;
   });
 }
@@ -140,6 +150,8 @@ export const wikidataRenderer: ComponentRenderer = (components, _ctx, deps) => {
     categories: c?.categories,
     before: c?.before,
     after: c?.after,
+    depicts: c?.depicts,
+    datedOnly: c?.datedOnly,
   });
 };
 

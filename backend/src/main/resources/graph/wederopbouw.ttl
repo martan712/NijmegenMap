@@ -40,24 +40,46 @@ id:seg_wed_2 a nmg:Segment ;
     nmg:order 2 ;
     nmg:tickLabel "Een nieuw centrum" ;
     nmg:mapState id:map_wed_2 ;
-    nmg:hasBlock id:block_wed_2_1 .
+    nmg:hasBlock id:block_wed_2_1 , id:block_wed_2_2 .
 id:map_wed_2 a nmg:MapState ;
     nmg:baseYear "1957"^^xsd:gYear ;
+    nmg:showWikidataLayer "publicart" ;
+    nmg:heritageBefore "1962"^^xsd:gYear ;
+    nmg:heritageAfter "1945"^^xsd:gYear ;
+    nmg:datedOnly true ;
     nmg:focusPlace id:centrum .
 id:block_wed_2_1 a nmg:NarrativeBlock ;
     nmg:order 1 ;
-    schema:text "In de jaren '50 verrijst een modern, ruimer opgezet stadshart op de oude fundamenten."@nl .
+    schema:text "In de jaren '50 verrijst een modern, ruimer opgezet stadshart op de oude fundamenten. Met de wederopbouw kwam ook de kunst: bij veel nieuwe gebouwen hoorde een beeld, een reliëf of een fontein — vaak betaald uit de percentageregeling voor beeldende kunst."@nl .
+id:block_wed_2_2 a nmg:ArtWallBlock ;
+    nmg:order 2 ;
+    schema:text "Kunst van de wederopbouw"@nl ;
+    nmg:wikidataSet "publicart" ;
+    nmg:heritageBefore "1962"^^xsd:gYear ;
+    nmg:heritageAfter "1945"^^xsd:gYear ;
+    nmg:datedOnly true .
 id:seg_wed_3 a nmg:Segment ;
     nmg:order 3 ;
     nmg:tickLabel "De stad hersteld" ;
     nmg:mapState id:map_wed_3 ;
-    nmg:hasBlock id:block_wed_3_1 .
+    nmg:hasBlock id:block_wed_3_1 , id:block_wed_3_2 .
 id:map_wed_3 a nmg:MapState ;
     nmg:baseYear "1967"^^xsd:gYear ;
+    nmg:showWikidataLayer "publicart" ;
+    nmg:heritageBefore "1978"^^xsd:gYear ;
+    nmg:heritageAfter "1963"^^xsd:gYear ;
+    nmg:datedOnly true ;
     nmg:focusPlace id:centrum .
 id:block_wed_3_1 a nmg:NarrativeBlock ;
     nmg:order 1 ;
-    schema:text "Tegen het eind van de jaren '60 is de wederopbouw grotendeels voltooid."@nl .
+    schema:text "Tegen het eind van de jaren '60 is de wederopbouw grotendeels voltooid. De stad raakt gevuld met naoorlogse beeldhouwkunst — van figuratieve gedenkbeelden tot abstracte, modernistische sculpturen."@nl .
+id:block_wed_3_2 a nmg:ArtWallBlock ;
+    nmg:order 2 ;
+    schema:text "Beeldende kunst van de jaren zestig en zeventig"@nl ;
+    nmg:wikidataSet "publicart" ;
+    nmg:heritageBefore "1978"^^xsd:gYear ;
+    nmg:heritageAfter "1963"^^xsd:gYear ;
+    nmg:datedOnly true .
 id:thread_wed_wijken a nmg:Thread ;
     rdfs:label "Naoorlogse wijken"@nl ;
     nmg:order 2 ;
@@ -85,7 +107,7 @@ id:map_wed_5 a nmg:MapState ;
     nmg:focusPlace id:dukenburg , id:centrum .
 id:block_wed_5_1 a nmg:NarrativeBlock ;
     nmg:order 1 ;
-    schema:text "Vanaf de jaren '60–'70 verrijst Dukenburg als grote naoorlogse uitbreiding."@nl .
+    schema:text "Vanaf de jaren '60–'70 verrijst Dukenburg als grote naoorlogse uitbreiding — de nieuwe wijken kregen hun eigen kunst in de openbare ruimte."@nl .
 id:seg_wed_6 a nmg:Segment ;
     nmg:order 6 ;
     nmg:tickLabel "Lindenholt erbij" ;

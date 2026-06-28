@@ -72,6 +72,7 @@ export interface WikidataLayerPoint {
   categories?: string;
   inception?: string;
   image?: string;
+  depicts?: string;
 }
 
 /** One directed, curved arrow between two [lat, lon] points. */
