@@ -131,6 +131,11 @@ nmg:inception a owl:DatatypeProperty ; rdfs:subPropertyOf dct:created ; rdfs:ran
 nmg:renovation a owl:DatatypeProperty ; rdfs:range xsd:gYear ; rdfs:comment "A later construction/renovation year (P571 after the earliest)."@en .
 nmg:style a owl:DatatypeProperty ; rdfs:comment "Architectural style label (P149)."@en .
 nmg:category a owl:DatatypeProperty ; rdfs:comment "Wikidata type label (P31) — used to filter the heritage layer per chapter."@en .
+
+# Person biographical literals (Wikidata-sourced; see the wikidata stage, second-pass enrichment).
+nmg:birthDate a owl:DatatypeProperty ; rdfs:subPropertyOf schema:birthDate ; rdfs:range xsd:gYear ; rdfs:comment "Birth year (Wikidata P569)."@en .
+nmg:deathDate a owl:DatatypeProperty ; rdfs:subPropertyOf schema:deathDate ; rdfs:range xsd:gYear ; rdfs:comment "Death year (Wikidata P570)."@en .
+nmg:nationality a owl:DatatypeProperty ; rdfs:subPropertyOf schema:nationality ; rdfs:comment "Country of citizenship label (Wikidata P27)."@en .
 nmg:monumentId a owl:DatatypeProperty ; rdfs:comment "Rijksmonument register number (P359)."@en .
 nmg:wikidataSet a owl:DatatypeProperty ; rdfs:range xsd:string ; rdfs:comment "Catalog WikidataSet key the instance was minted from (for per-set filtering)."@en .
 

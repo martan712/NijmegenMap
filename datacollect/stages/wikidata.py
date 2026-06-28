@@ -27,6 +27,24 @@ from ..sources import wikidata
 OUT = BACKEND_GRAPH / "wikidata.ttl"
 SEP = ";;"   # multi-value separator inside a GROUP_CONCAT cell
 
+# SPARQL SELECT used in the second-pass agent enrichment step.
+# __VALUES__ is replaced at runtime with "wd:Q1 wd:Q2 …" built from agents dict.
+_AGENT_ENRICHMENT_SPARQL = """\
+SELECT ?item
+       (SAMPLE(?dob) AS ?birth) (SAMPLE(?dod) AS ?death)
+       (GROUP_CONCAT(DISTINCT ?natLabel; SEPARATOR=";;") AS ?nat)
+       (SAMPLE(?img) AS ?image) (SAMPLE(?h) AS ?human)
+WHERE {
+  VALUES ?item { __VALUES__ }
+  OPTIONAL { ?item wdt:P569 ?dob }
+  OPTIONAL { ?item wdt:P570 ?dod }
+  OPTIONAL { ?item wdt:P27 ?n . ?n rdfs:label ?natLabel . FILTER(LANG(?natLabel) = "nl") }
+  OPTIONAL { ?item wdt:P18 ?img }
+  OPTIONAL { ?item wdt:P31 wd:Q5 . BIND(true AS ?h) }
+}
+GROUP BY ?item
+"""
+
 
 @dataclass
 class WikidataSet:
@@ -198,9 +216,38 @@ class WikidataStage(Stage):
 
         if agents:
             lines.append("")
-            lines.append(f"# Architects / firms referenced above ({len(agents)}).")
+            # Second-pass enrichment: fetch biographical data for all collected agent
+            # Q-ids in one WDQS query and emit typed, annotated nodes instead of stubs.
+            values_items = " ".join(f"wd:{q}" for q in sorted(agents))
+            sparql = _AGENT_ENRICHMENT_SPARQL.replace("__VALUES__", values_items)
+            enrichment = {r["item"]: r for r in wikidata.select(sparql) if r.get("item")}
+            lines.append(f"# Architects / firms referenced above ({len(agents)}) — enriched from Wikidata.")
             for q, lbl in sorted(agents.items()):
-                lines.append(f'wd:{q} rdfs:label "{_esc(lbl)}"@nl .')
+                row = enrichment.get(q)
+                if row is None:
+                    # No enrichment row returned: fall back to bare stub so nothing regresses.
+                    lines.append(f'wd:{q} rdfs:label "{_esc(lbl)}"@nl .')
+                    continue
+                is_human = row.get("human") == "true"
+                rdf_type = "nmg:Person" if is_human else "nmg:Organization"
+                parts = [
+                    f"wd:{q} a {rdf_type}",
+                    f'rdfs:label "{_esc(lbl)}"@nl',
+                ]
+                birth = row.get("birth")
+                if birth:
+                    parts.append(f'nmg:birthDate "{birth[:4]}"^^xsd:gYear')
+                death = row.get("death")
+                if death:
+                    parts.append(f'nmg:deathDate "{death[:4]}"^^xsd:gYear')
+                nat = row.get("nat")
+                if nat:
+                    for n in _split(nat):
+                        parts.append(f'nmg:nationality "{_esc(n)}"@nl')
+                image = row.get("image")
+                if image:
+                    parts.append(f'nmg:image "{_image_url(image)}"')
+                lines.append(" ;\n    ".join(parts) + " .")
 
         OUT.write_text("\n".join(lines) + "\n", encoding="utf-8")
         print(f"  Wrote {OUT.name} ({total_minted} minted, {total_merged} merged onto authored, "
