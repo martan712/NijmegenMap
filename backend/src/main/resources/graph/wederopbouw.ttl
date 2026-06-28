@@ -107,7 +107,7 @@ id:map_wed_5 a nmg:MapState ;
     nmg:focusPlace id:dukenburg , id:centrum .
 id:block_wed_5_1 a nmg:NarrativeBlock ;
     nmg:order 1 ;
-    schema:text "Vanaf de jaren '60–'70 verrijst Dukenburg als grote naoorlogse uitbreiding — de nieuwe wijken kregen hun eigen kunst in de openbare ruimte."@nl .
+    schema:text "Vanaf de jaren '60–'70 verrijst Dukenburg als grote naoorlogse uitbreiding."@nl .
 id:seg_wed_6 a nmg:Segment ;
     nmg:order 6 ;
     nmg:tickLabel "Lindenholt erbij" ;

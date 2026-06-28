@@ -36,7 +36,7 @@ Chapter(
             Segment("wed_5", 5, "Dukenburg verrijst",
                     map=Map(base=1977, level=1975, focus=("dukenburg", "centrum")),
                     blocks=(
-                        Narr("Vanaf de jaren '60–'70 verrijst Dukenburg als grote naoorlogse uitbreiding — de nieuwe wijken kregen hun eigen kunst in de openbare ruimte."),)),
+                        Narr("Vanaf de jaren '60–'70 verrijst Dukenburg als grote naoorlogse uitbreiding."),)),
             Segment("wed_6", 6, "Lindenholt erbij",
                     map=Map(base=1986, level=1985, focus=("lindenholt", "centrum")),
                     blocks=(
