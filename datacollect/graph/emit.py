@@ -155,6 +155,16 @@ def _map_pairs(mp: m.Map):
             pairs.append(("nmg:heritageBefore", year(mp.heritage_before)))
         if mp.heritage_after is not None:
             pairs.append(("nmg:heritageAfter", year(mp.heritage_after)))
+    if mp.wikidata:
+        pairs.append(("nmg:showWikidataLayer", lit(mp.wikidata)))
+        # heritage_cats / heritage_before / heritage_after double as this layer's
+        # filters (reusing the same ontology predicates — see nmg:showWikidataLayer).
+        for cat in mp.heritage_cats:
+            pairs.append(("nmg:heritageCategory", lit(cat)))
+        if mp.heritage_before is not None:
+            pairs.append(("nmg:heritageBefore", year(mp.heritage_before)))
+        if mp.heritage_after is not None:
+            pairs.append(("nmg:heritageAfter", year(mp.heritage_after)))
     if mp.focus:
         pairs.append(("nmg:focusPlace", " , ".join(f"id:{f}" for f in mp.focus)))
     if mp.arrows:

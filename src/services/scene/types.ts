@@ -8,6 +8,7 @@ import type { FlowManager } from "../FlowManager";
 import type { MemorialManager } from "../MemorialManager";
 import type { HeritageManager } from "../HeritageManager";
 import type { WallManager } from "../WallManager";
+import type { WikidataLayerManager } from "../WikidataLayerManager";
 
 export type { SceneComponent };
 
@@ -36,6 +37,7 @@ export interface SceneDeps {
   memorials: MemorialManager;
   heritage: HeritageManager;
   wall: WallManager;
+  wikidataLayer: WikidataLayerManager;
 }
 
 /**

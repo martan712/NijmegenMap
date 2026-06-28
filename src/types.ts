@@ -64,6 +64,16 @@ export interface HeritagePoint {
   image?: string;
 }
 
+/** One generic Wikidata instance marker (common fields across any nmg:wikidataSet). */
+export interface WikidataLayerPoint {
+  lat: number;
+  lng: number;
+  name: string;
+  categories?: string;
+  inception?: string;
+  image?: string;
+}
+
 /** One directed, curved arrow between two [lat, lon] points. */
 export interface MovementArrow {
   from: [number, number];

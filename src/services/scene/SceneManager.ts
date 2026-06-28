@@ -10,6 +10,7 @@ import {
   photoPinRenderer,
   pinRenderer,
   wallRenderer,
+  wikidataRenderer,
 } from "./renderers";
 import type { ComponentRenderer, RenderContext, SceneComponent, SceneDeps } from "./types";
 
@@ -45,6 +46,7 @@ export class SceneManager {
     MemorialLayer: memorialRenderer,
     HeritageLayer: heritageRenderer,
     WallLayer: wallRenderer,
+    WikidataLayer: wikidataRenderer,
   };
 
   constructor(deps: SceneDeps) {

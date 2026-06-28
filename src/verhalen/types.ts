@@ -47,6 +47,17 @@ export interface Heritage {
   image?: string | null;
 }
 
+/** One row from /api/wikidata/{set}: the common fields for any nmg:wikidataSet. */
+export interface WikidataInstance {
+  s: string; // IRI
+  name: string;
+  lat: string;
+  long: string;
+  categories?: string | null;
+  inception?: string | null;
+  image?: string | null;
+}
+
 export interface Block {
   block: string; // IRI
   type: string; // IRI, e.g. .../ns#GalleryBlock

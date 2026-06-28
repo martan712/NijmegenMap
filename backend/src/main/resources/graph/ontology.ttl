@@ -169,5 +169,6 @@ nmg:heritageCategory a owl:DatatypeProperty ; rdfs:domain nmg:MapState ; rdfs:ra
 # [after, before] is hidden; undated monuments always pass.
 nmg:heritageBefore a owl:DatatypeProperty ; rdfs:domain nmg:MapState ; rdfs:range xsd:gYear .
 nmg:heritageAfter a owl:DatatypeProperty ; rdfs:domain nmg:MapState ; rdfs:range xsd:gYear .
+nmg:showWikidataLayer a owl:DatatypeProperty ; rdfs:domain nmg:MapState ; rdfs:range xsd:string ; rdfs:comment "Show the Wikidata instance layer for the named nmg:wikidataSet key (generalises nmg:showHeritage). The nmg:heritageCategory/heritageBefore/heritageAfter filters apply to it too."@en .
 nmg:arrowLabel a owl:DatatypeProperty .
 nmg:arrowCurve a owl:DatatypeProperty ; rdfs:range xsd:decimal .

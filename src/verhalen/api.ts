@@ -1,4 +1,4 @@
-import type { Block, Heritage, SceneComponent, Segment, Stolperstein, StoryMeta, StoryListEntry } from "./types";
+import type { Block, Heritage, SceneComponent, Segment, Stolperstein, StoryMeta, StoryListEntry, WikidataInstance } from "./types";
 
 // The Java backend (Apache Jena + Javalin). Override with VITE_API at build time.
 const API =
@@ -20,6 +20,8 @@ export const fetchStolpersteine = () =>
   get<Stolperstein[]>(`/api/stolpersteine`);
 export const fetchHeritage = () =>
   get<Heritage[]>(`/api/heritage`);
+export const fetchWikidata = (set: string) =>
+  get<WikidataInstance[]>(`/api/wikidata/${set}`);
 export const fetchStories = () =>
   get<StoryListEntry[]>("/api/stories");
 export const fetchStoryMeta = (storyId: string) =>

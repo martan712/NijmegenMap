@@ -1,5 +1,5 @@
 import type { OverlayState } from "../../config/overlays";
-import type { HeritagePoint, MovementArrow, ScenePin } from "../../types";
+import type { HeritagePoint, MovementArrow, ScenePin, WikidataLayerPoint } from "../../types";
 import type { SceneComponent } from "../../verhalen/types";
 import type { ComponentRenderer } from "./types";
 
@@ -106,6 +106,41 @@ export function filterHeritage(
 export const heritageRenderer: ComponentRenderer = (components, ctx, deps) => {
   const pts = filterHeritage(components[0], ctx.heritage);
   deps.heritage.show(pts.length ? pts : null);
+};
+
+/**
+ * Generic Wikidata instance layer filter: same comma-split category matching and
+ * inception-period logic as filterHeritage, but for WikidataLayerPoint (which has
+ * no renovation/architect/style fields). Exported for potential camera framing.
+ */
+export function filterWikidataPoints(
+  points: WikidataLayerPoint[],
+  filters: { categories?: string | null; before?: string | null; after?: string | null },
+): WikidataLayerPoint[] {
+  const terms = (filters.categories ?? "")
+    .split(",")
+    .map((t) => t.trim().toLowerCase())
+    .filter(Boolean);
+  const before = filters.before ? Number(filters.before) : null;
+  const after = filters.after ? Number(filters.after) : null;
+  return points.filter((p) => {
+    const cats = (p.categories ?? "").toLowerCase();
+    if (terms.length && !terms.some((t) => cats.includes(t))) return false;
+    const inc = p.inception ? Number(p.inception) : null;
+    if (inc != null && before != null && inc > before) return false;
+    if (inc != null && after != null && inc < after) return false;
+    return true;
+  });
+}
+
+/** WikidataLayer: a generic Wikidata instance layer fetched lazily per set key. */
+export const wikidataRenderer: ComponentRenderer = (components, _ctx, deps) => {
+  const c = components[0];
+  deps.wikidataLayer.show(c ? (c.set ?? null) : null, {
+    categories: c?.categories,
+    before: c?.before,
+    after: c?.after,
+  });
 };
 
 // The wall points already shown as curated accent photo pins (vesting.ttl

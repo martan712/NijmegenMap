@@ -10,6 +10,7 @@
 
 # --- rijksmonument: heritage-listed places in Nijmegen (287) ---
 id:wd_rijksmonument_001 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Gepleisterd huis"@nl ;
     owl:sameAs wd:Q17438103 ;
     nmg:lat 51.84805 ; nmg:long 5.86374 ;
@@ -17,6 +18,7 @@ id:wd_rijksmonument_001 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "31138" .
 id:wd_rijksmonument_002 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Huis Hatert"@nl ;
     owl:sameAs wd:Q2535694 ;
     nmg:lat 51.80884 ; nmg:long 5.8193 ;
@@ -24,6 +26,7 @@ id:wd_rijksmonument_002 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "31201" .
 id:wd_rijksmonument_003 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Besiendershuis"@nl ;
     owl:sameAs wd:Q2629270 ;
     nmg:lat 51.84899 ; nmg:long 5.86683 ;
@@ -31,6 +34,7 @@ id:wd_rijksmonument_003 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "31185" .
 id:wd_rijksmonument_004 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "De Blaauwe Hand"@nl ;
     owl:sameAs wd:Q17438080 ;
     nmg:lat 51.84793 ; nmg:long 5.86347 ;
@@ -38,6 +42,7 @@ id:wd_rijksmonument_004 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "31115" .
 id:wd_rijksmonument_005 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Blok met herenhuizen"@nl ;
     owl:sameAs wd:Q17600091 ;
     nmg:lat 51.84213 ; nmg:long 5.87459 ;
@@ -45,6 +50,7 @@ id:wd_rijksmonument_005 a nmg:Place ;
     nmg:category "woongebouw"@nl ;
     nmg:monumentId "522986" .
 id:wd_rijksmonument_006 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Neboklooster: plantenkas"@nl ;
     owl:sameAs wd:Q17600086 ;
     nmg:lat 51.81192 ; nmg:long 5.88416 ;
@@ -52,6 +58,7 @@ id:wd_rijksmonument_006 a nmg:Place ;
     nmg:category "groenvoorziening"@nl ;
     nmg:monumentId "522984" .
 id:wd_rijksmonument_007 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Transformatorhuisje"@nl ;
     owl:sameAs wd:Q17600087 ;
     nmg:lat 51.84133 ; nmg:long 5.87003 ;
@@ -59,6 +66,7 @@ id:wd_rijksmonument_007 a nmg:Place ;
     nmg:category "transformatorhuisje"@nl ;
     nmg:monumentId "522985" .
 id:wd_rijksmonument_008 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Dubbel herenhuis met tuinhek"@nl ;
     owl:sameAs wd:Q17600093 ;
     nmg:lat 51.84225 ; nmg:long 5.87433 ;
@@ -66,6 +74,7 @@ id:wd_rijksmonument_008 a nmg:Place ;
     nmg:category "herenhuis"@nl ;
     nmg:monumentId "522987" .
 id:wd_rijksmonument_009 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Villa Oud-Mariënboom"@nl ;
     owl:sameAs wd:Q17600098 ;
     nmg:lat 51.8236 ; nmg:long 5.87954 ;
@@ -73,6 +82,7 @@ id:wd_rijksmonument_009 a nmg:Place ;
     nmg:category "villa"@nl ;
     nmg:monumentId "522990" .
 id:wd_rijksmonument_010 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand, waarvan de gepleisterde gevel in- en uitzwenkende contouren heeft"@nl ;
     owl:sameAs wd:Q17438121 ;
     nmg:lat 51.84806 ; nmg:long 5.86003 ;
@@ -80,6 +90,7 @@ id:wd_rijksmonument_010 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31154" .
 id:wd_rijksmonument_011 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand"@nl ;
     owl:sameAs wd:Q17438122 ;
     nmg:lat 51.84809 ; nmg:long 5.85964 ;
@@ -87,6 +98,7 @@ id:wd_rijksmonument_011 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31155" .
 id:wd_rijksmonument_012 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Woonhuis met hekwerk"@nl ;
     owl:sameAs wd:Q17600102 ;
     nmg:lat 51.83972 ; nmg:long 5.85882 ;
@@ -94,6 +106,7 @@ id:wd_rijksmonument_012 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "522993" .
 id:wd_rijksmonument_013 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Woonhuis met schuur/werkplaats"@nl ;
     owl:sameAs wd:Q17600117 ;
     nmg:lat 51.84298 ; nmg:long 5.86354 ;
@@ -102,6 +115,7 @@ id:wd_rijksmonument_013 a nmg:Place ;
     nmg:category "werkplaats"@nl ;
     nmg:monumentId "522999" .
 id:wd_rijksmonument_014 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Half vrijstaande praktijkwoning met ommuurde voor- en zijtuin"@nl ;
     owl:sameAs wd:Q17600155 ;
     nmg:lat 51.82993 ; nmg:long 5.85744 ;
@@ -110,6 +124,7 @@ id:wd_rijksmonument_014 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "523018" .
 id:wd_rijksmonument_015 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Het Slotje"@nl ;
     owl:sameAs wd:Q17600191 ;
     nmg:lat 51.8358 ; nmg:long 5.81591 ;
@@ -118,6 +133,7 @@ id:wd_rijksmonument_015 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "523037" .
 id:wd_rijksmonument_016 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "De Varenhof"@nl ;
     owl:sameAs wd:Q17600200 ;
     nmg:lat 51.840911 ; nmg:long 5.889931 ;
@@ -126,6 +142,7 @@ id:wd_rijksmonument_016 a nmg:Place ;
     nmg:category "villa"@nl ;
     nmg:monumentId "523042" .
 id:wd_rijksmonument_017 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Woonhuis met hek"@nl ;
     owl:sameAs wd:Q17600205 ;
     nmg:lat 51.83753 ; nmg:long 5.86025 ;
@@ -133,6 +150,7 @@ id:wd_rijksmonument_017 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "523044" .
 id:wd_rijksmonument_018 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "De Gruyter"@nl ;
     owl:sameAs wd:Q17600218 ;
     nmg:lat 51.8426 ; nmg:long 5.87468 ;
@@ -140,6 +158,7 @@ id:wd_rijksmonument_018 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "523052" .
 id:wd_rijksmonument_019 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Drie aaneengesloten herenhuizen"@nl ;
     owl:sameAs wd:Q17600219 ;
     nmg:lat 51.84803 ; nmg:long 5.8576 ;
@@ -147,6 +166,7 @@ id:wd_rijksmonument_019 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "523053" .
 id:wd_rijksmonument_020 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Twee herenhuizen met tuinhek"@nl ;
     owl:sameAs wd:Q17600232 ;
     nmg:lat 51.84562 ; nmg:long 5.85607 ;
@@ -154,6 +174,7 @@ id:wd_rijksmonument_020 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "523062" .
 id:wd_rijksmonument_021 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "'Jannetje' en 'Johanna'"@nl ;
     owl:sameAs wd:Q17600237 ;
     nmg:lat 51.84147 ; nmg:long 5.83657 ;
@@ -161,6 +182,7 @@ id:wd_rijksmonument_021 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "523065" .
 id:wd_rijksmonument_022 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Twee herenhuizen met hekwerk"@nl ;
     owl:sameAs wd:Q17600247 ;
     nmg:lat 51.84018 ; nmg:long 5.86404 ;
@@ -168,6 +190,7 @@ id:wd_rijksmonument_022 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "523069" .
 id:wd_rijksmonument_023 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Belgisch consulaat"@nl ;
     owl:sameAs wd:Q17600251 ;
     nmg:lat 51.84764 ; nmg:long 5.85812 ;
@@ -175,6 +198,7 @@ id:wd_rijksmonument_023 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "523071" .
 id:wd_rijksmonument_024 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand, dat oudtijds deel uitmaakte van het Gewandhuis en de Lakenhal"@nl ;
     owl:sameAs wd:Q17438098 ;
     nmg:lat 51.84775 ; nmg:long 5.86336 ;
@@ -182,6 +206,7 @@ id:wd_rijksmonument_024 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31133" .
 id:wd_rijksmonument_025 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand, dat oudtijds deel uitmaakte van het Gewandhuis en de Lakenhal."@nl ;
     owl:sameAs wd:Q17438099 ;
     nmg:lat 51.8478 ; nmg:long 5.86341 ;
@@ -189,6 +214,7 @@ id:wd_rijksmonument_025 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31134" .
 id:wd_rijksmonument_026 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand, dat oudtijds deel uitmaakte van de Lakenhal en het Gewandhuis"@nl ;
     owl:sameAs wd:Q17438100 ;
     nmg:lat 51.84782 ; nmg:long 5.86339 ;
@@ -196,6 +222,7 @@ id:wd_rijksmonument_026 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31135" .
 id:wd_rijksmonument_027 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand, dat oudtijds deel uitmaakte van de Lakenhal en het Gewandhuis"@nl ;
     owl:sameAs wd:Q17438101 ;
     nmg:lat 51.84787 ; nmg:long 5.86341 ;
@@ -203,6 +230,7 @@ id:wd_rijksmonument_027 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31136" .
 id:wd_rijksmonument_028 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand met twee verdiepingen en schilddak met dakkapellen"@nl ;
     owl:sameAs wd:Q17438104 ;
     nmg:lat 51.84786 ; nmg:long 5.86386 ;
@@ -210,6 +238,7 @@ id:wd_rijksmonument_028 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31139" .
 id:wd_rijksmonument_029 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand"@nl ;
     owl:sameAs wd:Q17438107 ;
     nmg:lat 51.84967 ; nmg:long 5.86302 ;
@@ -217,6 +246,7 @@ id:wd_rijksmonument_029 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31142" .
 id:wd_rijksmonument_030 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand"@nl ;
     owl:sameAs wd:Q17438109 ;
     nmg:lat 51.84968 ; nmg:long 5.86309 ;
@@ -224,6 +254,7 @@ id:wd_rijksmonument_030 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31143" .
 id:wd_rijksmonument_031 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Breed pand onder hoog schilddak en met gepleisterde gevels"@nl ;
     owl:sameAs wd:Q17438110 ;
     nmg:lat 51.84968 ; nmg:long 5.86327 ;
@@ -231,6 +262,7 @@ id:wd_rijksmonument_031 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31144" .
 id:wd_rijksmonument_032 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand onder schilddak"@nl ;
     owl:sameAs wd:Q17438112 ;
     nmg:lat 51.84968 ; nmg:long 5.86331 ;
@@ -238,6 +270,7 @@ id:wd_rijksmonument_032 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31145" .
 id:wd_rijksmonument_033 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand onder schilddak."@nl ;
     owl:sameAs wd:Q17438113 ;
     nmg:lat 51.84971 ; nmg:long 5.86343 ;
@@ -245,6 +278,7 @@ id:wd_rijksmonument_033 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31146" .
 id:wd_rijksmonument_034 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Rijzig hoekpand van begane-grond, drie verdiepingen en schilddak met dakkapellen."@nl ;
     owl:sameAs wd:Q17438115 ;
     nmg:lat 51.84949 ; nmg:long 5.86261 ;
@@ -252,6 +286,7 @@ id:wd_rijksmonument_034 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31148" .
 id:wd_rijksmonument_035 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand met twee verdiepingen en hoog zadeldak, evenwijdig aan de straat"@nl ;
     owl:sameAs wd:Q17438116 ;
     nmg:lat 51.84787 ; nmg:long 5.86088 ;
@@ -259,6 +294,7 @@ id:wd_rijksmonument_035 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31149" .
 id:wd_rijksmonument_036 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand met insteekverdieping, twee verdieping en dwars zadeldak"@nl ;
     owl:sameAs wd:Q17438117 ;
     nmg:lat 51.84791 ; nmg:long 5.86078 ;
@@ -266,6 +302,7 @@ id:wd_rijksmonument_036 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31150" .
 id:wd_rijksmonument_037 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand ter breedte van vijf vensterassen, bestaande uit parterre en twee verdiepingen"@nl ;
     owl:sameAs wd:Q17438118 ;
     nmg:lat 51.84798 ; nmg:long 5.86066 ;
@@ -273,6 +310,7 @@ id:wd_rijksmonument_037 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31151" .
 id:wd_rijksmonument_038 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand, waarin gevel in- en uitzwenkende contouren heeft"@nl ;
     owl:sameAs wd:Q17438120 ;
     nmg:lat 51.84802 ; nmg:long 5.86006 ;
@@ -280,6 +318,7 @@ id:wd_rijksmonument_038 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31153" .
 id:wd_rijksmonument_039 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Sluiscomplex Weurt"@nl ;
     owl:sameAs wd:Q2743971 ;
     nmg:lat 51.85442 ; nmg:long 5.82267 ;
@@ -288,6 +327,7 @@ id:wd_rijksmonument_039 a nmg:Place ;
     nmg:category "schutsluis"@nl ;
     nmg:monumentId "523034" .
 id:wd_rijksmonument_040 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Waltoren Belvédère"@nl ;
     owl:sameAs wd:Q2175076 ;
     nmg:lat 51.84747 ; nmg:long 5.8725 ;
@@ -296,6 +336,7 @@ id:wd_rijksmonument_040 a nmg:Place ;
     nmg:category "verdedigingswerk"@nl ;
     nmg:monumentId "31140" .
 id:wd_rijksmonument_041 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Grote of Sint-Stevenskerk"@nl ;
     owl:sameAs wd:Q1146466 ;
     nmg:lat 51.847778 ; nmg:long 5.8625 ;
@@ -304,6 +345,7 @@ id:wd_rijksmonument_041 a nmg:Place ;
     nmg:category "kerkgebouw"@nl ;
     nmg:monumentId "31181" .
 id:wd_rijksmonument_042 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Petruskerk"@nl ;
     owl:sameAs wd:Q1957148 ;
     nmg:lat 51.840556 ; nmg:long 5.829167 ;
@@ -311,6 +353,7 @@ id:wd_rijksmonument_042 a nmg:Place ;
     nmg:category "kerkgebouw"@nl ;
     nmg:monumentId "31202" .
 id:wd_rijksmonument_043 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Sint-Nicolaaskapel"@nl ;
     owl:sameAs wd:Q1991875 ;
     nmg:lat 51.848111111111 ; nmg:long 5.86975 ;
@@ -319,6 +362,7 @@ id:wd_rijksmonument_043 a nmg:Place ;
     nmg:category "kerkgebouw"@nl ;
     nmg:monumentId "31192" .
 id:wd_rijksmonument_044 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Maria Geboortekerk"@nl ;
     owl:sameAs wd:Q2094918 ;
     nmg:lat 51.842225 ; nmg:long 5.873031 ;
@@ -327,6 +371,7 @@ id:wd_rijksmonument_044 a nmg:Place ;
     nmg:category "kerkgebouw"@nl ;
     nmg:monumentId "522947" .
 id:wd_rijksmonument_045 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Lutherse Kerk"@nl ;
     owl:sameAs wd:Q2225820 ;
     nmg:lat 51.841917 ; nmg:long 5.870431 ;
@@ -336,6 +381,7 @@ id:wd_rijksmonument_045 a nmg:Place ;
     nmg:category "kerkgebouw"@nl ;
     nmg:monumentId "476729" .
 id:wd_rijksmonument_046 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Antonius van Paduakerk"@nl ;
     owl:sameAs wd:Q2384187 ;
     nmg:lat 51.837833 ; nmg:long 5.86535 ;
@@ -344,6 +390,7 @@ id:wd_rijksmonument_046 a nmg:Place ;
     nmg:architect wd:Q2396998 ;
     nmg:category "kerkgebouw"@nl .
 id:wd_rijksmonument_047 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Titus Brandsma Gedachteniskerk"@nl ;
     owl:sameAs wd:Q2437078 ;
     nmg:lat 51.840556 ; nmg:long 5.858889 ;
@@ -357,6 +404,7 @@ id:wd_rijksmonument_047 a nmg:Place ;
     nmg:category "oorlogsmonument"@nl ;
     nmg:monumentId "522992" .
 id:wd_rijksmonument_048 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Antonius Abtkerk"@nl ;
     owl:sameAs wd:Q2697112 ;
     nmg:lat 51.835731 ; nmg:long 5.820017 ;
@@ -365,6 +413,7 @@ id:wd_rijksmonument_048 a nmg:Place ;
     nmg:category "kerkgebouw"@nl ;
     nmg:monumentId "31204" .
 id:wd_rijksmonument_049 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Molenstraatkerk"@nl ;
     owl:sameAs wd:Q2920856 ;
     nmg:lat 51.84472 ; nmg:long 5.86333 ;
@@ -373,6 +422,7 @@ id:wd_rijksmonument_049 a nmg:Place ;
     nmg:architect wd:Q127248527 ;
     nmg:category "kerkgebouw"@nl .
 id:wd_rijksmonument_050 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Groenestraatkerk"@nl ;
     owl:sameAs wd:Q2927907 ;
     nmg:lat 51.83077 ; nmg:long 5.84764 ;
@@ -382,12 +432,14 @@ id:wd_rijksmonument_050 a nmg:Place ;
     nmg:category "kerkgebouw"@nl ;
     nmg:monumentId "524836" .
 id:wd_rijksmonument_051 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Sint-Stephanuskerk"@nl ;
     owl:sameAs wd:Q3259892 ;
     nmg:lat 51.838253 ; nmg:long 5.884739 ;
     nmg:image "https://commons.wikimedia.org/wiki/Special:FilePath/Nijmegen-bergendalseweg-184196.jpg?width=320" ;
     nmg:category "kerkgebouw"@nl .
 id:wd_rijksmonument_052 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Linker helft van in twee woningen gesplitst, breed, onderkelderd, laat-gotisch huis"@nl ;
     owl:sameAs wd:Q17438132 ;
     nmg:lat 51.84907 ; nmg:long 5.86249 ;
@@ -395,6 +447,7 @@ id:wd_rijksmonument_052 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "31162" .
 id:wd_rijksmonument_053 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Recht helft van in twee woningen gesplitst, breed, onderkelderd, laat-gotisch huis"@nl ;
     owl:sameAs wd:Q17438133 ;
     nmg:lat 51.84912 ; nmg:long 5.86252 ;
@@ -402,6 +455,7 @@ id:wd_rijksmonument_053 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "31163" .
 id:wd_rijksmonument_054 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Gepleisterd dwarshuis met verdieping en zadeldak"@nl ;
     owl:sameAs wd:Q17438143 ;
     nmg:lat 51.84765 ; nmg:long 5.86249 ;
@@ -409,6 +463,7 @@ id:wd_rijksmonument_054 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "31172" .
 id:wd_rijksmonument_055 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Kanunnikenhuis"@nl ;
     owl:sameAs wd:Q17438144 ;
     nmg:lat 51.84844 ; nmg:long 5.86238 ;
@@ -416,6 +471,7 @@ id:wd_rijksmonument_055 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "31173" .
 id:wd_rijksmonument_056 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Kanunnikenhuis"@nl ;
     owl:sameAs wd:Q17438145 ;
     nmg:lat 51.84844 ; nmg:long 5.86238 ;
@@ -423,6 +479,7 @@ id:wd_rijksmonument_056 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "31174" .
 id:wd_rijksmonument_057 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Kanunnikenhuis"@nl ;
     owl:sameAs wd:Q17438147 ;
     nmg:lat 51.84814 ; nmg:long 5.86332 ;
@@ -430,6 +487,7 @@ id:wd_rijksmonument_057 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "31175" .
 id:wd_rijksmonument_058 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Kanunnikenhuis"@nl ;
     owl:sameAs wd:Q17438148 ;
     nmg:lat 51.84828 ; nmg:long 5.86289 ;
@@ -437,6 +495,7 @@ id:wd_rijksmonument_058 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "31176" .
 id:wd_rijksmonument_059 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Kanunnikenhuis"@nl ;
     owl:sameAs wd:Q17438149 ;
     nmg:lat 51.84823 ; nmg:long 5.86302 ;
@@ -444,6 +503,7 @@ id:wd_rijksmonument_059 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "31177" .
 id:wd_rijksmonument_060 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Kanunnikenhuis"@nl ;
     owl:sameAs wd:Q17438150 ;
     nmg:lat 51.84815 ; nmg:long 5.86326 ;
@@ -451,6 +511,7 @@ id:wd_rijksmonument_060 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "31178" .
 id:wd_rijksmonument_061 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Kanunnikenhuis"@nl ;
     owl:sameAs wd:Q17438151 ;
     nmg:lat 51.84807 ; nmg:long 5.86344 ;
@@ -458,6 +519,7 @@ id:wd_rijksmonument_061 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "31179" .
 id:wd_rijksmonument_062 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Kanunnikenhuis"@nl ;
     owl:sameAs wd:Q17438152 ;
     nmg:lat 51.84802 ; nmg:long 5.86352 ;
@@ -465,6 +527,7 @@ id:wd_rijksmonument_062 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "31180" .
 id:wd_rijksmonument_063 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Woonhuis onder zadeldak en met trapgevels aan de korte zijden"@nl ;
     owl:sameAs wd:Q17438154 ;
     nmg:lat 51.84905 ; nmg:long 5.86716 ;
@@ -473,6 +536,7 @@ id:wd_rijksmonument_063 a nmg:Place ;
     nmg:category "gebouw met trapgevel"@nl ;
     nmg:monumentId "31183" .
 id:wd_rijksmonument_064 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Spieker ''De spijker''"@nl ;
     owl:sameAs wd:Q17438182 ;
     nmg:lat 51.84271 ; nmg:long 5.79241 ;
@@ -480,6 +544,7 @@ id:wd_rijksmonument_064 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "31208" .
 id:wd_rijksmonument_065 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Huis Oosterhout"@nl ;
     owl:sameAs wd:Q17596774 ;
     nmg:lat 51.87322 ; nmg:long 5.83854 ;
@@ -487,6 +552,7 @@ id:wd_rijksmonument_065 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:category "complex van meerdere objecten"@nl .
 id:wd_rijksmonument_066 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Berk en Eik"@nl ;
     owl:sameAs wd:Q17599951 ;
     nmg:lat 51.83053 ; nmg:long 5.90241 ;
@@ -494,6 +560,7 @@ id:wd_rijksmonument_066 a nmg:Place ;
     nmg:category "woonhuis"@nl ;
     nmg:monumentId "522922" .
 id:wd_rijksmonument_067 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Kinderhuis Villandry"@nl ;
     owl:sameAs wd:Q17600110 ;
     nmg:lat 51.82686 ; nmg:long 5.88415 ;
@@ -501,6 +568,7 @@ id:wd_rijksmonument_067 a nmg:Place ;
     nmg:category "villa"@nl ;
     nmg:monumentId "522997" .
 id:wd_rijksmonument_068 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Villa Heyendaal"@nl ;
     owl:sameAs wd:Q17600127 ;
     nmg:lat 51.8241 ; nmg:long 5.85902 ;
@@ -508,6 +576,7 @@ id:wd_rijksmonument_068 a nmg:Place ;
     nmg:category "villa"@nl ;
     nmg:monumentId "523004" .
 id:wd_rijksmonument_069 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Vrijstaande villa"@nl ;
     owl:sameAs wd:Q17600130 ;
     nmg:lat 51.83064 ; nmg:long 5.90385 ;
@@ -515,6 +584,7 @@ id:wd_rijksmonument_069 a nmg:Place ;
     nmg:category "villa"@nl ;
     nmg:monumentId "523006" .
 id:wd_rijksmonument_070 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Vrijstaande villa met hekwerk"@nl ;
     owl:sameAs wd:Q17600137 ;
     nmg:lat 51.84233 ; nmg:long 5.86188 ;
@@ -522,6 +592,7 @@ id:wd_rijksmonument_070 a nmg:Place ;
     nmg:category "villa"@nl ;
     nmg:monumentId "523009" .
 id:wd_rijksmonument_071 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Grote vrijstaande villa"@nl ;
     owl:sameAs wd:Q17600157 ;
     nmg:lat 51.82889 ; nmg:long 5.85817 ;
@@ -529,6 +600,7 @@ id:wd_rijksmonument_071 a nmg:Place ;
     nmg:category "villa"@nl ;
     nmg:monumentId "523019" .
 id:wd_rijksmonument_072 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Dubbele villa"@nl ;
     owl:sameAs wd:Q17600170 ;
     nmg:lat 51.83861 ; nmg:long 5.8806 ;
@@ -536,6 +608,7 @@ id:wd_rijksmonument_072 a nmg:Place ;
     nmg:category "villa"@nl ;
     nmg:monumentId "523025" .
 id:wd_rijksmonument_073 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Villa De Westerhelling"@nl ;
     owl:sameAs wd:Q17600197 ;
     nmg:lat 51.8303 ; nmg:long 5.89366 ;
@@ -545,6 +618,7 @@ id:wd_rijksmonument_073 a nmg:Place ;
     nmg:category "villa"@nl ;
     nmg:monumentId "523040" .
 id:wd_rijksmonument_074 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Prima Villa"@nl ;
     owl:sameAs wd:Q17600204 ;
     nmg:lat 51.84765 ; nmg:long 5.84904 ;
@@ -552,6 +626,7 @@ id:wd_rijksmonument_074 a nmg:Place ;
     nmg:category "villa"@nl ;
     nmg:monumentId "523043" .
 id:wd_rijksmonument_075 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Villa De Wolfskuyl"@nl ;
     owl:sameAs wd:Q17600220 ;
     nmg:lat 51.83616 ; nmg:long 5.84206 ;
@@ -560,6 +635,7 @@ id:wd_rijksmonument_075 a nmg:Place ;
     nmg:category "villa"@nl ;
     nmg:monumentId "523054" .
 id:wd_rijksmonument_076 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Landgoed Gelders Hof"@nl ;
     owl:sameAs wd:Q135746054 ;
     nmg:lat 51.830277777778 ; nmg:long 5.8787777777778 ;
@@ -567,6 +643,7 @@ id:wd_rijksmonument_076 a nmg:Place ;
     nmg:inception "1855"^^xsd:gYear ;
     nmg:category "villa"@nl .
 id:wd_rijksmonument_077 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand met een eenvoudige gepleisterde lijstgevel"@nl ;
     owl:sameAs wd:Q17438097 ;
     nmg:lat 51.84766 ; nmg:long 5.86329 ;
@@ -574,6 +651,7 @@ id:wd_rijksmonument_077 a nmg:Place ;
     nmg:category "gebouw met lijstgevel"@nl ;
     nmg:monumentId "31132" .
 id:wd_rijksmonument_078 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand met twee verdiepingen en schilddak, dat aan de achterzijde aansluit tegen een puntgevel"@nl ;
     owl:sameAs wd:Q17438106 ;
     nmg:lat 51.84964 ; nmg:long 5.86266 ;
@@ -581,6 +659,7 @@ id:wd_rijksmonument_078 a nmg:Place ;
     nmg:category "gebouw met puntgevel"@nl ;
     nmg:monumentId "31141" .
 id:wd_rijksmonument_079 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Patriciershuis met twee verdiepingen en schilddak"@nl ;
     owl:sameAs wd:Q17438114 ;
     nmg:lat 51.84949 ; nmg:long 5.86245 ;
@@ -588,6 +667,7 @@ id:wd_rijksmonument_079 a nmg:Place ;
     nmg:category "patriciershuis"@nl ;
     nmg:monumentId "31147" .
 id:wd_rijksmonument_080 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand met gepleisterde halsgevel"@nl ;
     owl:sameAs wd:Q17438119 ;
     nmg:lat 51.84771 ; nmg:long 5.86079 ;
@@ -595,6 +675,7 @@ id:wd_rijksmonument_080 a nmg:Place ;
     nmg:category "gebouw met halsgevel"@nl ;
     nmg:monumentId "31152" .
 id:wd_rijksmonument_081 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Voetbrug in het Hunnerpark"@nl ;
     owl:sameAs wd:Q17600229 ;
     nmg:lat 51.84721 ; nmg:long 5.87238 ;
@@ -602,6 +683,7 @@ id:wd_rijksmonument_081 a nmg:Place ;
     nmg:category "brug"@nl ;
     nmg:monumentId "523059" .
 id:wd_rijksmonument_082 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Voetgangersbrug met hekwerk"@nl ;
     owl:sameAs wd:Q17600248 ;
     nmg:lat 51.8470275 ; nmg:long 5.8703764 ;
@@ -609,6 +691,7 @@ id:wd_rijksmonument_082 a nmg:Place ;
     nmg:category "brug"@nl ;
     nmg:monumentId "523070" .
 id:wd_rijksmonument_083 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Kronenburgerpark"@nl ;
     owl:sameAs wd:Q2383906 ;
     nmg:lat 51.84632 ; nmg:long 5.8576 ;
@@ -617,6 +700,7 @@ id:wd_rijksmonument_083 a nmg:Place ;
     nmg:category "park"@nl ;
     nmg:category "complex van meerdere objecten"@nl .
 id:wd_rijksmonument_084 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Park Brakkenstein"@nl ;
     owl:sameAs wd:Q2439153 ;
     nmg:lat 51.819758 ; nmg:long 5.871764 ;
@@ -624,12 +708,14 @@ id:wd_rijksmonument_084 a nmg:Place ;
     nmg:category "park"@nl ;
     nmg:category "complex van meerdere objecten"@nl .
 id:wd_rijksmonument_085 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Goffertpark"@nl ;
     owl:sameAs wd:Q2642341 ;
     nmg:lat 51.823333 ; nmg:long 5.8325 ;
     nmg:image "https://commons.wikimedia.org/wiki/Special:FilePath/Goffertpark.jpg?width=320" ;
     nmg:category "park"@nl .
 id:wd_rijksmonument_086 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Hervormde/Gereformeerde kerk van Lent"@nl ;
     owl:sameAs wd:Q17600189 ;
     nmg:lat 51.85979 ; nmg:long 5.86594 ;
@@ -637,6 +723,7 @@ id:wd_rijksmonument_086 a nmg:Place ;
     nmg:category "kerkgebouw"@nl ;
     nmg:monumentId "523035" .
 id:wd_rijksmonument_087 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Bethelkerk Neerbosch"@nl ;
     owl:sameAs wd:Q17600195 ;
     nmg:lat 51.84321 ; nmg:long 5.79848 ;
@@ -644,6 +731,7 @@ id:wd_rijksmonument_087 a nmg:Place ;
     nmg:category "kerkgebouw"@nl ;
     nmg:monumentId "523039" .
 id:wd_rijksmonument_088 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Dominicuskerk"@nl ;
     owl:sameAs wd:Q92785639 ;
     nmg:lat 51.829911111111 ; nmg:long 5.8692638888889 ;
@@ -652,6 +740,7 @@ id:wd_rijksmonument_088 a nmg:Place ;
     nmg:architect wd:Q54819578 ;
     nmg:category "kerkgebouw"@nl .
 id:wd_rijksmonument_089 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Boskapel"@nl ;
     owl:sameAs wd:Q116660755 ;
     nmg:lat 51.834277777778 ; nmg:long 5.8375277777778 ;
@@ -660,6 +749,7 @@ id:wd_rijksmonument_089 a nmg:Place ;
     nmg:architect wd:Q29560121 ;
     nmg:category "kerkgebouw"@nl .
 id:wd_rijksmonument_090 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Villa Brakkesteyn"@nl ;
     owl:sameAs wd:Q17599962 ;
     nmg:lat 51.81932 ; nmg:long 5.87558 ;
@@ -667,6 +757,7 @@ id:wd_rijksmonument_090 a nmg:Place ;
     nmg:category "villa"@nl ;
     nmg:monumentId "522927" .
 id:wd_rijksmonument_091 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Villa Salatiga"@nl ;
     owl:sameAs wd:Q17600074 ;
     nmg:lat 51.84152 ; nmg:long 5.88561 ;
@@ -676,6 +767,7 @@ id:wd_rijksmonument_091 a nmg:Place ;
     nmg:category "villa"@nl ;
     nmg:monumentId "522978" .
 id:wd_rijksmonument_092 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Nederlands Hervormde kerk, voorheen Antonius Abtkerk"@nl ;
     owl:sameAs wd:Q17438178 ;
     nmg:lat 51.83509 ; nmg:long 5.81049 ;
@@ -683,6 +775,7 @@ id:wd_rijksmonument_092 a nmg:Place ;
     nmg:category "kerkgebouw"@nl ;
     nmg:monumentId "31205" .
 id:wd_rijksmonument_093 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Maria Geboortekerk"@nl ;
     owl:sameAs wd:Q17600019 ;
     nmg:lat 51.86126 ; nmg:long 5.86483 ;
@@ -691,6 +784,7 @@ id:wd_rijksmonument_093 a nmg:Place ;
     nmg:category "kerkgebouw"@nl ;
     nmg:monumentId "522954" .
 id:wd_rijksmonument_094 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Concertgebouw de Vereeniging"@nl ;
     owl:sameAs wd:Q2183522 ;
     nmg:lat 51.84138889 ; nmg:long 5.86083333 ;
@@ -701,6 +795,7 @@ id:wd_rijksmonument_094 a nmg:Place ;
     nmg:category "concertgebouw"@nl ;
     nmg:monumentId "523000" .
 id:wd_rijksmonument_095 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Stadsschouwburg Nijmegen"@nl ;
     owl:sameAs wd:Q2433308 ;
     nmg:lat 51.842758 ; nmg:long 5.858042 ;
@@ -714,6 +809,7 @@ id:wd_rijksmonument_095 a nmg:Place ;
     nmg:category "voorbeschermd rijksmonument"@nl ;
     nmg:monumentId "532210" .
 id:wd_rijksmonument_096 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Café Trianon"@nl ;
     owl:sameAs wd:Q17600097 ;
     nmg:lat 51.84245 ; nmg:long 5.87515 ;
@@ -721,6 +817,7 @@ id:wd_rijksmonument_096 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "522989" .
 id:wd_rijksmonument_097 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Aula en hekken begraafplaats Graafseweg"@nl ;
     owl:sameAs wd:Q17600181 ;
     nmg:lat 51.83117 ; nmg:long 5.83166 ;
@@ -730,6 +827,7 @@ id:wd_rijksmonument_097 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "523030" .
 id:wd_rijksmonument_098 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "De Tempelier"@nl ;
     owl:sameAs wd:Q17600190 ;
     nmg:lat 51.84355 ; nmg:long 5.86165 ;
@@ -737,6 +835,7 @@ id:wd_rijksmonument_098 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "523036" .
 id:wd_rijksmonument_099 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Waldeck Pyrmontsingel 77, Nijmegen"@nl ;
     owl:sameAs wd:Q17600212 ;
     nmg:lat 51.84015 ; nmg:long 5.8656 ;
@@ -744,6 +843,7 @@ id:wd_rijksmonument_099 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "523048" .
 id:wd_rijksmonument_100 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Blokvormig pand, bestaande uit twee gekoppelde herenhuizen"@nl ;
     owl:sameAs wd:Q17600231 ;
     nmg:lat 51.84513 ; nmg:long 5.85635 ;
@@ -751,6 +851,7 @@ id:wd_rijksmonument_100 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "523061" .
 id:wd_rijksmonument_101 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand met in de verminkte en gepleisterde voorgevel"@nl ;
     owl:sameAs wd:Q17610124 ;
     nmg:lat 51.84968 ; nmg:long 5.86289 ;
@@ -758,6 +859,7 @@ id:wd_rijksmonument_101 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "530427" .
 id:wd_rijksmonument_102 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Estelgebouw"@nl ;
     owl:sameAs wd:Q108476320 ;
     nmg:lat 51.844902777778 ; nmg:long 5.8784083333333 ;
@@ -766,12 +868,14 @@ id:wd_rijksmonument_102 a nmg:Place ;
     nmg:architect wd:Q2139183 ;
     nmg:category "gebouw"@nl .
 id:wd_rijksmonument_103 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Van der Werffgebouw"@nl ;
     owl:sameAs wd:Q135183230 ;
     nmg:lat 51.8457213608 ; nmg:long 5.8637128855349 ;
     nmg:image "https://commons.wikimedia.org/wiki/Special:FilePath/Nijmegen%20Van%20der%20Werffgebouw%20%2801%29%20Plein%20%2744.JPG?width=320" ;
     nmg:category "gebouw"@nl .
 id:wd_rijksmonument_104 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Nieuwe Synagoge"@nl ;
     owl:sameAs wd:Q51576835 ;
     nmg:lat 51.844589 ; nmg:long 5.870429 ;
@@ -780,6 +884,7 @@ id:wd_rijksmonument_104 a nmg:Place ;
     nmg:category "synagoge"@nl ;
     nmg:monumentId "523060" .
 id:wd_rijksmonument_105 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Synagoge"@nl ;
     owl:sameAs wd:Q2020421 ;
     nmg:lat 51.849 ; nmg:long 5.8635 ;
@@ -788,6 +893,7 @@ id:wd_rijksmonument_105 a nmg:Place ;
     nmg:category "synagoge"@nl ;
     nmg:monumentId "31157" .
 id:wd_rijksmonument_106 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Stratemakerstoren"@nl ;
     owl:sameAs wd:Q1982236 ;
     nmg:lat 51.84877 ; nmg:long 5.86979 ;
@@ -796,6 +902,7 @@ id:wd_rijksmonument_106 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31188" .
 id:wd_rijksmonument_107 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Oosterhout: tuinmuren"@nl ;
     owl:sameAs wd:Q17596780 ;
     nmg:lat 51.87322 ; nmg:long 5.83854 ;
@@ -803,6 +910,7 @@ id:wd_rijksmonument_107 a nmg:Place ;
     nmg:category "groenvoorziening"@nl ;
     nmg:monumentId "520311" .
 id:wd_rijksmonument_108 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Berk en Eik - garage"@nl ;
     owl:sameAs wd:Q17599954 ;
     nmg:lat 51.83053 ; nmg:long 5.90241 ;
@@ -810,6 +918,7 @@ id:wd_rijksmonument_108 a nmg:Place ;
     nmg:category "garage"@nl ;
     nmg:monumentId "522923" .
 id:wd_rijksmonument_109 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Villa Brakkensteyn: park"@nl ;
     owl:sameAs wd:Q17599977 ;
     nmg:lat 51.81963 ; nmg:long 5.87312 ;
@@ -817,6 +926,7 @@ id:wd_rijksmonument_109 a nmg:Place ;
     nmg:category "groenvoorziening"@nl ;
     nmg:monumentId "522933" .
 id:wd_rijksmonument_110 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Kronenburgerpark"@nl ;
     owl:sameAs wd:Q17600024 ;
     nmg:lat 51.84554 ; nmg:long 5.85762 ;
@@ -824,6 +934,7 @@ id:wd_rijksmonument_110 a nmg:Place ;
     nmg:category "groenvoorziening"@nl ;
     nmg:monumentId "522957" .
 id:wd_rijksmonument_111 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Garage"@nl ;
     owl:sameAs wd:Q17600072 ;
     nmg:lat 51.84282 ; nmg:long 5.86853 ;
@@ -831,6 +942,7 @@ id:wd_rijksmonument_111 a nmg:Place ;
     nmg:category "garage"@nl ;
     nmg:monumentId "522976" .
 id:wd_rijksmonument_112 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Villa Salatiga: plantenkas"@nl ;
     owl:sameAs wd:Q17600079 ;
     nmg:lat 51.84152 ; nmg:long 5.88561 ;
@@ -838,6 +950,7 @@ id:wd_rijksmonument_112 a nmg:Place ;
     nmg:category "groenvoorziening"@nl ;
     nmg:monumentId "522980" .
 id:wd_rijksmonument_113 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Sint Annamolen"@nl ;
     owl:sameAs wd:Q1955470 ;
     nmg:lat 51.828333 ; nmg:long 5.856111 ;
@@ -846,6 +959,7 @@ id:wd_rijksmonument_113 a nmg:Place ;
     nmg:category "stellingmolen"@nl ;
     nmg:monumentId "31199" .
 id:wd_rijksmonument_114 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "De Witte Molen"@nl ;
     owl:sameAs wd:Q2692033 ;
     nmg:lat 51.836667 ; nmg:long 5.8425 ;
@@ -854,6 +968,7 @@ id:wd_rijksmonument_114 a nmg:Place ;
     nmg:category "stellingmolen"@nl ;
     nmg:monumentId "31207" .
 id:wd_rijksmonument_115 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Huize Heijendaal"@nl ;
     owl:sameAs wd:Q2548039 ;
     nmg:lat 51.824069 ; nmg:long 5.858986 ;
@@ -861,6 +976,7 @@ id:wd_rijksmonument_115 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31200" .
 id:wd_rijksmonument_116 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Bisschop Hamerhuis"@nl ;
     owl:sameAs wd:Q2627374 ;
     nmg:lat 51.82889 ; nmg:long 5.8625 ;
@@ -869,6 +985,7 @@ id:wd_rijksmonument_116 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "523031" .
 id:wd_rijksmonument_117 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Commanderie van Sint Jan"@nl ;
     owl:sameAs wd:Q2689243 ;
     nmg:lat 51.84889 ; nmg:long 5.86444 ;
@@ -876,6 +993,7 @@ id:wd_rijksmonument_117 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31123" .
 id:wd_rijksmonument_118 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Kantongerecht met inpandige, voormalige conciergewoning"@nl ;
     owl:sameAs wd:Q4759859 ;
     nmg:lat 51.843 ; nmg:long 5.86619 ;
@@ -886,6 +1004,7 @@ id:wd_rijksmonument_118 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "522988" .
 id:wd_rijksmonument_119 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand in neogotische trant"@nl ;
     owl:sameAs wd:Q17438079 ;
     nmg:lat 51.84788 ; nmg:long 5.86345 ;
@@ -893,6 +1012,7 @@ id:wd_rijksmonument_119 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31114" .
 id:wd_rijksmonument_120 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand met verdieping en schilddak"@nl ;
     owl:sameAs wd:Q17438081 ;
     nmg:lat 51.84802 ; nmg:long 5.86368 ;
@@ -900,6 +1020,7 @@ id:wd_rijksmonument_120 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31116" .
 id:wd_rijksmonument_121 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand onder schilddak en met gepleisterde gevel onder rechte kroonlijst"@nl ;
     owl:sameAs wd:Q17438082 ;
     nmg:lat 51.84835 ; nmg:long 5.86049 ;
@@ -907,6 +1028,7 @@ id:wd_rijksmonument_121 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31117" .
 id:wd_rijksmonument_122 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Gepleisterd hoekpand met verdieping en omlopend schilddak"@nl ;
     owl:sameAs wd:Q17438084 ;
     nmg:lat 51.849 ; nmg:long 5.86097 ;
@@ -914,6 +1036,7 @@ id:wd_rijksmonument_122 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31119" .
 id:wd_rijksmonument_123 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Voorm.Rooms Katholiek Weeshuis"@nl ;
     owl:sameAs wd:Q17438086 ;
     nmg:lat 51.84721 ; nmg:long 5.85961 ;
@@ -923,6 +1046,7 @@ id:wd_rijksmonument_123 a nmg:Place ;
     nmg:category "ruïne"@nl ;
     nmg:monumentId "31122" .
 id:wd_rijksmonument_124 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Ganzenheuvel 1, Nijmegen"@nl ;
     owl:sameAs wd:Q17438088 ;
     nmg:lat 51.84788 ; nmg:long 5.86107 ;
@@ -930,6 +1054,7 @@ id:wd_rijksmonument_124 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31124" .
 id:wd_rijksmonument_125 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand met twee verdiepingen"@nl ;
     owl:sameAs wd:Q17438089 ;
     nmg:lat 51.84793 ; nmg:long 5.86111 ;
@@ -937,6 +1062,7 @@ id:wd_rijksmonument_125 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31125" .
 id:wd_rijksmonument_126 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand met twee verdiepingen"@nl ;
     owl:sameAs wd:Q17438090 ;
     nmg:lat 51.84797 ; nmg:long 5.86116 ;
@@ -944,6 +1070,7 @@ id:wd_rijksmonument_126 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31126" .
 id:wd_rijksmonument_127 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand me twee verdiepingen"@nl ;
     owl:sameAs wd:Q17438091 ;
     nmg:lat 51.84802 ; nmg:long 5.86114 ;
@@ -951,6 +1078,7 @@ id:wd_rijksmonument_127 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31127" .
 id:wd_rijksmonument_128 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand met aan de voorzijde een gevel met stucversieringen"@nl ;
     owl:sameAs wd:Q17438095 ;
     nmg:lat 51.84761 ; nmg:long 5.86324 ;
@@ -958,6 +1086,7 @@ id:wd_rijksmonument_128 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31130" .
 id:wd_rijksmonument_129 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand onder schilddak"@nl ;
     owl:sameAs wd:Q17438096 ;
     nmg:lat 51.84764 ; nmg:long 5.86329 ;
@@ -965,6 +1094,7 @@ id:wd_rijksmonument_129 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31131" .
 id:wd_rijksmonument_130 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "begraafplaats Daalseweg"@nl ;
     owl:sameAs wd:Q2373030 ;
     nmg:lat 51.838611 ; nmg:long 5.873333 ;
@@ -972,6 +1102,7 @@ id:wd_rijksmonument_130 a nmg:Place ;
     nmg:category "begraafplaats"@nl ;
     nmg:monumentId "522938" .
 id:wd_rijksmonument_131 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Rustoord"@nl ;
     owl:sameAs wd:Q2405793 ;
     nmg:lat 51.830556 ; nmg:long 5.880833 ;
@@ -979,6 +1110,7 @@ id:wd_rijksmonument_131 a nmg:Place ;
     nmg:inception "1897"^^xsd:gYear ;
     nmg:category "begraafplaats"@nl .
 id:wd_rijksmonument_132 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Gemetselde tuinmuur"@nl ;
     owl:sameAs wd:Q17603881 ;
     nmg:lat 51.83077 ; nmg:long 5.84764 ;
@@ -986,6 +1118,7 @@ id:wd_rijksmonument_132 a nmg:Place ;
     nmg:category "muur"@nl ;
     nmg:monumentId "525504" .
 id:wd_rijksmonument_133 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand met verdieping en zadeldak"@nl ;
     owl:sameAs wd:Q17438127 ;
     nmg:lat 51.84804 ; nmg:long 5.86723 ;
@@ -993,6 +1126,7 @@ id:wd_rijksmonument_133 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31159" .
 id:wd_rijksmonument_134 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Rechthoekig pand van parterre met drie verdiepingen en schilddak"@nl ;
     owl:sameAs wd:Q17438129 ;
     nmg:lat 51.84947 ; nmg:long 5.86173 ;
@@ -1000,6 +1134,7 @@ id:wd_rijksmonument_134 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31161" .
 id:wd_rijksmonument_135 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand met verdieping en hoog zadeldak"@nl ;
     owl:sameAs wd:Q17438134 ;
     nmg:lat 51.84941 ; nmg:long 5.86262 ;
@@ -1007,6 +1142,7 @@ id:wd_rijksmonument_135 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31164" .
 id:wd_rijksmonument_136 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand voorzien van geveltop met in- en uitzwenkende contouren"@nl ;
     owl:sameAs wd:Q17438135 ;
     nmg:lat 51.84935 ; nmg:long 5.86259 ;
@@ -1014,6 +1150,7 @@ id:wd_rijksmonument_136 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31165" .
 id:wd_rijksmonument_137 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand, waarvan de lijstgevel een gebeeldhouwde Lodewijk XV-omlijsting van het venster boven de deur heeft"@nl ;
     owl:sameAs wd:Q17438136 ;
     nmg:lat 51.84762 ; nmg:long 5.86742 ;
@@ -1021,6 +1158,7 @@ id:wd_rijksmonument_137 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31166" .
 id:wd_rijksmonument_138 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand, waarin natuurstenen deuromlijsting"@nl ;
     owl:sameAs wd:Q17438137 ;
     nmg:lat 51.84782 ; nmg:long 5.86728 ;
@@ -1028,6 +1166,7 @@ id:wd_rijksmonument_138 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31167" .
 id:wd_rijksmonument_139 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Cellebroederenhuis 'De Ellendige en andere gevoegde Broederschappen'"@nl ;
     owl:sameAs wd:Q17438138 ;
     nmg:lat 51.8483 ; nmg:long 5.86756 ;
@@ -1035,6 +1174,7 @@ id:wd_rijksmonument_139 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31168" .
 id:wd_rijksmonument_140 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand met verdieping en zadeldak"@nl ;
     owl:sameAs wd:Q17438141 ;
     nmg:lat 51.84765 ; nmg:long 5.86253 ;
@@ -1042,6 +1182,7 @@ id:wd_rijksmonument_140 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31171" .
 id:wd_rijksmonument_141 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Brouwershuis"@nl ;
     owl:sameAs wd:Q17438155 ;
     nmg:lat 51.84917 ; nmg:long 5.86615 ;
@@ -1049,6 +1190,7 @@ id:wd_rijksmonument_141 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31184" .
 id:wd_rijksmonument_142 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Hoekpand met twee verdiepingen en omlopend schilddak, waarin getoogde dakkapellen"@nl ;
     owl:sameAs wd:Q17438157 ;
     nmg:lat 51.84864 ; nmg:long 5.86923 ;
@@ -1056,6 +1198,7 @@ id:wd_rijksmonument_142 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "31186" .
 id:wd_rijksmonument_143 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Oosterhout: hoofdgebouw"@nl ;
     owl:sameAs wd:Q17596775 ;
     nmg:lat 51.87451 ; nmg:long 5.83912 ;
@@ -1063,6 +1206,7 @@ id:wd_rijksmonument_143 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "520308" .
 id:wd_rijksmonument_144 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Oosterhout: paardenstal"@nl ;
     owl:sameAs wd:Q17596785 ;
     nmg:lat 51.87451 ; nmg:long 5.83912 ;
@@ -1070,6 +1214,7 @@ id:wd_rijksmonument_144 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "520314" .
 id:wd_rijksmonument_145 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Villa Brakkensteyn: schelpenhuis"@nl ;
     owl:sameAs wd:Q17599968 ;
     nmg:lat 51.81932 ; nmg:long 5.87558 ;
@@ -1077,6 +1222,7 @@ id:wd_rijksmonument_145 a nmg:Place ;
     nmg:category "gebouw"@nl ;
     nmg:monumentId "522930" .
 id:wd_rijksmonument_146 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Collegium Berchmanianum"@nl ;
     owl:sameAs wd:Q17600153 ;
     nmg:lat 51.81703 ; nmg:long 5.86547 ;
@@ -1086,6 +1232,7 @@ id:wd_rijksmonument_146 a nmg:Place ;
     nmg:category "kloostercomplex"@nl ;
     nmg:monumentId "523017" .
 id:wd_rijksmonument_147 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Half-vrijstaand herenhuis met aangebouwde berging en oorspronkelijk smeedijzeren hekwerk rond de voortuin"@nl ;
     owl:sameAs wd:Q17600162 ;
     nmg:lat 51.84205 ; nmg:long 5.86554 ;
@@ -1094,6 +1241,7 @@ id:wd_rijksmonument_147 a nmg:Place ;
     nmg:category "herenhuis"@nl ;
     nmg:monumentId "523021" .
 id:wd_rijksmonument_148 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Aaneengesloten rij van vijf herenhuizen met hekwerken"@nl ;
     owl:sameAs wd:Q17600178 ;
     nmg:lat 51.84048 ; nmg:long 5.86214 ;
@@ -1101,6 +1249,7 @@ id:wd_rijksmonument_148 a nmg:Place ;
     nmg:category "hek"@nl ;
     nmg:monumentId "523029" .
 id:wd_rijksmonument_149 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "standbeeld van Petrus Canisius"@nl ;
     owl:sameAs wd:Q17600223 ;
     nmg:lat 51.8460594 ; nmg:long 5.87235564 ;
@@ -1109,6 +1258,7 @@ id:wd_rijksmonument_149 a nmg:Place ;
     nmg:category "standbeeld"@nl ;
     nmg:monumentId "523056" .
 id:wd_rijksmonument_150 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Transformatorhuisje"@nl ;
     owl:sameAs wd:Q17600174 ;
     nmg:lat 51.86175 ; nmg:long 5.86281 ;
@@ -1116,6 +1266,7 @@ id:wd_rijksmonument_150 a nmg:Place ;
     nmg:category "transformatorhuisje"@nl ;
     nmg:monumentId "523027" .
 id:wd_rijksmonument_151 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Transformatorhuis"@nl ;
     owl:sameAs wd:Q17600185 ;
     nmg:lat 51.854416666667 ; nmg:long 5.8246944444444 ;
@@ -1123,6 +1274,7 @@ id:wd_rijksmonument_151 a nmg:Place ;
     nmg:category "transformatorhuisje"@nl ;
     nmg:monumentId "523033" .
 id:wd_rijksmonument_152 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Huis Oosterhout: boerderij"@nl ;
     owl:sameAs wd:Q17608089 ;
     nmg:lat 51.875983 ; nmg:long 5.834825 ;
@@ -1130,6 +1282,7 @@ id:wd_rijksmonument_152 a nmg:Place ;
     nmg:category "boerenwoning"@nl ;
     nmg:monumentId "529146" .
 id:wd_rijksmonument_153 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Olde Wehme"@nl ;
     owl:sameAs wd:Q17600176 ;
     nmg:lat 51.84012 ; nmg:long 5.83084 ;
@@ -1137,6 +1290,7 @@ id:wd_rijksmonument_153 a nmg:Place ;
     nmg:category "pastorie"@nl ;
     nmg:monumentId "523028" .
 id:wd_rijksmonument_154 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pastorie"@nl ;
     owl:sameAs wd:Q17603882 ;
     nmg:lat 51.83099 ; nmg:long 5.84728 ;
@@ -1144,6 +1298,7 @@ id:wd_rijksmonument_154 a nmg:Place ;
     nmg:category "pastorie"@nl ;
     nmg:monumentId "525505" .
 id:wd_rijksmonument_155 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "standbeeld van Ferdinand Hamer"@nl ;
     owl:sameAs wd:Q17600240 ;
     nmg:lat 51.8427094 ; nmg:long 5.86009881 ;
@@ -1152,6 +1307,7 @@ id:wd_rijksmonument_155 a nmg:Place ;
     nmg:category "standbeeld"@nl ;
     nmg:monumentId "523066" .
 id:wd_rijksmonument_156 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Ivensbank"@nl ;
     owl:sameAs wd:Q17600226 ;
     nmg:lat 51.84687 ; nmg:long 5.873 ;
@@ -1159,6 +1315,7 @@ id:wd_rijksmonument_156 a nmg:Place ;
     nmg:category "bouwwerk"@nl ;
     nmg:monumentId "523058" .
 id:wd_rijksmonument_157 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Bakstenen muur met steunberen"@nl ;
     owl:sameAs wd:Q17438171 ;
     nmg:lat 51.84825 ; nmg:long 5.86727 ;
@@ -1166,6 +1323,7 @@ id:wd_rijksmonument_157 a nmg:Place ;
     nmg:category "muur"@nl ;
     nmg:monumentId "31197" .
 id:wd_rijksmonument_158 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Vrijstaand herenhuis met smeedijzeren hekwerk"@nl ;
     owl:sameAs wd:Q17600106 ;
     nmg:lat 51.84236 ; nmg:long 5.86139 ;
@@ -1173,6 +1331,7 @@ id:wd_rijksmonument_158 a nmg:Place ;
     nmg:category "herenhuis"@nl ;
     nmg:monumentId "522995" .
 id:wd_rijksmonument_159 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Halfvrijstaand herenhuis met oorspronkelijk smeedijzeren hekwerk rond de voortuin"@nl ;
     owl:sameAs wd:Q17600119 ;
     nmg:lat 51.84173 ; nmg:long 5.86372 ;
@@ -1180,6 +1339,7 @@ id:wd_rijksmonument_159 a nmg:Place ;
     nmg:category "herenhuis"@nl ;
     nmg:monumentId "523001" .
 id:wd_rijksmonument_160 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Halfvrijstaand herenhuis met oorspronkelijk smeedijzeren hekwerk rond de voortuin"@nl ;
     owl:sameAs wd:Q17600123 ;
     nmg:lat 51.84262 ; nmg:long 5.86765 ;
@@ -1187,6 +1347,7 @@ id:wd_rijksmonument_160 a nmg:Place ;
     nmg:category "herenhuis"@nl ;
     nmg:monumentId "523002" .
 id:wd_rijksmonument_161 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Herenhuis met oorspronkelijk smeedijzeren hekwerk rond de voortuin"@nl ;
     owl:sameAs wd:Q17600125 ;
     nmg:lat 51.84264 ; nmg:long 5.86778 ;
@@ -1194,6 +1355,7 @@ id:wd_rijksmonument_161 a nmg:Place ;
     nmg:category "herenhuis"@nl ;
     nmg:monumentId "523003" .
 id:wd_rijksmonument_162 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Herenhuis met hekwerk"@nl ;
     owl:sameAs wd:Q17600133 ;
     nmg:lat 51.84122 ; nmg:long 5.85829 ;
@@ -1201,6 +1363,7 @@ id:wd_rijksmonument_162 a nmg:Place ;
     nmg:category "herenhuis"@nl ;
     nmg:monumentId "523007" .
 id:wd_rijksmonument_163 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Dubbel herenhuis met hekwerken"@nl ;
     owl:sameAs wd:Q17600138 ;
     nmg:lat 51.83589 ; nmg:long 5.88626 ;
@@ -1208,6 +1371,7 @@ id:wd_rijksmonument_163 a nmg:Place ;
     nmg:category "herenhuis"@nl ;
     nmg:monumentId "523010" .
 id:wd_rijksmonument_164 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Herenhuis met hekwerken"@nl ;
     owl:sameAs wd:Q17600141 ;
     nmg:lat 51.84246 ; nmg:long 5.86374 ;
@@ -1215,6 +1379,7 @@ id:wd_rijksmonument_164 a nmg:Place ;
     nmg:category "herenhuis"@nl ;
     nmg:monumentId "523011" .
 id:wd_rijksmonument_165 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Herenhuis, dat thans in gebruik is als kantoor"@nl ;
     owl:sameAs wd:Q17600143 ;
     nmg:lat 51.84249 ; nmg:long 5.86384 ;
@@ -1222,6 +1387,7 @@ id:wd_rijksmonument_165 a nmg:Place ;
     nmg:category "herenhuis"@nl ;
     nmg:monumentId "523012" .
 id:wd_rijksmonument_166 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Herenhuis met hekwerken, dat thans in gebruik is als kantoor"@nl ;
     owl:sameAs wd:Q17600146 ;
     nmg:lat 51.8425 ; nmg:long 5.86393 ;
@@ -1229,6 +1395,7 @@ id:wd_rijksmonument_166 a nmg:Place ;
     nmg:category "herenhuis"@nl ;
     nmg:monumentId "523013" .
 id:wd_rijksmonument_167 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Herenhuis met hekwerk, dat thans in gebruik is als kantoor"@nl ;
     owl:sameAs wd:Q17600147 ;
     nmg:lat 51.84252 ; nmg:long 5.86403 ;
@@ -1236,6 +1403,7 @@ id:wd_rijksmonument_167 a nmg:Place ;
     nmg:category "herenhuis"@nl ;
     nmg:monumentId "523014" .
 id:wd_rijksmonument_168 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Herenhuis, dat thans in gebruik is als kantoor"@nl ;
     owl:sameAs wd:Q17600149 ;
     nmg:lat 51.8433 ; nmg:long 5.86726 ;
@@ -1243,6 +1411,7 @@ id:wd_rijksmonument_168 a nmg:Place ;
     nmg:category "herenhuis"@nl ;
     nmg:monumentId "523015" .
 id:wd_rijksmonument_169 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Herenhuis met hekwerk"@nl ;
     owl:sameAs wd:Q17600150 ;
     nmg:lat 51.84267 ; nmg:long 5.86467 ;
@@ -1250,6 +1419,7 @@ id:wd_rijksmonument_169 a nmg:Place ;
     nmg:category "herenhuis"@nl ;
     nmg:monumentId "523016" .
 id:wd_rijksmonument_170 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Herenhuis met spijlenhek"@nl ;
     owl:sameAs wd:Q17600159 ;
     nmg:lat 51.83808 ; nmg:long 5.86037 ;
@@ -1257,6 +1427,7 @@ id:wd_rijksmonument_170 a nmg:Place ;
     nmg:category "herenhuis"@nl ;
     nmg:monumentId "523020" .
 id:wd_rijksmonument_171 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Groot dubbel herenhuis"@nl ;
     owl:sameAs wd:Q17600165 ;
     nmg:lat 51.84948 ; nmg:long 5.86099 ;
@@ -1264,6 +1435,7 @@ id:wd_rijksmonument_171 a nmg:Place ;
     nmg:category "herenhuis"@nl ;
     nmg:monumentId "523022" .
 id:wd_rijksmonument_172 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Herenhuis met smeedijzeren hekwerk"@nl ;
     owl:sameAs wd:Q17600166 ;
     nmg:lat 51.84237 ; nmg:long 5.8667 ;
@@ -1271,6 +1443,7 @@ id:wd_rijksmonument_172 a nmg:Place ;
     nmg:category "herenhuis"@nl ;
     nmg:monumentId "523023" .
 id:wd_rijksmonument_173 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Herenhuis met oorspronkelijk smeedijzeren hekwerk rond de voortuin"@nl ;
     owl:sameAs wd:Q17600169 ;
     nmg:lat 51.84242 ; nmg:long 5.86683 ;
@@ -1278,6 +1451,7 @@ id:wd_rijksmonument_173 a nmg:Place ;
     nmg:category "herenhuis"@nl ;
     nmg:monumentId "523024" .
 id:wd_rijksmonument_174 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Halfvrijstaande herenhuis met hekwerken"@nl ;
     owl:sameAs wd:Q17600208 ;
     nmg:lat 51.84358 ; nmg:long 5.87236 ;
@@ -1285,6 +1459,7 @@ id:wd_rijksmonument_174 a nmg:Place ;
     nmg:category "herenhuis"@nl ;
     nmg:monumentId "523046" .
 id:wd_rijksmonument_175 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Herenhuis met tuinhek"@nl ;
     owl:sameAs wd:Q17600211 ;
     nmg:lat 51.84035 ; nmg:long 5.85413 ;
@@ -1292,6 +1467,7 @@ id:wd_rijksmonument_175 a nmg:Place ;
     nmg:category "herenhuis"@nl ;
     nmg:monumentId "523047" .
 id:wd_rijksmonument_176 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Dubbel herenhuis met hekwerk"@nl ;
     owl:sameAs wd:Q17600217 ;
     nmg:lat 51.83814 ; nmg:long 5.86545 ;
@@ -1299,6 +1475,7 @@ id:wd_rijksmonument_176 a nmg:Place ;
     nmg:category "herenhuis"@nl ;
     nmg:monumentId "523051" .
 id:wd_rijksmonument_177 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Halfvrijstaande herenhuis met hekwerk en prieel"@nl ;
     owl:sameAs wd:Q17600206 ;
     nmg:lat 51.84348 ; nmg:long 5.86789 ;
@@ -1306,6 +1483,7 @@ id:wd_rijksmonument_177 a nmg:Place ;
     nmg:category "prieel"@nl ;
     nmg:monumentId "523045" .
 id:wd_rijksmonument_178 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Villa Brakkensteyn: waterput"@nl ;
     owl:sameAs wd:Q17599969 ;
     nmg:lat 51.81963 ; nmg:long 5.87312 ;
@@ -1313,6 +1491,7 @@ id:wd_rijksmonument_178 a nmg:Place ;
     nmg:category "waterput"@nl ;
     nmg:monumentId "522931" .
 id:wd_rijksmonument_179 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Huis Oosterhout: schuur"@nl ;
     owl:sameAs wd:Q17606179 ;
     nmg:lat 51.87451 ; nmg:long 5.83912 ;
@@ -1320,6 +1499,7 @@ id:wd_rijksmonument_179 a nmg:Place ;
     nmg:category "schuur"@nl ;
     nmg:monumentId "527421" .
 id:wd_rijksmonument_180 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Huis Oosterhout: kleine schuur"@nl ;
     owl:sameAs wd:Q17608090 ;
     nmg:lat 51.875902 ; nmg:long 5.834955 ;
@@ -1327,6 +1507,7 @@ id:wd_rijksmonument_180 a nmg:Place ;
     nmg:category "schuur"@nl ;
     nmg:monumentId "529147" .
 id:wd_rijksmonument_181 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Huis Oosterhout: grote schuur"@nl ;
     owl:sameAs wd:Q17608091 ;
     nmg:lat 51.875964 ; nmg:long 5.835173 ;
@@ -1334,6 +1515,7 @@ id:wd_rijksmonument_181 a nmg:Place ;
     nmg:category "schuur"@nl ;
     nmg:monumentId "529148" .
 id:wd_rijksmonument_182 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Agnes Reiniera Fröbelschool"@nl ;
     owl:sameAs wd:Q17600105 ;
     nmg:lat 51.83153 ; nmg:long 5.85023 ;
@@ -1341,6 +1523,7 @@ id:wd_rijksmonument_182 a nmg:Place ;
     nmg:category "schoolgebouw"@nl ;
     nmg:monumentId "522994" .
 id:wd_rijksmonument_183 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Openbare School N0.2 voor U.L.O."@nl ;
     owl:sameAs wd:Q17600194 ;
     nmg:lat 51.84231 ; nmg:long 5.87002 ;
@@ -1348,6 +1531,7 @@ id:wd_rijksmonument_183 a nmg:Place ;
     nmg:category "schoolgebouw"@nl ;
     nmg:monumentId "523038" .
 id:wd_rijksmonument_184 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Schoolgebouw"@nl ;
     owl:sameAs wd:Q17600213 ;
     nmg:lat 51.83373 ; nmg:long 5.88334 ;
@@ -1355,6 +1539,7 @@ id:wd_rijksmonument_184 a nmg:Place ;
     nmg:category "schoolgebouw"@nl ;
     nmg:monumentId "523049" .
 id:wd_rijksmonument_185 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Huis Oosterhout: dienstwoning"@nl ;
     owl:sameAs wd:Q17608087 ;
     nmg:lat 51.874495 ; nmg:long 5.833648 ;
@@ -1362,6 +1547,7 @@ id:wd_rijksmonument_185 a nmg:Place ;
     nmg:category "dienstwoning"@nl ;
     nmg:monumentId "529145" .
 id:wd_rijksmonument_186 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Bloemisterij"@nl ;
     owl:sameAs wd:Q17600129 ;
     nmg:lat 51.82371 ; nmg:long 5.8562 ;
@@ -1370,6 +1556,7 @@ id:wd_rijksmonument_186 a nmg:Place ;
     nmg:category "winkel"@nl ;
     nmg:monumentId "523005" .
 id:wd_rijksmonument_187 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Poortjes Oud-Burger Gasthuis"@nl ;
     owl:sameAs wd:Q17438172 ;
     nmg:lat 51.8335 ; nmg:long 5.8659 ;
@@ -1377,6 +1564,7 @@ id:wd_rijksmonument_187 a nmg:Place ;
     nmg:category "poort"@nl ;
     nmg:monumentId "31198" .
 id:wd_rijksmonument_188 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Het Grote Bolwerk"@nl ;
     owl:sameAs wd:Q17438165 ;
     nmg:lat 51.84645 ; nmg:long 5.85827 ;
@@ -1384,6 +1572,7 @@ id:wd_rijksmonument_188 a nmg:Place ;
     nmg:category "verdedigingswerk"@nl ;
     nmg:monumentId "31190" .
 id:wd_rijksmonument_189 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Maarten Schonckpoort"@nl ;
     owl:sameAs wd:Q17438168 ;
     nmg:lat 51.84982 ; nmg:long 5.86282 ;
@@ -1391,6 +1580,7 @@ id:wd_rijksmonument_189 a nmg:Place ;
     nmg:category "verdedigingswerk"@nl ;
     nmg:monumentId "31194" .
 id:wd_rijksmonument_190 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Neboklooster"@nl ;
     owl:sameAs wd:Q2303969 ;
     nmg:lat 51.811923 ; nmg:long 5.88416 ;
@@ -1399,6 +1589,7 @@ id:wd_rijksmonument_190 a nmg:Place ;
     nmg:category "kloostercomplex"@nl ;
     nmg:monumentId "522983" .
 id:wd_rijksmonument_191 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Klooster Mariënbosch"@nl ;
     owl:sameAs wd:Q2407031 ;
     nmg:lat 51.821728 ; nmg:long 5.882354 ;
@@ -1407,6 +1598,7 @@ id:wd_rijksmonument_191 a nmg:Place ;
     nmg:category "kloostercomplex"@nl ;
     nmg:monumentId "523008" .
 id:wd_rijksmonument_192 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Albertinum"@nl ;
     owl:sameAs wd:Q2950528 ;
     nmg:lat 51.82725 ; nmg:long 5.87218 ;
@@ -1415,6 +1607,7 @@ id:wd_rijksmonument_192 a nmg:Place ;
     nmg:category "kloostercomplex"@nl ;
     nmg:monumentId "508798" .
 id:wd_rijksmonument_193 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Blok met woonhuis, beneden- en bovenwoning met een door een eenvoudig smeedijzeren spijlenhek omzoomde voortuin"@nl ;
     owl:sameAs wd:Q17600112 ;
     nmg:lat 51.8394 ; nmg:long 5.85824 ;
@@ -1422,6 +1615,7 @@ id:wd_rijksmonument_193 a nmg:Place ;
     nmg:category "woongebouw"@nl ;
     nmg:monumentId "522998" .
 id:wd_rijksmonument_194 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Vier Jaargetijden"@nl ;
     owl:sameAs wd:Q17600224 ;
     nmg:lat 51.843229 ; nmg:long 5.858481 ;
@@ -1430,6 +1624,7 @@ id:wd_rijksmonument_194 a nmg:Place ;
     nmg:category "beeldengroep"@nl ;
     nmg:monumentId "523057" .
 id:wd_rijksmonument_195 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Mariënboom"@nl ;
     owl:sameAs wd:Q18813837 ;
     nmg:lat 51.82564 ; nmg:long 5.88782 ;
@@ -1437,12 +1632,14 @@ id:wd_rijksmonument_195 a nmg:Place ;
     nmg:category "Romeins aquaduct"@nl ;
     nmg:monumentId "531084" .
 id:wd_rijksmonument_196 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "De Drie Huizen"@nl ;
     owl:sameAs wd:Q133771792 ;
     nmg:lat 51.815081 ; nmg:long 5.871561 ;
     nmg:image "https://commons.wikimedia.org/wiki/Special:FilePath/Driehuizerweg%20321%20-%20327%20-%20Huize%20%27De%20Drie%20Huizen%27%20-%20F26378%20-%20Van%20der%20Grinten.jpg?width=320" ;
     nmg:category "landgoed"@nl .
 id:wd_rijksmonument_197 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Leeuw in het Kronenburgerpark"@nl ;
     owl:sameAs wd:Q17600030 ;
     nmg:lat 51.8459542 ; nmg:long 5.85780483 ;
@@ -1452,6 +1649,7 @@ id:wd_rijksmonument_197 a nmg:Place ;
     nmg:category "sculptuur"@nl ;
     nmg:monumentId "522960" .
 id:wd_rijksmonument_198 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Snijderskazerne"@nl ;
     owl:sameAs wd:Q17600041 ;
     nmg:lat 51.83301 ; nmg:long 5.87821 ;
@@ -1459,6 +1657,7 @@ id:wd_rijksmonument_198 a nmg:Place ;
     nmg:category "kazerne"@nl ;
     nmg:monumentId "522963" .
 id:wd_rijksmonument_199 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "St. Geertruidenkapel"@nl ;
     owl:sameAs wd:Q17438169 ;
     nmg:lat 51.84708 ; nmg:long 5.87229 ;
@@ -1466,6 +1665,7 @@ id:wd_rijksmonument_199 a nmg:Place ;
     nmg:category "kapel"@nl ;
     nmg:monumentId "31195" .
 id:wd_rijksmonument_200 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Winkel-woonhuis"@nl ;
     owl:sameAs wd:Q17600100 ;
     nmg:lat 51.84788 ; nmg:long 5.86377 ;
@@ -1473,6 +1673,7 @@ id:wd_rijksmonument_200 a nmg:Place ;
     nmg:category "werk-woonhuis"@nl ;
     nmg:monumentId "522991" .
 id:wd_rijksmonument_201 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Rijtje van vier herenhuizen met hekken"@nl ;
     owl:sameAs wd:Q17600171 ;
     nmg:lat 51.84203 ; nmg:long 5.86603 ;
@@ -1480,6 +1681,7 @@ id:wd_rijksmonument_201 a nmg:Place ;
     nmg:category "huizenrij"@nl ;
     nmg:monumentId "523026" .
 id:wd_rijksmonument_202 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Rij van zeven herenhuizen"@nl ;
     owl:sameAs wd:Q17600183 ;
     nmg:lat 51.84017 ; nmg:long 5.86169 ;
@@ -1487,6 +1689,7 @@ id:wd_rijksmonument_202 a nmg:Place ;
     nmg:category "huizenrij"@nl ;
     nmg:monumentId "523032" .
 id:wd_rijksmonument_203 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Woon/winkelhuis"@nl ;
     owl:sameAs wd:Q17600235 ;
     nmg:lat 51.84786 ; nmg:long 5.85987 ;
@@ -1495,6 +1698,7 @@ id:wd_rijksmonument_203 a nmg:Place ;
     nmg:category "werk-woonhuis"@nl ;
     nmg:monumentId "523063" .
 id:wd_rijksmonument_204 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Rijtje van drie herenhuizen"@nl ;
     owl:sameAs wd:Q17600244 ;
     nmg:lat 51.84052 ; nmg:long 5.86358 ;
@@ -1502,6 +1706,7 @@ id:wd_rijksmonument_204 a nmg:Place ;
     nmg:category "huizenrij"@nl ;
     nmg:monumentId "523068" .
 id:wd_rijksmonument_205 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Kops Plateau"@nl ;
     owl:sameAs wd:Q3921197 ;
     nmg:lat 51.837806 ; nmg:long 5.893972 ;
@@ -1510,12 +1715,14 @@ id:wd_rijksmonument_205 a nmg:Place ;
     nmg:category "castellum"@nl ;
     nmg:category "Romeins bouwwerk"@nl .
 id:wd_rijksmonument_206 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Huize Villandry"@nl ;
     owl:sameAs wd:Q60219112 ;
     nmg:lat 51.826443046463 ; nmg:long 5.881162928638 ;
     nmg:image "https://commons.wikimedia.org/wiki/Special:FilePath/Nijmegen%20Villa%20Villandry%20%28Villandry%2050%20tm%2060%29%20vanuit%20de%20tuin.JPG?width=320" ;
     nmg:category "landhuis"@nl .
 id:wd_rijksmonument_207 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Terrein waarin sporen van bewoning (burgerlijk en militair) uit de Romeinse Tijd."@nl ;
     owl:sameAs wd:Q17448667 ;
     nmg:lat 51.84698 ; nmg:long 5.87219 ;
@@ -1523,18 +1730,21 @@ id:wd_rijksmonument_207 a nmg:Place ;
     nmg:category "archeologische vindplaats"@nl ;
     nmg:monumentId "395952" .
 id:wd_rijksmonument_208 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Terrein waarin sporen van bewoning uit de Romeinse Tijd"@nl ;
     owl:sameAs wd:Q17448829 ;
     nmg:lat 51.84941 ; nmg:long 5.84712 ;
     nmg:category "archeologische vindplaats"@nl ;
     nmg:monumentId "397576" .
 id:wd_rijksmonument_209 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Terrein waarin sporen van bewoning uit de Prehistorie en de Romeinse Tijd"@nl ;
     owl:sameAs wd:Q17454203 ;
     nmg:lat 51.83734 ; nmg:long 5.89288 ;
     nmg:category "archeologische vindplaats"@nl ;
     nmg:monumentId "45809" .
 id:wd_rijksmonument_210 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Militaire versterkingen t.b.v. legioenen"@nl ;
     owl:sameAs wd:Q17454205 ;
     nmg:lat 51.84 ; nmg:long 5.8838888888889 ;
@@ -1543,18 +1753,21 @@ id:wd_rijksmonument_210 a nmg:Place ;
     nmg:category "Romeins bouwwerk"@nl ;
     nmg:monumentId "45811" .
 id:wd_rijksmonument_211 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Terrein met daarin restanten van bewoning"@nl ;
     owl:sameAs wd:Q17463306 ;
     nmg:lat 51.88263 ; nmg:long 5.85467 ;
     nmg:category "archeologische vindplaats"@nl ;
     nmg:monumentId "511804" .
 id:wd_rijksmonument_212 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Terrein waarin nederzettingsresten"@nl ;
     owl:sameAs wd:Q17468726 ;
     nmg:lat 51.88087 ; nmg:long 5.86159 ;
     nmg:category "archeologische vindplaats"@nl ;
     nmg:monumentId "515197" .
 id:wd_rijksmonument_213 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "station Nijmegen"@nl ;
     owl:sameAs wd:Q801257 ;
     nmg:lat 51.843333 ; nmg:long 5.8525 ;
@@ -1567,6 +1780,7 @@ id:wd_rijksmonument_213 a nmg:Place ;
     nmg:architect wd:Q108115098 ;
     nmg:category "spoorwegstation"@nl .
 id:wd_rijksmonument_214 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Hekwerk Museum Kam"@nl ;
     owl:sameAs wd:Q17600016 ;
     nmg:lat 51.84194 ; nmg:long 5.87825 ;
@@ -1574,6 +1788,7 @@ id:wd_rijksmonument_214 a nmg:Place ;
     nmg:category "hek"@nl ;
     nmg:monumentId "522952" .
 id:wd_rijksmonument_215 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "LIMOS-kazerne: hek & wachthuisjes"@nl ;
     owl:sameAs wd:Q17600052 ;
     nmg:lat 51.83302 ; nmg:long 5.87528 ;
@@ -1581,6 +1796,7 @@ id:wd_rijksmonument_215 a nmg:Place ;
     nmg:category "hek"@nl ;
     nmg:monumentId "522966" .
 id:wd_rijksmonument_216 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "LIMOS-kazerne: 4 toegangspoorten, 1 hek en wachthuisje"@nl ;
     owl:sameAs wd:Q17600061 ;
     nmg:lat 51.83139 ; nmg:long 5.87876 ;
@@ -1588,6 +1804,7 @@ id:wd_rijksmonument_216 a nmg:Place ;
     nmg:category "hek"@nl ;
     nmg:monumentId "522969" .
 id:wd_rijksmonument_217 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Hekwerk"@nl ;
     owl:sameAs wd:Q17600067 ;
     nmg:lat 51.84598 ; nmg:long 5.85604 ;
@@ -1595,6 +1812,7 @@ id:wd_rijksmonument_217 a nmg:Place ;
     nmg:category "hek"@nl ;
     nmg:monumentId "522973" .
 id:wd_rijksmonument_218 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Villa Salatiga: hekwerk"@nl ;
     owl:sameAs wd:Q17600082 ;
     nmg:lat 51.84148 ; nmg:long 5.8856 ;
@@ -1602,6 +1820,7 @@ id:wd_rijksmonument_218 a nmg:Place ;
     nmg:category "hek"@nl ;
     nmg:monumentId "522981" .
 id:wd_rijksmonument_219 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Villa Brakkensteyn: dressuurstal"@nl ;
     owl:sameAs wd:Q17599964 ;
     nmg:lat 51.81932 ; nmg:long 5.87558 ;
@@ -1609,6 +1828,7 @@ id:wd_rijksmonument_219 a nmg:Place ;
     nmg:category "stal"@nl ;
     nmg:monumentId "522928" .
 id:wd_rijksmonument_220 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Kronenburgertoren"@nl ;
     owl:sameAs wd:Q2413638 ;
     nmg:lat 51.8475 ; nmg:long 5.8575 ;
@@ -1619,12 +1839,14 @@ id:wd_rijksmonument_220 a nmg:Place ;
     nmg:category "verdedigingstoren"@nl ;
     nmg:monumentId "31189" .
 id:wd_rijksmonument_221 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Bioscoop Carolus"@nl ;
     owl:sameAs wd:Q15873346 ;
     nmg:lat 51.84571 ; nmg:long 5.86204 ;
     nmg:image "https://commons.wikimedia.org/wiki/Special:FilePath/Foyer%20Bioscoop%20Carolus.JPG?width=320" ;
     nmg:category "bioscoop"@nl .
 id:wd_rijksmonument_222 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Kruiswegstaties op Begraafplaats Daalseweg"@nl ;
     owl:sameAs wd:Q17599988 ;
     nmg:lat 51.83857 ; nmg:long 5.87322 ;
@@ -1632,6 +1854,7 @@ id:wd_rijksmonument_222 a nmg:Place ;
     nmg:category "kruisweg"@nl ;
     nmg:monumentId "522940" .
 id:wd_rijksmonument_223 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "LIMOS-kazerne: schuilkelders"@nl ;
     owl:sameAs wd:Q17600054 ;
     nmg:lat 51.83302 ; nmg:long 5.87528 ;
@@ -1639,6 +1862,7 @@ id:wd_rijksmonument_223 a nmg:Place ;
     nmg:category "schuilkelder"@nl ;
     nmg:monumentId "522967" .
 id:wd_rijksmonument_224 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Prins Hendrikkazerne"@nl ;
     owl:sameAs wd:Q2372448 ;
     nmg:lat 51.83361 ; nmg:long 5.88028 ;
@@ -1647,6 +1871,7 @@ id:wd_rijksmonument_224 a nmg:Place ;
     nmg:category "kazerne"@nl ;
     nmg:monumentId "522968" .
 id:wd_rijksmonument_225 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Krayenhoffkazerne"@nl ;
     owl:sameAs wd:Q7477470 ;
     nmg:lat 51.83417 ; nmg:long 5.87278 ;
@@ -1654,6 +1879,7 @@ id:wd_rijksmonument_225 a nmg:Place ;
     nmg:category "kazerne"@nl ;
     nmg:monumentId "522962" .
 id:wd_rijksmonument_226 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Arsenaal Nijmegen"@nl ;
     owl:sameAs wd:Q2563507 ;
     nmg:lat 51.84499 ; nmg:long 5.86572 ;
@@ -1661,6 +1887,7 @@ id:wd_rijksmonument_226 a nmg:Place ;
     nmg:category "arsenaal"@nl ;
     nmg:monumentId "31156" .
 id:wd_rijksmonument_227 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Oosterhout: koetshuis annex stal"@nl ;
     owl:sameAs wd:Q17596783 ;
     nmg:lat 51.87451 ; nmg:long 5.83912 ;
@@ -1668,6 +1895,7 @@ id:wd_rijksmonument_227 a nmg:Place ;
     nmg:category "koetshuis"@nl ;
     nmg:monumentId "520313" .
 id:wd_rijksmonument_228 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pastorie Maria Geboortekerk"@nl ;
     owl:sameAs wd:Q17600010 ;
     nmg:lat 51.84232 ; nmg:long 5.87307 ;
@@ -1675,6 +1903,7 @@ id:wd_rijksmonument_228 a nmg:Place ;
     nmg:category "pastorie"@nl ;
     nmg:monumentId "522948" .
 id:wd_rijksmonument_229 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Sint-Jacobskapel"@nl ;
     owl:sameAs wd:Q2042022 ;
     nmg:lat 51.84853 ; nmg:long 5.85953 ;
@@ -1682,6 +1911,7 @@ id:wd_rijksmonument_229 a nmg:Place ;
     nmg:category "kapel"@nl ;
     nmg:monumentId "31128" .
 id:wd_rijksmonument_230 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Mariënburgkapel"@nl ;
     owl:sameAs wd:Q2681653 ;
     nmg:lat 51.84511 ; nmg:long 5.86649 ;
@@ -1689,6 +1919,7 @@ id:wd_rijksmonument_230 a nmg:Place ;
     nmg:category "kapel"@nl ;
     nmg:monumentId "31158" .
 id:wd_rijksmonument_231 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "3 Brugkazematten, Lent Oost, Lent Midden en Lent zuid"@nl ;
     owl:sameAs wd:Q17452484 ;
     nmg:lat 51.85664 ; nmg:long 5.87337 ;
@@ -1696,6 +1927,7 @@ id:wd_rijksmonument_231 a nmg:Place ;
     nmg:category "kazemat"@nl ;
     nmg:monumentId "418950" .
 id:wd_rijksmonument_232 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Joodse Begraafplaats aanleg"@nl ;
     owl:sameAs wd:Q17599980 ;
     nmg:lat 51.83068 ; nmg:long 5.88359 ;
@@ -1703,6 +1935,7 @@ id:wd_rijksmonument_232 a nmg:Place ;
     nmg:category "funeraire architectuur"@nl ;
     nmg:monumentId "522935" .
 id:wd_rijksmonument_233 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Bebouwing op de Joodse Begraafplaats"@nl ;
     owl:sameAs wd:Q17599983 ;
     nmg:lat 51.83074 ; nmg:long 5.88298 ;
@@ -1710,6 +1943,7 @@ id:wd_rijksmonument_233 a nmg:Place ;
     nmg:category "funeraire architectuur"@nl ;
     nmg:monumentId "522936" .
 id:wd_rijksmonument_234 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Bebouwing op Begraafplaats Daalseweg"@nl ;
     owl:sameAs wd:Q17599986 ;
     nmg:lat 51.83857 ; nmg:long 5.87322 ;
@@ -1717,6 +1951,7 @@ id:wd_rijksmonument_234 a nmg:Place ;
     nmg:category "funeraire architectuur"@nl ;
     nmg:monumentId "522939" .
 id:wd_rijksmonument_235 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "grafmonument van Heukelum op Begraafplaats Daalseweg"@nl ;
     owl:sameAs wd:Q17599989 ;
     nmg:lat 51.83857 ; nmg:long 5.87322 ;
@@ -1724,6 +1959,7 @@ id:wd_rijksmonument_235 a nmg:Place ;
     nmg:category "funeraire architectuur"@nl ;
     nmg:monumentId "522941" .
 id:wd_rijksmonument_236 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "grafmonument Veerkamp op Begraafplaats Daalseweg"@nl ;
     owl:sameAs wd:Q17599996 ;
     nmg:lat 51.83857 ; nmg:long 5.87322 ;
@@ -1731,6 +1967,7 @@ id:wd_rijksmonument_236 a nmg:Place ;
     nmg:category "funeraire architectuur"@nl ;
     nmg:monumentId "522942" .
 id:wd_rijksmonument_237 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "grafmonument van A.F. Smulders"@nl ;
     owl:sameAs wd:Q17599999 ;
     nmg:lat 51.83857 ; nmg:long 5.87322 ;
@@ -1738,6 +1975,7 @@ id:wd_rijksmonument_237 a nmg:Place ;
     nmg:category "funeraire architectuur"@nl ;
     nmg:monumentId "522943" .
 id:wd_rijksmonument_238 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "grafmonument Randag op Begraafplaats Daalseweg"@nl ;
     owl:sameAs wd:Q17600002 ;
     nmg:lat 51.83857 ; nmg:long 5.87322 ;
@@ -1745,6 +1983,7 @@ id:wd_rijksmonument_238 a nmg:Place ;
     nmg:category "funeraire architectuur"@nl ;
     nmg:monumentId "522944" .
 id:wd_rijksmonument_239 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "grafmonument van Carel van Rosendael"@nl ;
     owl:sameAs wd:Q17600004 ;
     nmg:lat 51.83857 ; nmg:long 5.87322 ;
@@ -1752,6 +1991,7 @@ id:wd_rijksmonument_239 a nmg:Place ;
     nmg:category "funeraire architectuur"@nl ;
     nmg:monumentId "522945" .
 id:wd_rijksmonument_240 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Waalbrug"@nl ;
     owl:sameAs wd:Q1570859 ;
     nmg:lat 51.85111 ; nmg:long 5.87194 ;
@@ -1763,6 +2003,7 @@ id:wd_rijksmonument_240 a nmg:Place ;
     nmg:category "stalen brug"@nl ;
     nmg:monumentId "523067" .
 id:wd_rijksmonument_241 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Protestants-Kinderen Weeshuis"@nl ;
     owl:sameAs wd:Q17438083 ;
     nmg:lat 51.8484197 ; nmg:long 5.8583147 ;
@@ -1771,6 +2012,7 @@ id:wd_rijksmonument_241 a nmg:Place ;
     nmg:category "weeshuis"@nl ;
     nmg:monumentId "31118" .
 id:wd_rijksmonument_242 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Nieuwe Hezelpoort"@nl ;
     owl:sameAs wd:Q2500575 ;
     nmg:lat 51.8487 ; nmg:long 5.85453 ;
@@ -1779,6 +2021,7 @@ id:wd_rijksmonument_242 a nmg:Place ;
     nmg:category "viaduct"@nl ;
     nmg:monumentId "523064" .
 id:wd_rijksmonument_243 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Latijnse School"@nl ;
     owl:sameAs wd:Q2622205 ;
     nmg:lat 51.847878 ; nmg:long 5.863389 ;
@@ -1786,6 +2029,7 @@ id:wd_rijksmonument_243 a nmg:Place ;
     nmg:category "schoolgebouw"@nl ;
     nmg:monumentId "31170" .
 id:wd_rijksmonument_244 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Canisius College"@nl ;
     owl:sameAs wd:Q2648947 ;
     nmg:lat 51.840833 ; nmg:long 5.878056 ;
@@ -1796,6 +2040,7 @@ id:wd_rijksmonument_244 a nmg:Place ;
     nmg:category "schoolgebouw"@nl ;
     nmg:monumentId "46805" .
 id:wd_rijksmonument_245 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Municipium Ulpia Noviomagus Batavorum"@nl ;
     owl:sameAs wd:Q1309708 ;
     nmg:lat 51.851765 ; nmg:long 5.847816 ;
@@ -1803,6 +2048,7 @@ id:wd_rijksmonument_245 a nmg:Place ;
     nmg:category "vicus"@nl ;
     nmg:category "Romeins bouwwerk"@nl .
 id:wd_rijksmonument_246 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Oranjesingel 68"@nl ;
     owl:sameAs wd:Q2580312 ;
     nmg:lat 51.843056 ; nmg:long 5.866944 ;
@@ -1811,6 +2057,7 @@ id:wd_rijksmonument_246 a nmg:Place ;
     nmg:category "kraakhuis"@nl ;
     nmg:monumentId "522996" .
 id:wd_rijksmonument_247 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Landhoofd spoorbrug Nijmegen"@nl ;
     owl:sameAs wd:Q17440302 ;
     nmg:lat 51.85078 ; nmg:long 5.85596 ;
@@ -1818,6 +2065,7 @@ id:wd_rijksmonument_247 a nmg:Place ;
     nmg:category "landhoofd"@nl ;
     nmg:monumentId "333577" .
 id:wd_rijksmonument_248 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Boterwaag"@nl ;
     owl:sameAs wd:Q2732783 ;
     nmg:lat 51.8477 ; nmg:long 5.86385 ;
@@ -1825,6 +2073,7 @@ id:wd_rijksmonument_248 a nmg:Place ;
     nmg:category "waag"@nl ;
     nmg:monumentId "31137" .
 id:wd_rijksmonument_249 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Hollandsch-Duitsch gemaal"@nl ;
     owl:sameAs wd:Q2693099 ;
     nmg:lat 51.84694 ; nmg:long 5.87667 ;
@@ -1833,6 +2082,7 @@ id:wd_rijksmonument_249 a nmg:Place ;
     nmg:category "pompgemaal"@nl ;
     nmg:monumentId "523041" .
 id:wd_rijksmonument_250 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "LIMOS-kazerne: kantine"@nl ;
     owl:sameAs wd:Q17600043 ;
     nmg:lat 51.83302 ; nmg:long 5.87528 ;
@@ -1840,6 +2090,7 @@ id:wd_rijksmonument_250 a nmg:Place ;
     nmg:category "militair gebouw"@nl ;
     nmg:monumentId "522964" .
 id:wd_rijksmonument_251 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "LIMOS-kazerne: Kledingmagazijn"@nl ;
     owl:sameAs wd:Q17600050 ;
     nmg:lat 51.83302 ; nmg:long 5.87528 ;
@@ -1847,6 +2098,7 @@ id:wd_rijksmonument_251 a nmg:Place ;
     nmg:category "militair gebouw"@nl ;
     nmg:monumentId "522965" .
 id:wd_rijksmonument_252 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "LIMOS-kazerne: burgerkantine"@nl ;
     owl:sameAs wd:Q17600063 ;
     nmg:lat 51.83302 ; nmg:long 5.87528 ;
@@ -1854,18 +2106,21 @@ id:wd_rijksmonument_252 a nmg:Place ;
     nmg:category "militair gebouw"@nl ;
     nmg:monumentId "522970" .
 id:wd_rijksmonument_253 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Israelitische Begraafplaats van Nijmegen"@nl ;
     owl:sameAs wd:Q2368664 ;
     nmg:lat 51.83083 ; nmg:long 5.88333 ;
     nmg:image "https://commons.wikimedia.org/wiki/Special:FilePath/Jewish%20cemetery%20nijmegen1.jpg?width=320" ;
     nmg:category "complex van meerdere objecten"@nl .
 id:wd_rijksmonument_254 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "LIMOS-kazernecomplex"@nl ;
     owl:sameAs wd:Q5421331 ;
     nmg:lat 51.83278 ; nmg:long 5.87417 ;
     nmg:image "https://commons.wikimedia.org/wiki/Special:FilePath/Nijmegen%20Rijksmonument%20522963%20Snijderskazerne%20gevel%20boven%20entree.JPG?width=320" ;
     nmg:category "complex van meerdere objecten"@nl .
 id:wd_rijksmonument_255 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Spoorwegmonument"@nl ;
     owl:sameAs wd:Q2645424 ;
     nmg:lat 51.8471154 ; nmg:long 5.86887559 ;
@@ -1875,6 +2130,7 @@ id:wd_rijksmonument_255 a nmg:Place ;
     nmg:category "sculptuur"@nl ;
     nmg:monumentId "523055" .
 id:wd_rijksmonument_256 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Gepleisterd herenhuis met twee verdiepingen en schilddak"@nl ;
     owl:sameAs wd:Q17438158 ;
     nmg:lat 51.84865 ; nmg:long 5.86945 ;
@@ -1882,6 +2138,7 @@ id:wd_rijksmonument_256 a nmg:Place ;
     nmg:category "herenhuis"@nl ;
     nmg:monumentId "31187" .
 id:wd_rijksmonument_257 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Herenhuis"@nl ;
     owl:sameAs wd:Q17600066 ;
     nmg:lat 51.84591 ; nmg:long 5.856 ;
@@ -1889,6 +2146,7 @@ id:wd_rijksmonument_257 a nmg:Place ;
     nmg:category "herenhuis"@nl ;
     nmg:monumentId "522972" .
 id:wd_rijksmonument_258 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Onderkelderde en aan drie zijden vrijstaande herenhuis"@nl ;
     owl:sameAs wd:Q17600070 ;
     nmg:lat 51.84282 ; nmg:long 5.86853 ;
@@ -1896,6 +2154,7 @@ id:wd_rijksmonument_258 a nmg:Place ;
     nmg:category "herenhuis"@nl ;
     nmg:monumentId "522975" .
 id:wd_rijksmonument_259 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Stadhuis van Nijmegen"@nl ;
     owl:sameAs wd:Q1906372 ;
     nmg:lat 51.846953 ; nmg:long 5.865836 ;
@@ -1904,6 +2163,7 @@ id:wd_rijksmonument_259 a nmg:Place ;
     nmg:category "gemeentehuis"@nl ;
     nmg:monumentId "31121" .
 id:wd_rijksmonument_260 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Museumgebouw Kam"@nl ;
     owl:sameAs wd:Q2447629 ;
     nmg:lat 51.841986 ; nmg:long 5.878239 ;
@@ -1914,6 +2174,7 @@ id:wd_rijksmonument_260 a nmg:Place ;
     nmg:category "museumgebouw"@nl ;
     nmg:monumentId "522950" .
 id:wd_rijksmonument_261 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Benzinestation Auto Palace"@nl ;
     owl:sameAs wd:Q2256210 ;
     nmg:lat 51.829167 ; nmg:long 5.825278 ;
@@ -1923,6 +2184,7 @@ id:wd_rijksmonument_261 a nmg:Place ;
     nmg:category "tankstation"@nl ;
     nmg:monumentId "386790" .
 id:wd_rijksmonument_262 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Gedeelte van de stadsmuur"@nl ;
     owl:sameAs wd:Q17438167 ;
     nmg:lat 51.8474 ; nmg:long 5.87128 ;
@@ -1930,6 +2192,7 @@ id:wd_rijksmonument_262 a nmg:Place ;
     nmg:category "stadsmuur"@nl ;
     nmg:monumentId "31193" .
 id:wd_rijksmonument_263 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Langgerekt gedeelte van de stadsmuur"@nl ;
     owl:sameAs wd:Q17438170 ;
     nmg:lat 51.84729 ; nmg:long 5.87246 ;
@@ -1937,6 +2200,7 @@ id:wd_rijksmonument_263 a nmg:Place ;
     nmg:category "stadsmuur"@nl ;
     nmg:monumentId "31196" .
 id:wd_rijksmonument_264 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Villa Brakkensteyn: tuinmanswoning"@nl ;
     owl:sameAs wd:Q17599966 ;
     nmg:lat 51.81703 ; nmg:long 5.87046 ;
@@ -1944,12 +2208,14 @@ id:wd_rijksmonument_264 a nmg:Place ;
     nmg:category "tuinmanswoning"@nl ;
     nmg:monumentId "522929" .
 id:wd_rijksmonument_265 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Romeins aquaduct Nijmegen"@nl ;
     owl:sameAs wd:Q3086365 ;
     nmg:lat 51.82103 ; nmg:long 5.91799 ;
     nmg:image "https://commons.wikimedia.org/wiki/Special:FilePath/Louisedal%20bij%20Postweg%2C%20een%20deel%20van%20een%20Romeins%20aquaduct%20-%20Unknown%20-%2020537048%20-%20RCE.jpg?width=320" ;
     nmg:category "Romeins aquaduct"@nl .
 id:wd_rijksmonument_266 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Oosterhout: historische tuin- en parkaanleg"@nl ;
     owl:sameAs wd:Q17596777 ;
     nmg:lat 51.87322 ; nmg:long 5.83854 ;
@@ -1957,6 +2223,7 @@ id:wd_rijksmonument_266 a nmg:Place ;
     nmg:category "tuin"@nl ;
     nmg:monumentId "520309" .
 id:wd_rijksmonument_267 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Oosterhout: prieel"@nl ;
     owl:sameAs wd:Q17596782 ;
     nmg:lat 51.87322 ; nmg:long 5.83854 ;
@@ -1964,6 +2231,7 @@ id:wd_rijksmonument_267 a nmg:Place ;
     nmg:category "prieel"@nl ;
     nmg:monumentId "520312" .
 id:wd_rijksmonument_268 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand met gepleisterde lijstgevel"@nl ;
     owl:sameAs wd:Q17438085 ;
     nmg:lat 51.84832 ; nmg:long 5.86065 ;
@@ -1971,6 +2239,7 @@ id:wd_rijksmonument_268 a nmg:Place ;
     nmg:category "gebouw met lijstgevel"@nl ;
     nmg:monumentId "31120" .
 id:wd_rijksmonument_269 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Conciërgewoning Museum Kam"@nl ;
     owl:sameAs wd:Q17600014 ;
     nmg:lat 51.84195 ; nmg:long 5.8782 ;
@@ -1978,6 +2247,7 @@ id:wd_rijksmonument_269 a nmg:Place ;
     nmg:category "dienstwoning"@nl ;
     nmg:monumentId "522951" .
 id:wd_rijksmonument_270 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Badhuis Daalseweg"@nl ;
     owl:sameAs wd:Q5175453 ;
     nmg:lat 51.83749 ; nmg:long 5.87664 ;
@@ -1985,6 +2255,7 @@ id:wd_rijksmonument_270 a nmg:Place ;
     nmg:category "badhuis"@nl ;
     nmg:monumentId "523050" .
 id:wd_rijksmonument_271 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Oranjesingel 42"@nl ;
     owl:sameAs wd:Q14942264 ;
     nmg:lat 51.84269 ; nmg:long 5.8648 ;
@@ -1993,6 +2264,7 @@ id:wd_rijksmonument_271 a nmg:Place ;
     nmg:architect wd:Q2142022 ;
     nmg:category "bouwwerk"@nl .
 id:wd_rijksmonument_272 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Fort Beneden Lent"@nl ;
     owl:sameAs wd:Q2225118 ;
     nmg:lat 51.86203 ; nmg:long 5.85257 ;
@@ -2000,6 +2272,7 @@ id:wd_rijksmonument_272 a nmg:Place ;
     nmg:category "fort"@nl ;
     nmg:monumentId "14955" .
 id:wd_rijksmonument_273 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Fort Boven-Lent"@nl ;
     owl:sameAs wd:Q2638031 ;
     nmg:lat 51.86436 ; nmg:long 5.88052 ;
@@ -2007,18 +2280,21 @@ id:wd_rijksmonument_273 a nmg:Place ;
     nmg:category "fort"@nl ;
     nmg:monumentId "14952" .
 id:wd_rijksmonument_274 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "watertoren Nijmegen"@nl ;
     owl:sameAs wd:Q2860636 ;
     nmg:lat 51.856667 ; nmg:long 5.837778 ;
     nmg:image "https://commons.wikimedia.org/wiki/Special:FilePath/Nijmegen%20Watertoren%202010.JPG?width=320" ;
     nmg:category "watertoren"@nl .
 id:wd_rijksmonument_275 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Grafveld"@nl ;
     owl:sameAs wd:Q17454204 ;
     nmg:lat 51.83512 ; nmg:long 5.896 ;
     nmg:category "grafveld"@nl ;
     nmg:monumentId "45810" .
 id:wd_rijksmonument_276 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Berk en Eik - theehuis"@nl ;
     owl:sameAs wd:Q17599958 ;
     nmg:lat 51.8306 ; nmg:long 5.90173 ;
@@ -2026,6 +2302,7 @@ id:wd_rijksmonument_276 a nmg:Place ;
     nmg:category "theekoepel"@nl ;
     nmg:monumentId "522924" .
 id:wd_rijksmonument_277 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Villa Salatiga: theekoepel"@nl ;
     owl:sameAs wd:Q17600076 ;
     nmg:lat 51.84149 ; nmg:long 5.88518 ;
@@ -2033,6 +2310,7 @@ id:wd_rijksmonument_277 a nmg:Place ;
     nmg:category "theekoepel"@nl ;
     nmg:monumentId "522979" .
 id:wd_rijksmonument_278 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Quack-monument"@nl ;
     owl:sameAs wd:Q2263656 ;
     nmg:lat 51.8439748 ; nmg:long 5.85791937 ;
@@ -2040,6 +2318,7 @@ id:wd_rijksmonument_278 a nmg:Place ;
     nmg:inception "1925"^^xsd:gYear ;
     nmg:category "sculptuur"@nl .
 id:wd_rijksmonument_279 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Kerkboog"@nl ;
     owl:sameAs wd:Q17438094 ;
     nmg:lat 51.84777 ; nmg:long 5.86335 ;
@@ -2049,6 +2328,7 @@ id:wd_rijksmonument_279 a nmg:Place ;
     nmg:category "poortgebouw"@nl ;
     nmg:monumentId "31129" .
 id:wd_rijksmonument_280 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand met aan de voorzijde een bakstenen halsgevel"@nl ;
     owl:sameAs wd:Q17438128 ;
     nmg:lat 51.84948 ; nmg:long 5.86157 ;
@@ -2056,6 +2336,7 @@ id:wd_rijksmonument_280 a nmg:Place ;
     nmg:category "gebouw met halsgevel"@nl ;
     nmg:monumentId "31160" .
 id:wd_rijksmonument_281 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Pand met aan voor- en achterzijde trapgevels"@nl ;
     owl:sameAs wd:Q17438139 ;
     nmg:lat 51.84778 ; nmg:long 5.86743 ;
@@ -2064,6 +2345,7 @@ id:wd_rijksmonument_281 a nmg:Place ;
     nmg:category "gebouw met trapgevel"@nl ;
     nmg:monumentId "31169" .
 id:wd_rijksmonument_282 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Berk en Eik - toegangspoort"@nl ;
     owl:sameAs wd:Q17599960 ;
     nmg:lat 51.8306 ; nmg:long 5.90173 ;
@@ -2071,6 +2353,7 @@ id:wd_rijksmonument_282 a nmg:Place ;
     nmg:category "toegangshek"@nl ;
     nmg:monumentId "522925" .
 id:wd_rijksmonument_283 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Villa Brakkensteyn: toegangshekken"@nl ;
     owl:sameAs wd:Q17599972 ;
     nmg:lat 51.81703 ; nmg:long 5.87046 ;
@@ -2078,6 +2361,7 @@ id:wd_rijksmonument_283 a nmg:Place ;
     nmg:category "toegangshek"@nl ;
     nmg:monumentId "522932" .
 id:wd_rijksmonument_284 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Rechthoekig calvarie- annex baarhuisje"@nl ;
     owl:sameAs wd:Q17600022 ;
     nmg:lat 51.86126 ; nmg:long 5.86483 ;
@@ -2085,6 +2369,7 @@ id:wd_rijksmonument_284 a nmg:Place ;
     nmg:category "baarhuis"@nl ;
     nmg:monumentId "522955" .
 id:wd_rijksmonument_285 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Kerktoren van de Grote of Sint-Stevenskerk"@nl ;
     owl:sameAs wd:Q17438153 ;
     nmg:lat 51.84797 ; nmg:long 5.86228 ;
@@ -2092,6 +2377,7 @@ id:wd_rijksmonument_285 a nmg:Place ;
     nmg:category "torenspits"@nl ;
     nmg:monumentId "31182" .
 id:wd_rijksmonument_286 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Kerktoren van de Petruskerk"@nl ;
     owl:sameAs wd:Q17438176 ;
     nmg:lat 51.84047 ; nmg:long 5.82904 ;
@@ -2099,6 +2385,7 @@ id:wd_rijksmonument_286 a nmg:Place ;
     nmg:category "torenspits"@nl ;
     nmg:monumentId "31203" .
 id:wd_rijksmonument_287 a nmg:Place ;
+    nmg:wikidataSet "rijksmonument" ;
     rdfs:label "Kerktoren Nederlands Hervormde kerk, voorheen Antonius Abtkerk"@nl ;
     owl:sameAs wd:Q17438179 ;
     nmg:lat 51.83513 ; nmg:long 5.81034 ;

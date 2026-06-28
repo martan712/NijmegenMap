@@ -166,6 +166,10 @@ class Map:
     # (undated ones always pass, so marquee medieval churches aren't lost).
     heritage_before: Optional[int] = None
     heritage_after: Optional[int] = None
+    # Generic per-set layer toggle: emits nmg:showWikidataLayer "<key>".
+    # heritage_cats / heritage_before / heritage_after also serve as this layer's
+    # filters (reusing the same ontology predicates).
+    wikidata: Optional[str] = None
 
 
 # Block kinds map 1:1 to ontology subclasses of nmg:Block.

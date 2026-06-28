@@ -157,6 +157,9 @@ public class GraphStore {
      *   HeritageLayer   — the Wikidata heritage layer (nmg:showHeritage); its
      *                     `categories` is a comma-joined nmg:heritageCategory list
      *                     (empty = show all) the frontend filters the dataset by
+     *   WikidataLayer   — a generic Wikidata instance layer keyed by
+     *                     nmg:showWikidataLayer; `set` is the nmg:wikidataSet key
+     *                     the frontend fetches from /api/wikidata/{set}
      */
     public List<Map<String, Object>> scene(String segId) {
         List<Map<String, Object>> out = new ArrayList<>();
@@ -226,6 +229,15 @@ public class GraphStore {
               OPTIONAL { ?m nmg:heritageAfter ?af }
               BIND("heritage" AS ?dataset)
             } GROUP BY ?dataset""".formatted(segId)));
+        out.addAll(select("""
+            SELECT ("WikidataLayer" AS ?type) ?set
+                   (GROUP_CONCAT(?cat; SEPARATOR=",") AS ?categories)
+                   (SAMPLE(?bf) AS ?before) (SAMPLE(?af) AS ?after) WHERE {
+              id:%s nmg:mapState ?m . ?m nmg:showWikidataLayer ?set .
+              OPTIONAL { ?m nmg:heritageCategory ?cat }
+              OPTIONAL { ?m nmg:heritageBefore ?bf }
+              OPTIONAL { ?m nmg:heritageAfter ?af }
+            } GROUP BY ?set""".formatted(segId)));
         return out;
     }
 
@@ -264,6 +276,34 @@ public class GraphStore {
               OPTIONAL { ?s nmg:monumentId ?mid }
               OPTIONAL { ?s nmg:image ?img }
             } GROUP BY ?s ?name ?lat ?long ORDER BY ?name""");
+    }
+
+    /** Escape a string for safe interpolation into a SPARQL string literal. */
+    private static String escapeLiteral(String s) {
+        return s.replace("\\", "\\\\").replace("\"", "\\\"");
+    }
+
+    /**
+     * All Wikidata instances tagged with the given nmg:wikidataSet key: common
+     * fields (name, position, categories, inception, image) sufficient to place
+     * and describe any set's markers. The heritage layer keeps its own richer
+     * {@link #heritage()} query with renovation/architect/style/monumentId fields.
+     *
+     * @param set the nmg:wikidataSet key, e.g. "rijksmonument" or "roman_finds";
+     *            arrives from a URL path param and is SPARQL-escaped before use.
+     */
+    public List<Map<String, Object>> wikidata(String set) {
+        String safeSet = escapeLiteral(set);
+        return select("""
+            SELECT ?s ?name ?lat ?long
+                   (GROUP_CONCAT(DISTINCT ?cat; SEPARATOR="; ") AS ?categories)
+                   (SAMPLE(?inc) AS ?inception) (SAMPLE(?img) AS ?image) WHERE {
+              ?s a/rdfs:subClassOf* nmg:Place ; nmg:wikidataSet "%s" ;
+                 rdfs:label ?name ; nmg:lat ?lat ; nmg:long ?long .
+              OPTIONAL { ?s nmg:category ?cat }
+              OPTIONAL { ?s nmg:inception ?inc }
+              OPTIONAL { ?s nmg:image ?img }
+            } GROUP BY ?s ?name ?lat ?long ORDER BY ?name""".formatted(safeSet));
     }
 
     /** Auto-bibliography: distinct sources used across a story, with rights/licence. */

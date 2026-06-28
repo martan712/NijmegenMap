@@ -8,6 +8,7 @@ import { FlowManager } from "./FlowManager";
 import { WallManager } from "./WallManager";
 import { MemorialManager } from "./MemorialManager";
 import { HeritageManager } from "./HeritageManager";
+import { WikidataLayerManager } from "./WikidataLayerManager";
 import { SpyManager, type LensRefs } from "./SpyManager";
 import { SceneManager } from "./scene/SceneManager";
 import type { ManifestEntry } from "../types";
@@ -28,6 +29,7 @@ export class MapEngine {
   readonly wall: WallManager;
   readonly memorials: MemorialManager;
   readonly heritage: HeritageManager;
+  readonly wikidataLayer: WikidataLayerManager;
   readonly spy: SpyManager;
   /** Renders backend-described, type-driven scenes (the Verhalen surface). */
   readonly scene: SceneManager;
@@ -48,11 +50,12 @@ export class MapEngine {
     this.wall = new WallManager(this.map);
     this.memorials = new MemorialManager(this.map);
     this.heritage = new HeritageManager(this.map);
+    this.wikidataLayer = new WikidataLayerManager(this.map);
     this.spy = new SpyManager(this.map, lens);
     this.scene = new SceneManager({
       map: this.map, manifest: this.manifest, base: this.base, overlays: this.overlays,
       pins: this.pins, flow: this.flow, memorials: this.memorials,
-      heritage: this.heritage, wall: this.wall,
+      heritage: this.heritage, wall: this.wall, wikidataLayer: this.wikidataLayer,
     });
   }
 

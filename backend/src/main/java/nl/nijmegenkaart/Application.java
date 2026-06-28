@@ -44,6 +44,11 @@ public class Application {
         app.get("/api/heritage", ctx ->
             ctx.json(store.heritage()));
 
+        // Generic per-set Wikidata layer (any nmg:wikidataSet key; toggled per segment
+        // via nmg:showWikidataLayer). New catalog sets need no new endpoint.
+        app.get("/api/wikidata/{set}", ctx ->
+            ctx.json(store.wikidata(ctx.pathParam("set"))));
+
         // Story listing & metadata
         app.get("/api/stories", ctx ->
             ctx.json(store.stories()));
